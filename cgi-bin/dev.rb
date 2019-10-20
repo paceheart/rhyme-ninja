@@ -1,4 +1,4 @@
-#!/usr/bin/ruby
+#!/usr/bin/env ruby
 
 require 'cgi'
 require 'net/http'
@@ -12,6 +12,10 @@ def debug(string)
   if(DEBUG_MODE)
     puts string
   end
+end
+
+def load_cmudict()
+  JSON.parse(File.read("cmudict.json"))
 end
 
 def results_to_words(results)
@@ -194,7 +198,7 @@ def be_a_ninja(rhyme1, rel1, rel2)
     rel1, rel2 = rel2, rel1
   end
   if(rhyme1 == "smiley" && rel1 == "love")
-    puts "<font size=80><bold>KYELI!</bold></font>";
+    puts "<font size=80><bold>KYELI!</bold></font>"; # easter egg for Kyeli
     return true
   end
 
@@ -209,7 +213,7 @@ def be_a_ninja(rhyme1, rel1, rel2)
     puts "If you specify a rhyming word, you can only specify one related word."
     true # don't say "No matching results."
   elsif(rhyme1 != ""                and rel2 == "")
-    $max_api_requests = 1000 # we're not going to loop, so we can bump this up
+    $max_api_requests = 1000 # we're not going to loop, so we can safely bump this up
     print_words(find_words(rhyme1, rel1, true))
   end
 end
@@ -230,8 +234,6 @@ cgi = CGI.new;
 rhyme1 = cgi['rhyme1'];
 rel1 = cgi['rel1'];
 rel2 = cgi['rel2'];
-
-puts `./rhymes.py`
 
 if !be_a_ninja(rhyme1, rel1, rel2)
   puts "No matching results."
