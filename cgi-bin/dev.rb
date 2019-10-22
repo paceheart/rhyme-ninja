@@ -5,8 +5,8 @@ require 'net/http'
 require 'uri'
 require 'json'
 
-DEBUG_MODE = false;
-$max_api_requests = 100 # don't overload the datamuse API
+DEBUG_MODE = false
+$datamuse_max = 400
 
 def debug(string)
   if(DEBUG_MODE)
@@ -14,9 +14,87 @@ def debug(string)
   end
 end
 
-def load_cmudict()
-  JSON.parse(File.read("cmudict.json"))
+#
+# Local rhyme computation
+#
+
+$cmudict = nil
+def cmudict()
+  # word => [pronunciation1, pronunciation2 ...]
+  # pronunciation = [syllable1, syllable1, ...]
+  if $cmudict.nil?
+    $cmudict = load_filtered_cmudict_as_hash
+  end
+  $cmudict
 end
+
+$rdict = nil # rhyme signature -> words hash
+def rdict
+  # rhyme_signature => [rhyming_word1 rhyming_word2 ...]
+  # where rhyme_signature = "syllable1 syllable2 ..."
+  if $rdict.nil?
+    $rdict = load_rhyme_signature_dict_as_hash
+  end
+  $rdict
+end
+
+def load_filtered_cmudict_as_hash()
+  JSON.parse(File.read("filtered_cmudict.json"))
+end
+
+def load_rhyme_signature_dict_as_hash()
+  JSON.parse(File.read("rhyme_signature_dict.json"))
+end
+
+def rhyme_signature_array(pron)
+  # The rhyme signature is everything including and after the final fully stressed vowel,
+  # which is indicated in cmudict by a "1"
+  # input: [IH0 N S IH1 ZH AH0 N] # the pronunciation of 'incision'
+  # output: [IH1 ZH AH0 N] # the pronunciation of '-ision'
+  rsig = Array.new
+  pron.reverse.each { |syl|
+    rsig.unshift(syl) # prepend
+    if(syl.include?("1"))
+      break # we found the main stressed syllable, we can stop now
+    end
+  }
+  rsig
+end
+
+def rhyme_signature(pron)
+  # this makes for a better hash key
+  rhyme_signature_array(pron).join(" ")
+end
+
+def pronunciations(word)
+  cmudict[word] || [ ]
+end
+
+def rdict_lookup(rsig)
+  rdict[rsig] || [ ]
+end
+
+def find_rhyming_words(word)
+  # use our local dictionaries, we don't need the Datamuse API for simple rhyme lookup
+  results = Array.new
+  pronunciations(word).each { |pron|
+    rsig = rhyme_signature(pron)
+    rdict_lookup(rsig).each { |rhyme|
+      unless is_stupid_rhyme(word, rhyme)
+        results.push(rhyme)
+      end
+    }
+  }
+  results || [ ]
+end
+
+def is_stupid_rhyme(word, rhyme)
+  word.include?(rhyme) or rhyme.include?(word)
+end
+
+#
+# Datamuse stuff
+#
 
 def results_to_words(results)
   words = [ ]
@@ -62,12 +140,12 @@ def find_results(rhyme, rel, print_header=false)
     if(print_header)
       puts header
     end
-    if($max_api_requests != 100)
-      request += "max=#{$max_api_requests}" # no trailing &, must be the last thing
+    if($datamuse_max != 100) # 100 is the default
+      request += "max=#{$datamuse_max}" # no trailing &, must be the last thing
     end
     request = URI.escape(request)
-    debug "#{request}<br/><br/>";
 
+    debug "#{request}<br/><br/>";
     uri = URI.parse(request);
     response = Net::HTTP.get_response(uri)
     if(response.body() != "")
@@ -83,10 +161,6 @@ def find_words(rhyme, rel, print_header=false)
   results_to_words(find_results(rhyme, rel, print_header))
 end
 
-def find_rhyming_words(rhyme)
-  results_to_words(find_results(rhyme, ""))
-end
-
 def find_rhyming_tuples(input_rel1)
   # Rhyming word sets that are related to INPUT_REL1.
   # Each element of the returned array is an array of words that rhyme with each other and are all related to INPUT_REL1.
@@ -94,10 +168,6 @@ def find_rhyming_tuples(input_rel1)
   relateds1 = find_related_words(input_rel1)
   apiCount = 0;
   relateds1.each { |rel1|
-    apiCount += 1;
-    if(apiCount > $max_api_requests)
-      break
-    end
     debug "rhymes for #{rel1}:<br>"
     find_rhyming_words(rel1).each { |rhyme1|
       if(relateds1.include? rhyme1) # we only care about relateds of input_rel1
@@ -126,10 +196,6 @@ def find_rhyming_pairs(input_rel1, input_rel2)
   apiCount = 0;
   relateds1.each { |rel1|
     # rel1 is a word related to input_rel1. We're looking for rhyming pairs [rel1 rel2].
-    apiCount += 1;
-    if(apiCount > $max_api_requests)
-      break
-    end
     debug "rhymes for #{rel1}:<br>"
     # If we find a word 'RHYME' that rhymes with rel1 and is related to input_rel2, we win!
     find_rhyming_words(rel1).each { |rhyme| # check all rhymes of rel1, call each one 'RHYME'
@@ -150,6 +216,10 @@ def find_rhyming_pairs(input_rel1, input_rel2)
   }
   pairs.sort!().uniq()
 end
+
+#
+# Main loop and display
+#
 
 def print_tuple(tuple)
   # print TUPLE separated by slashes
@@ -213,7 +283,6 @@ def be_a_ninja(rhyme1, rel1, rel2)
     puts "If you specify a rhyming word, you can only specify one related word."
     true # don't say "No matching results."
   elsif(rhyme1 != ""                and rel2 == "")
-    $max_api_requests = 1000 # we're not going to loop, so we can safely bump this up
     print_words(find_words(rhyme1, rel1, true))
   end
 end
@@ -243,4 +312,3 @@ end
 puts "<br><br>"
 puts IO.read("/var/www/html/dev.html");
 puts "</body></html>"
-
