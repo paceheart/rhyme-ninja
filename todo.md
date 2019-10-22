@@ -1,5 +1,6 @@
 ## to-do list
 
+* this is just a spurious to-do item to make sure git is working
 * test phrases
 * eliminate_stupid_rhymes
 * factor out display from logic
