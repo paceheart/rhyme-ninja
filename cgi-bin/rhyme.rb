@@ -105,60 +105,37 @@ def results_to_words(results)
 end
   
 def find_related_words(word)
-  words = results_to_words(find_results("", word))
+  words = results_to_words(find_datamuse_results("", word))
   words.push(word) # every word is related to itself
 end
 
-def find_results(rhyme, rel, print_header=false)
-  if(rhyme.include?(" "))
-    if(print_header)
-      puts "Can't handle phrases, only single words."
-    end
-    [ ]
-  else
-    header = ""
-    request = "https://api.datamuse.com/words?"
-    if(rhyme != "")
-      request += "rel_rhy=#{rhyme}&";
-      if(header == "")
-        header = "Rhymes for "
-      else
-        header += " that rhyme with "
-      end
-      header += "<b>#{rhyme}</b>"
-    end
-    if(rel != "")
-      request += "ml=#{rel}&";
-      if(header == "")
-        header = "Words related to "
-      else
-        header += " that are related to "
-      end
-      header += "<b>#{rel}:</b>"
-    end
-    header += ":<br/><br/>"
-    if(print_header)
-      puts header
-    end
-    if($datamuse_max != 100) # 100 is the default
-      request += "max=#{$datamuse_max}" # no trailing &, must be the last thing
-    end
-    request = URI.escape(request)
+def find_datamuse_results(rhyme, rel)
+  request = "https://api.datamuse.com/words?"
+  if(rhyme != "")
+    request += "rel_rhy=#{rhyme}&";
+  end
+  if(rel != "")
+    request += "ml=#{rel}&";
+  end
+  if($datamuse_max != 100) # 100 is the default
+    request += "max=#{$datamuse_max}" # no trailing &, must be the last thing
+  end
+  request = URI.escape(request)
 
-    debug "#{request}<br/><br/>";
-    uri = URI.parse(request);
-    response = Net::HTTP.get_response(uri)
-    if(response.body() != "")
-      JSON.parse(response.body());
-    else
-      puts "Error connecting to Datamuse API: #{request}"
-      abort
-    end
+  debug "#{request}<br/><br/>";
+  uri = URI.parse(request);
+  response = Net::HTTP.get_response(uri)
+  if(response.body() != "")
+    JSON.parse(response.body());
+  else
+    # @todo refactor
+    puts "Error connecting to Datamuse API: #{request} <br> Try again later."
+    abort
   end
 end
 
-def find_words(rhyme, rel, print_header=false)
-  results_to_words(find_results(rhyme, rel, print_header))
+def find_words(rhyme, rel)
+  results_to_words(find_datamuse_results(rhyme, rel))
 end
 
 def find_rhyming_tuples(input_rel1)
@@ -257,33 +234,50 @@ def print_words(words)
   success
 end
 
-def be_a_ninja(rhyme1, rel1, rel2)
+def be_a_ninja(word1, word2, goal)
   # return SUCCESS?
 
   # special cases
-  if(rhyme1 == "" and rel1 == "" and rel2 == "")
+  if(word1 == "" and word2 == "")
     return true # vacuous success, no need to say "No matching results"
   end
-  if(rel1 == "" and rel2 != "")
-    rel1, rel2 = rel2, rel1
+  if(word1 == "" and word2 != "")
+    word1, word2 = word2, word1
   end
-  if(rhyme1 == "smiley" && rel1 == "love")
+  if(word1 == "smiley" and word2 == "love" and goal == "related_rhymes")
     puts "<font size=80><bold>KYELI!</bold></font>"; # easter egg for Kyeli
     return true
   end
 
+  # @todo  if(word1.include?(" "))
+
   # main list of cases
-  if(   rhyme1 == "" and rel1 != "" and rel2 == "")
-    puts "Rhyming word sets that are related to <b>#{rel1}</b>:<br>"
-    print_tuples(find_rhyming_tuples(rel1))
-  elsif(rhyme1 == "" and rel1 != "" and rel2 != "")
-    puts "Pairs of rhyming words where the first word is related to <b>#{rel1}</b> and the second word is related to <b>#{rel2}</b>:<br>"
-    print_tuples(find_rhyming_pairs(rel1, rel2))
-  elsif(rhyme1 != ""                and rel2 != "")
-    puts "If you specify a rhyming word, you can only specify one related word."
-    true # don't say "No matching results."
-  elsif(rhyme1 != ""                and rel2 == "")
-    print_words(find_words(rhyme1, rel1, true))
+  case goal
+  when "rhymes"
+    puts "Rhymes for \"<b>#{word1}</b>\":<br><br>"
+    print_words(find_words(word1, ""))
+  when "related"
+    puts "Words conceptually related to \"<b>#{word1}:</b>\":<br><br>"
+    print_words(find_words("", word1))
+  when "set_related"
+    puts "Rhyming word sets that are related to \"<b>#{word1}</b>\":<br><br>"
+    print_tuples(find_rhyming_tuples(word1))
+  when "pair_related"
+    if(word1 == "" or word2 == "")
+      puts "I need two words to find rhyming pairs. For example, Word 1 = crime, Word 2 = heaven"
+    else
+      puts "Rhyming word pairs where the first word is related to \"<b>#{word1}</b>\" and the second word is related to \"<b>#{word2}</b>\":<br>"
+      print_tuples(find_rhyming_pairs(word1, word2))
+    end
+  when "related_rhymes"
+    if(word1 == "" or word2 == "")
+      puts "I need two words to find related rhymes pairs. For example, Word 1 = please, Word 2 = cats"
+    else
+      puts "Rhymes for \"<b>#{word1}</b>\" that are conceptually related to \"<b>#{word2}</b>\":<br><br>"
+      print_words(find_words(word1, word2))
+    end
+  else
+    puts "Invalid selection."
   end
 end
 
@@ -300,15 +294,21 @@ puts "<html>
 debug "DEBUG MODE"
 
 cgi = CGI.new;
-rhyme1 = cgi['rhyme1'];
-rel1 = cgi['rel1'];
-rel2 = cgi['rel2'];
+word1 = cgi['word1'];
+word2 = cgi['word2'];
+goal = cgi['goal'];
 
-if !be_a_ninja(rhyme1, rel1, rel2)
+if !be_a_ninja(word1, word2, goal)
   puts "No matching results."
 end
 
 # do it again
 puts "<br><br>"
-puts IO.read("/var/www/html/dev.html");
+form = IO.read("/var/www/html/rhyme.html");
+
+# make the dropdown box default to the most recent one you picked
+target_string = "<option value=\"#{goal}\""
+tweaked_form = form.sub(target_string, target_string + " selected")
+puts tweaked_form
+
 puts "</body></html>"

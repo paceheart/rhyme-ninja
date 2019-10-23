@@ -1,16 +1,37 @@
 <form action=/cgi-bin/rhyme.rb>
-  Rhymes with:<br>
-  <input type=text name=rhyme1 value=>
+  <table border=0>
+    <tr>
+      <td>
+	<b>Word: </b>
+      </td><td>
+	<input type=text name=word1 value=>
+      </td><td>
+	<select name="goal">
+    <option value="rhymes">rhymes</option>
+    <option value="related">conceptually related words</option>
+    <option value="set_related">sets of related rhyming words (death &rarr; bled / dead / dread)</option>
+    <optgroup label="Requires Word 2:">
+    <option value="pair_related">pairs of related rhyming words (crime + heaven &rarr; confessed / blessed)</option>
+    <option value="related_rhymes">rhymes with Word 1, conceptually related to Word 2 (please + cats &rarr; siamese)</option>
+    </optgroup>
+  </select>
+      </td>
+    </tr>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+  <b>Word 2: </b>
+      </td><td>
+	<input type=text name=word2 value=>
+      </td><td>
+	(optional)
+	</td>
+    </tr>
+  </table>
   <br>
-  (leave blank to find sets of rhyming words)
-  <br><br>
-  Related to:<br>
-  <input type=text name=rel1 value=>
-  <br><br>
-  Rhyming word is related to:<br>
-  <input type=text name=rel2 value=>
-  <br><br>
-  <input type=submit value=Submit>
+  <input type=submit value=Search>
 </form> 
 <hr>
-<center><font size=-2><a href="https://github.com/pace212/rhyme-ninja">Rhyme Ninja</a> by <a href=\"http://pacesmith.com\">Pace Smith</a>, powered by the <a href="https://www.datamuse.com/api/">Datamuse API</a></font></center>
+<center><font size=-2><a href="https://github.com/pace212/rhyme-ninja">Rhyme Ninja</a> by <a href=\"http://pacesmith.com\">Pace Smith</a>, powered by the <a href="https://www.datamuse.com/api/">Datamuse API</a> and the <a href="https://github.com/cmusphinx/cmudict/">CMU Pronunciation Dictionary</font></center>
