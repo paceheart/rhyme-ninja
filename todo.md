@@ -1,6 +1,5 @@
 ## to-do list
 
-* factor out display from logic
 * tests
 * truck
 * ape

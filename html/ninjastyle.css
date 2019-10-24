@@ -7,7 +7,7 @@ body {
     color: #eeeefa;
 }
 
-.word, .results, p, td, input {
+.word, .output_word, .tuple, .results, p, td, input {
     font-family: "Verdana", Verdana, sans-serif;
     color: #22dce1;
 }
@@ -26,8 +26,14 @@ body {
     color: #eeeefa;
 }
 
-.word {
+.tuple {
+}
+
+.focal_word {
     font-weight: bold;
+}
+
+.output_word {
 }
 
 input {

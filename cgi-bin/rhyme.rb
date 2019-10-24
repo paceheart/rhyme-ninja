@@ -1,11 +1,11 @@
 #!/usr/bin/env ruby
-require 'cgi'
 require 'net/http'
 require 'uri'
 require 'json'
+require 'cgi'
 
 DEBUG_MODE = false
-OUTPUT_FORMAT = :text # :text or :cgi
+$output_format = 'cgi'
 $datamuse_max = 400
 
 def debug(string)
@@ -15,13 +15,13 @@ def debug(string)
 end
 
 def cgi_print(string)
-  if(OUTPUT_FORMAT == :cgi)
+  if($output_format == 'cgi')
     print string
   end
 end
 
 def cgi_puts(string)
-  if(OUTPUT_FORMAT == :cgi)
+  if($output_format == 'cgi')
     puts string
   end
 end
@@ -211,7 +211,7 @@ def find_rhyming_pairs(input_rel1, input_rel2)
 end
 
 #
-# Main loop and display
+# Display
 #
 
 def print_tuple(tuple)
@@ -258,7 +258,12 @@ def print_words(words)
   success
 end
 
-def be_a_ninja(word1, word2, goal)
+#
+# Central dispatcher
+#
+
+def be_a_ninja(word1, word2, goal, output_format='text')
+  $output_format = output_format
   result = nil
   result_type = :error # :words, :tuple, :bad_input, :empty, :error
   result_header = "Unexpected error."
@@ -280,32 +285,32 @@ def be_a_ninja(word1, word2, goal)
   # main list of cases
   case goal
   when "rhymes"
-    result_header = "Rhymes for \"<span class='word'>#{word1}</span>\":<div class='results'>"
+    result_header = "Rhymes for \"<span class='focal_word'>#{word1}</span>\":<div class='results'>"
     result = find_rhyming_words(word1)
     result_type = :words
   when "related"
-    result_header = "Words conceptually related to \"<span class='word'>#{word1}:</span>\":<div class='results'>"
+    result_header = "Words conceptually related to \"<span class='focal_word'>#{word1}:</span>\":<div class='results'>"
     result = find_words("", word1)
     result_type = :words
   when "set_related"
-    result_header = "Rhyming word sets that are related to \"<span class='word'>#{word1}</span>\":<div class='results'>"
+    result_header = "Rhyming word sets that are related to \"<span class='focal_word'>#{word1}</span>\":<div class='results'>"
     result = find_rhyming_tuples(word1)
     result_type = :tuple
   when "pair_related"
     if(word1 == "" or word2 == "")
-      result_header = "I need two words to find rhyming pairs. For example, Word 1 = <span class='word'>crime</span>, Word 2 = <span class='word'>heaven</span>"
+      result_header = "I need two words to find rhyming pairs. For example, Word 1 = <span class='focal_word'>crime</span>, Word 2 = <span class='focal_word'>heaven</span>"
       result_type = :bad_input
     else
-      result_header = "Rhyming word pairs where the first word is related to \"<span class='word'>#{word1}</span>\" and the second word is related to \"<span class='word'>#{word2}</span>\":<br>"
+      result_header = "Rhyming word pairs where the first word is related to \"<span class='focal_word'>#{word1}</span>\" and the second word is related to \"<span class='focal_word'>#{word2}</span>\":<br>"
       result = find_rhyming_pairs(word1, word2)
       result_type = :tuple
     end
   when "related_rhymes"
     if(word1 == "" or word2 == "")
-      result_header = "I need two words to find related rhymes pairs. For example, Word 1 = <span class='word'>please</span>, Word 2 = <span class='word'>cats</span>"
+      result_header = "I need two words to find related rhymes pairs. For example, Word 1 = <span class='focal_word'>please</span>, Word 2 = <span class='focal_word'>cats</span>"
       result_type = :bad_input
     else
-      result_header = "Rhymes for \"<span class='word'>#{word1}</span>\" that are conceptually related to \"<span class='word'>#{word2}</span>\":<div class='results'>"
+      result_header = "Rhymes for \"<span class='focal_word'>#{word1}</span>\" that are conceptually related to \"<span class='focal_word'>#{word2}</span>\":<div class='results'>"
       result = find_words(word1, word2)
       result_type = :words
     end
@@ -316,7 +321,9 @@ def be_a_ninja(word1, word2, goal)
   return result, result_type, result_header
 end
 
+#
 # main
+#
 
 cgi_puts IO.read("header.html");
 debug "DEBUG MODE"
@@ -326,7 +333,7 @@ word1 = cgi['word1'].downcase;
 word2 = cgi['word2'].downcase;
 goal = cgi['goal'].downcase;
 
-output, type, header = be_a_ninja(word1, word2, goal)
+output, type, header = be_a_ninja(word1, word2, goal, $output_format)
 case type # :words, :tuple, :bad_input, :empty, :error
 when :words
   cgi_puts header
@@ -344,7 +351,7 @@ else
   puts "Very unexpected error."
 end
 
-if(OUTPUT_FORMAT == :cgi)
+if($output_format == 'cgi')
   # do it again
   form = IO.read("rhyme.html");
 
