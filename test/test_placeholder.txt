@@ -3,4 +3,7 @@ truck nonempty
 ape nonempty
 action nonempty # this is failing because of the overzealous is_stupid_rhyme
 
+pair_related
+food evil potato chips / apocalypse
+
 

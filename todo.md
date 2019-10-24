@@ -8,12 +8,13 @@
 * filter / rank by rarity
 * filter out slurs
 * filter out words containing numbers
-* combine plurals using (s)
+* combine plurals using (s) - optional in text mode, auto in CGI mode
 * test phrases
 
 ## could-do list
 
 * guess at pronunciations of unknown words
+* don't use json for the internal dictionaries - it would be nice to be able to grep them
 
 ## beta-testers
 

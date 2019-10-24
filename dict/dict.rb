@@ -35,10 +35,37 @@ def delete_blacklisted_words_from_cmudict()
   puts "Removed #{count} blacklisted words from the dictionary"
 end
 
+def useful_cmudict_line?(line)
+  # ignore entries that start with comment characters, punctuation, or numbers
+  if(line =~ /\A'/)
+    whitelisted_apostrophe_words = ["'allo", "'bout", "'cause", "'em", "'til", "'tis", "'twas", "'kay", "'gain"] # most of the words in cmudict that begin with an apostrophe are shit, but these are okay.
+    whitelisted_apostrophe_words.include?(line.split.shift.downcase)
+  else
+    line =~ /\A[[A-Z]]/
+  end
+rescue ArgumentError => error
+  false
+end
+
 def load_cmudict_as_hash()
   # word => [pronunciation1, pronunciation2 ...]
   # pronunciation = [syllable1, syllable1, ...]
-  JSON.parse(File.read("cmudict.json"))
+  hash = Hash.new {|h,k| h[k] = [] } # hash of arrays
+  IO.readlines("cmudict-0.7b.txt").each{ |line|
+    line = line.chop()
+    if(useful_cmudict_line?(line))
+      tokens = line.split
+      word = tokens.shift.downcase # now TOKENS contains only syllables
+      word = word.gsub("_", " ")
+      if(word =~ /\([0-9]\)\Z/)
+        word = word[0...-3]
+      end
+      hash[word].push(tokens)
+    else
+      puts "Ignoring cmudict line: #{line}"
+    end
+  }
+  return hash
 end
 
 $blacklist = nil
@@ -46,11 +73,11 @@ def blacklist()
   if $blacklist.nil?
     $blacklist = load_blacklist_as_array
   end
-  $blacklist
+  return $blacklist
 end
 
 def load_blacklist_as_array
-  IO.readlines("blacklist.txt")
+  return IO.readlines("blacklist.txt")
 end
 
 # note copied from rhyme.rb, @todo refactor
@@ -66,13 +93,13 @@ def rhyme_signature_array(pron)
       break # we found the main stressed syllable, we can stop now
     end
   }
-  rsig
+  return rsig
 end
 
 # note copied from rhyme.rb, @todo refactor
 def rhyme_signature(pron)
   # this makes for a better hash key
-  rhyme_signature_array(pron).join(" ")
+  return rhyme_signature_array(pron).join(" ")
 end
 
 def build_rhyme_signature_dict()
@@ -100,7 +127,7 @@ def build_rhyme_signature_dict()
   print "Identified #{rdict.length} unique rhyme signatures, "
   rdict = rdict.reject!{|rsig, words| words.length <= 1 }
   puts "#{rdict.length} of which are nonempty"
-  rdict
+  return rdict
 end
 
 def filter_cmudict(rdict)
@@ -114,7 +141,7 @@ def filter_cmudict(rdict)
     end
   end
   puts "#{filtered_cmudict.length} entries remain in the pronunciation dictionary after removing words with no rhymes"
-  filtered_cmudict
+  return filtered_cmudict
 end
 
 def rebuild_rhyme_ninja_dictionaries()

@@ -58,6 +58,7 @@ def load_rhyme_signature_dict_as_hash()
   JSON.parse(File.read("rhyme_signature_dict.json"))
 end
 
+# @note a copy exists in dict.rb, @todo refactor
 def rhyme_signature_array(pron)
   # The rhyme signature is everything including and after the final fully stressed vowel,
   # which is indicated in cmudict by a "1"
@@ -73,6 +74,7 @@ def rhyme_signature_array(pron)
   rsig
 end
 
+# @note a copy exists in dict.rb, @todo refactor
 def rhyme_signature(pron)
   # this makes for a better hash key
   rhyme_signature_array(pron).join(" ")
