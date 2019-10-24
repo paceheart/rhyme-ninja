@@ -1,9 +1,10 @@
 ## to-do list
 
 * factor out display from logic
-* make it less ugly
-* make rhyme.ninja automatically go to the cgi-bin/rhyme.rb
 * tests
+* truck
+* ape
+* action
 * test phrases
 * imperfect rhymes
 ** snapshot -> trap's wrought (if that were an actual phrase)
@@ -11,6 +12,7 @@
 * is_stupid_rhyme gets rid of e.g. pot / spot, which is a perfectly good rhyme.
 * filter / rank by rarity
 * get rid of stupid entries
+** a42128
 ** ct
 ** aaa
 

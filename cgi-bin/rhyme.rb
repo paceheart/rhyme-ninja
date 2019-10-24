@@ -135,7 +135,11 @@ def find_datamuse_results(rhyme, rel)
 end
 
 def find_words(rhyme, rel)
-  results_to_words(find_datamuse_results(rhyme, rel))
+  if(rel == "")
+    find_rhyming_words(rhyme)
+  else
+    results_to_words(find_datamuse_results(rhyme, rel))
+  end
 end
 
 def find_rhyming_tuples(input_rel1)
@@ -254,26 +258,26 @@ def be_a_ninja(word1, word2, goal)
   # main list of cases
   case goal
   when "rhymes"
-    puts "Rhymes for \"<b>#{word1}</b>\":<br><br>"
-    print_words(find_words(word1, ""))
+    puts "Rhymes for \"<span class='word'>#{word1}</span>\":<div class='results'>"
+    print_words(find_rhyming_words(word1))
   when "related"
-    puts "Words conceptually related to \"<b>#{word1}:</b>\":<br><br>"
+    puts "Words conceptually related to \"<span class='word'>#{word1}:</span>\":<div class='results'>"
     print_words(find_words("", word1))
   when "set_related"
-    puts "Rhyming word sets that are related to \"<b>#{word1}</b>\":<br><br>"
+    puts "Rhyming word sets that are related to \"<span class='word'>#{word1}</span>\":<div class='results'>"
     print_tuples(find_rhyming_tuples(word1))
   when "pair_related"
     if(word1 == "" or word2 == "")
-      puts "I need two words to find rhyming pairs. For example, Word 1 = crime, Word 2 = heaven"
+      puts "I need two words to find rhyming pairs. For example, Word 1 = <span class='word'>crime</span>, Word 2 = <span class='word'>heaven</span>"
     else
-      puts "Rhyming word pairs where the first word is related to \"<b>#{word1}</b>\" and the second word is related to \"<b>#{word2}</b>\":<br>"
+      puts "Rhyming word pairs where the first word is related to \"<span class='word'>#{word1}</span>\" and the second word is related to \"<span class='word'>#{word2}</span>\":<br>"
       print_tuples(find_rhyming_pairs(word1, word2))
     end
   when "related_rhymes"
     if(word1 == "" or word2 == "")
-      puts "I need two words to find related rhymes pairs. For example, Word 1 = please, Word 2 = cats"
+      puts "I need two words to find related rhymes pairs. For example, Word 1 = <span class='word'>please</span>, Word 2 = <span class='word'>cats</span>"
     else
-      puts "Rhymes for \"<b>#{word1}</b>\" that are conceptually related to \"<b>#{word2}</b>\":<br><br>"
+      puts "Rhymes for \"<span class='word'>#{word1}</span>\" that are conceptually related to \"<span class='word'>#{word2}</span>\":<div class='results'>"
       print_words(find_words(word1, word2))
     end
   else
@@ -283,32 +287,22 @@ end
 
 # main
 
-puts "Content-type: text/html\n\n";
-
-puts "<html>
-  <head>
-  </head>
-  <body>
-<h2>RHYME NINJA</h2>"
-
+puts IO.read("header.html");
 debug "DEBUG MODE"
 
 cgi = CGI.new;
-word1 = cgi['word1'];
-word2 = cgi['word2'];
-goal = cgi['goal'];
+word1 = cgi['word1'].downcase;
+word2 = cgi['word2'].downcase;
+goal = cgi['goal'].downcase;
 
 if !be_a_ninja(word1, word2, goal)
   puts "No matching results."
 end
 
 # do it again
-puts "<br><br>"
-form = IO.read("/var/www/html/rhyme.html");
+form = IO.read("rhyme.html");
 
 # make the dropdown box default to the most recent one you picked
 target_string = "<option value=\"#{goal}\""
 tweaked_form = form.sub(target_string, target_string + " selected")
 puts tweaked_form
-
-puts "</body></html>"
