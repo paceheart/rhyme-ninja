@@ -353,7 +353,7 @@ end
 
 if($output_format == 'cgi')
   # do it again
-  form = IO.read("rhyme.html");
+  form = IO.read("footer.html");
 
   # make the dropdown box default to the most recent one you picked
   target_string = "<option value=\"#{goal}\""
