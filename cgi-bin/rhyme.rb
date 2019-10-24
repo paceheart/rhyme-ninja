@@ -1,15 +1,27 @@
 #!/usr/bin/env ruby
-
 require 'cgi'
 require 'net/http'
 require 'uri'
 require 'json'
 
 DEBUG_MODE = false
+OUTPUT_FORMAT = :text # :text or :cgi
 $datamuse_max = 400
 
 def debug(string)
   if(DEBUG_MODE)
+    puts string
+  end
+end
+
+def cgi_print(string)
+  if(OUTPUT_FORMAT == :cgi)
+    print string
+  end
+end
+
+def cgi_puts(string)
+  if(OUTPUT_FORMAT == :cgi)
     puts string
   end
 end
@@ -205,13 +217,18 @@ end
 def print_tuple(tuple)
   # print TUPLE separated by slashes
   i = 0
+  cgi_print "<div class='tuple'>"
   tuple.each { |elem|
     if(i > 0)
       print " / "
     end
+    cgi_print "<span class='output_word'>"
     print elem
+    cgi_print "</span>"
     i += 1
   }
+  cgi_print "</div>"
+  puts
   STDOUT.flush
 end
 
@@ -221,7 +238,6 @@ def print_tuples(tuples)
   if(success)
     tuples.each { |tuple|
       print_tuple(tuple)
-      puts "<br>"
     }
   end
   success
@@ -231,26 +247,32 @@ def print_words(words)
   success = !words.empty?
   if(success)
     words.each { |word|
-      puts word
-      puts "<br>"
+      cgi_print "<div class='output_tuple'>"
+      cgi_print "<span class='output_word'>"
+      print word
+      cgi_print "</span>"
+      cgi_print "</div>"
+      puts
     }
   end
   success
 end
 
 def be_a_ninja(word1, word2, goal)
-  # return SUCCESS?
+  result = nil
+  result_type = :error # :words, :tuple, :bad_input, :empty, :error
+  result_header = "Unexpected error."
 
   # special cases
   if(word1 == "" and word2 == "")
-    return true # vacuous success, no need to say "No matching results"
+    return nil, :empty, ""
   end
   if(word1 == "" and word2 != "")
     word1, word2 = word2, word1
   end
   if(word1 == "smiley" and word2 == "love" and goal == "related_rhymes")
-    puts "<font size=80><bold>KYELI!</bold></font>"; # easter egg for Kyeli
-    return true
+    result_header = "<font size=80><bold>KYELI!</bold></font>"; # easter egg for Kyeli
+    return [ ], :words, result_header
   end
 
   # @todo  if(word1.include?(" "))
@@ -258,36 +280,45 @@ def be_a_ninja(word1, word2, goal)
   # main list of cases
   case goal
   when "rhymes"
-    puts "Rhymes for \"<span class='word'>#{word1}</span>\":<div class='results'>"
-    print_words(find_rhyming_words(word1))
+    result_header = "Rhymes for \"<span class='word'>#{word1}</span>\":<div class='results'>"
+    result = find_rhyming_words(word1)
+    result_type = :words
   when "related"
-    puts "Words conceptually related to \"<span class='word'>#{word1}:</span>\":<div class='results'>"
-    print_words(find_words("", word1))
+    result_header = "Words conceptually related to \"<span class='word'>#{word1}:</span>\":<div class='results'>"
+    result = find_words("", word1)
+    result_type = :words
   when "set_related"
-    puts "Rhyming word sets that are related to \"<span class='word'>#{word1}</span>\":<div class='results'>"
-    print_tuples(find_rhyming_tuples(word1))
+    result_header = "Rhyming word sets that are related to \"<span class='word'>#{word1}</span>\":<div class='results'>"
+    result = find_rhyming_tuples(word1)
+    result_type = :tuple
   when "pair_related"
     if(word1 == "" or word2 == "")
-      puts "I need two words to find rhyming pairs. For example, Word 1 = <span class='word'>crime</span>, Word 2 = <span class='word'>heaven</span>"
+      result_header = "I need two words to find rhyming pairs. For example, Word 1 = <span class='word'>crime</span>, Word 2 = <span class='word'>heaven</span>"
+      result_type = :bad_input
     else
-      puts "Rhyming word pairs where the first word is related to \"<span class='word'>#{word1}</span>\" and the second word is related to \"<span class='word'>#{word2}</span>\":<br>"
-      print_tuples(find_rhyming_pairs(word1, word2))
+      result_header = "Rhyming word pairs where the first word is related to \"<span class='word'>#{word1}</span>\" and the second word is related to \"<span class='word'>#{word2}</span>\":<br>"
+      result = find_rhyming_pairs(word1, word2)
+      result_type = :tuple
     end
   when "related_rhymes"
     if(word1 == "" or word2 == "")
-      puts "I need two words to find related rhymes pairs. For example, Word 1 = <span class='word'>please</span>, Word 2 = <span class='word'>cats</span>"
+      result_header = "I need two words to find related rhymes pairs. For example, Word 1 = <span class='word'>please</span>, Word 2 = <span class='word'>cats</span>"
+      result_type = :bad_input
     else
-      puts "Rhymes for \"<span class='word'>#{word1}</span>\" that are conceptually related to \"<span class='word'>#{word2}</span>\":<div class='results'>"
-      print_words(find_words(word1, word2))
+      result_header = "Rhymes for \"<span class='word'>#{word1}</span>\" that are conceptually related to \"<span class='word'>#{word2}</span>\":<div class='results'>"
+      result = find_words(word1, word2)
+      result_type = :words
     end
   else
-    puts "Invalid selection."
+    result_header = "Invalid selection."
+    result_type = :bad_input
   end
+  return result, result_type, result_header
 end
 
 # main
 
-puts IO.read("header.html");
+cgi_puts IO.read("header.html");
 debug "DEBUG MODE"
 
 cgi = CGI.new;
@@ -295,14 +326,30 @@ word1 = cgi['word1'].downcase;
 word2 = cgi['word2'].downcase;
 goal = cgi['goal'].downcase;
 
-if !be_a_ninja(word1, word2, goal)
+output, type, header = be_a_ninja(word1, word2, goal)
+case type # :words, :tuple, :bad_input, :empty, :error
+when :words
+  cgi_puts header
+  print_words(output)
+when :tuples
+  cgi_puts header
+  print_tuples(output)
+when :bad_input
+  puts header
+when :empty
   puts "No matching results."
+when :error
+  puts "Unexpected error."
+else
+  puts "Very unexpected error."
 end
 
-# do it again
-form = IO.read("rhyme.html");
+if(OUTPUT_FORMAT == :cgi)
+  # do it again
+  form = IO.read("rhyme.html");
 
-# make the dropdown box default to the most recent one you picked
-target_string = "<option value=\"#{goal}\""
-tweaked_form = form.sub(target_string, target_string + " selected")
-puts tweaked_form
+  # make the dropdown box default to the most recent one you picked
+  target_string = "<option value=\"#{goal}\""
+  tweaked_form = form.sub(target_string, target_string + " selected")
+  puts tweaked_form
+end
