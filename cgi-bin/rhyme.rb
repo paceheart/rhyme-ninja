@@ -5,7 +5,7 @@ require 'json'
 require 'cgi'
 
 DEBUG_MODE = false
-$output_format = 'cgi'
+$output_format = 'text'
 $datamuse_max = 400
 
 def debug(string)

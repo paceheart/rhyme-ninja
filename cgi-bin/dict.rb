@@ -66,7 +66,7 @@ def build_rhyme_signature_dict()
   end
   # sort, and remove duplicate words
   for rsig, words in rdict
-    new_words = words.sort!.uniq!
+    new_words = words.sort.uniq
     if(new_words.nil?)
       rdict.delete(rsig)
     else
@@ -102,4 +102,3 @@ def rebuild_rhyme_ninja_dictionaries()
 end
 
 rebuild_rhyme_ninja_dictionaries
-

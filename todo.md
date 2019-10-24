@@ -1,9 +1,6 @@
 ## to-do list
 
 * tests
-* truck
-* ape
-* action
 * test phrases
 * imperfect rhymes
 ** snapshot -> trap's wrought (if that were an actual phrase)
