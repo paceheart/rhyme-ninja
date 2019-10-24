@@ -1,9 +1,5 @@
 ## to-do list
 
-* get rid of stupid entries
-** a42128
-** ct
-** aaa
 * is_stupid_rhyme gets rid of e.g. pot / spot, which is a perfectly good rhyme.
 * tests
 * imperfect rhymes
@@ -11,6 +7,7 @@
 ** sitter / admit her
 * filter / rank by rarity
 * filter out slurs
+* filter out words containing numbers
 * combine plurals using (s)
 * test phrases
 

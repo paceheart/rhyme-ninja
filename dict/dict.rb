@@ -19,14 +19,38 @@ $cmudict = nil
 def cmudict()
   if $cmudict.nil?
     $cmudict = load_cmudict_as_hash
+    puts "Loaded #{$cmudict.length} words from cmudict"
+    delete_blacklisted_words_from_cmudict
   end
   $cmudict
+end
+
+def delete_blacklisted_words_from_cmudict()
+  count = 0
+  for bad_word in blacklist
+    if($cmudict.delete(bad_word.chop))
+      count = count + 1
+    end
+  end
+  puts "Removed #{count} blacklisted words from the dictionary"
 end
 
 def load_cmudict_as_hash()
   # word => [pronunciation1, pronunciation2 ...]
   # pronunciation = [syllable1, syllable1, ...]
   JSON.parse(File.read("cmudict.json"))
+end
+
+$blacklist = nil
+def blacklist()
+  if $blacklist.nil?
+    $blacklist = load_blacklist_as_array
+  end
+  $blacklist
+end
+
+def load_blacklist_as_array
+  IO.readlines("blacklist.txt")
 end
 
 # note copied from rhyme.rb, @todo refactor
@@ -73,8 +97,9 @@ def build_rhyme_signature_dict()
       rdict[rsig] = new_words
     end
   end
-  # remove all words that don't rhyme with anything
+  print "Identified #{rdict.length} unique rhyme signatures, "
   rdict = rdict.reject!{|rsig, words| words.length <= 1 }
+  puts "#{rdict.length} of which are nonempty"
   rdict
 end
 
@@ -88,6 +113,7 @@ def filter_cmudict(rdict)
       end
     end
   end
+  puts "#{filtered_cmudict.length} entries remain in the pronunciation dictionary after removing words with no rhymes"
   filtered_cmudict
 end
 
