@@ -5,7 +5,7 @@ require 'json'
 require 'cgi'
 
 DEBUG_MODE = false
-$output_format = 'text'
+$output_format = 'cgi'
 $datamuse_max = 400
 
 def debug(string)
@@ -265,7 +265,7 @@ end
 def be_a_ninja(word1, word2, goal, output_format='text')
   $output_format = output_format
   result = nil
-  result_type = :error # :words, :tuple, :bad_input, :empty, :error
+  result_type = :error # :words, :tuples, :bad_input, :empty, :error
   result_header = "Unexpected error."
 
   # special cases
@@ -295,15 +295,15 @@ def be_a_ninja(word1, word2, goal, output_format='text')
   when "set_related"
     result_header = "Rhyming word sets that are related to \"<span class='focal_word'>#{word1}</span>\":<div class='results'>"
     result = find_rhyming_tuples(word1)
-    result_type = :tuple
+    result_type = :tuples
   when "pair_related"
     if(word1 == "" or word2 == "")
       result_header = "I need two words to find rhyming pairs. For example, Word 1 = <span class='focal_word'>crime</span>, Word 2 = <span class='focal_word'>heaven</span>"
       result_type = :bad_input
     else
-      result_header = "Rhyming word pairs where the first word is related to \"<span class='focal_word'>#{word1}</span>\" and the second word is related to \"<span class='focal_word'>#{word2}</span>\":<br>"
+      result_header = "Rhyming word pairs where the first word is related to \"<span class='focal_word'>#{word1}</span>\" and the second word is related to \"<span class='focal_word'>#{word2}</span>\":<div class='results'>"
       result = find_rhyming_pairs(word1, word2)
-      result_type = :tuple
+      result_type = :tuples
     end
   when "related_rhymes"
     if(word1 == "" or word2 == "")
@@ -318,6 +318,8 @@ def be_a_ninja(word1, word2, goal, output_format='text')
     result_header = "Invalid selection."
     result_type = :bad_input
   end
+  debug result
+  debug result_type
   return result, result_type, result_header
 end
 
@@ -334,7 +336,7 @@ word2 = cgi['word2'].downcase;
 goal = cgi['goal'].downcase;
 
 output, type, header = be_a_ninja(word1, word2, goal, $output_format)
-case type # :words, :tuple, :bad_input, :empty, :error
+case type # :words, :tuples, :bad_input, :empty, :error
 when :words
   cgi_puts header
   print_words(output)
