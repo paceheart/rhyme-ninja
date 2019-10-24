@@ -248,7 +248,7 @@ end
 def print_words(words)
   success = !words.empty?
   if(success)
-    words.each { |word|
+    words.sort.each { |word|
       cgi_print "<div class='output_tuple'>"
       cgi_print "<span class='output_word'>"
       print word
