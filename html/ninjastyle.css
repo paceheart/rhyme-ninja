@@ -1,1 +1,60 @@
-@todo copy
+body {
+    background-color: #333341;
+}
+
+.ninja_main, h1, h2, h3 {
+    font-family: "Verdana", Verdana, sans-serif;
+    color: #eeeefa;
+}
+
+.focal_word, .output_word, .output_tuple, .results, p, td, input {
+    font-family: "Verdana", Verdana, sans-serif;
+    color: #ffdce1;
+}
+
+.results {
+    margin-top: 20px;
+}
+
+.fieldlabel {
+    white-space: nowrap;
+    font-weight: bold;
+    color: #eeeefa;
+}
+
+.optional {
+    color: #eeeefa;
+}
+
+.output_tuple {
+    line-height: 130%;
+}
+
+.focal_word {
+    font-weight: bold;
+    color: #22dce1;
+}
+
+.output_word {
+    color: #22dce1;
+}
+
+input {
+    background: black;
+    margin: 3px;
+    padding: 3px;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+center {
+    color: #16aabb;
+}
+
+a {
+    color: #22dce1;
+}
+
+a:visited {
+    color: #1ac0d0;
+}
