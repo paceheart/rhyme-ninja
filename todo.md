@@ -1,18 +1,25 @@
 ## to-do list
 
+* refactor rhyme_signature_array
+* fix "No matching results" :empty
+* make sure we do the right thing for words with multiple pronounciations
+* get rid of rare words
+** get rid of most names (people names and place names)
 * is_stupid_rhyme gets rid of e.g. pot / spot, which is a perfectly good rhyme.
 * tests
+* what happens if we turn all 0's into schwas?
 * imperfect rhymes
 ** snapshot -> trap's wrought (if that were an actual phrase)
 ** sitter / admit her
 * filter / rank by rarity
-* filter out slurs
 * filter out words containing numbers
-* combine plurals using (s) - optional in text mode, auto in CGI mode
+* combine plurals using (s) - optional in text mode, auto in CGI mode. maybe possessives too?
 * test phrases
 
 ## could-do list
 
+* make words links
+* add a clickable "x" for "this is a dumb word that should be stricken from the list forever"
 * guess at pronunciations of unknown words
 * don't use json for the internal dictionaries - it would be nice to be able to grep them
 

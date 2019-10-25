@@ -3,10 +3,15 @@ require 'net/http'
 require 'uri'
 require 'json'
 require 'cgi'
+require_relative 'dict/utils_rhyme'
 
 DEBUG_MODE = false
 $output_format = 'cgi'
 $datamuse_max = 400
+
+#
+# utilities
+#
 
 def debug(string)
   if(DEBUG_MODE)
@@ -51,33 +56,11 @@ def rdict
 end
 
 def load_filtered_cmudict_as_hash()
-  JSON.parse(File.read("filtered_cmudict.json"))
+  JSON.parse(File.read("dict/filtered_cmudict.json"))
 end
 
 def load_rhyme_signature_dict_as_hash()
-  JSON.parse(File.read("rhyme_signature_dict.json"))
-end
-
-# @note a copy exists in dict.rb, @todo refactor
-def rhyme_signature_array(pron)
-  # The rhyme signature is everything including and after the final fully stressed vowel,
-  # which is indicated in cmudict by a "1"
-  # input: [IH0 N S IH1 ZH AH0 N] # the pronunciation of 'incision'
-  # output: [IH1 ZH AH0 N] # the pronunciation of '-ision'
-  rsig = Array.new
-  pron.reverse.each { |syl|
-    rsig.unshift(syl) # prepend
-    if(syl.include?("1"))
-      break # we found the main stressed syllable, we can stop now
-    end
-  }
-  rsig
-end
-
-# @note a copy exists in dict.rb, @todo refactor
-def rhyme_signature(pron)
-  # this makes for a better hash key
-  rhyme_signature_array(pron).join(" ")
+  JSON.parse(File.read("dict/rhyme_signature_dict.json"))
 end
 
 def pronunciations(word)
@@ -267,12 +250,12 @@ end
 def be_a_ninja(word1, word2, goal, output_format='text')
   $output_format = output_format
   result = nil
-  result_type = :error # :words, :tuples, :bad_input, :empty, :error
+  result_type = :error # :words, :tuples, :bad_input, :vacuous, :error
   result_header = "Unexpected error."
 
   # special cases
   if(word1 == "" and word2 == "")
-    return nil, :empty, ""
+    return nil, :vacuous, ""
   end
   if(word1 == "" and word2 != "")
     word1, word2 = word2, word1
@@ -320,8 +303,8 @@ def be_a_ninja(word1, word2, goal, output_format='text')
     result_header = "Invalid selection."
     result_type = :bad_input
   end
-  debug result
-  debug result_type
+  debug "result = #{result}"
+  debug "result_type = #{result_type}"
   return result, result_type, result_header
 end
 
@@ -329,7 +312,7 @@ end
 # main
 #
 
-cgi_puts IO.read("header.html");
+cgi_puts IO.read("html/header.html");
 debug "DEBUG MODE"
 
 cgi = CGI.new;
@@ -338,7 +321,7 @@ word2 = cgi['word2'].downcase;
 goal = cgi['goal'].downcase;
 
 output, type, header = be_a_ninja(word1, word2, goal, $output_format)
-case type # :words, :tuples, :bad_input, :empty, :error
+case type # :words, :tuples, :bad_input, :vacuous, :error
 when :words
   cgi_puts header
   print_words(output)
@@ -347,6 +330,7 @@ when :tuples
   print_tuples(output)
 when :bad_input
   puts header
+when :vacuous
 when :empty
   puts "No matching results."
 when :error
@@ -357,7 +341,7 @@ end
 
 if($output_format == 'cgi')
   # do it again
-  form = IO.read("footer.html");
+  form = IO.read("html/footer.html");
 
   # make the dropdown box default to the most recent one you picked
   target_string = "<option value=\"#{goal}\""

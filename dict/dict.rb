@@ -14,6 +14,7 @@
 # having Step 2 be an array lookup instead of a hash lookup.
 
 require 'json'
+require_relative 'utils_rhyme'
 
 $cmudict = nil
 def cmudict()
@@ -51,7 +52,7 @@ def load_cmudict_as_hash()
   # word => [pronunciation1, pronunciation2 ...]
   # pronunciation = [syllable1, syllable1, ...]
   hash = Hash.new {|h,k| h[k] = [] } # hash of arrays
-  IO.readlines("cmudict-0.7b.txt").each{ |line|
+  IO.readlines("cmudict-0.7c.txt").each{ |line|
     line = line.chop()
     if(useful_cmudict_line?(line))
       tokens = line.split
@@ -78,28 +79,6 @@ end
 
 def load_blacklist_as_array
   return IO.readlines("blacklist.txt")
-end
-
-# note copied from rhyme.rb, @todo refactor
-def rhyme_signature_array(pron)
-  # The rhyme signature is everything including and after the final fully stressed vowel,
-  # which is indicated in cmudict by a "1"
-  # input: [IH0 N S IH1 ZH AH0 N] # the pronunciation of 'incision'
-  # output: [IH1 ZH AH0 N] # the pronunciation of '-ision'
-  rsig = Array.new
-  pron.reverse.each { |syl|
-    rsig.unshift(syl) # prepend
-    if(syl.include?("1"))
-      break # we found the main stressed syllable, we can stop now
-    end
-  }
-  return rsig
-end
-
-# note copied from rhyme.rb, @todo refactor
-def rhyme_signature(pron)
-  # this makes for a better hash key
-  return rhyme_signature_array(pron).join(" ")
 end
 
 def build_rhyme_signature_dict()
