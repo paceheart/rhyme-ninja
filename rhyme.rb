@@ -1,4 +1,13 @@
 #!/usr/bin/env ruby
+
+#
+# control parameters
+#
+
+DEBUG_MODE = false
+$output_format = 'cgi' # 'cgi' or 'text'
+$datamuse_max = 400
+
 # Input: word1, word2 (optional, goal ("rhymes", "related", "set_related", "pair_related", "related_rhymes")
 # Output: A list of words or word tuples, one per line, bearing the "goal" relation to the inputs.
 #
@@ -21,14 +30,6 @@ require 'uri'
 require 'json'
 require 'cgi'
 require_relative 'dict/utils_rhyme'
-
-#
-# control parameters
-#
-
-DEBUG_MODE = false
-$output_format = 'text' # 'cgi' or 'text'
-$datamuse_max = 400
 
 #
 # utilities
@@ -103,7 +104,7 @@ def find_rhyming_words(word)
       end
     }
   }
-  results || [ ]
+  results.uniq || [ ] # the uniq is needed because of multiple pronunciations
 end
 
 def is_stupid_rhyme(word, rhyme)
