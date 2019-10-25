@@ -1,8 +1,5 @@
 ## to-do list
 
-* refactor rhyme_signature_array
-* fix "No matching results" :empty
-* make sure we do the right thing for words with multiple pronounciations
 * get rid of rare words
 ** get rid of most names (people names and place names)
 * is_stupid_rhyme gets rid of e.g. pot / spot, which is a perfectly good rhyme.

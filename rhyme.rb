@@ -1,12 +1,33 @@
 #!/usr/bin/env ruby
+# Input: word1, word2 (optional, goal ("rhymes", "related", "set_related", "pair_related", "related_rhymes")
+# Output: A list of words or word tuples, one per line, bearing the "goal" relation to the inputs.
+#
+# For example, if word1="slice" and goal="rhymes", the output (in text mode) will be
+# advice
+# berneice
+# bice
+# brice
+# ...
+#
+# If word1="crime", word2="heaven", and goal="pair_related", the output (in text mode) will be
+# arrest / blessed
+# arrest / blest
+# assassination / damnation
+# assassination / salvation
+# ...
+
 require 'net/http'
 require 'uri'
 require 'json'
 require 'cgi'
 require_relative 'dict/utils_rhyme'
 
+#
+# control parameters
+#
+
 DEBUG_MODE = false
-$output_format = 'cgi'
+$output_format = 'text' # 'cgi' or 'text'
 $datamuse_max = 400
 
 #
@@ -56,11 +77,11 @@ def rdict
 end
 
 def load_filtered_cmudict_as_hash()
-  JSON.parse(File.read("dict/filtered_cmudict.json"))
+  JSON.parse(File.read("dict/filtered_cmudict.json")) or die "First run dict/dict.rb to generate dictionary caches"
 end
 
 def load_rhyme_signature_dict_as_hash()
-  JSON.parse(File.read("dict/rhyme_signature_dict.json"))
+  JSON.parse(File.read("dict/rhyme_signature_dict.json")) or die "First run dict/dict.rb to generate dictionary caches"
 end
 
 def pronunciations(word)
@@ -98,12 +119,16 @@ def results_to_words(results)
   results.each { |result|
     words.push(result["word"])
   }
-  words
+  return words
 end
   
 def find_related_words(word)
   words = results_to_words(find_datamuse_results("", word))
   words.push(word) # every word is related to itself
+end
+
+def find_related_rhymes(rhyme, rel)
+  results_to_words(find_datamuse_results(rhyme, rel))
 end
 
 def find_datamuse_results(rhyme, rel)
@@ -131,14 +156,6 @@ def find_datamuse_results(rhyme, rel)
   end
 end
 
-def find_words(rhyme, rel)
-  if(rel == "")
-    find_rhyming_words(rhyme)
-  else
-    results_to_words(find_datamuse_results(rhyme, rel))
-  end
-end
-
 def find_rhyming_tuples(input_rel1)
   # Rhyming word sets that are related to INPUT_REL1.
   # Each element of the returned array is an array of words that rhyme with each other and are all related to INPUT_REL1.
@@ -162,7 +179,7 @@ def find_rhyming_tuples(input_rel1)
       tuples.push(relrhyme_rest.sort!)
     end
   }
-  tuples.sort!().uniq()
+  return tuples
 end
 
 def find_rhyming_pairs(input_rel1, input_rel2)
@@ -192,7 +209,7 @@ def find_rhyming_pairs(input_rel1, input_rel2)
       }
     end
   }
-  pairs.sort!().uniq()
+  return pairs
 end
 
 #
@@ -221,17 +238,17 @@ def print_tuples(tuples)
   # return boolean, did I print anything? i.e. was TUPLES nonempty?
   success = !tuples.empty?
   if(success)
-    tuples.each { |tuple|
+    tuples.sort.uniq.each { |tuple|
       print_tuple(tuple)
     }
   end
-  success
+  return success
 end
 
 def print_words(words)
   success = !words.empty?
   if(success)
-    words.sort.each { |word|
+    words.sort.uniq.each { |word|
       cgi_print "<div class='output_tuple'>"
       cgi_print "<span class='output_word'>"
       print word
@@ -240,7 +257,7 @@ def print_words(words)
       puts
     }
   end
-  success
+  return success
 end
 
 #
@@ -265,8 +282,6 @@ def be_a_ninja(word1, word2, goal, output_format='text')
     return [ ], :words, result_header
   end
 
-  # @todo  if(word1.include?(" "))
-
   # main list of cases
   case goal
   when "rhymes"
@@ -274,8 +289,8 @@ def be_a_ninja(word1, word2, goal, output_format='text')
     result = find_rhyming_words(word1)
     result_type = :words
   when "related"
-    result_header = "Words conceptually related to \"<span class='focal_word'>#{word1}:</span>\":<div class='results'>"
-    result = find_words("", word1)
+    result_header = "Words related to \"<span class='focal_word'>#{word1}:</span>\":<div class='results'>"
+    result = find_related_words(word1)
     result_type = :words
   when "set_related"
     result_header = "Rhyming word sets that are related to \"<span class='focal_word'>#{word1}</span>\":<div class='results'>"
@@ -295,8 +310,8 @@ def be_a_ninja(word1, word2, goal, output_format='text')
       result_header = "I need two words to find related rhymes pairs. For example, Word 1 = <span class='focal_word'>please</span>, Word 2 = <span class='focal_word'>cats</span>"
       result_type = :bad_input
     else
-      result_header = "Rhymes for \"<span class='focal_word'>#{word1}</span>\" that are conceptually related to \"<span class='focal_word'>#{word2}</span>\":<div class='results'>"
-      result = find_words(word1, word2)
+      result_header = "Rhymes for \"<span class='focal_word'>#{word1}</span>\" that are related to \"<span class='focal_word'>#{word2}</span>\":<div class='results'>"
+      result = find_related_rhymes(word1, word2)
       result_type = :words
     end
   else
@@ -323,16 +338,22 @@ goal = cgi['goal'].downcase;
 output, type, header = be_a_ninja(word1, word2, goal, $output_format)
 case type # :words, :tuples, :bad_input, :vacuous, :error
 when :words
-  cgi_puts header
-  print_words(output)
+  if output.empty?
+    puts "No matching results."
+  else
+    cgi_puts header
+    print_words(output)
+  end
 when :tuples
-  cgi_puts header
-  print_tuples(output)
+  if output.empty?
+    puts "No matching results."
+  else
+    cgi_puts header
+    print_tuples(output)
+  end
 when :bad_input
   puts header
 when :vacuous
-when :empty
-  puts "No matching results."
 when :error
   puts "Unexpected error."
 else
