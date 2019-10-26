@@ -4,8 +4,8 @@
 # control parameters
 #
 
-OUTPUT_FORMAT = 'text' # 'cgi' or 'text'
-DEBUG_MODE = false
+OUTPUT_FORMAT = 'cgi' # 'cgi' or 'text'
+DEBUG_MODE = true
 
 #
 # Front end for Rhyme Ninja.
@@ -30,6 +30,12 @@ DEBUG_MODE = false
 
 require_relative 'ninja'
 
+def cgi_puts(string)
+  if(OUTPUT_FORMAT == 'cgi')
+    puts string
+  end
+end
+
 cgi_puts IO.read("html/header.html");
 debug "DEBUG MODE"
 
@@ -38,7 +44,7 @@ word1 = cgi['word1'].downcase;
 word2 = cgi['word2'].downcase;
 goal = cgi['goal'].downcase;
 
-output, type, header = rhyme_ninja(word1, word2, goal, OUTPUT_FORMAT)
+output, type, header = rhyme_ninja(word1, word2, goal, OUTPUT_FORMAT, DEBUG_MODE)
 case type # :words, :tuples, :bad_input, :vacuous, :error
 when :words
   if output.empty?

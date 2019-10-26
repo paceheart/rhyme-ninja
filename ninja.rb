@@ -5,9 +5,10 @@
 # Don't tweak these here, tweak them in rhyme.rb
 #
 
-$debug_mode = false; 
-$output_format = 'text';
-$datamuse_max = 550
+DEFAULT_DATAMUSE_MAX = 550
+$datamuse_max = DEFAULT_DATAMUSE_MAX
+$debug_mode = false; # don't
+$output_format = 'text'; # don't
 
 #
 # Public interface: rhyme_ninja(word1, word2, goal, output_format='text', debug_mode=false, datamuse_max=400)
@@ -33,12 +34,6 @@ end
 def cgi_print(string)
   if($output_format == 'cgi')
     print string
-  end
-end
-
-def cgi_puts(string)
-  if($output_format == 'cgi')
-    puts string
   end
 end
 
@@ -112,9 +107,12 @@ def results_to_words(results)
   return words
 end
   
-def find_related_words(word)
+def find_related_words(word, include_self=false)
   words = results_to_words(find_datamuse_results("", word))
-  words.push(word) # every word is related to itself
+  if(include_self)
+    words.push(word)
+  end
+  return words
 end
 
 def find_related_rhymes(rhyme, rel)
@@ -150,7 +148,7 @@ def find_rhyming_tuples(input_rel1)
   # Rhyming word sets that are related to INPUT_REL1.
   # Each element of the returned array is an array of words that rhyme with each other and are all related to INPUT_REL1.
   related_rhymes = Hash.new {|h,k| h[k] = [] } # hash of arrays
-  relateds1 = find_related_words(input_rel1)
+  relateds1 = find_related_words(input_rel1, true)
   apiCount = 0;
   relateds1.each { |rel1|
     debug "rhymes for #{rel1}:<br>"
@@ -176,8 +174,8 @@ def find_rhyming_pairs(input_rel1, input_rel2)
   # Pairs of rhyming words where the first word is related to INPUT_REL1 and the second word is related to INPUT_REL2
   # Each element of the returned array is a pair of rhyming words [W1 W2] where W1 is related to INPUT_REL1 and W2 is related to INPUT_REL2
   related_rhymes = Hash.new {|h,k| h[k] = [] } # hash of arrays
-  relateds1 = find_related_words(input_rel1)
-  relateds2 = find_related_words(input_rel2)
+  relateds1 = find_related_words(input_rel1, true)
+  relateds2 = find_related_words(input_rel2, true)
   apiCount = 0;
   relateds1.each { |rel1|
     # rel1 is a word related to input_rel1. We're looking for rhyming pairs [rel1 rel2].
@@ -254,7 +252,7 @@ end
 # Central dispatcher
 #
 
-def rhyme_ninja(word1, word2, goal, output_format='text', debug_mode=false, datamuse_max=400)
+def rhyme_ninja(word1, word2, goal, output_format='text', debug_mode=false, datamuse_max=DEFAULT_DATAMUSE_MAX)
   $output_format = output_format
   $debug_mode = debug_mode
   $datamuse_max = datamuse_max
@@ -283,7 +281,7 @@ def rhyme_ninja(word1, word2, goal, output_format='text', debug_mode=false, data
     result_type = :words
   when "related"
     result_header = "Words related to \"<span class='focal_word'>#{word1}:</span>\":<div class='results'>"
-    result = find_related_words(word1)
+    result = find_related_words(word1, false)
     result_type = :words
   when "set_related"
     result_header = "Rhyming word sets that are related to \"<span class='focal_word'>#{word1}</span>\":<div class='results'>"
@@ -325,3 +323,7 @@ def rhymes?(word1, word2)
   find_rhyming_words(word1).include?(word2)
 end
 
+def related?(word1, word2, include_self=false)
+  # Is word1 conceptually related to word2?
+  find_related_words(word1, include_self).include?(word2)
+end
