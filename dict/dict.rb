@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+
 # Preprocess the cmudict data into a format that's efficient for looking up rhyming words.
 # Assumes cmudict.json is in the current directory. Writes out rhyme_signature_dict.json to the current directory.
 #
@@ -48,13 +49,22 @@ rescue ArgumentError => error
   false
 end
 
+def preprocess_line(line)
+  # merge some similar-enough-sounding syllables
+  line = line.chop()
+  line = line.gsub("IH1 R", "IY1 R") # ear [IY1 R] rhymes with beer [IH1 R]
+  line = line.gsub("IH2 R", "IY2 R")
+  line = line.gsub("IH0 R", "IY0 R")
+  return line
+end
+
 def load_cmudict_as_hash()
   # word => [pronunciation1, pronunciation2 ...]
   # pronunciation = [syllable1, syllable1, ...]
   hash = Hash.new {|h,k| h[k] = [] } # hash of arrays
   IO.readlines("cmudict-0.7c.txt").each{ |line|
-    line = line.chop()
     if(useful_cmudict_line?(line))
+      line = preprocess_line(line)
       tokens = line.split
       word = tokens.shift.downcase # now TOKENS contains only syllables
       word = word.gsub("_", " ")

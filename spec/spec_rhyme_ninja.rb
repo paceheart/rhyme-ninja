@@ -1,7 +1,7 @@
 require_relative '../ninja'
 
 # conditionalizes tests that we don't expect to work yet
-OPTIMISTIC = false
+OPTIMISTIC = true
 
 NOT_WORKING = false; #don't edit this one
 
@@ -36,14 +36,19 @@ describe 'rhymes' do
   end
   
   context 'basic' do
-    oughta_rhyme 'rhyme', 'crime'
     ought_not_rhyme 'beer', 'wine'
-    oughta_rhyme 'gay', 'hooray'
+    oughta_rhyme 'yum', 'plum'
     oughta_rhyme 'space', 'place'
+    oughta_rhyme 'rhyme', 'crime'
+    oughta_rhyme 'gay', 'hooray'
   end
   
   context 'tricky' do
+    oughta_rhyme 'ear', 'beer' # used to fail because ear is [IY1 R] and beer is [B IH1 R]
     oughta_rhyme "we're", 'queer'
+    ought_not_rhyme 'crime', "yum"
+    ought_not_rhyme 'crime', "'em"
+    ought_not_rhyme 'rhyme', "'em"
     oughta_rhyme 'station', 'nation'
     oughta_rhyme 'station', 'education'
     ought_not_rhyme 'station', 'cation' # it's pronounced "CAT-EYE-ON"
@@ -81,6 +86,16 @@ describe 'rhymes' do
     oughta_rhyme 'stand', 'strand'
     oughta_rhyme 'understand', 'strand'
     ought_not_rhyme 'stand', 'understand'
+  end
+  end
+
+  if(OPTIMISTIC)
+  context "homophones ought not count as rhymes" do
+    ought_not_rhyme 'adapter', 'adaptor'
+    ought_not_rhyme 'blue', 'blew'
+    ought_not_rhyme 'base', 'bass'
+    ought_not_rhyme 'leader', 'lieder'
+    ought_not_rhyme 'impostor', 'imposter'
   end
   end
   
@@ -208,6 +223,7 @@ describe 'set_related' do
     set_related_oughta_contain 'pirate', 'crew', 'tattoo'
     set_related_oughta_contain 'pirate', 'coast', 'ghost'
     set_related_oughta_contain 'pirate', 'loot', 'pursuit'
+    set_related_oughta_contain 'pirate', 'buccaneer', 'commandeer'
   end
 
   context 'music' do

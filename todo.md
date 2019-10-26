@@ -1,20 +1,17 @@
 ## to-do list
 
-* tests
-* get rid of rare words
-** get rid of most names (people names and place names)
-* is_stupid_rhyme gets rid of e.g. pot / spot, which is a perfectly good rhyme.
-** adapter / adaptor, base / bass, leader / lieder
-** set_related friendship
-** set_related pirate: figure out why the "-eer" words didn't all get grouped together
 * set_related music 1000: blow / boe / bow + blow / boe / bow / low + boe / bow / low
 ** two copies of intone / trombone
+* get rid of rare words; filter / rank by rarity
+** get rid of most names (people names and place names)
+* pot / spot
+* adapter / adaptor
+** set_related friendship
 * what happens if we turn all 0's into schwas?
 * figure out the best $datamuse_max
 * imperfect rhymes
 ** snapshot -> trap's wrought (if that were an actual phrase)
 ** sitter / admit her
-* filter / rank by rarity
 * filter out words containing numbers
 * combine plurals using (s) - optional in text mode, auto in CGI mode. maybe possessives too?
 * test phrases
