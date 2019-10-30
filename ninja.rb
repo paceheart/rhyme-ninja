@@ -5,7 +5,7 @@
 # Don't tweak these here, tweak them in rhyme.rb
 #
 
-DEFAULT_DATAMUSE_MAX = 1000
+DEFAULT_DATAMUSE_MAX = 550
 $datamuse_max = DEFAULT_DATAMUSE_MAX
 $debug_mode = false;
 $output_format = 'text';
@@ -298,7 +298,7 @@ def rhyme_ninja(word1, word2, goal, output_format='text', debug_mode=false, data
     result = find_related_words(word1, false)
     result_type = :words
   when "set_related"
-    result_header = "Rhyming word sets that are related to \"<span class='focal_word'>#{word1}</span>\":<div class='results'>"
+    result_header = "Rhyming word sets related to \"<span class='focal_word'>#{word1}</span>\":<div class='results'>"
     result = find_rhyming_tuples(word1)
     result_type = :tuples
   when "pair_related"

@@ -9,4 +9,33 @@ Content-type: text/html
   </head>
   <body>
 <h2>RHYME NINJA</h2>
+<form action=/cgi-bin/rhyme.rb>
+  <table border=0>
+    <tr>
+      <td>
+	<span class="fieldlabel">Word: </span>
+      </td><td>
+	<input type=text name=word1 value=>
+      </td><td>
+      </td>
+    </tr>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+  <span class="fieldlabel"><nobr>Word 2:</nobr> </span>
+      </td><td>
+	<input type=text name=word2 value=>
+      </td><td>
+	<span class="optional">(optional)</span>
+	</td>
+    </tr>
+  </table>
+  <br>
+  <input type=submit value=Search>
+</form>
+<hr>
 <div class="ninja_main">
+<table><tr>
+   
