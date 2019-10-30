@@ -1,11 +1,11 @@
 ## to-do list
 
-* set_related music 1000: blow / boe / bow + blow / boe / bow / low + boe / bow / low
-** two copies of intone / trombone
+* make the UI simpler
+* adapter / adaptor
 * get rid of rare words; filter / rank by rarity
 ** get rid of most names (people names and place names)
 * pot / spot
-* adapter / adaptor
+* dynamically blacklist words from datamuse
 ** set_related friendship
 * what happens if we turn all 0's into schwas?
 * figure out the best $datamuse_max

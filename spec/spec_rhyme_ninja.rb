@@ -1,7 +1,7 @@
 require_relative '../ninja'
 
 # conditionalizes tests that we don't expect to work yet
-OPTIMISTIC = true
+OPTIMISTIC = false
 
 NOT_WORKING = false; #don't edit this one
 
@@ -62,31 +62,30 @@ describe 'rhymes' do
     ought_not_rhyme 'tea', 'bounty'
   end
 
-  if(OPTIMISTIC)
   context "you can't just add a prefix and call it a rhyme" do
     oughta_rhyme 'grape', 'ape' # gr- is not a prefix
     oughta_rhyme 'pot', 'spot' # s- is not a prefix
     oughta_rhyme 'under', 'plunder' # pl- is not a prefix
+    ought_not_rhyme 'bone', 'trombone', NOT_WORKING # trom- is not a prefix... but this one is arguable
     
     ought_not_rhyme 'promising', 'unpromising'
     ought_not_rhyme 'ion', 'cation'
     
     oughta_rhyme 'able', 'cable'
     oughta_rhyme 'unable', 'cable'
-    ought_not_rhyme 'able', 'unable'
+    ought_not_rhyme 'able', 'unable', NOT_WORKING
 
-    ought_not_rhyme 'traction', 'attraction'
+    ought_not_rhyme 'traction', 'attraction', NOT_WORKING # arguable
     oughta_rhyme 'action', 'traction'
     oughta_rhyme 'action', 'attraction'
 
     oughta_rhyme 'ice', 'dice'
-    oughta_rhyme 'ice', 'deice' # de-ice
-    ought_not_rhyme 'ice', 'deice'
+    oughta_rhyme 'ice', 'deice', NOT_WORKING # deice (de-ice) is not in cmudict
+    ought_not_rhyme 'ice', 'deice', NOT_WORKING
 
     oughta_rhyme 'stand', 'strand'
     oughta_rhyme 'understand', 'strand'
-    ought_not_rhyme 'stand', 'understand'
-  end
+    ought_not_rhyme 'stand', 'understand', NOT_WORKING
   end
 
   if(OPTIMISTIC)
@@ -96,6 +95,8 @@ describe 'rhymes' do
     ought_not_rhyme 'base', 'bass'
     ought_not_rhyme 'leader', 'lieder'
     ought_not_rhyme 'impostor', 'imposter'
+    ought_not_rhyme 'lindsay', 'lindsey'
+    ought_not_rhyme 'hanukkah', 'chanukah' # what if the initial sounds are different, though? Then how do we know to eliminate this?
   end
   end
   
@@ -167,6 +168,15 @@ describe 'related' do
     ought_not_be_related 'pirate', 'pew', NOT_WORKING
   end
   end
+
+  context 'halloween' do
+    ought_not_be_related 'halloween', 'ira', NOT_WORKING
+    ought_not_be_related 'halloween', 'lindsay', NOT_WORKING
+    ought_not_be_related 'halloween', 'lindsey', NOT_WORKING
+    ought_not_be_related 'halloween', 'nicki', NOT_WORKING
+    ought_not_be_related 'halloween', 'nikki', NOT_WORKING
+    ought_not_be_related 'halloween', 'pauline', NOT_WORKING
+  end
   
 end
 
@@ -224,6 +234,19 @@ describe 'set_related' do
     set_related_oughta_contain 'pirate', 'coast', 'ghost'
     set_related_oughta_contain 'pirate', 'loot', 'pursuit'
     set_related_oughta_contain 'pirate', 'buccaneer', 'commandeer'
+    set_related_ought_not_contain 'pirate', 'eyes', 'seas' # via two pronunciations of 'reprise'
+  end
+
+  context 'halloween' do
+    set_related_oughta_contain 'halloween', 'celebration', 'decoration'
+    set_related_oughta_contain 'halloween', 'cider', 'spider'
+    set_related_oughta_contain 'halloween', 'sheet', 'treat'
+    set_related_oughta_contain 'halloween', 'bat', 'cat'
+    set_related_oughta_contain 'halloween', 'fairy', 'scary'
+    set_related_oughta_contain 'halloween', 'fright', 'night'
+    set_related_ought_not_contain 'halloween', 'lindsay', 'lindsey', NOT_WORKING
+    set_related_ought_not_contain 'halloween', 'cider', 'snyder', NOT_WORKING
+    set_related_ought_not_contain 'halloween', 'day', 'ira', NOT_WORKING
   end
 
   context 'music' do
@@ -247,8 +270,38 @@ describe 'set_related' do
     set_related_oughta_contain 'music', 'harp', 'sharp', NOT_WORKING
     set_related_oughta_contain 'music', 'show', 'arpeggio', NOT_WORKING # if we squish the stress
     set_related_oughta_contain 'music', 'mix', 'drumsticks', NOT_WORKING # if we squish the stress
+    set_related_oughta_contain 'music', 'violin', 'mandolin', NOT_WORKING
+    set_related_oughta_contain 'music', 'rest', 'expressed', NOT_WORKING
+    set_related_oughta_contain 'music', 'lute', 'flute', NOT_WORKING
+    set_related_oughta_contain 'music', 'fortissimo', 'pianissimo', NOT_WORKING
+    set_related_ought_not_contain 'music', 'cello', 'solo'
+    set_related_ought_not_contain 'music', 'cello', 'concerto'
+    set_related_ought_not_contain 'music', 'solo', 'concerto'
+    set_related_oughta_contain 'music', 'gong', 'song', NOT_WORKING
+    set_related_oughta_contain 'music', 'duet', 'quartet', NOT_WORKING
+    set_related_oughta_contain 'music', 'duet', 'quintet', NOT_WORKING
+    it 'no proper subsets: we should get bone / intone / trombone, and not also get bone / intone' do
+      bone_intone = ['bone', 'intone']
+      bone_intone_trombone = ['bone', 'intone', 'trombone']
+      tuples = find_rhyming_tuples('music')
+      expect(tuples.include?(bone_intone_trombone)).to eql(true)
+      expect(tuples.include?(bone_intone)).to eql(false)
+    end
   end
 
+  if(OPTIMISTIC)
+  context 'imperfect' do
+    # relax the stress:
+    set_related_oughta_contain 'halloween', 'broom', 'costume'
+    set_related_oughta_contain 'music', 'oboe', 'piano'
+    set_related_oughta_contain 'music', 'cello', 'solo'
+    set_related_oughta_contain 'music', 'cello', 'concerto'
+    set_related_oughta_contain 'music', 'solo', 'concerto'
+    # dwim a non-final consonant
+    set_related_oughta_contain 'music', 'symphony', 'timpani'
+  end
+  end
+  
 end
 
 #
@@ -303,6 +356,7 @@ describe 'pair_related' do
     pair_related_oughta_contain 'food', 'evil', 'chips', 'apocalypse', NOT_WORKING
     pair_related_oughta_contain 'food', 'evil', 'seder', 'darth vader', NOT_WORKING
     pair_related_oughta_contain 'food', 'evil', 'sachertort', 'voldemort', NOT_WORKING
+    pair_related_oughta_contain 'food', 'evil', 'bread', 'undead', NOT_WORKING
   end
   
   context 'food dark' do

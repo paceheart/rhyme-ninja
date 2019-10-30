@@ -5,10 +5,10 @@
 # Don't tweak these here, tweak them in rhyme.rb
 #
 
-DEFAULT_DATAMUSE_MAX = 550
+DEFAULT_DATAMUSE_MAX = 1000
 $datamuse_max = DEFAULT_DATAMUSE_MAX
-$debug_mode = false; # don't
-$output_format = 'text'; # don't
+$debug_mode = false;
+$output_format = 'text';
 
 #
 # Public interface: rhyme_ninja(word1, word2, goal, output_format='text', debug_mode=false, datamuse_max=400)
@@ -78,22 +78,36 @@ def rdict_lookup(rsig)
 end
 
 def find_rhyming_words(word)
+  # merges multiple pronunciations of WORD
   # use our local dictionaries, we don't need the Datamuse API for simple rhyme lookup
-  results = Array.new
-  pronunciations(word).each { |pron|
-    rsig = rhyme_signature(pron)
-    rdict_lookup(rsig).each { |rhyme|
-      unless is_stupid_rhyme(word, rhyme)
-        results.push(rhyme)
-      end
-    }
-  }
-  results.uniq || [ ] # the uniq is needed because of multiple pronunciations
+  rhyming_words = Array.new
+  for pron in pronunciations(word)
+    for rhyme in find_rhyming_words_for_pronunciation(pron)
+      rhyming_words.push(rhyme)
+    end
+  end
+  rhyming_words.delete(word)
+  if(rhyming_words)
+    rhyming_words = rhyming_words.uniq
+  end
+  return rhyming_words || [ ]
 end
 
-def is_stupid_rhyme(word, rhyme)
-  word.include?(rhyme) or rhyme.include?(word)
+def find_rhyming_words_for_pronunciation(pron)
+  # use our local dictionaries, we don't need the Datamuse API for simple rhyme lookup
+  results = Array.new
+  rsig = rhyme_signature(pron)
+  rdict_lookup(rsig).each { |rhyme|
+    results.push(rhyme)
+  }
+  return results || [ ]
 end
+
+# def is_stupid_rhyme(pron, rhyme)
+  # word.include?(rhyme) or rhyme.include?(word)
+  # consider filtering out words where the rhyming syllabme is identical. But for now it's better to overinclude than overexclude.
+#   word == rhyme
+# end
 
 #
 # Datamuse stuff
@@ -149,22 +163,23 @@ def find_rhyming_tuples(input_rel1)
   # Each element of the returned array is an array of words that rhyme with each other and are all related to INPUT_REL1.
   related_rhymes = Hash.new {|h,k| h[k] = [] } # hash of arrays
   relateds1 = find_related_words(input_rel1, true)
-  apiCount = 0;
   relateds1.each { |rel1|
-    debug "rhymes for #{rel1}:<br>"
-    find_rhyming_words(rel1).each { |rhyme1|
-      if(relateds1.include? rhyme1) # we only care about relateds of input_rel1
-        related_rhymes[rel1].push(rhyme1)
-        debug rhyme1;
-      end
-    }
-    debug "<br><br>"
+    for rel1pron in pronunciations(rel1)
+      rsig = rhyme_signature(rel1pron)
+      debug "Rhymes for #{rel1} [#{rsig}]:"
+      find_rhyming_words_for_pronunciation(rel1pron).each { |rhyme1|
+        if(relateds1.include? rhyme1) # we only care about relateds of input_rel1
+          related_rhymes[rsig].push(rhyme1)
+          debug " #{rhyme1}"
+        end
+      }
+    end
   }
   tuples = [ ]
-  related_rhymes.each { |relrhyme1, relrhyme_rest|
-    if(!relrhyme_rest.empty?)
-      relrhyme_rest.push(relrhyme1) # relrhyme_rest is now relrhymes_all
-      tuples.push(relrhyme_rest.sort!)
+  related_rhymes.each { |rsig, relrhymes|
+    relrhymes.sort!.uniq!
+    if(relrhymes.length > 1)
+      tuples.push(relrhymes.sort!)
     end
   }
   return tuples
@@ -176,7 +191,6 @@ def find_rhyming_pairs(input_rel1, input_rel2)
   related_rhymes = Hash.new {|h,k| h[k] = [] } # hash of arrays
   relateds1 = find_related_words(input_rel1, true)
   relateds2 = find_related_words(input_rel2, true)
-  apiCount = 0;
   relateds1.each { |rel1|
     # rel1 is a word related to input_rel1. We're looking for rhyming pairs [rel1 rel2].
     debug "rhymes for #{rel1}:<br>"
