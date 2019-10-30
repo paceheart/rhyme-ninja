@@ -227,8 +227,7 @@ def print_tuple(tuple)
       print " / "
     end
     cgi_print "<span class='output_word'>"
-    print elem
-    cgi_print "</span>"
+    print_word elem
     i += 1
   }
   cgi_print "</div>"
@@ -253,13 +252,24 @@ def print_words(words)
     words.sort.uniq.each { |word|
       cgi_print "<div class='output_tuple'>"
       cgi_print "<span class='output_word'>"
-      print word
+      print_word word
       cgi_print "</span>"
       cgi_print "</div>"
       puts
     }
   end
   return success
+end
+
+def print_word(word)
+  got_rhymes = !pronunciations(word).empty?
+  if(got_rhymes)
+    cgi_print "<a href='rhyme.rb?word1=#{word}'>" # @todo urlencode
+  end
+  print word
+  if(got_rhymes)
+    cgi_print "</a>"
+  end
 end
 
 #

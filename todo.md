@@ -1,6 +1,8 @@
 ## to-do list
 
-* make words links
+* autofill word1 and word2 into the text boxes
+* fix indention upon word wrap
+* urlencode word links
 * text mode for rhyme.rb
 * adapter / adaptor
 * get rid of rare words; filter / rank by rarity
