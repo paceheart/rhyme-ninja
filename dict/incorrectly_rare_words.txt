@@ -1,0 +1,21 @@
+at # and apparently all stop words
+begat
+nonfat
+astray
+away
+chez
+cray
+everyday
+faraway
+fey
+francais
+halfway
+jose
+kay
+ole
+one-way
+passe
+risque
+underway
+
+

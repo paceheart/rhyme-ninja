@@ -17,20 +17,14 @@
 require 'json'
 require_relative 'utils_rhyme'
 
-$cmudict = nil
-def cmudict()
-  if $cmudict.nil?
-    $cmudict = load_cmudict_as_hash
-    puts "Loaded #{$cmudict.length} words from cmudict"
-    delete_blacklisted_words_from_cmudict
-  end
-  $cmudict
-end
+###############
+# parse cmudict
+###############
 
-def delete_blacklisted_words_from_cmudict()
+def delete_blacklisted_words(cmudict)
   count = 0
   for bad_word in blacklist
-    if($cmudict.delete(bad_word.chop))
+    if(cmudict.delete(bad_word.chop))
       count = count + 1
     end
   end
@@ -49,7 +43,7 @@ rescue ArgumentError => error
   false
 end
 
-def preprocess_line(line)
+def preprocess_cmudict_line(line)
   # merge some similar-enough-sounding syllables
   line = line.chop()
   line = line.gsub("IH1 R", "IY1 R") # ear [IY1 R] rhymes with beer [IH1 R]
@@ -58,13 +52,13 @@ def preprocess_line(line)
   return line
 end
 
-def load_cmudict_as_hash()
+def load_cmudict()
   # word => [pronunciation1, pronunciation2 ...]
   # pronunciation = [syllable1, syllable1, ...]
   hash = Hash.new {|h,k| h[k] = [] } # hash of arrays
-  IO.readlines("cmudict-0.7c.txt").each{ |line|
+  IO.readlines("cmudict/cmudict-0.7c.txt").each{ |line|
     if(useful_cmudict_line?(line))
-      line = preprocess_line(line)
+      line = preprocess_cmudict_line(line)
       tokens = line.split
       word = tokens.shift.downcase # now TOKENS contains only syllables
       word = word.gsub("_", " ")
@@ -76,8 +70,13 @@ def load_cmudict_as_hash()
       puts "Ignoring cmudict line: #{line}"
     end
   }
+  puts "Loaded #{hash.length} words from cmudict"
   return hash
 end
+
+#################
+# parse blacklist
+#################
 
 $blacklist = nil
 def blacklist()
@@ -91,7 +90,45 @@ def load_blacklist_as_array
   return IO.readlines("blacklist.txt")
 end
 
-def build_rhyme_signature_dict()
+######################
+# parse frequency dict
+######################
+
+def load_frequency_dict()
+  # word => frequency
+  hash = Hash.new(0) # hash of numbers, default 0
+  IO.readlines("lemma_en/lemma.en.txt").each{ |line|
+    if(useful_frequency_dict_line?(line))
+      line.chop!
+      entry, altforms_str = line.split(' -> ')
+      word, freq_str = entry.split('/')
+      if(freq_str)
+        freq = freq_str.to_i
+      else
+        freq = 1
+      end
+      hash[word] += freq
+      for altform in altforms_str.split(',')
+        hash[altform] += freq
+      end
+    else
+      puts "Ignoring frequency_dict line: #{line}"
+    end
+  }
+  puts "Loaded #{hash.length} words from the frequency data"
+  return hash
+end
+
+def useful_frequency_dict_line?(line)
+  # comments are not useful
+  return !(line =~ /\A;/)
+end
+
+#####################
+# put it all together
+#####################
+
+def build_rhyme_signature_dict(cmudict)
   rdict = Hash.new {|h,k| h[k] = [] } # hash of arrays
   i = 0;
   for word, prons in cmudict
@@ -100,9 +137,6 @@ def build_rhyme_signature_dict()
       rdict[rsig].push(word)
     end
     i = i + 1;
-    if(i > 99999999999)
-      break # for testing
-    end
   end
   # sort, and remove duplicate words
   for rsig, words in rdict
@@ -119,7 +153,7 @@ def build_rhyme_signature_dict()
   return rdict
 end
 
-def filter_cmudict(rdict)
+def filter_cmudict(cmudict, rdict)
   filtered_cmudict = Hash.new {|h,k| h[k] = [] } # hash of arrays. We don't need the whole cmudict, just the words with at least one rhyme.
   for word, prons in cmudict
     for pron in prons
@@ -133,13 +167,37 @@ def filter_cmudict(rdict)
   return filtered_cmudict
 end
 
+def add_frequency_info(cmudict, freqdict)
+  count = 0;
+  hash = Hash.new
+  for word, prons in cmudict
+    freq = freqdict[word] || 0
+    if(freq > 0)
+      count += 1
+    end
+    entry = [freq, prons]
+    hash[word] = entry
+  end
+  puts "#{count} of those entries have frequency data"
+  hash
+end
+
+def build_word_dict(cmudict, freqdict, rdict)
+  cmudict = filter_cmudict(cmudict,rdict) # we only care about the words with entries in rdict
+  add_frequency_info(cmudict, freqdict)
+end
+
 def rebuild_rhyme_ninja_dictionaries()
-  rdict = build_rhyme_signature_dict
+  cmudict = load_cmudict
+  delete_blacklisted_words(cmudict)
+  rdict = build_rhyme_signature_dict(cmudict)
   File.open("rhyme_signature_dict.json", "w") do |f|
     f.write(rdict.to_json)
   end
-  File.open("filtered_cmudict.json", "w") do |f|
-    f.write(filter_cmudict(rdict).to_json)
+  freq_dict = load_frequency_dict
+  word_dict = build_word_dict(cmudict, freq_dict, rdict)
+  File.open("word_dict.json", "w") do |f|
+    f.write(word_dict.to_json)
   end
 end
 

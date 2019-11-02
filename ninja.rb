@@ -9,6 +9,7 @@ DEFAULT_DATAMUSE_MAX = 550
 $datamuse_max = DEFAULT_DATAMUSE_MAX
 $debug_mode = false;
 $output_format = 'text';
+$display_word_frequencies = false;
 
 #
 # Public interface: rhyme_ninja(word1, word2, goal, output_format='text', debug_mode=false, datamuse_max=400)
@@ -41,14 +42,15 @@ end
 # Local rhyme computation
 #
 
-$cmudict = nil
-def cmudict()
-  # word => [pronunciation1, pronunciation2 ...]
+$word_dict = nil
+def word_dict()
+  # word => [frequency, pronunciations]
+  # pronunciations = [pronunciation1, pronunciation2 ...]
   # pronunciation = [syllable1, syllable1, ...]
-  if $cmudict.nil?
-    $cmudict = load_filtered_cmudict_as_hash
+  if $word_dict.nil?
+    $word_dict = load_word_dict_as_hash
   end
-  $cmudict
+  $word_dict
 end
 
 $rdict = nil # rhyme signature -> words hash
@@ -61,8 +63,8 @@ def rdict
   $rdict
 end
 
-def load_filtered_cmudict_as_hash()
-  JSON.parse(File.read("dict/filtered_cmudict.json")) or die "First run dict/dict.rb to generate dictionary caches"
+def load_word_dict_as_hash()
+  JSON.parse(File.read("dict/word_dict.json")) or die "First run dict/dict.rb to generate dictionary caches"
 end
 
 def load_rhyme_signature_dict_as_hash()
@@ -70,8 +72,22 @@ def load_rhyme_signature_dict_as_hash()
 end
 
 def pronunciations(word)
-  cmudict[word] || [ ]
+  word_info = word_dict[word]
+  if(word_info)
+    return word_info[1]
+  else
+    return [ ]
+  end
 end
+
+def frequency(word)
+  word_info = word_dict[word]
+  if(word_info)
+    return word_info[0]
+  else
+    return 0
+  end
+end  
 
 def rdict_lookup(rsig)
   rdict[rsig] || [ ]
@@ -226,7 +242,6 @@ def print_tuple(tuple)
     if(i > 0)
       print " / "
     end
-    cgi_print "<span class='output_word'>"
     print_word elem
     i += 1
   }
@@ -253,6 +268,9 @@ def print_words(words)
       cgi_print "<div class='output_tuple'>"
       cgi_print "<span class='output_word'>"
       print_word word
+      if($display_word_frequencies)
+        print " (#{frequency(word)})"
+      end
       cgi_print "</span>"
       cgi_print "</div>"
       puts
@@ -261,12 +279,45 @@ def print_words(words)
   return success
 end
 
+def ubiquity(word)
+  # 0-255
+  result = 0
+  case frequency(word)
+  when 0
+    result = 0
+  when 1
+    result = 40
+  when 2..5
+    result = 80
+  when 6..20
+    result = 120
+  when 21..100
+    result = 160
+  when 101..1000
+    result = 200
+  else
+    result = 255
+  end
+  result
+end
+
+def rare?(word)
+  frequency(word) == 0
+end
+
+def filter_out_rare_words(words)
+  words.reject{ |w| rare?(w) }
+end
+
 def print_word(word)
   got_rhymes = !pronunciations(word).empty?
   if(got_rhymes)
     cgi_print "<a href='rhyme.rb?word1=#{word}'>" # @todo urlencode
   end
+  ubiq = ubiquity(word)
+#  cgi_print "<span style='color: rgb(#{ubiq}, #{ubiq}, #{ubiq});'>"
   print word
+#  cgi_print "</span>"
   if(got_rhymes)
     cgi_print "</a>"
   end
@@ -301,11 +352,11 @@ def rhyme_ninja(word1, word2, goal, output_format='text', debug_mode=false, data
   case goal
   when "rhymes"
     result_header = "Rhymes for \"<span class='focal_word'>#{word1}</span>\":<div class='results'>"
-    result = find_rhyming_words(word1)
+    result = filter_out_rare_words(find_rhyming_words(word1))
     result_type = :words
   when "related"
-    result_header = "Words related to \"<span class='focal_word'>#{word1}:</span>\":<div class='results'>"
-    result = find_related_words(word1, false)
+    result_header = "Words related to \"<span class='focal_word'>#{word1}</span>\":<div class='results'>"
+    result = filter_out_rare_words(find_related_words(word1, false))
     result_type = :words
   when "set_related"
     result_header = "Rhyming word sets related to \"<span class='focal_word'>#{word1}</span>\":<div class='results'>"
