@@ -304,12 +304,14 @@ describe 'rhymes' do
   
   context 'profanity is allowed' do
     oughta_rhyme 'truck', 'fuck'
+    oughta_rhyme 'bunt', 'cunt'
   end
   
   context 'slurs are forbidden' do
     ought_not_rhyme 'tipsy', 'gypsy'
     ought_not_rhyme 'fop', 'wop'
     ought_not_rhyme 'fops', 'wops'
+    ought_not_rhyme 'crannies', 'trannies'
   end
   
   context 'Limerick Heist' do

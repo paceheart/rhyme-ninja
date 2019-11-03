@@ -15,11 +15,15 @@
 # having Step 2 be an array lookup instead of a hash lookup.
 
 require 'json'
+require 'rwordnet'
 require_relative 'utils_rhyme'
 
-###############
+WordNet::DB.path = "WordNet3.1/"
+WORDNET_TAGSENSE_COUNT_MULTIPLICATION_FACTOR = 100 # each tagsense_count from wordnet counts as this many occurrences in some corpus
+
+#
 # parse cmudict
-###############
+#
 
 def delete_blacklisted_words(cmudict)
   count = 0
@@ -74,9 +78,9 @@ def load_cmudict()
   return hash
 end
 
-#################
+#
 # parse blacklist
-#################
+#
 
 $blacklist = nil
 def blacklist()
@@ -90,43 +94,72 @@ def load_blacklist_as_array
   return IO.readlines("blacklist.txt")
 end
 
-######################
-# parse frequency dict
-######################
+#
+# parse lemma dict
+#
 
-def load_frequency_dict()
-  # word => frequency
-  hash = Hash.new(0) # hash of numbers, default 0
+def load_lemma_dict()
+  lemmahash = Hash.new # word form => base word (lemma)
+  freqhash = Hash.new(0) # hash of numbers (word occurrence frequencies), default 0
+  wordcount = 0
   IO.readlines("lemma_en/lemma.en.txt").each{ |line|
-    if(useful_frequency_dict_line?(line))
+    if(useful_lemma_dict_line?(line))
       line.chop!
+      wordcount += 1
       entry, altforms_str = line.split(' -> ')
       word, freq_str = entry.split('/')
+      # update lemmehash
+      for altform in altforms_str.split(',')
+        lemmahash[altform] = word
+      end
+      # update freqhash
       if(freq_str)
         freq = freq_str.to_i
       else
         freq = 1
       end
-      hash[word] += freq
+      freqhash[word] += freq
       for altform in altforms_str.split(',')
-        hash[altform] += freq
+        freqhash[altform] += freq
       end
     else
-      puts "Ignoring frequency_dict line: #{line}"
+      puts "Ignoring lemma_dict line: #{line}"
     end
   }
-  puts "Loaded #{hash.length} words from the frequency data"
-  return hash
+  # this slightly overcounts because it double-counts altforms that are the same as lemma
+  puts "Mapped #{lemmahash.length + wordcount} words to #{wordcount} lemmas"
+  puts "Loaded #{freqhash.length} words from the frequency data"
+  return lemmahash, freqhash
 end
 
-def useful_frequency_dict_line?(line)
+def useful_lemma_dict_line?(line)
   # comments are not useful
   return !(line =~ /\A;/)
 end
 
-#####################
+#
+# WordNet
+#
+
+def wn_frequency(word, lemmadict)
+  frequency = 0
+  lemmas = WordNet::Lemma.find_all(word)
+  # If you didn't find it, try using the lemmadict to get the base form of WORD
+  if(lemmas.empty?)
+    base_word = lemmadict[word]
+    if(base_word)
+      lemmas = WordNet::Lemma.find_all(base_word)
+    end
+  end
+  lemmas.each { |lemma|
+    frequency += lemma.tagsense_count * WORDNET_TAGSENSE_COUNT_MULTIPLICATION_FACTOR
+  }
+  return frequency
+end
+
+#
 # put it all together
-#####################
+#
 
 def build_rhyme_signature_dict(cmudict)
   rdict = Hash.new {|h,k| h[k] = [] } # hash of arrays
@@ -167,11 +200,24 @@ def filter_cmudict(cmudict, rdict)
   return filtered_cmudict
 end
 
-def add_frequency_info(cmudict, freqdict)
+def add_frequency_info(cmudict, lemmadict, freqdict)
   count = 0;
   hash = Hash.new
   for word, prons in cmudict
-    freq = freqdict[word] || 0
+    freqdict_freq = freqdict[word] || 0
+    wn_freq = wn_frequency(word, lemmadict)
+    freq = freqdict_freq + wn_freq
+    # including freqdict_freq has the pro of including good things like
+    #   bettor 1, holy 2994, mod 456, paroled 237, saffron 180, slacker 561, trillion 1, vanes 153
+    # at the cost of including some crap and proper nouns like
+    #   nardo 1, bors 27, matias 2, soweto 96, steinman 1
+    # A random sample of 15 words with a freqdict_freq of 1 yielded:
+    #   5 good: gasoline (wn 1), chicanery, noncombatants, propagandize, psilocybin
+    #   1 whatever: parimutuel (wn 1)
+    #   5 names: adam (wn 1), ciardi, cydonia, tuscaloosa, walter
+    #   2 initialisms: cctv, ni
+    #   2 rare: junco, stylites
+    # Only a third of them are good. Is it worth adding 2/3 crap to get the 1/3 good?
     if(freq > 0)
       count += 1
     end
@@ -182,9 +228,9 @@ def add_frequency_info(cmudict, freqdict)
   hash
 end
 
-def build_word_dict(cmudict, freqdict, rdict)
+def build_word_dict(cmudict, lemmadict, freqdict, rdict)
   cmudict = filter_cmudict(cmudict,rdict) # we only care about the words with entries in rdict
-  add_frequency_info(cmudict, freqdict)
+  add_frequency_info(cmudict, lemmadict, freqdict)
 end
 
 def rebuild_rhyme_ninja_dictionaries()
@@ -194,8 +240,8 @@ def rebuild_rhyme_ninja_dictionaries()
   File.open("rhyme_signature_dict.json", "w") do |f|
     f.write(rdict.to_json)
   end
-  freq_dict = load_frequency_dict
-  word_dict = build_word_dict(cmudict, freq_dict, rdict)
+  lemma_dict, freq_dict = load_lemma_dict
+  word_dict = build_word_dict(cmudict, lemma_dict, freq_dict, rdict)
   File.open("word_dict.json", "w") do |f|
     f.write(word_dict.to_json)
   end

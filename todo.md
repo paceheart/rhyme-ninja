@@ -1,7 +1,10 @@
 ## to-do list
 
+* improve rare word filtering
+* entirely forbid blacklisted words, not just from rhymes
 * use wordnet to show synonyms
-* improve rare word filtering, see dict/incorrectly_rare_words.txt
+* add WN to www
+* add definition
 * autofill word1 and word2 into the text boxes
 * fix indention upon word wrap
 * urlencode word links
@@ -21,6 +24,7 @@
 
 ## could-do list
 
+* try using wordnet for related words to eliminate dependence on datamuse
 * add a clickable "x" for "this is a dumb word that should be stricken from the list forever"
 * guess at pronunciations of unknown words
 * don't use json for the internal dictionaries - it would be nice to be able to grep them
