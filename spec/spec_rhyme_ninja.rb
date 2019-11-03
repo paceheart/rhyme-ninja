@@ -57,7 +57,7 @@ describe 'rarity' do
     oughta_be_common('away')
     oughta_be_common('cat')
     oughta_be_common('alive')
-    oughta_be_common("i've", NOT_WORKING)
+    oughta_be_common("i've")
     oughta_be_common('next')
     oughta_be_common('around')
     oughta_be_common('flight')

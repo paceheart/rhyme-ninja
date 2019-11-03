@@ -206,7 +206,7 @@ def add_frequency_info(cmudict, lemmadict, freqdict)
   for word, prons in cmudict
     freqdict_freq = freqdict[word] || 0
     wn_freq = wn_frequency(word, lemmadict)
-    if(stop_word?(word)
+    if(stop_word?(word))
       freq = 999999 # very common
     else
       freq = freqdict_freq + wn_freq
