@@ -113,14 +113,16 @@ def find_rhyming_words(word, lang)
   # merges multiple pronunciations of WORD
   # use our local dictionaries, we don't need the Datamuse API for simple rhyme lookup
   rhyming_words = Array.new
-  for pron in pronunciations(word, lang)
-    for rhyme in find_rhyming_words_for_pronunciation(pron)
-      rhyming_words.push(rhyme)
+  unless(blacklisted?(word))
+    for pron in pronunciations(word, lang)
+      for rhyme in find_rhyming_words_for_pronunciation(pron)
+        rhyming_words.push(rhyme)
+      end
     end
-  end
-  rhyming_words.delete(word)
-  if(rhyming_words)
-    rhyming_words = rhyming_words.uniq
+    rhyming_words.delete(word)
+    if(rhyming_words)
+      rhyming_words = rhyming_words.uniq
+    end
   end
   return rhyming_words || [ ]
 end
@@ -152,7 +154,10 @@ end
 def results_to_words(results)
   words = [ ]
   results.each { |result|
-    words.push(result["word"])
+    word = result["word"]
+    unless(blacklisted?(word))
+      words.push(word)
+    end
   }
   return words
 end
@@ -170,6 +175,14 @@ def find_related_rhymes(rhyme, rel, lang)
 end
 
 def find_datamuse_results(rhyme, rel, lang)
+  if(blacklisted?(rhyme) || blacklisted?(rel))
+    return [ ]
+  else
+    return really_find_datamuse_results(rhyme, rel, lang)
+  end
+end
+
+def really_find_datamuse_results(rhyme, rel, lang)
   request = "https://api.datamuse.com/words?"
   if(lang != "en")
     request += "v=#{lang}&"
@@ -201,19 +214,21 @@ def find_rhyming_tuples(input_rel1, lang)
   # Rhyming word sets that are related to INPUT_REL1.
   # Each element of the returned array is an array of words that rhyme with each other and are all related to INPUT_REL1.
   related_rhymes = Hash.new {|h,k| h[k] = [] } # hash of arrays
-  relateds1 = find_related_words(input_rel1, true, lang)
-  relateds1.each { |rel1|
-    for rel1pron in pronunciations(rel1, lang)
-      rsig = rhyme_signature(rel1pron)
-      debug "Rhymes for #{rel1} [#{rsig}]:"
-      find_rhyming_words_for_pronunciation(rel1pron).each { |rhyme1|
-        if(relateds1.include? rhyme1) # we only care about relateds of input_rel1
-          related_rhymes[rsig].push(rhyme1)
-          debug " #{rhyme1}"
-        end
-      }
-    end
-  }
+  unless(blacklisted?(input_rel1))
+    relateds1 = find_related_words(input_rel1, true, lang)
+    relateds1.each { |rel1|
+      for rel1pron in pronunciations(rel1, lang)
+        rsig = rhyme_signature(rel1pron)
+        debug "Rhymes for #{rel1} [#{rsig}]:"
+        find_rhyming_words_for_pronunciation(rel1pron).each { |rhyme1|
+          if(relateds1.include? rhyme1) # we only care about relateds of input_rel1
+            related_rhymes[rsig].push(rhyme1)
+            debug " #{rhyme1}"
+          end
+        }
+      end
+    }
+  end
   tuples = [ ]
   related_rhymes.each { |rsig, relrhymes|
     relrhymes.sort!.uniq!
@@ -228,20 +243,22 @@ def find_rhyming_pairs(input_rel1, input_rel2, lang)
   # Pairs of rhyming words where the first word is related to INPUT_REL1 and the second word is related to INPUT_REL2
   # Each element of the returned array is a pair of rhyming words [W1 W2] where W1 is related to INPUT_REL1 and W2 is related to INPUT_REL2
   related_rhymes = Hash.new {|h,k| h[k] = [] } # hash of arrays
-  relateds1 = find_related_words(input_rel1, true, lang)
-  relateds2 = find_related_words(input_rel2, true, lang)
-  relateds1.each { |rel1|
-    # rel1 is a word related to input_rel1. We're looking for rhyming pairs [rel1 rel2].
-    debug "rhymes for #{rel1}:<br>"
-    # If we find a word 'RHYME' that rhymes with rel1 and is related to input_rel2, we win!
-    find_rhyming_words(rel1, lang).each { |rhyme| # check all rhymes of rel1, call each one 'RHYME'
-      if(relateds2.include? rhyme) # is RHYME related to input_rel2? If so, we win!
-        related_rhymes[rel1].push(rhyme)
-        debug rhyme;
-      end
+  unless(blacklisted?(input_rel1) || blacklisted?(input_rel2))
+    relateds1 = find_related_words(input_rel1, true, lang)
+    relateds2 = find_related_words(input_rel2, true, lang)
+    relateds1.each { |rel1|
+      # rel1 is a word related to input_rel1. We're looking for rhyming pairs [rel1 rel2].
+      debug "rhymes for #{rel1}:<br>"
+      # If we find a word 'RHYME' that rhymes with rel1 and is related to input_rel2, we win!
+      find_rhyming_words(rel1, lang).each { |rhyme| # check all rhymes of rel1, call each one 'RHYME'
+        if(relateds2.include? rhyme) # is RHYME related to input_rel2? If so, we win!
+          related_rhymes[rel1].push(rhyme)
+          debug rhyme;
+        end
+      }
+      debug "<br><br>"
     }
-    debug "<br><br>"
-  }
+  end
   pairs = [ ]
   related_rhymes.each { |relrhyme1, relrhyme2_list|
     if(!relrhyme2_list.empty?)

@@ -25,7 +25,7 @@ WORDNET_TAGSENSE_COUNT_MULTIPLICATION_FACTOR = 100 # each tagsense_count from wo
 # parse cmudict
 #
 
-def delete_blacklisted_words(cmudict)
+def delete_blacklisted_keys_from_hash(cmudict)
   count = 0
   for bad_word in blacklist
     if(cmudict.delete(bad_word.chop))
@@ -76,22 +76,6 @@ def load_cmudict()
   }
   puts "Loaded #{hash.length} words from cmudict"
   return hash
-end
-
-#
-# parse blacklist
-#
-
-$blacklist = nil
-def blacklist()
-  if $blacklist.nil?
-    $blacklist = load_blacklist_as_array
-  end
-  return $blacklist
-end
-
-def load_blacklist_as_array
-  return IO.readlines("blacklist.txt")
 end
 
 #
@@ -239,7 +223,7 @@ end
 
 def rebuild_rhyme_ninja_dictionaries()
   cmudict = load_cmudict
-  delete_blacklisted_words(cmudict)
+  delete_blacklisted_keys_from_hash(cmudict)
   rdict = build_rhyme_signature_dict(cmudict)
   File.open("rhyme_signature_dict.json", "w") do |f|
     f.write(rdict.to_json)

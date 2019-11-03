@@ -3,6 +3,10 @@
 # Rhyming utilities for Rhyme Ninja
 # Used both in preprocessing and at runtime
 
+#
+# stop words
+#
+
 STOP_WORDS_TRIVIAL = ["i", "me", "my", "myself", "we", "our", "ours", "ourselves", "you", "your", "yours", "yourself", "yourselves", "he", "him", "his", "himself", "she", "her", "hers", "herself", "it", "its", "itself", "they", "them", "their", "theirs", "themself", "themselves", "what", "which", "who", "whom", "this", "that", "these", "those", "am", "is", "are", "was", "were", "be", "been", "being", "have", "has", "had", "having", "do", "does", "did", "doing", "a", "an", "the", "and", "but", "if", "or", "as", "of", "at", "by", "for", "with", "to", "from", "then", "so", "than", "i'd", "i've", "i'll", "we'd", "we've", "we'll", "you'd", "you've", "you'll", "he'd", "he'll", "she's", "she'd", "she'll", "it's", "it'd", "it'll", "they'd", "they've", "they'll", "that's", "that'd", "that've", "that'll", "what's", "what've", "what'll", "who's", "who'd", "who've", "who'll", "this'd", "this'll", "that's", "that'd", "that've", "that'll"] # added 's 'd 've 'll forms as appropriate
 
 STOP_WORDS_RELATABLE = ["because", "until", "while", "about", "against", "between", "into", "through", "during", "before", "after", "above", "below", "up", "down", "in", "out", "on", "off", "over", "under", "again", "further", "once", "here", "there", "when", "where", "why", "how", "all", "any", "both", "each", "few", "more", "most", "other", "some", "such", "no", "nor", "not", "only", "own", "same", "too", "very", "can", "will", "just", "dont", "should", "now"] # from https://gist.github.com/sebleier/554280, removed "s" "t", added "themself", and changed "don" to "dont", separated out the ones that ought not show up as related words of anything
@@ -14,6 +18,38 @@ end
 def relatable_word?(word)
   return ! STOP_WORDS_TRIVIAL.include?(word)
 end
+
+#
+# blacklist
+#
+
+$blacklist = nil
+def blacklist()
+  if $blacklist.nil?
+    $blacklist = load_blacklist_as_array
+  end
+  return $blacklist
+end
+
+def blacklisted?(word)
+  return blacklist.include?(word)
+end
+
+def load_blacklist_as_array
+  if(File.exists?("blacklist.txt"))
+     return IO.readlines("blacklist.txt", chomp: true)
+  else
+    return IO.readlines("dict/blacklist.txt", chomp: true)
+  end
+end
+
+def delete_blacklisted_words_from_array(array)
+  return array.reject { |word| blacklisted?(word) }
+end
+
+#
+# rhyme signature
+#
 
 def rhyme_signature_array(pron)
   # The rhyme signature is everything including and after the final most stressed vowel,

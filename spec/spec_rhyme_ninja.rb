@@ -372,10 +372,10 @@ describe 'related' do
   end
 
   context 'slurs are forbidden' do
-    ought_not_be_related 'en', 'gypsy', 'romanian', NOT_WORKING
-    ought_not_be_related 'en', 'romanian', 'gypsy', NOT_WORKING
-    ought_not_be_related 'en', 'gypsies', 'romanian', NOT_WORKING
-    ought_not_be_related 'en', 'romanian', 'gypsies', NOT_WORKING
+    ought_not_be_related 'en', 'gypsy', 'romanian'
+    ought_not_be_related 'en', 'romanian', 'gypsy'
+    ought_not_be_related 'en', 'gypsies', 'romanian'
+    ought_not_be_related 'en', 'romanian', 'gypsies'
   end
 
   context 'trivial stop words ought not show up as related to anything' do
