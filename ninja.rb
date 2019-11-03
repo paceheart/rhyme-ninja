@@ -145,6 +145,10 @@ end
 # Datamuse stuff
 #
 
+def results_to_related_words(results)
+  results_to_words(results).select { |res| relatable_word?(res) }
+end
+
 def results_to_words(results)
   words = [ ]
   results.each { |result|
@@ -154,7 +158,7 @@ def results_to_words(results)
 end
   
 def find_related_words(word, include_self, lang)
-  words = results_to_words(find_datamuse_results("", word, lang))
+  words = results_to_related_words(find_datamuse_results("", word, lang))
   if(include_self)
     words.push(word)
   end
@@ -162,7 +166,7 @@ def find_related_words(word, include_self, lang)
 end
 
 def find_related_rhymes(rhyme, rel, lang)
-  results_to_words(find_datamuse_results(rhyme, rel, lang))
+  results_to_related_words(find_datamuse_results(rhyme, rel, lang))
 end
 
 def find_datamuse_results(rhyme, rel, lang)

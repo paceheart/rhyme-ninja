@@ -1,7 +1,6 @@
 ## to-do list
 
 * improve rare word filtering
-* filter out some stop words as related words
 * entirely forbid blacklisted words, not just from rhymes. see 'romanian' in spec
 * use wordnet to show synonyms
 * add definition

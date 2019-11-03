@@ -377,6 +377,10 @@ describe 'related' do
     ought_not_be_related 'en', 'gypsies', 'romanian', NOT_WORKING
     ought_not_be_related 'en', 'romanian', 'gypsies', NOT_WORKING
   end
+
+  context 'trivial stop words ought not show up as related to anything' do
+    ought_not_be_related 'en', 'food', 'the'
+  end
   
   if(OPTIMISTIC)
   context 'pirate' do
