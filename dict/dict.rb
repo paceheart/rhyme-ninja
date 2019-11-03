@@ -21,6 +21,8 @@ require_relative 'utils_rhyme'
 WordNet::DB.path = "WordNet3.1/"
 WORDNET_TAGSENSE_COUNT_MULTIPLICATION_FACTOR = 100 # each tagsense_count from wordnet counts as this many occurrences in some corpus
 
+STOP_WORDS = ["i", "me", "my", "myself", "we", "our", "ours", "ourselves", "you", "your", "yours", "yourself", "yourselves", "he", "him", "his", "himself", "she", "her", "hers", "herself", "it", "its", "itself", "they", "them", "their", "theirs", "themself", "themselves", "what", "which", "who", "whom", "this", "that", "these", "those", "am", "is", "are", "was", "were", "be", "been", "being", "have", "has", "had", "having", "do", "does", "did", "doing", "a", "an", "the", "and", "but", "if", "or", "because", "as", "until", "while", "of", "at", "by", "for", "with", "about", "against", "between", "into", "through", "during", "before", "after", "above", "below", "to", "from", "up", "down", "in", "out", "on", "off", "over", "under", "again", "further", "then", "once", "here", "there", "when", "where", "why", "how", "all", "any", "both", "each", "few", "more", "most", "other", "some", "such", "no", "nor", "not", "only", "own", "same", "so", "than", "too", "very", "can", "will", "just", "dont", "should", "now"] # from https://gist.github.com/sebleier/554280, removed "s" "t", added "themself", and changed "don" to "dont"
+
 #
 # parse cmudict
 #
@@ -206,7 +208,11 @@ def add_frequency_info(cmudict, lemmadict, freqdict)
   for word, prons in cmudict
     freqdict_freq = freqdict[word] || 0
     wn_freq = wn_frequency(word, lemmadict)
-    freq = freqdict_freq + wn_freq
+    if(STOP_WORDS.include?(word))
+      freq = 999999 # very common
+    else
+      freq = freqdict_freq + wn_freq
+    end
     # including freqdict_freq has the pro of including good things like
     #   bettor 1, holy 2994, mod 456, paroled 237, saffron 180, slacker 561, trillion 1, vanes 153
     # at the cost of including some crap and proper nouns like

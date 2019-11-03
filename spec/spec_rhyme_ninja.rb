@@ -180,6 +180,7 @@ describe 'rarity' do
     oughta_be_common('daft')
     oughta_be_common('evict')
     oughta_be_common('flighty')
+    oughta_be_common('canned')
   end
 
   context 'arguable' do
