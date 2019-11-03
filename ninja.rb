@@ -6,7 +6,7 @@
 # Don't tweak these here, tweak them in rhyme.rb
 #
 
-DEFAULT_DATAMUSE_MAX = 550
+DEFAULT_DATAMUSE_MAX = 1000
 $datamuse_max = DEFAULT_DATAMUSE_MAX
 $debug_mode = false;
 $output_format = 'text';
@@ -109,7 +109,7 @@ def rdict_lookup(rsig)
   rdict[rsig] || [ ]
 end
 
-def find_rhyming_words(word, lang="en")
+def find_rhyming_words(word, lang)
   # merges multiple pronunciations of WORD
   # use our local dictionaries, we don't need the Datamuse API for simple rhyme lookup
   rhyming_words = Array.new
@@ -153,7 +153,7 @@ def results_to_words(results)
   return words
 end
   
-def find_related_words(word, include_self=false, lang)
+def find_related_words(word, include_self, lang)
   words = results_to_words(find_datamuse_results("", word, lang))
   if(include_self)
     words.push(word)
@@ -230,7 +230,7 @@ def find_rhyming_pairs(input_rel1, input_rel2, lang)
     # rel1 is a word related to input_rel1. We're looking for rhyming pairs [rel1 rel2].
     debug "rhymes for #{rel1}:<br>"
     # If we find a word 'RHYME' that rhymes with rel1 and is related to input_rel2, we win!
-    find_rhyming_words(rel1).each { |rhyme| # check all rhymes of rel1, call each one 'RHYME'
+    find_rhyming_words(rel1, lang).each { |rhyme| # check all rhymes of rel1, call each one 'RHYME'
       if(relateds2.include? rhyme) # is RHYME related to input_rel2? If so, we win!
         related_rhymes[rel1].push(rhyme)
         debug rhyme;
@@ -416,12 +416,12 @@ end
 # Utilities
 #
 
-def rhymes?(word1, word2)
+def rhymes?(word1, word2, lang="en")
   # Does word1 rhyme with word2?
-  find_rhyming_words(word1).include?(word2)
+  find_rhyming_words(word1, lang).include?(word2)
 end
 
-def related?(word1, word2, include_self=false)
+def related?(word1, word2, include_self=false, lang="en")
   # Is word1 conceptually related to word2?
-  find_related_words(word1, include_self).include?(word2)
+  find_related_words(word1, include_self, lang).include?(word2)
 end
