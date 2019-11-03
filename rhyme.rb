@@ -104,7 +104,11 @@ end
 def print_interesting_html_column_data(output, dregs, header, is_tuples)
   cgi_puts header
   if output.empty?
-    puts "No matching results."
+    if dregs.empty?
+      puts "No matching results."
+    else
+      puts "No good results."
+    end
   else
     print_words_or_tuples(output, is_tuples)
   end
