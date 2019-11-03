@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# coding: utf-8
 
 #
 # control parameters
@@ -71,13 +72,28 @@ def load_rhyme_signature_dict_as_hash()
   JSON.parse(File.read("dict/rhyme_signature_dict.json")) or die "First run dict/dict.rb to generate dictionary caches"
 end
 
-def pronunciations(word)
+def pronunciations(word, lang)
+  case lang
+  when "en"
+    return english_pronunciations(word)
+  when "es"
+    return spanish_pronunciations(word)
+  else
+    abort "Unexpected language #{lang}"
+  end
+end
+
+def english_pronunciations(word)
   word_info = word_dict[word]
   if(word_info)
     return word_info[1]
   else
     return [ ]
   end
+end
+
+def spanish_pronunciations(word)
+  english_pronunciations(word) # stub
 end
 
 def frequency(word)
@@ -93,11 +109,11 @@ def rdict_lookup(rsig)
   rdict[rsig] || [ ]
 end
 
-def find_rhyming_words(word)
+def find_rhyming_words(word, lang="en")
   # merges multiple pronunciations of WORD
   # use our local dictionaries, we don't need the Datamuse API for simple rhyme lookup
   rhyming_words = Array.new
-  for pron in pronunciations(word)
+  for pron in pronunciations(word, lang)
     for rhyme in find_rhyming_words_for_pronunciation(pron)
       rhyming_words.push(rhyme)
     end
@@ -137,20 +153,23 @@ def results_to_words(results)
   return words
 end
   
-def find_related_words(word, include_self=false)
-  words = results_to_words(find_datamuse_results("", word))
+def find_related_words(word, include_self=false, lang)
+  words = results_to_words(find_datamuse_results("", word, lang))
   if(include_self)
     words.push(word)
   end
   return words
 end
 
-def find_related_rhymes(rhyme, rel)
-  results_to_words(find_datamuse_results(rhyme, rel))
+def find_related_rhymes(rhyme, rel, lang)
+  results_to_words(find_datamuse_results(rhyme, rel, lang))
 end
 
-def find_datamuse_results(rhyme, rel)
+def find_datamuse_results(rhyme, rel, lang)
   request = "https://api.datamuse.com/words?"
+  if(lang != "en")
+    request += "v=#{lang}&"
+  end
   if(rhyme != "")
     request += "rel_rhy=#{rhyme}&";
   end
@@ -174,13 +193,13 @@ def find_datamuse_results(rhyme, rel)
   end
 end
 
-def find_rhyming_tuples(input_rel1)
+def find_rhyming_tuples(input_rel1, lang)
   # Rhyming word sets that are related to INPUT_REL1.
   # Each element of the returned array is an array of words that rhyme with each other and are all related to INPUT_REL1.
   related_rhymes = Hash.new {|h,k| h[k] = [] } # hash of arrays
-  relateds1 = find_related_words(input_rel1, true)
+  relateds1 = find_related_words(input_rel1, true, lang)
   relateds1.each { |rel1|
-    for rel1pron in pronunciations(rel1)
+    for rel1pron in pronunciations(rel1, lang)
       rsig = rhyme_signature(rel1pron)
       debug "Rhymes for #{rel1} [#{rsig}]:"
       find_rhyming_words_for_pronunciation(rel1pron).each { |rhyme1|
@@ -201,12 +220,12 @@ def find_rhyming_tuples(input_rel1)
   return tuples
 end
 
-def find_rhyming_pairs(input_rel1, input_rel2)
+def find_rhyming_pairs(input_rel1, input_rel2, lang)
   # Pairs of rhyming words where the first word is related to INPUT_REL1 and the second word is related to INPUT_REL2
   # Each element of the returned array is a pair of rhyming words [W1 W2] where W1 is related to INPUT_REL1 and W2 is related to INPUT_REL2
   related_rhymes = Hash.new {|h,k| h[k] = [] } # hash of arrays
-  relateds1 = find_related_words(input_rel1, true)
-  relateds2 = find_related_words(input_rel2, true)
+  relateds1 = find_related_words(input_rel1, true, lang)
+  relateds2 = find_related_words(input_rel2, true, lang)
   relateds1.each { |rel1|
     # rel1 is a word related to input_rel1. We're looking for rhyming pairs [rel1 rel2].
     debug "rhymes for #{rel1}:<br>"
@@ -234,7 +253,7 @@ end
 # Display
 #
 
-def print_tuple(tuple)
+def print_tuple(tuple, lang)
   # print TUPLE separated by slashes
   i = 0
   cgi_print "<div class='tuple'>"
@@ -242,7 +261,7 @@ def print_tuple(tuple)
     if(i > 0)
       print " / "
     end
-    print_word elem
+    print_word(elem, lang)
     i += 1
   }
   cgi_print "</div>"
@@ -250,24 +269,24 @@ def print_tuple(tuple)
   STDOUT.flush
 end
 
-def print_tuples(tuples)
+def print_tuples(tuples, lang)
   # return boolean, did I print anything? i.e. was TUPLES nonempty?
   success = !tuples.empty?
   if(success)
     tuples.sort.uniq.each { |tuple|
-      print_tuple(tuple)
+      print_tuple(tuple, lang)
     }
   end
   return success
 end
 
-def print_words(words)
+def print_words(words, lang)
   success = !words.empty?
   if(success)
     words.sort.uniq.each { |word|
       cgi_print "<div class='output_tuple'>"
       cgi_print "<span class='output_word'>"
-      print_word word
+      print_word(word, lang)
       if($display_word_frequencies)
         print " (#{frequency(word)})"
       end
@@ -311,10 +330,11 @@ def filter_out_rare_words(words)
   return good, bad
 end
 
-def print_word(word)
-  got_rhymes = !pronunciations(word).empty?
+def print_word(word, lang)
+  got_rhymes = !pronunciations(word, lang).empty?
   if(got_rhymes)
-    cgi_print "<a href='rhyme.rb?word1=#{word}'>" # @todo urlencode
+    # @todo urlencode
+    cgi_print lang(lang, "<a href='rhyme.rb?word1=#{word}'>", "<a href='rimar.rb?word1=#{word}'>")
   end
   ubiq = ubiquity(word)
 #  cgi_print "<span style='color: rgb(#{ubiq}, #{ubiq}, #{ubiq});'>"
@@ -329,7 +349,7 @@ end
 # Central dispatcher
 #
 
-def rhyme_ninja(word1, word2, goal, output_format='text', debug_mode=false, datamuse_max=DEFAULT_DATAMUSE_MAX)
+def rhyme_ninja(word1, word2, goal, lang='en', output_format='text', debug_mode=false, datamuse_max=DEFAULT_DATAMUSE_MAX)
   $output_format = output_format
   $debug_mode = debug_mode
   $datamuse_max = datamuse_max
@@ -354,37 +374,37 @@ def rhyme_ninja(word1, word2, goal, output_format='text', debug_mode=false, data
   # main list of cases
   case goal
   when "rhymes"
-    result_header = "Rhymes for \"<span class='focal_word'>#{word1}</span>\":<div class='results'>"
-    result, dregs = filter_out_rare_words(find_rhyming_words(word1))
+    result_header = lang(lang, "Rhymes for", "Rimas para") + " \"<span class='focal_word'>#{word1}</span>\":<div class='results'>"
+    result, dregs = filter_out_rare_words(find_rhyming_words(word1, lang))
     result_type = :words
   when "related"
-    result_header = "Words related to \"<span class='focal_word'>#{word1}</span>\":<div class='results'>"
-    result, dregs = filter_out_rare_words(find_related_words(word1, false))
+    result_header = lang(lang, "Words related to", "Palabras relacionadas con") + " \"<span class='focal_word'>#{word1}</span>\":<div class='results'>"
+    result, dregs = filter_out_rare_words(find_related_words(word1, false, lang))
     result_type = :words
   when "set_related"
-    result_header = "Rhyming word sets related to \"<span class='focal_word'>#{word1}</span>\":<div class='results'>"
-    result = find_rhyming_tuples(word1)
+    result_header = lang(lang, "Rhyming word sets related to", "Conjuntos de rimas relacionadas de") + " \"<span class='focal_word'>#{word1}</span>\":<div class='results'>"
+    result = find_rhyming_tuples(word1, lang)
     result_type = :tuples
   when "pair_related"
     if(word1 == "" or word2 == "")
-      result_header = "I need two words to find rhyming pairs. For example, Word 1 = <span class='focal_word'>crime</span>, Word 2 = <span class='focal_word'>heaven</span>"
+      result_header = lang(lang, "I need two words to find rhyming pairs. For example, Word 1 = <span class='focal_word'>crime</span>, Word 2 = <span class='focal_word'>heaven</span>", "Necesito dos palabras para buscar pares rimandos")
       result_type = :bad_input
     else
-      result_header = "Rhyming word pairs where the first word is related to \"<span class='focal_word'>#{word1}</span>\" and the second word is related to \"<span class='focal_word'>#{word2}</span>\":<div class='results'>"
-      result = find_rhyming_pairs(word1, word2)
+      result_header = lang(lang, "Rhyming word pairs where the first word is related to", "Pares de palabras rimandas, la primera palabra está relacionada con") + " \"<span class='focal_word'>#{word1}</span>\" " + lang(lang, "and the second word is related to ", "y la segunda palabra está relacionada con") + " \"<span class='focal_word'>#{word2}</span>\":<div class='results'>"
+      result = find_rhyming_pairs(word1, word2, lang)
       result_type = :tuples
     end
   when "related_rhymes"
     if(word1 == "" or word2 == "")
-      result_header = "I need two words to find related rhymes pairs. For example, Word 1 = <span class='focal_word'>please</span>, Word 2 = <span class='focal_word'>cats</span>"
+      result_header = lang(lang, "I need two words to find related rhyming pairs. For example, Word 1 = <span class='focal_word'>please</span>, Word 2 = <span class='focal_word'>cats</span>", "Necesito dos palabras para buscar pares rimandos relacionados.")
       result_type = :bad_input
     else
-      result_header = "Rhymes for \"<span class='focal_word'>#{word1}</span>\" that are related to \"<span class='focal_word'>#{word2}</span>\":<div class='results'>"
-      result = find_related_rhymes(word1, word2)
+      result_header = lang(lang, "Rhymes for", "Rimas para") + " \"<span class='focal_word'>#{word1}</span>\" " + lang(lang, "that are related to", "que están relacionadas con") + " \"<span class='focal_word'>#{word2}</span>\":<div class='results'>"
+      result = find_related_rhymes(word1, word2, lang)
       result_type = :words
     end
   else
-    result_header = "Invalid selection."
+    result_header = lang(lang, "Invalid selection.", "selección invalida")
     result_type = :bad_input
   end
   debug "result = #{result}"

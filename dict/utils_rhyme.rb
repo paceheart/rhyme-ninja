@@ -45,3 +45,14 @@ def rhyme_signature(pron)
   # this makes for a better hash key
   return rhyme_signature_array(pron).join(" ")
 end
+
+def lang(lang, en_string, es_string)
+  case lang
+  when "en"
+    return en_string
+  when "es"
+    return es_string
+  else
+    abort "Unexpected language #{lang}"
+  end
+end

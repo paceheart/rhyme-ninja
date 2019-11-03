@@ -3,7 +3,6 @@
 * improve rare word filtering
 * entirely forbid blacklisted words, not just from rhymes
 * use wordnet to show synonyms
-* add WN to www
 * add definition
 * autofill word1 and word2 into the text boxes
 * fix indention upon word wrap
@@ -25,11 +24,16 @@
 ## could-do list
 
 * try using wordnet for related words to eliminate dependence on datamuse
+* try v=enwiki for datamuse API, see if it's better
 * add a clickable "x" for "this is a dumb word that should be stricken from the list forever"
 * guess at pronunciations of unknown words
-* don't use json for the internal dictionaries - it would be nice to be able to grep them
+* don't use json for the internal dictionaries - it would be nice to be able to grep them. And git wouldn't be so slow and crashy
 * drag and drop for two-word combos
 
-## beta-testers
+## wishlist (feature requests from users)
+
+* find Spanish data sets, unstub rimar.rb
+
+## potential beta-testers
 
 * https://www.reddit.com/user/wordgoeshere/
