@@ -382,7 +382,7 @@ def rhyme_ninja(word1, word2, goal, lang='en', output_format='text', debug_mode=
     result, dregs = filter_out_rare_words(find_related_words(word1, false, lang))
     result_type = :words
   when "set_related"
-    result_header = lang(lang, "Rhyming word sets related to", "Conjuntos de rimas relacionadas de") + " \"<span class='focal_word'>#{word1}</span>\":<div class='results'>"
+    result_header = lang(lang, "Rhyming word sets related to", "Conjuntos de rimas relacionadas con") + " \"<span class='focal_word'>#{word1}</span>\":<div class='results'>"
     result = find_rhyming_tuples(word1, lang)
     result_type = :tuples
   when "pair_related"
