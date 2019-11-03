@@ -44,6 +44,8 @@ def print_html_header(word1, word2, lang)
 
   if(lang=="es")
     head = head.gsub("rhyme.rb", "rimar.rb")
+    head = head.gsub("Word:", "Palabra:")
+    head = head.gsub("Word 2:", "Palabra 2:")
     head = head.gsub("value=Search", "value=Busca")
     head = head.gsub("(optional)", "(opcional)")
   end
