@@ -1,6 +1,6 @@
 ## to-do list
 
-* show rare words at the bottom
+* use wordnet to show synonyms
 * improve rare word filtering, see dict/incorrectly_rare_words.txt
 * autofill word1 and word2 into the text boxes
 * fix indention upon word wrap
