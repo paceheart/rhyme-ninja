@@ -38,6 +38,18 @@ describe 'rarity' do
     oughta_be_common('to')
     oughta_be_common('of')
     oughta_be_common('at')
+    oughta_be_common('he')
+    oughta_be_common('she')
+    oughta_be_common('they')
+    oughta_be_common('their')
+    oughta_be_common('theirs')
+    oughta_be_common('his')
+    oughta_be_common('hers')
+    oughta_be_common('yours')
+    oughta_be_common('my')
+    oughta_be_common('about')
+    oughta_be_common('because')
+    oughta_be_common('and')
   end
 
   context 'obvious' do
@@ -48,6 +60,7 @@ describe 'rarity' do
     oughta_be_common("i've")
     oughta_be_common('next')
     oughta_be_common('around')
+    oughta_be_common('flight')
   end
 
   context 'timely' do
@@ -163,6 +176,10 @@ describe 'rarity' do
     oughta_be_common('renowned')
     oughta_be_common('newfound')
     oughta_be_common('shat')
+    oughta_be_common('bra')
+    oughta_be_common('daft')
+    oughta_be_common('evict')
+    oughta_be_common('flighty')
   end
 
   context 'arguable' do
@@ -292,6 +309,7 @@ describe 'rhymes' do
   context 'slurs are forbidden' do
     ought_not_rhyme 'tipsy', 'gypsy'
     ought_not_rhyme 'fop', 'wop'
+    ought_not_rhyme 'fops', 'wops'
   end
   
   context 'Limerick Heist' do
@@ -348,6 +366,13 @@ describe 'related' do
     oughta_be_related 'death', 'dread'
   end
 
+  context 'slurs are forbidden' do
+    ought_not_be_related 'gypsy', 'romanian'
+    ought_not_be_related 'romanian', 'gypsy'
+    ought_not_be_related 'gypsies', 'romanian'
+    ought_not_be_related 'romanian', 'gypsies'
+  end
+  
   if(OPTIMISTIC)
   context 'pirate' do
     ought_not_be_related 'pirate', 'pew', NOT_WORKING
