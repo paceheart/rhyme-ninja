@@ -17,7 +17,6 @@
 * filter out words containing numbers
 * get rid of plurals, possessives, etc. if they don't add anything new
 * test input phrases
-* add another input form at the bottom
 * mine Limerick Heist for more test cases
 
 ## could-do list
@@ -28,6 +27,7 @@
 * guess at pronunciations of unknown words
 * don't use json for the internal dictionaries - it would be nice to be able to grep them. And git wouldn't be so slow and crashy
 * drag and drop for two-word combos
+* add another input form at the bottom
 
 ## wishlist (feature requests from users)
 

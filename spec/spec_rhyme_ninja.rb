@@ -473,10 +473,10 @@ describe 'set_related' do
     set_related_oughta_contain 'en', 'music', 'enjoys', 'noise'
     set_related_oughta_contain 'en', 'music', 'funk', 'punk'
     set_related_oughta_contain 'en', 'music', 'sing', 'swing'
-    set_related_oughta_contain 'en', 'music', 'composition', 'musician', NOT_WORKING # bump up $datamuse_max
-    set_related_oughta_contain 'en', 'music', 'clarinet', 'minuet', NOT_WORKING # bump up $datamuse_max
-    set_related_oughta_contain 'en', 'music', 'accidental', 'instrumental', NOT_WORKING # bump up $datamuse_max
-    set_related_oughta_contain 'en', 'music', 'sings', 'strings', NOT_WORKING # bump up $datamuse_max
+    set_related_oughta_contain 'en', 'music', 'composition', 'musician'
+    set_related_oughta_contain 'en', 'music', 'clarinet', 'minuet'
+    set_related_oughta_contain 'en', 'music', 'accidental', 'instrumental'
+    set_related_oughta_contain 'en', 'music', 'sings', 'strings'
     set_related_oughta_contain 'en', 'music', 'glissando', 'ritardando', NOT_WORKING
     set_related_oughta_contain 'en', 'music', 'viola', 'hemiola', NOT_WORKING
     set_related_oughta_contain 'en', 'music', 'overtone', 'xylophone', NOT_WORKING
