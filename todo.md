@@ -7,14 +7,10 @@
 * fix indention upon word wrap
 * urlencode word links
 * adapter / adaptor
-* dynamically blacklist words from datamuse
-** set_related friendship
 * what happens if we turn all 0's into schwas?
-* parametrize $datamuse_max, set it to 1000 for behind-the-scenes
 * imperfect rhymes
 ** snapshot -> trap's wrought (if that were an actual phrase)
 ** sitter / admit her
-* filter out words containing numbers
 * get rid of plurals, possessives, etc. if they don't add anything new
 * test input phrases
 * mine Limerick Heist for more test cases
