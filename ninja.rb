@@ -306,7 +306,9 @@ def rare?(word)
 end
 
 def filter_out_rare_words(words)
-  words.reject{ |w| rare?(w) }
+  good = words.reject{ |w| rare?(w) }
+  bad = words.select { |w| rare?(w) }
+  return good, bad
 end
 
 def print_word(word)
@@ -333,6 +335,7 @@ def rhyme_ninja(word1, word2, goal, output_format='text', debug_mode=false, data
   $datamuse_max = datamuse_max
   
   result = nil
+  dregs = [ ]
   result_type = :error # :words, :tuples, :bad_input, :vacuous, :error
   result_header = "Unexpected error."
 
@@ -352,11 +355,11 @@ def rhyme_ninja(word1, word2, goal, output_format='text', debug_mode=false, data
   case goal
   when "rhymes"
     result_header = "Rhymes for \"<span class='focal_word'>#{word1}</span>\":<div class='results'>"
-    result = filter_out_rare_words(find_rhyming_words(word1))
+    result, dregs = filter_out_rare_words(find_rhyming_words(word1))
     result_type = :words
   when "related"
     result_header = "Words related to \"<span class='focal_word'>#{word1}</span>\":<div class='results'>"
-    result = filter_out_rare_words(find_related_words(word1, false))
+    result, dregs = filter_out_rare_words(find_related_words(word1, false))
     result_type = :words
   when "set_related"
     result_header = "Rhyming word sets related to \"<span class='focal_word'>#{word1}</span>\":<div class='results'>"
@@ -386,7 +389,7 @@ def rhyme_ninja(word1, word2, goal, output_format='text', debug_mode=false, data
   end
   debug "result = #{result}"
   debug "result_type = #{result_type}"
-  return result, result_type, result_header
+  return result, dregs, result_type, result_header
 end
 
 #
