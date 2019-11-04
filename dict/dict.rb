@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+TRACE_WORD = nil
+
 # Preprocess the cmudict data into a format that's efficient for looking up rhyming words.
 # Assumes cmudict.json is in the current directory. Writes out rhyme_signature_dict.json to the current directory.
 #
@@ -28,7 +30,7 @@ WORDNET_TAGSENSE_COUNT_MULTIPLICATION_FACTOR = 100 # each tagsense_count from wo
 def delete_blacklisted_keys_from_hash(cmudict)
   count = 0
   for bad_word in blacklist
-    if(cmudict.delete(bad_word.chop))
+    if(cmudict.delete(bad_word.chomp))
       count = count + 1
     end
   end
@@ -49,7 +51,7 @@ end
 
 def preprocess_cmudict_line(line)
   # merge some similar-enough-sounding syllables
-  line = line.chop()
+  line = line.chomp()
   line = line.gsub("IH1 R", "IY1 R") # ear [IY1 R] rhymes with beer [IH1 R]
   line = line.gsub("IH2 R", "IY2 R")
   line = line.gsub("IH0 R", "IY0 R")
@@ -70,6 +72,9 @@ def load_cmudict()
         word = word[0...-3]
       end
       hash[word].push(tokens)
+      if(word == TRACE_WORD)
+        puts "TRACE Loaded #{word} as #{tokens}"
+      end
     else
       puts "Ignoring cmudict line: #{line}"
     end
@@ -88,7 +93,7 @@ def load_lemma_dict()
   wordcount = 0
   IO.readlines("lemma_en/lemma.en.txt").each{ |line|
     if(useful_lemma_dict_line?(line))
-      line.chop!
+      line.chomp!
       wordcount += 1
       entry, altforms_str = line.split(' -> ')
       word, freq_str = entry.split('/')
@@ -136,7 +141,11 @@ def wn_frequency(word, lemmadict)
     end
   end
   lemmas.each { |lemma|
-    frequency += lemma.tagsense_count * WORDNET_TAGSENSE_COUNT_MULTIPLICATION_FACTOR
+    # +1 because words get a boost just from being in WordNet at all
+    frequency += (lemma.tagsense_count + 1) * WORDNET_TAGSENSE_COUNT_MULTIPLICATION_FACTOR
+    if(word == TRACE_WORD)
+      puts "TRACE lemma #{lemma.inspect}, tagsense_count = #{lemma.tagsense_count}, wn_frequency = #{frequency}"
+    end
   }
   return frequency
 end
@@ -171,17 +180,44 @@ def build_rhyme_signature_dict(cmudict)
 end
 
 def filter_cmudict(cmudict, rdict)
-  filtered_cmudict = Hash.new {|h,k| h[k] = [] } # hash of arrays. We don't need the whole cmudict, just the words with at least one rhyme.
+  # filter out pronunciations with no rhymes
+  filtered_cmudict = Hash.new
+  proncount = 0
+  total = 0
   for word, prons in cmudict
+    filtered_cmudict[word] = Array.new # we still want entries for words with no pronunciations, though, in case they have frequency data
+    if(word == TRACE_WORD)
+      puts "TRACE prons = #{prons}"
+    end
     for pron in prons
+      total += 1
       rsig = rhyme_signature(pron)
       if(!rdict[rsig].empty?)
+        proncount += 1
         filtered_cmudict[word].push(pron)
+        if(word == TRACE_WORD)
+          puts "TRACE #{pron} passed filters because it rhymes with #{rdict[rsig]}"
+        end
       end
     end
   end
-  puts "#{filtered_cmudict.length} entries remain in the pronunciation dictionary after removing words with no rhymes"
+  puts "#{proncount} out of #{total} pronunciations remain in the dictionary after removing pronunciations with no rhymes"
   return filtered_cmudict
+end
+
+def filter_word_dict(word_dict)
+  filtered_word_dict = Hash.new
+  for word, entry in word_dict
+    freq, prons = entry
+    if(!prons.empty? || freq > 0)
+      filtered_word_dict[word] = entry
+      if(word == TRACE_WORD)
+        puts "TRACE freq #{freq} passed filters"
+      end
+    end
+  end
+  puts "#{filtered_word_dict.length} out of #{word_dict.length} entries remain in the dictionary after removing words with no rhymes and zero frequency"
+  return filtered_word_dict
 end
 
 def add_frequency_info(cmudict, lemmadict, freqdict)
@@ -213,12 +249,13 @@ def add_frequency_info(cmudict, lemmadict, freqdict)
     hash[word] = entry
   end
   puts "#{count} of those entries have frequency data"
-  hash
+  return hash
 end
 
 def build_word_dict(cmudict, lemmadict, freqdict, rdict)
-  cmudict = filter_cmudict(cmudict,rdict) # we only care about the words with entries in rdict
-  add_frequency_info(cmudict, lemmadict, freqdict)
+  cmudict = filter_cmudict(cmudict,rdict)
+  word_dict = add_frequency_info(cmudict, lemmadict, freqdict)
+  return filter_word_dict(word_dict)
 end
 
 def rebuild_rhyme_ninja_dictionaries()

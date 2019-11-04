@@ -61,6 +61,8 @@ describe 'RARITY' do
     oughta_be_common 'next'
     oughta_be_common 'around'
     oughta_be_common 'flight'
+    oughta_be_common 'yeah'
+    oughta_be_common 'whatever'
   end
 
   context 'timely' do
@@ -185,16 +187,16 @@ describe 'RARITY' do
     oughta_be_common 'everyday'
     oughta_be_common 'faraway'
     oughta_be_common 'halfway'
-    oughta_be_common 'risque', NOT_WORKING
+    oughta_be_common 'risque'
     oughta_be_common 'underway'
-    oughta_be_common 'renowned', NOT_WORKING
-    oughta_be_common 'newfound', NOT_WORKING
+    oughta_be_common 'renowned'
+    oughta_be_common 'newfound'
     oughta_be_common 'shat', NOT_WORKING
     oughta_be_common 'bra'
     oughta_be_common 'daft'
     oughta_be_common 'evict'
     oughta_be_common 'flighty'
-    oughta_be_common 'canned', NOT_WORKING
+    oughta_be_common 'canned'
     oughta_be_common 'convex'
     oughta_be_common 'face-to-face'
     oughta_be_common 'gasoline'
@@ -207,8 +209,21 @@ describe 'RARITY' do
     oughta_be_common 'chicanery'
     oughta_be_common 'combatants'
     oughta_be_common 'noncombatants'
-    oughta_be_common 'aground', NOT_WORKING
-    oughta_be_common 'inbound', NOT_WORKING
+    oughta_be_common 'rapt'
+    oughta_be_common 'sparkly'
+    oughta_be_common 'splashy'
+    oughta_be_common 'straightforward'
+    oughta_be_common 'suicidal'
+    oughta_be_common 'surgical'
+    oughta_be_common 'tenuous'
+    oughta_be_common 'tearful'
+    oughta_be_common 'teary'
+    oughta_be_common 'tasteless'
+    oughta_be_common 'uncut'
+    oughta_be_common 'viral'
+    oughta_be_common 'wholehearted'
+    oughta_be_common 'aground'
+    oughta_be_common 'inbound'
   end
 
 end
