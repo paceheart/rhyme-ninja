@@ -321,12 +321,14 @@ describe 'RHYMES' do
     ought_not_rhyme 'en', 'impostor', 'imposter'
     ought_not_rhyme 'en', 'lindsay', 'lindsey'
     ought_not_rhyme 'en', 'hanukkah', 'chanukah' # what if the initial sounds are different, though? Then how do we know to eliminate this?
-    # 'lay' ought not rhyme with 'lei', but 'bay' oughta rhyme with both of 'em
     ought_not_rhyme 'en', 'lay', 'lei'
-    oughta_rhyme 'en', 'bay', 'lay'
-    oughta_rhyme 'en', 'bay', 'lei'
+  end
   end
 
+  context "rhyming with homophones" do
+    # 'lay' ought not rhyme with 'lei', but 'bay' oughta rhyme with both of 'em
+    oughta_rhyme 'en', 'bay', 'lay'
+    oughta_rhyme 'en', 'bay', 'lei'
   end
   
   context 'profanity is allowed' do
