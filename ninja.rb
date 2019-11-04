@@ -137,6 +137,22 @@ def find_rhyming_words_for_pronunciation(pron)
   return results || [ ]
 end
 
+def has_rhyming_word?(word, lang)
+  unless(blacklisted?(word))
+    for pron in pronunciations(word, lang)
+      rsig = rhyme_signature(pron)
+      if(! rdict_lookup(rsig).empty?)
+        return true
+      end
+    end
+  end
+  return false
+end
+
+def filter_out_rhymeless_words(words, lang)
+  words.select { |word| has_rhyming_word?(word, lang) }
+end
+
 # def is_stupid_rhyme(pron, rhyme)
   # word.include?(rhyme) or rhyme.include?(word)
   # consider filtering out words where the rhyming syllabme is identical. But for now it's better to overinclude than overexclude.
@@ -400,7 +416,7 @@ def rhyme_ninja(word1, word2, goal, lang='en', output_format='text', debug_mode=
     result_type = :words
   when "related"
     result_header = lang(lang, "Words related to", "Palabras relacionadas con") + " \"<span class='focal_word'>#{word1}</span>\":<div class='results'>"
-    result, dregs = filter_out_rare_words(find_related_words(word1, false, lang))
+    result, dregs = filter_out_rare_words(filter_out_rhymeless_words(find_related_words(word1, false, lang), lang))
     result_type = :words
   when "set_related"
     result_header = lang(lang, "Rhyming word sets related to", "Conjuntos de rimas relacionadas con") + " \"<span class='focal_word'>#{word1}</span>\":<div class='results'>"
