@@ -7,6 +7,7 @@
 * fix indention upon word wrap
 * urlencode word links
 * adapter / adaptor
+* filter out entries containing numbers
 * what happens if we turn all 0's into schwas?
 * imperfect rhymes
 ** snapshot -> trap's wrought (if that were an actual phrase)
