@@ -1,5 +1,6 @@
 ## to-do list
 
+* filter out entries containing numbers
 * improve rare word filtering
 * use wordnet to show synonyms
 * add definition
@@ -7,12 +8,12 @@
 * fix indention upon word wrap
 * urlencode word links
 * adapter / adaptor
-* filter out entries containing numbers
+** American / British differences
+* get rid of plurals, possessives, etc. if they don't add anything new
 * what happens if we turn all 0's into schwas?
 * imperfect rhymes
 ** snapshot -> trap's wrought (if that were an actual phrase)
 ** sitter / admit her
-* get rid of plurals, possessives, etc. if they don't add anything new
 * test input phrases
 * mine Limerick Heist for more test cases
 
