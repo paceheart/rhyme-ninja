@@ -71,9 +71,13 @@ def load_cmudict()
       if(word =~ /\([0-9]\)\Z/)
         word = word[0...-3]
       end
-      hash[word].push(tokens)
-      if(word == TRACE_WORD)
-        puts "TRACE Loaded #{word} as #{tokens}"
+      if(!(word =~ /\d/) || word == "w00t") # ignore words containing digits, except w00t
+        hash[word].push(tokens)
+        if(word == TRACE_WORD)
+          puts "TRACE Loaded #{word} as #{tokens}"
+        end
+      else
+        puts "filtered out #{word}"
       end
     else
       puts "Ignoring cmudict line: #{line}"

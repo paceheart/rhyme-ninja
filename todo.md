@@ -1,9 +1,9 @@
 ## to-do list
 
-* filter out entries containing numbers
-* improve rare word filtering
 * use wordnet to show synonyms
+* improve rare word filtering
 * add definition
+** improve UI to reduce scrolling
 * autofill word1 and word2 into the text boxes
 * fix indention upon word wrap
 * urlencode word links
