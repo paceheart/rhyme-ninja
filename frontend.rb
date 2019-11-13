@@ -29,7 +29,6 @@ def parse_cgi_input
 end
 
 def print_html_header(word1, word2, lang)
-  # ignore lang, @todo 
   head = IO.read("html/header.html");
 
   # tweak the title of the webpage to include the submitted word(s)
@@ -60,7 +59,7 @@ def compute_and_print_html_middle(word1, word2, lang)
   if(word1 == "")
     # vacuous: no goals means nothing will happen
   elsif(word2 == "")
-    goals = [ "rhymes", "related", "set_related" ]
+    goals = [ "rhymes", "synonyms", "set_related" ]
     #  widths = [25, 25, 46]
     widths = [31, 31, 33]
   else
@@ -72,29 +71,23 @@ def compute_and_print_html_middle(word1, word2, lang)
     goal = goals[i]
     width = widths[i]
     output, dregs, type, header = rhyme_ninja(word1, word2, goal, lang, OUTPUT_FORMAT, DEBUG_MODE)
-    print_html_column(goal, output, dregs, type, header, width, lang, i == goals.length - 1)
+    print_html_column(goal, output, dregs, word1, type, header, width, lang, i == goals.length - 1)
   end
 end
 
-def print_html_column(goal, output, dregs, type, header, width, lang, is_last_column)
-  # don't bother to display related dregs - there are already plenty of related words
-  if(goal == "related")
-    dregs = [ ]
-  end
+def print_html_column(goal, output, dregs, input_word1, type, header, width, lang, is_last_column)
   cgi_puts "<td style='vertical-align: top; width:#{width}%;' label='#{goal}'>"
-  print_html_column_data(output, dregs, type, header, lang)
+  print_html_column_data(output, dregs, input_word1, type, header, lang)
   cgi_puts "</td>"
   unless(is_last_column)
     cgi_puts "<td style='border-left: 2px solid; width:2%;'> </td>"
   end  
 end
 
-def print_html_column_data(output, dregs, type, header, lang)
-  case type # :words, :tuples, :bad_input, :error
-  when :words
-    print_interesting_html_column_data(output, dregs, header, lang, false)
-  when :tuples
-    print_interesting_html_column_data(output, dregs, header, lang, true)
+def print_html_column_data(output, dregs, input_word1, type, header, lang)
+  case type # :words, :tuples, :synsets, :bad_input, :error
+  when :words, :tuples, :synsets
+    print_interesting_html_column_data(output, dregs, input_word1, header, lang, type)
   when :bad_input
     puts header
   when :error
@@ -118,7 +111,7 @@ def print_html_column_data(output, dregs, type, header, lang)
   end
 end
 
-def print_interesting_html_column_data(output, dregs, header, lang, is_tuples)
+def print_interesting_html_column_data(output, dregs, input_word1, header, lang, output_type)
   cgi_puts header
   if output.empty?
     if dregs.empty?
@@ -127,21 +120,24 @@ def print_interesting_html_column_data(output, dregs, header, lang, is_tuples)
       puts lang(lang, "No good results.", "Ningun resultados buenos.")
     end
   else
-    print_words_or_tuples(output, lang, is_tuples)
+    print_output(output, input_word1, lang, output_type)
   end
   if(!dregs.empty?)
     cgi_puts "<br/><hr><p>"
     puts lang(lang, "For the desperate:", "Para los desesperados:")
     cgi_puts "</p>"
-    print_words_or_tuples(dregs, lang, is_tuples)
+    print_output(dregs, input_word1, lang, output_type)
   end
 end
 
-def print_words_or_tuples(output, lang, is_tuples)
-  if(is_tuples)
-    print_tuples(output, lang)
-  else
+def print_output(output, input_word1, lang, output_type)
+  case output_type
+  when :words
     print_words(output, lang)
+  when :tuples
+    print_tuples(output, lang)
+  when :synsets
+    print_synsets(output, input_word1, lang)
   end
 end
 

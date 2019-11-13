@@ -3,7 +3,7 @@
 
 #
 # control parameters
-# Don't tweak these here, tweak them in rhyme.rb
+# Don't tweak these here, tweak them in frontend.rb
 #
 
 DEFAULT_DATAMUSE_MAX = 1000
@@ -17,6 +17,7 @@ $display_word_frequencies = false;
 # see rhyme.rb for documentation
 # 
 
+require 'rwordnet'
 require 'net/http'
 require 'uri'
 require 'json'
@@ -290,6 +291,35 @@ end
 # Display
 #
 
+def print_synsets(synsets, input_word, lang)
+  # prints the synsets in SYNSETS that are nontrivial wrt INPUT_WORD
+  isFirst = true
+  for synset in synsets
+    synonyms = synset.words - [ input_word ]
+    unless(synonyms.empty?)
+      unless isFirst
+        cgi_print "<br><br>"
+      end
+      isFirst = false;
+      cgi_print "<i>"
+      puts short_gloss(synset)
+      cgi_print "</i>"
+      puts
+      print_words(synonyms, lang)
+    end
+  end
+end
+
+def short_gloss(synset)
+  gloss = synset.gloss
+  i = gloss.index(';')
+  if i
+    return gloss[0,i]
+  else
+    return gloss
+  end
+end
+
 def print_tuple(tuple, lang)
   # print TUPLE separated by slashes
   i = 0
@@ -375,7 +405,7 @@ def print_word(word, lang)
   end
   ubiq = ubiquity(word)
 #  cgi_print "<span style='color: rgb(#{ubiq}, #{ubiq}, #{ubiq});'>"
-  print word
+  print word.gsub('_', ' ')
 #  cgi_print "</span>"
   if(got_rhymes)
     cgi_print "</a>"
@@ -386,10 +416,15 @@ end
 # Central dispatcher
 #
 
+def focal_word(word)
+  return "\"<span class='focal_word'>#{word}</span>\""
+end
+
 def rhyme_ninja(word1, word2, goal, lang='en', output_format='text', debug_mode=false, datamuse_max=DEFAULT_DATAMUSE_MAX)
   $output_format = output_format
   $debug_mode = debug_mode
   $datamuse_max = datamuse_max
+  header_eol = ":<div class='results'>"
   
   result = nil
   dregs = [ ]
@@ -411,15 +446,20 @@ def rhyme_ninja(word1, word2, goal, lang='en', output_format='text', debug_mode=
   # main list of cases
   case goal
   when "rhymes"
-    result_header = lang(lang, "Rhymes for", "Rimas para") + " \"<span class='focal_word'>#{word1}</span>\":<div class='results'>"
+    result_header = lang(lang, "Rhymes for", "Rimas para") + " " + focal_word(word1) + header_eol
     result, dregs = filter_out_rare_words(find_rhyming_words(word1, lang))
     result_type = :words
+  when "synonyms"
+    result_header = lang(lang, "Synonyms of", "Sinónimos para") + " " + focal_word(word1) + header_eol
+    result = find_synsets(word1, lang)
+    dregs = [ ]
+    result_type = :synsets
   when "related"
-    result_header = lang(lang, "Words related to", "Palabras relacionadas con") + " \"<span class='focal_word'>#{word1}</span>\":<div class='results'>"
+    result_header = lang(lang, "Words related to", "Palabras relacionadas con") + " " + focal_word(word1) + header_eol
     result, dregs = filter_out_rare_words(filter_out_rhymeless_words(find_related_words(word1, false, lang), lang))
     result_type = :words
   when "set_related"
-    result_header = lang(lang, "Rhyming word sets related to", "Conjuntos de rimas relacionadas con") + " \"<span class='focal_word'>#{word1}</span>\":<div class='results'>"
+    result_header = lang(lang, "Rhyming word sets related to", "Conjuntos de rimas relacionadas con") + " " + focal_word(word1) + header_eol
     result = find_rhyming_tuples(word1, lang)
     result_type = :tuples
   when "pair_related"
@@ -427,7 +467,7 @@ def rhyme_ninja(word1, word2, goal, lang='en', output_format='text', debug_mode=
       result_header = lang(lang, "I need two words to find rhyming pairs. For example, Word 1 = <span class='focal_word'>crime</span>, Word 2 = <span class='focal_word'>heaven</span>", "Necesito dos palabras para buscar pares rimandos")
       result_type = :bad_input
     else
-      result_header = lang(lang, "Rhyming word pairs where the first word is related to", "Pares de palabras rimandas, la primera palabra está relacionada con") + " \"<span class='focal_word'>#{word1}</span>\" " + lang(lang, "and the second word is related to ", "y la segunda palabra está relacionada con") + " \"<span class='focal_word'>#{word2}</span>\":<div class='results'>"
+      result_header = lang(lang, "Rhyming word pairs where the first word is related to", "Pares de palabras rimandas, la primera palabra está relacionada con") + " " + focal_word(word1) + " " + lang(lang, "and the second word is related to ", "y la segunda palabra está relacionada con") + " " + focal_word(word2) + header_eol
       result = find_rhyming_pairs(word1, word2, lang)
       result_type = :tuples
     end
@@ -436,12 +476,12 @@ def rhyme_ninja(word1, word2, goal, lang='en', output_format='text', debug_mode=
       result_header = lang(lang, "I need two words to find related rhyming pairs. For example, Word 1 = <span class='focal_word'>please</span>, Word 2 = <span class='focal_word'>cats</span>", "Necesito dos palabras para buscar pares rimandos relacionados.")
       result_type = :bad_input
     else
-      result_header = lang(lang, "Rhymes for", "Rimas para") + " \"<span class='focal_word'>#{word1}</span>\" " + lang(lang, "that are related to", "que están relacionadas con") + " \"<span class='focal_word'>#{word2}</span>\":<div class='results'>"
+      result_header = lang(lang, "Rhymes for", "Rimas para") + " " + focal_word(word1) + " " + lang(lang, "that are related to", "que están relacionadas con") + " " + focal_word(word2) + header_eol
       result = find_related_rhymes(word1, word2, lang)
       result_type = :words
     end
   else
-    result_header = lang(lang, "Invalid selection.", "selección invalida")
+    result_header = lang(lang, "Invalid selection.", "Selección invalida.")
     result_type = :bad_input
   end
   debug "result = #{result}"
@@ -461,4 +501,26 @@ end
 def related?(word1, word2, include_self=false, lang="en")
   # Is word1 conceptually related to word2?
   find_related_words(word1, include_self, lang).include?(word2)
+end
+
+# @todo move
+#
+# WordNet stuff
+#
+
+def find_synsets(word, lang)
+  # ignore lang, @todo hook up Spanish WordNet
+  lemmas = WordNet::Lemma.find_all(word)
+  synsets = lemmas.map { |lemma| lemma.synsets }
+  return synsets.flatten || [ ]
+end
+
+def find_synonyms(word)
+  results = Array.new
+  for synset in find_synsets(word) do
+    for word in synset.words do
+      results << word
+    end
+  end
+  return results.uniq!.sort!
 end

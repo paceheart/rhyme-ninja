@@ -1,6 +1,9 @@
 ## to-do list
 
 * use wordnet to show synonyms
+** synonym dregs
+** fix LOAD_PATH stuff
+** blue -> blue(a)
 * improve rare word filtering
 * add definition
 ** improve UI to reduce scrolling
