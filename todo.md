@@ -1,17 +1,15 @@
 ## to-do list
 
 * use wordnet to show synonyms
-** synonym dregs
-** fix LOAD_PATH stuff
-** blue -> blue(a)
+** make them good
+** ace -> angiotensin-converting enzyme and angiotensin converting enzyme
+** Synonyms of "concise":
 * improve rare word filtering
-* add definition
-** improve UI to reduce scrolling
 * autofill word1 and word2 into the text boxes
 * fix indention upon word wrap
 * urlencode word links
 * adapter / adaptor
-** American / British differences
+** American / British differences, e.g. synonym of agree -> harmonize, harmonise, rhymes related to ace: honor / honour
 * get rid of plurals, possessives, etc. if they don't add anything new
 * what happens if we turn all 0's into schwas?
 * imperfect rhymes
@@ -29,6 +27,7 @@
 * don't use json for the internal dictionaries - it would be nice to be able to grep them. And git wouldn't be so slow and crashy
 * drag and drop for two-word combos
 * add another input form at the bottom
+* add definition (i.e. singleton synsets)
 
 ## wishlist (feature requests from users)
 

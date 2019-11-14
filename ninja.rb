@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 # coding: utf-8
 
+Gem.paths = { 'GEM_PATH' => '/usr/local/rvm/gems/ruby-2.6.5/' }
+
 #
 # control parameters
 # Don't tweak these here, tweak them in frontend.rb
@@ -298,7 +300,7 @@ def print_synsets(synsets, input_word, lang)
     synonyms = synset.words - [ input_word ]
     unless(synonyms.empty?)
       unless isFirst
-        cgi_print "<br><br>"
+        cgi_print "<br>"
       end
       isFirst = false;
       cgi_print "<i>"
@@ -398,14 +400,16 @@ def filter_out_rare_words(words)
 end
 
 def print_word(word, lang)
+  word = word.gsub(/\(.*\)/, '') # remove stuff in parentheses
   got_rhymes = !pronunciations(word, lang).empty?
   if(got_rhymes)
     # @todo urlencode
     cgi_print lang(lang, "<a href='rhyme.rb?word1=#{word}'>", "<a href='rimar.rb?word1=#{word}'>")
   end
   ubiq = ubiquity(word)
-#  cgi_print "<span style='color: rgb(#{ubiq}, #{ubiq}, #{ubiq});'>"
-  print word.gsub('_', ' ')
+  #  cgi_print "<span style='color: rgb(#{ubiq}, #{ubiq}, #{ubiq});'>"
+  word = word.gsub('_', ' ')
+  print word
 #  cgi_print "</span>"
   if(got_rhymes)
     cgi_print "</a>"
