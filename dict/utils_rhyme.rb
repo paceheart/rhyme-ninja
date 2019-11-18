@@ -48,6 +48,59 @@ def delete_blacklisted_words_from_array(array)
 end
 
 #
+# spelling variants
+#
+
+$variants = nil
+def variants()
+  # hash: word -> [preferred_form alternate_form1 alternate_form2 ...]
+  if $variants.nil?
+    $variants = load_variants
+  end
+  return $variants
+end
+
+def preferred_form(word)
+  forms = variants[word]
+  if(forms)
+    return forms[0]
+  else
+    return word
+  end
+end
+
+def all_forms(word)
+  forms = variants[word]
+  if(forms)
+    return forms
+  else
+    return [word]
+  end
+end
+
+def load_variants_raw
+  if(File.exists?("spelling_variants.txt"))
+     return IO.readlines("spelling_variants.txt", chomp: true)
+  else
+    return IO.readlines("dict/spelling_variants.txt", chomp: true)
+  end
+end
+
+def load_variants
+  variants_array = load_variants_raw
+  hash = Hash.new
+  for line in variants_array
+    if line =~ /\A[[:alpha:]]/ # ignore lines that start with comment characters, punctuation, or numbers
+      all_forms = line.split
+      for word in all_forms
+        hash[word] = all_forms
+      end
+    end
+  end
+  return hash
+end
+    
+#
 # rhyme signature
 #
 

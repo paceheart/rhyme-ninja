@@ -158,7 +158,7 @@ end
 
 # def is_stupid_rhyme(pron, rhyme)
   # word.include?(rhyme) or rhyme.include?(word)
-  # consider filtering out words where the rhyming syllabme is identical. But for now it's better to overinclude than overexclude.
+  # consider filtering out words where the rhyming syllable is identical. But for now it's better to overinclude than overexclude.
 #   word == rhyme
 # end
 
@@ -262,6 +262,7 @@ def find_rhyming_tuples(input_rel1, lang)
         debug "Rhymes for #{rel1} [#{rsig}]:"
         find_rhyming_words_for_pronunciation(rel1pron).each { |rhyme1|
           if(relateds1.include? rhyme1) # we only care about relateds of input_rel1
+            rhyme1 = preferred_form(rhyme1) # push 'honor' instead of 'honour'. This will ensure we don't push both.
             related_rhymes[rsig].push(rhyme1)
             debug " #{rhyme1}"
           end

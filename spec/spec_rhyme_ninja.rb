@@ -312,13 +312,16 @@ describe 'RHYMES' do
     ought_not_rhyme 'en', 'stand', 'understand', NOT_WORKING
   end
 
+  context "spelling variants ought not count as rhymes" do
+    ought_not_rhyme 'en', 'adapter', 'adaptor'
+    ought_not_rhyme 'en', 'impostor', 'imposter'
+  end
+
   if(OPTIMISTIC)
   context "homophones ought not count as rhymes" do
-    ought_not_rhyme 'en', 'adapter', 'adaptor'
     ought_not_rhyme 'en', 'blue', 'blew'
     ought_not_rhyme 'en', 'base', 'bass'
     ought_not_rhyme 'en', 'leader', 'lieder'
-    ought_not_rhyme 'en', 'impostor', 'imposter'
     ought_not_rhyme 'en', 'lindsay', 'lindsey'
     ought_not_rhyme 'en', 'hanukkah', 'chanukah' # what if the initial sounds are different, though? Then how do we know to eliminate this?
     ought_not_rhyme 'en', 'lay', 'lei'
@@ -526,7 +529,7 @@ describe 'SET_RELATED' do
     set_related_ought_not_contain 'en', 'music', 'cello', 'solo'
     set_related_ought_not_contain 'en', 'music', 'cello', 'concerto'
     set_related_ought_not_contain 'en', 'music', 'solo', 'concerto'
-    set_related_oughta_contain 'en', 'music', 'gong', 'song', NOT_WORKING
+    set_related_oughta_contain 'en', 'music', 'gong', 'song', NOT_WORKING # reverse relatedness would fix
     set_related_oughta_contain 'en', 'music', 'duet', 'quartet', NOT_WORKING
     set_related_oughta_contain 'en', 'music', 'duet', 'quintet', NOT_WORKING
     it 'no proper subsets: we should get bone / intone / trombone, and not also get bone / intone' do
@@ -550,7 +553,12 @@ describe 'SET_RELATED' do
     set_related_oughta_contain 'en', 'music', 'symphony', 'timpani'
   end
   end
-  
+
+  context 'no spelling variants' do
+    set_related_ought_not_contain 'en', 'agree', 'harmonize', 'harmonise'
+    set_related_ought_not_contain 'en', 'ace', 'honor', 'honour'
+  end
+
 end
 
 #
