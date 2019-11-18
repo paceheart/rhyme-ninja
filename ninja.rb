@@ -163,6 +163,27 @@ end
 # end
 
 #
+# WordNet stuff
+#
+
+def find_synsets(word, lang)
+  # ignore lang, @todo hook up Spanish WordNet
+  lemmas = WordNet::Lemma.find_all(word)
+  synsets = lemmas.map { |lemma| lemma.synsets }
+  return synsets.flatten || [ ]
+end
+
+def find_synonyms(word)
+  results = Array.new
+  for synset in find_synsets(word) do
+    for word in synset.words do
+      results << word
+    end
+  end
+  return results.uniq!.sort!
+end
+
+#
 # Datamuse stuff
 #
 
@@ -505,26 +526,4 @@ end
 def related?(word1, word2, include_self=false, lang="en")
   # Is word1 conceptually related to word2?
   find_related_words(word1, include_self, lang).include?(word2)
-end
-
-# @todo move
-#
-# WordNet stuff
-#
-
-def find_synsets(word, lang)
-  # ignore lang, @todo hook up Spanish WordNet
-  lemmas = WordNet::Lemma.find_all(word)
-  synsets = lemmas.map { |lemma| lemma.synsets }
-  return synsets.flatten || [ ]
-end
-
-def find_synonyms(word)
-  results = Array.new
-  for synset in find_synsets(word) do
-    for word in synset.words do
-      results << word
-    end
-  end
-  return results.uniq!.sort!
 end

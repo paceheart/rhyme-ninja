@@ -3,7 +3,7 @@
 #
 
 OUTPUT_FORMAT = 'cgi' # 'cgi' or 'text'
-DEBUG_MODE = false
+DEBUG_MODE = true
 
 #
 # Front end for Rhyme Ninja.
@@ -59,9 +59,13 @@ def compute_and_print_html_middle(word1, word2, lang)
   if(word1 == "")
     # vacuous: no goals means nothing will happen
   elsif(word2 == "")
-    goals = [ "rhymes", "synonyms", "set_related" ]
-    #  widths = [25, 25, 46]
-    widths = [31, 31, 33]
+    if(DEBUG_MODE)
+      goals = [ "rhymes", "related", "set_related" ]
+      widths = [25, 25, 46]
+    else
+      goals = [ "rhymes", "set_related" ]
+      widths = [22, 76]
+    end
   else
     goals = [ "related_rhymes", "pair_related" ]
     widths = [45, 53]
