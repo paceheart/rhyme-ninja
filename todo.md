@@ -1,10 +1,5 @@
 ## to-do list
 
-* use wordnet to show synonyms
-** make them good
-** terser glosses
-** ace -> angiotensin-converting enzyme and angiotensin converting enzyme
-** Synonyms of "concise":
 * improve rare word filtering
 * autofill word1 and word2 into the text boxes
 * fix indention upon word wrap
