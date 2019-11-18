@@ -2,6 +2,7 @@
 
 * use wordnet to show synonyms
 ** make them good
+** terser glosses
 ** ace -> angiotensin-converting enzyme and angiotensin converting enzyme
 ** Synonyms of "concise":
 * improve rare word filtering
@@ -20,7 +21,7 @@
 
 ## could-do list
 
-* try using wordnet for related words to eliminate dependence on datamuse
+* try using wordnet for related words to eliminate dependence on datamuse. Or maybe NLTK wup_similarity or https://stackoverflow.com/questions/14148986/how-do-you-write-a-program-to-find-if-certain-words-are-similar/14638272#14638272
 * try v=enwiki for datamuse API, see if it's better
 * add a clickable "x" for "this is a dumb word that should be stricken from the list forever"
 * guess at pronunciations of unknown words
