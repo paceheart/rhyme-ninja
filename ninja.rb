@@ -113,6 +113,16 @@ def rdict_lookup(rsig)
   rdict[rsig] || [ ]
 end
 
+def find_preferred_rhyming_words(word, lang)
+  result = find_rhyming_words(word, lang).map { |word| preferred_form(word) }
+  if result
+    result.sort!.uniq!
+    result = result - all_forms(word)
+    debug "preferred: #{result.inspect}"
+  end
+  return result || [ ]
+end
+
 def find_rhyming_words(word, lang)
   # merges multiple pronunciations of WORD
   # use our local dictionaries, we don't need the Datamuse API for simple rhyme lookup
@@ -474,7 +484,7 @@ def rhyme_ninja(word1, word2, goal, lang='en', output_format='text', debug_mode=
   case goal
   when "rhymes"
     result_header = lang(lang, "Rhymes for", "Rimas para") + " " + focal_word(word1) + header_eol
-    result, dregs = filter_out_rare_words(find_rhyming_words(word1, lang))
+    result, dregs = filter_out_rare_words(find_preferred_rhyming_words(word1, lang))
     result_type = :words
   when "synonyms"
     result_header = lang(lang, "Synonyms of", "Sinónimos para") + " " + focal_word(word1) + header_eol

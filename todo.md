@@ -4,12 +4,11 @@
 * fix indention upon word wrap
 * urlencode word links
 * reduce dumb outputs
-** adapter / adaptor
-*** use preferred_form in find_rhyming_words. actually, create find_preferred_rhyming_words.
-** American / British differences, e.g. synonym of agree -> harmonize, harmonise, rhymes related to ace: honor / honour
 ** get rid of plurals, possessives, etc. if they don't add anything new
+** 'saddle' has a bunch of rare words
 * improve good outputs
 ** use all_forms
+** try merging AA and AO. Check the data.
 ** what happens if we turn all 0's into schwas?
 ** relatedness isn't symmetric. For set_related, we don't have to go related1, related2, rhyme. We could also go related, rhyme, related to input. But to do that, we would need to make hundreds of Datamuse calls. So we'll need a faster metric of semantic relatedness.
 * imperfect rhymes

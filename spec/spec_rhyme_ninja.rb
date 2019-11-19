@@ -226,6 +226,10 @@ describe 'RARITY' do
     oughta_be_common 'inbound'
   end
 
+  # context 'filter rare words' do
+  # 
+  # end
+
 end
 
 
@@ -315,6 +319,8 @@ describe 'RHYMES' do
   context "spelling variants ought not count as rhymes" do
     ought_not_rhyme 'en', 'adapter', 'adaptor'
     ought_not_rhyme 'en', 'impostor', 'imposter'
+    oughta_rhyme 'en', 'goner', 'honor'
+    oughta_rhyme 'en', 'goner', 'honour'
   end
 
   if(OPTIMISTIC)
@@ -357,12 +363,9 @@ describe 'RHYMES' do
   end
 
   context 'imperfect rhymes' do
+    oughta_rhyme 'en', 'foster', 'impostor' # foster [AA S T ER] imposter [AO S T ER]
     oughta_rhyme 'en', 'mushroom', 'doom', NOT_WORKING # no pronunciation for 'mushroom'
   end
-  
-  # context 'filter rare words' do
-  # 'saddle' has a bunch of rare words
-  # end
 end
 
 #

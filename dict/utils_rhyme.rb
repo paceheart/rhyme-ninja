@@ -63,6 +63,7 @@ end
 def preferred_form(word)
   forms = variants[word]
   if(forms)
+    debug "The preferred form of '#{word}' is '#{forms[0]}'"
     return forms[0]
   else
     return word
