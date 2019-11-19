@@ -10,9 +10,10 @@ Gem.paths = { 'GEM_PATH' => '/usr/local/rvm/gems/ruby-2.6.5/' }
 
 DEFAULT_DATAMUSE_MAX = 1000
 $datamuse_max = DEFAULT_DATAMUSE_MAX
-$debug_mode = false;
-$output_format = 'text';
-$display_word_frequencies = false;
+$debug_mode = false
+$output_format = 'text'
+$display_word_frequencies = false
+DATAMUSE_ENABLED = false
 
 #
 # Public interface: rhyme_ninja(word1, word2, goal, output_format='text', debug_mode=false, datamuse_max=400)
@@ -215,7 +216,7 @@ def find_related_rhymes(rhyme, rel, lang)
 end
 
 def find_datamuse_results(rhyme, rel, lang)
-  if(blacklisted?(rhyme) || blacklisted?(rel))
+  if(blacklisted?(rhyme) || blacklisted?(rel) || !DATAMUSE_ENABLED)
     return [ ]
   else
     return really_find_datamuse_results(rhyme, rel, lang)
@@ -482,27 +483,45 @@ def rhyme_ninja(word1, word2, goal, lang='en', output_format='text', debug_mode=
     result_type = :synsets
   when "related"
     result_header = lang(lang, "Words related to", "Palabras relacionadas con") + " " + focal_word(word1) + header_eol
+    unless DATAMUSE_ENABLED
+      result_header = "<i>This section currently under (re)construction. Try back in a couple of days. I'm working on it! -Pace</i>"
+    end
     result, dregs = filter_out_rare_words(filter_out_rhymeless_words(find_related_words(word1, false, lang), lang))
     result_type = :words
   when "set_related"
     result_header = lang(lang, "Rhyming word sets related to", "Conjuntos de rimas relacionadas con") + " " + focal_word(word1) + header_eol
+    unless DATAMUSE_ENABLED
+      result_header = "<i>This section currently under (re)construction. Try back in a couple of days. I'm working on it! -Pace</i>"
+    end
     result = find_rhyming_tuples(word1, lang)
     result_type = :tuples
   when "pair_related"
     if(word1 == "" or word2 == "")
       result_header = lang(lang, "I need two words to find rhyming pairs. For example, Word 1 = <span class='focal_word'>crime</span>, Word 2 = <span class='focal_word'>heaven</span>", "Necesito dos palabras para buscar pares rimandos")
+      unless DATAMUSE_ENABLED
+        result_header = "<i>This section currently under (re)construction. Try back in a couple of days. I'm working on it! -Pace</i>"
+      end
       result_type = :bad_input
     else
       result_header = lang(lang, "Rhyming word pairs where the first word is related to", "Pares de palabras rimandas, la primera palabra está relacionada con") + " " + focal_word(word1) + " " + lang(lang, "and the second word is related to ", "y la segunda palabra está relacionada con") + " " + focal_word(word2) + header_eol
+      unless DATAMUSE_ENABLED
+        result_header = "<i>This section currently under (re)construction. Try back in a couple of days. I'm working on it! -Pace</i>"
+      end
       result = find_rhyming_pairs(word1, word2, lang)
       result_type = :tuples
     end
   when "related_rhymes"
     if(word1 == "" or word2 == "")
       result_header = lang(lang, "I need two words to find related rhyming pairs. For example, Word 1 = <span class='focal_word'>please</span>, Word 2 = <span class='focal_word'>cats</span>", "Necesito dos palabras para buscar pares rimandos relacionados.")
+      unless DATAMUSE_ENABLED
+        result_header = "<i>This section currently under (re)construction. Try back in a couple of days. I'm working on it! -Pace</i>"
+      end
       result_type = :bad_input
     else
       result_header = lang(lang, "Rhymes for", "Rimas para") + " " + focal_word(word1) + " " + lang(lang, "that are related to", "que están relacionadas con") + " " + focal_word(word2) + header_eol
+      unless DATAMUSE_ENABLED
+        result_header = "<i>This section currently under (re)construction. Try back in a couple of days. I'm working on it! -Pace</i>"
+      end
       result = find_related_rhymes(word1, word2, lang)
       result_type = :words
     end
