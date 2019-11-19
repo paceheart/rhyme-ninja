@@ -178,7 +178,7 @@ laboring labouring
 labors labours
 lambaste lambast
 lasagna lasagne
-leukemia leukæmia
+leukemia leukaemia
 license licence
 licensed licenced
 licenses licences
@@ -292,7 +292,7 @@ story storey
 sulfur sulphur
 t-shirt tee_shirt
 theater theatre
-till ’til til
+till 'til til
 tire tyre
 tires tyres
 tranquility tranquillity
