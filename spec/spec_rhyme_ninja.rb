@@ -239,21 +239,29 @@ end
 
 def oughta_rhyme(lang, word1, word2, is_working=true)
   if(is_working or OPTIMISTIC)
-    test_name = "'#{word1}' in #{lang} oughta rhyme with '#{word2}'"
-    it test_name do
-      expect(rhymes?(word1, word2)).to eql(true), "'#{word1}' (pronounced #{pronunciations(word1, lang)}) oughta rhyme with '#{word2}' ((pronounced #{pronunciations(word2, lang)}), but instead it only rhymes with #{find_rhyming_words(word1, lang)}, and #{word2} only rhymes with #{find_rhyming_words(word2, lang)}"
-      expect(rhymes?(word2, word1)).to eql(true), "'#{word2}' (pronounced #{pronunciations(word2, lang)}) oughta rhyme with '#{word1}' (pronounced #{pronunciations(word1, lang)}), but instead it only rhymes with #{find_rhyming_words(word2, lang)}, and #{word1} only rhymes with #{find_rhyming_words(word1, lang)}"
-    end
+    oughta_rhyme_one_way(lang, word1, word2, is_working)
+    oughta_rhyme_one_way(lang, word2, word1, is_working)
+  end
+end
+
+def oughta_rhyme_one_way(lang, word1, word2, is_working=true)
+  test_name = "'#{word1}' in #{lang} oughta have '#{word2}' in its list of rhymes"
+  it test_name do
+    expect(find_preferred_rhyming_words(word1, lang).include?(word2)).to eql(true), "'#{word1}' (pronounced #{pronunciations(word1, lang)}) oughta include '#{word2}' ((pronounced #{pronunciations(word2, lang)}) in its list of rhymes, but instead it only rhymes with #{find_preferred_rhyming_words(word1, lang)}"
   end
 end
                 
 def ought_not_rhyme(lang, word1, word2, is_working=true)
   if(is_working or OPTIMISTIC)
-    test_name = "'#{word1}' ought not rhyme with '#{word2}'"
-    it test_name do
-      expect(rhymes?(word1, word2)).to eql(false), "'#{word1}' (pronounced #{pronunciations(word1, lang)}) ought not rhyme with '#{word2}' (pronounced #{pronunciations(word2, lang)}), but it does, and it also rhymes with #{find_rhyming_words(word1, lang)}"
-      expect(rhymes?(word2, word1)).to eql(false), "'#{word2}' (pronounced #{pronunciations(word2, lang)}) ought not rhyme with '#{word1}' (pronounced #{pronunciations(word1, lang)}), but it does, and it also rhymes with #{find_rhyming_words(word2, lang)}"
-    end
+    ought_not_rhyme_one_way(lang, word1, word2, is_working)
+    ought_not_rhyme_one_way(lang, word2, word1, is_working)
+  end
+end
+
+def ought_not_rhyme_one_way(lang, word1, word2, is_working=true)
+  test_name = "'#{word1}' in #{lang} ought not have '#{word2}' in its list of rhymes"
+  it test_name do
+    expect(find_preferred_rhyming_words(word1, lang).include?(word2)).to eql(false), "'#{word1}' (pronounced #{pronunciations(word1, lang)}) ought not include '#{word2}' (pronounced #{pronunciations(word2, lang)}) as a rhyme, but it does, and it also rhymes with #{find_preferred_rhyming_words(word1, lang)}"
   end
 end
 
@@ -319,8 +327,9 @@ describe 'RHYMES' do
   context "spelling variants ought not count as rhymes" do
     ought_not_rhyme 'en', 'adapter', 'adaptor'
     ought_not_rhyme 'en', 'impostor', 'imposter'
-    oughta_rhyme 'en', 'goner', 'honor'
-    oughta_rhyme 'en', 'goner', 'honour'
+    oughta_rhyme_one_way 'en', 'honour', 'goner' # input honour, you oughta get goner
+    oughta_rhyme 'en', 'goner', 'honor' # but input goner, and you oughta get honor...
+    ought_not_rhyme_one_way 'en', 'goner', 'honour' # ...but not honour
   end
 
   if(OPTIMISTIC)
@@ -363,7 +372,7 @@ describe 'RHYMES' do
   end
 
   context 'imperfect rhymes' do
-    oughta_rhyme 'en', 'foster', 'impostor' # foster [AA S T ER] imposter [AO S T ER]
+    oughta_rhyme 'en', 'foster', 'impostor', NOT_WORKING # foster [AA S T ER] imposter [AO S T ER]
     oughta_rhyme 'en', 'mushroom', 'doom', NOT_WORKING # no pronunciation for 'mushroom'
   end
 end

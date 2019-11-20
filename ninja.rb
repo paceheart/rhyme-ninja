@@ -13,7 +13,7 @@ $datamuse_max = DEFAULT_DATAMUSE_MAX
 $debug_mode = false
 $output_format = 'text'
 $display_word_frequencies = false
-DATAMUSE_ENABLED = false
+DATAMUSE_ENABLED = true
 
 #
 # Public interface: rhyme_ninja(word1, word2, goal, output_format='text', debug_mode=false, datamuse_max=400)
