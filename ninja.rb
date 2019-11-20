@@ -127,15 +127,17 @@ def find_rhyming_words(word, lang)
   # merges multiple pronunciations of WORD
   # use our local dictionaries, we don't need the Datamuse API for simple rhyme lookup
   rhyming_words = Array.new
-  unless(blacklisted?(word))
-    for pron in pronunciations(word, lang)
-      for rhyme in find_rhyming_words_for_pronunciation(pron)
-        rhyming_words.push(rhyme)
+  for form in all_forms(word) # to increase the likelihood of a hit, try all spelling variants
+    unless(blacklisted?(word))
+      for pron in pronunciations(word, lang)
+        for rhyme in find_rhyming_words_for_pronunciation(pron)
+          rhyming_words.push(rhyme)
+        end
       end
-    end
-    rhyming_words.delete(word)
-    if(rhyming_words)
-      rhyming_words = rhyming_words.uniq
+      rhyming_words.delete(word)
+      if(rhyming_words)
+        rhyming_words = rhyming_words.uniq
+      end
     end
   end
   return rhyming_words || [ ]

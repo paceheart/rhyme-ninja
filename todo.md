@@ -15,8 +15,9 @@
 ** what happens if we turn all 0's into schwas?
 ** relatedness isn't symmetric. For set_related, we don't have to go related1, related2, rhyme. We could also go related, rhyme, related to input. Blocked on semantic relatedness.
 * imperfect rhymes
-** snapshot -> trap's wrought (if that were an actual phrase)
 ** sitter / admit her
+** snapshot -> trap's wrought (if that were an actual phrase)
+** snapshot -> trap's wrought (even though that's not an actual phrase)
 * test input phrases
 * mine Limerick Heist for more test cases
 
