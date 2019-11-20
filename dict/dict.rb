@@ -52,9 +52,12 @@ end
 def preprocess_cmudict_line(line)
   # merge some similar-enough-sounding syllables
   line = line.chomp()
-  line = line.gsub("IH1 R", "IY1 R") # ear [IY1 R] rhymes with beer [IH1 R]
+  line = line.gsub("IH1 R", "IY1 R") # ear [IY R] rhymes with beer [IH R]
   line = line.gsub("IH2 R", "IY2 R")
   line = line.gsub("IH0 R", "IY0 R")
+  # imperfect rhymes. @todo allow this to be toggleable at runtime instead of dictionary-building time
+  line = line.gsub(" AO", " AA") # caught [AA T] rhymes with fought [AO T]
+  line = line.gsub("N D Z", "N Z") # make tons [T AH1 N Z] rhyme with funds [F AH1 N D Z] 
   return line
 end
 

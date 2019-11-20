@@ -368,11 +368,11 @@ describe 'RHYMES' do
   context 'Limerick Heist' do
     oughta_rhyme 'en', 'heist', 'sliced'
     oughta_rhyme 'en', 'heist', 'iced'
-    oughta_rhyme 'en', 'tons', 'funds', NOT_WORKING
+    oughta_rhyme 'en', 'tons', 'funds' # [T AH1 N Z] [F AH1 N D Z], N D Z gets collapsed to N Z
   end
 
   context 'imperfect rhymes' do
-    oughta_rhyme 'en', 'foster', 'impostor', NOT_WORKING # foster [AA S T ER] imposter [AO S T ER]
+    oughta_rhyme 'en', 'foster', 'impostor' # foster [AA S T ER] imposter [AO S T ER]
     oughta_rhyme 'en', 'mushroom', 'doom', NOT_WORKING # no pronunciation for 'mushroom'
   end
 end

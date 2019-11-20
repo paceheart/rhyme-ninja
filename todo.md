@@ -10,8 +10,6 @@
 ** get rid of prefixes
 ** 'saddle' has a bunch of rare words
 * improve good outputs
-** use all_forms
-** try merging AA and AO. Check the data.
 ** what happens if we turn all 0's into schwas?
 ** relatedness isn't symmetric. For set_related, we don't have to go related1, related2, rhyme. We could also go related, rhyme, related to input. Blocked on semantic relatedness.
 * imperfect rhymes
