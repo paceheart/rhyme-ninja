@@ -295,6 +295,8 @@ theater theatre
 till 'til til
 tire tyre
 tires tyres
+ton tonne
+tons tonnes
 tranquility tranquillity
 traveled travelled
 traveler traveller
