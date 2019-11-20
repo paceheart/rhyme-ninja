@@ -55,9 +55,15 @@ def preprocess_cmudict_line(line)
   line = line.gsub("IH1 R", "IY1 R") # ear [IY R] rhymes with beer [IH R]
   line = line.gsub("IH2 R", "IY2 R")
   line = line.gsub("IH0 R", "IY0 R")
+  line = line.gsub("IH1 NG", "IY1 NG") # faring [F EH1 R IY0 NG] rhymes with glaring [G L EH1 R IH0 NG]
+  line = line.gsub("IH2 NG", "IY2 NG")
+  line = line.gsub("IH0 NG", "IY0 NG")
   # imperfect rhymes. @todo allow this to be toggleable at runtime instead of dictionary-building time
   line = line.gsub(" AO", " AA") # caught [AA T] rhymes with fought [AO T]
-  line = line.gsub("N D Z", "N Z") # make tons [T AH1 N Z] rhyme with funds [F AH1 N D Z] 
+  line = line.gsub("N D Z", "N Z") # make tons [T AH1 N Z] rhyme with funds [F AH1 N D Z]
+  # replace all unstressed schwa-ish syllables with "x" indicating "schwa"
+  # line = line.gsub("AH0", "x")
+# IH0  
   return line
 end
 

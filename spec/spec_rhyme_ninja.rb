@@ -282,6 +282,7 @@ describe 'RHYMES' do
   context 'tricky' do
     oughta_rhyme 'en', 'ear', 'beer' # used to fail because ear is [IY1 R] and beer is [B IH1 R]
     oughta_rhyme 'en', "we're", 'queer'
+    oughta_rhyme 'en', 'faring', 'glaring' # used to fail because faring is [F EH1 R IY0 NG] and glaring is [G L EH1 R IH0 NG]
     ought_not_rhyme 'en', 'crime', "yum"
     ought_not_rhyme 'en', 'crime', "'em"
     ought_not_rhyme 'en', 'rhyme', "'em"
