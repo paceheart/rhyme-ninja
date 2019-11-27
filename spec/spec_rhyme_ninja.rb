@@ -308,6 +308,7 @@ describe 'RHYMES' do
     ought_not_rhyme 'bars', 'scores'
     oughta_rhyme 'wank', 'bank'
     ought_not_rhyme 'wank', 'bonk'
+    oughta_rhyme 'bong', 'song'
   end
   
   context 'perfect rhymes must rhyme the last primary-stressed syllable, not just the last syllable' do
