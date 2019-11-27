@@ -266,6 +266,12 @@ end
 def find_rhyming_tuples(input_rel1, lang)
   # Rhyming word sets that are related to INPUT_REL1.
   # Each element of the returned array is an array of words that rhyme with each other and are all related to INPUT_REL1.
+  # Algorithm:
+  # Compute the set of all words semantically related to INPUT_REL1, call it RELATEDS1.
+  # For each word REL1 in RELATEDS1,
+  #   Get all rhymes RHYME1 of REL1.
+  #   If R is in RELATEDS1, compute R's rhyme signature RSIG and put RHYME1 in the bucket labeled RSIG.
+  # Return all buckets with two or more words in them.
   related_rhymes = Hash.new {|h,k| h[k] = [] } # hash of arrays
   unless(blacklisted?(input_rel1))
     relateds1 = find_related_words(input_rel1, true, lang)
@@ -296,6 +302,12 @@ end
 def find_rhyming_pairs(input_rel1, input_rel2, lang)
   # Pairs of rhyming words where the first word is related to INPUT_REL1 and the second word is related to INPUT_REL2
   # Each element of the returned array is a pair of rhyming words [W1 W2] where W1 is related to INPUT_REL1 and W2 is related to INPUT_REL2
+  # Algorithm:
+  # Compute the set of all words semantically related to INPUT_REL1, call it RELATEDS1.
+  # Compute the set of all words semantically related to INPUT_REL2, call it RELATEDS2.
+  # For each word REL1 in RELATEDS1,
+  #   Get all rhymes RHYME of REL1.
+  #   If RHYME rhymes with REL1 and is related to INPUT_REL2, we win! "REL1 / RHYME" is a pair.
   related_rhymes = Hash.new {|h,k| h[k] = [] } # hash of arrays
   unless(blacklisted?(input_rel1) || blacklisted?(input_rel2))
     relateds1 = find_related_words(input_rel1, true, lang)
@@ -303,7 +315,7 @@ def find_rhyming_pairs(input_rel1, input_rel2, lang)
     relateds1.each { |rel1|
       # rel1 is a word related to input_rel1. We're looking for rhyming pairs [rel1 rel2].
       debug "rhymes for #{rel1}:<br>"
-      # If we find a word 'RHYME' that rhymes with rel1 and is related to input_rel2, we win!
+      # If we find a word 'RHYME' that rhymes with REL1 and is related to INPUT_REL2, we win!
       find_rhyming_words(rel1, lang).each { |rhyme| # check all rhymes of rel1, call each one 'RHYME'
         if(relateds2.include? rhyme) # is RHYME related to input_rel2? If so, we win!
           related_rhymes[rel1].push(rhyme)
@@ -429,6 +441,19 @@ def rare?(word)
 end
 
 def filter_out_rare_words(words)
+  # When you enter e.g. 'kitten', you'll get back some reasonable
+  # things like 'bitten', 'britain', and 'smitten', but you'll also
+  # get back crap like 'bitton', 'brittain', 'brittan', 'brittin',
+  # 'britton', 'ditton', 'fitton', etc.
+  #
+  # Some of these are rare words, and some are just
+  # mistakes. Regardless, we don't want them in our output. They
+  # clutter up the place and make the good rhymes harder to see.
+  #
+  # We don't want to get rid of them entirely, though; occasionally
+  # that rare word is exactly the one you want, or a good word gets
+  # misfiled as rare. So instead we put them in the 'dregs' bucket,
+  # which shows up as "For the desperate:" on the website.
   good = words.reject{ |w| rare?(w) }
   bad = words.select { |w| rare?(w) }
   return good, bad
@@ -460,6 +485,12 @@ def focal_word(word)
 end
 
 def rhyme_ninja(word1, word2, goal, lang='en', output_format='text', debug_mode=false, datamuse_max=DEFAULT_DATAMUSE_MAX)
+  # When you enter a single word,
+  #   Rhyme Ninja displays rhymes for that word (see find_rhyming_words), separating out the rare words (see rare?)
+  #   and in a separate column, displays sets of rhyming words (see find_rhyming_tuples)
+  # When you enter two words,
+  #   Rhyme Ninja first displays rhymes for WORD1 that are semantically related to WORD2 (see related_rhymes),
+  #   and in a separate column, displays pairs of rhyming words (RHYME1 / RHYME2) in which RHYME1 is related to WORD1 and RHYME2 is related to WORD2. (see find_rhyming_pairs)
   $output_format = output_format
   $debug_mode = debug_mode
   $datamuse_max = datamuse_max

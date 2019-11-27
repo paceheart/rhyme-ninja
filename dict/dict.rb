@@ -6,8 +6,15 @@ TRACE_WORD = nil
 # Preprocess the cmudict data into a format that's efficient for looking up rhyming words.
 # Assumes cmudict.json is in the current directory. Writes out rhyme_signature_dict.json to the current directory.
 #
-# We use a two-step lookup process to avoid storing lots of redundant data, e.g. all 500+ "-ation" rhymes as values for "elation", "consternation", etc.
+# cmudict is the CMU Pronouncing Dictionary, a text file with lines like this:
+#  KITTEN  K IH1 T AH0 N
+#  KITTENS  K IH1 T AH0 N Z
+#  KITTERMAN  K IH1 T ER0 M AH0 N
+#
+# A word's "rhyme signature" 
+# Rhyme Ninja uses a two-step lookup process to avoid storing lots of redundant data. For exa e.g. all 500+ "-ation" rhymes as values for "elation", "consternation", etc.
 # Step 1: Given a word, use the CMU Pronouncing Data to get its pronunciation.
+# Step 1.1: Tweak the given pronunciation to deal with quirks of cmudict.
 # Step 1.5: Get the word's rhyme signature
 # Step 2: Given the rhyme signature, look up all words that rhyme with it (including itself)
 # Step 2.5: Filter out bad rhymes, like the word itself and subwords (e.g. important rhyming with unimportant)
@@ -51,6 +58,7 @@ rescue ArgumentError => error
 end
 
 def preprocess_cmudict_line(line)
+  # Step 1.1: Tweak the given pronunciation to deal with quirks of cmudict.
   # merge some similar-enough-sounding syllables
   line = line.chomp()
   original_line = line.clone
@@ -297,6 +305,8 @@ def filter_word_dict(word_dict)
 end
 
 def add_frequency_info(cmudict, lemmadict, freqdict)
+  # we use lemma_en and WordNet for word frequency data,
+  # to distinguish rare words from common words.
   count = 0;
   hash = Hash.new
   for word, prons in cmudict
@@ -307,7 +317,8 @@ def add_frequency_info(cmudict, lemmadict, freqdict)
     else
       freq = freqdict_freq + wn_freq
     end
-    # including freqdict_freq has the pro of including good things like
+    # lemma_en (freqdict_freq) has better coverage than WordNet,
+    # but also includes some false positives. It has the pro of including good things like
     #   bettor 1, holy 2994, mod 456, paroled 237, saffron 180, slacker 561, trillion 1, vanes 153
     # at the cost of including some crap and proper nouns like
     #   nardo 1, bors 27, matias 2, soweto 96, steinman 1
