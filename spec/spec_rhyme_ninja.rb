@@ -1,7 +1,7 @@
 require_relative '../ninja'
 
-# conditionalizes tests that we don't expect to work yet
-OPTIMISTIC = false
+# set this to false to skip known failures
+TEST_FOR_SURPRISING_SUCCESSES = true
 
 NOT_WORKING = false; #don't edit this one
 
@@ -10,19 +10,27 @@ NOT_WORKING = false; #don't edit this one
 # 
 
 def oughta_be_common(word, is_working=true)
-  if(is_working or OPTIMISTIC)
+  if(is_working)
     test_name = "'#{word}' oughta be common"
     it test_name do
       expect(rare?(word)).to eql(false), "'#{word}' oughta be common, but is rare, with frequency #{frequency(word)}"
+    end
+  else # NOT_WORKING
+    if TEST_FOR_SURPRISING_SUCCESSES
+      oughta_be_rare(word, true)
     end
   end
 end
 
 def oughta_be_rare(word, is_working=true)
-  if(is_working or OPTIMISTIC)
+  if(is_working)
     test_name = "'#{word}' oughta be rare"
     it test_name do
       expect(rare?(word)).to eql(true), "'#{word}' oughta be rare, but is common, with frequency #{frequency(word)}"
+    end
+  else # NOT_WORKING
+    if TEST_FOR_SURPRISING_SUCCESSES
+      oughta_be_common(word, true)
     end
   end
 end
@@ -225,11 +233,6 @@ describe 'RARITY' do
     oughta_be_common 'aground'
     oughta_be_common 'inbound'
   end
-
-  # context 'filter rare words' do
-  # 
-  # end
-
 end
 
 
@@ -238,33 +241,41 @@ end
 #
 
 def oughta_rhyme(word1, word2, is_working=true)
-  if(is_working or OPTIMISTIC)
-    oughta_rhyme_one_way(word1, word2, is_working)
-    oughta_rhyme_one_way(word2, word1, is_working)
-  end
+  oughta_rhyme_one_way(word1, word2, is_working)
+  oughta_rhyme_one_way(word2, word1, is_working)
 end
 
 def oughta_rhyme_one_way(word1, word2, is_working=true)
-  lang = 'en'
-  test_name = "'#{word1}' in #{lang} oughta have '#{word2}' in its list of rhymes"
-  it test_name do
-    expect(find_preferred_rhyming_words(word1, lang).include?(word2)).to eql(true), "'#{word1}' (pronounced #{pronunciations(word1, lang)}) oughta include '#{word2}' ((pronounced #{pronunciations(word2, lang)}) in its list of rhymes, but instead it only rhymes with #{find_preferred_rhyming_words(word1, lang)}"
+  if is_working
+    lang = 'en'
+    test_name = "'#{word1}' in #{lang} oughta have '#{word2}' in its list of rhymes"
+    it test_name do
+      expect(find_preferred_rhyming_words(word1, lang).include?(word2)).to eql(true), "'#{word1}' (pronounced #{pronunciations(word1, lang)}) oughta include '#{word2}' ((pronounced #{pronunciations(word2, lang)}) in its list of rhymes, but instead it only rhymes with #{find_preferred_rhyming_words(word1, lang)}"
+    end
+  else # NOT_WORKING
+    if TEST_FOR_SURPRISING_SUCCESSES
+      ought_not_rhyme_one_way(word1, word2, true)
+    end
   end
 end
                 
 def ought_not_rhyme(word1, word2, is_working=true)
   lang = 'en'
-  if(is_working or OPTIMISTIC)
-    ought_not_rhyme_one_way(word1, word2, is_working)
-    ought_not_rhyme_one_way(word2, word1, is_working)
-  end
+  ought_not_rhyme_one_way(word1, word2, is_working)
+  ought_not_rhyme_one_way(word2, word1, is_working)
 end
 
 def ought_not_rhyme_one_way(word1, word2, is_working=true)
-  lang = 'en'
-  test_name = "'#{word1}' in #{lang} ought not have '#{word2}' in its list of rhymes"
-  it test_name do
-    expect(find_preferred_rhyming_words(word1, lang).include?(word2)).to eql(false), "'#{word1}' (pronounced #{pronunciations(word1, lang)}) ought not include '#{word2}' (pronounced #{pronunciations(word2, lang)}) as a rhyme, but it does, and it also rhymes with #{find_preferred_rhyming_words(word1, lang)}"
+  if is_working
+    lang = 'en'
+    test_name = "'#{word1}' in #{lang} ought not have '#{word2}' in its list of rhymes"
+    it test_name do
+      expect(find_preferred_rhyming_words(word1, lang).include?(word2)).to eql(false), "'#{word1}' (pronounced #{pronunciations(word1, lang)}) ought not include '#{word2}' (pronounced #{pronunciations(word2, lang)}) as a rhyme, but it does, and it also rhymes with #{find_preferred_rhyming_words(word1, lang)}"
+    end
+  else # NOT_WORKING
+    if TEST_FOR_SURPRISING_SUCCESSES
+      oughta_rhyme_one_way(word1, word2, true)
+    end
   end
 end
 
@@ -291,6 +302,12 @@ describe 'RHYMES' do
     ought_not_rhyme 'station', 'cation' # it's pronounced "CAT-EYE-ON"
     ought_not_rhyme 'education', 'cation'
     ought_not_rhyme 'anion', 'onion' # it's pronounced "ANN-EYE-ON"
+    oughta_rhyme 'bore', 'score'
+    oughta_rhyme 'bar', 'scar'
+    ought_not_rhyme 'bar', 'score'
+    ought_not_rhyme 'bars', 'scores'
+    oughta_rhyme 'wank', 'bank'
+    ought_not_rhyme 'wank', 'bonk'
   end
   
   context 'perfect rhymes must rhyme the last primary-stressed syllable, not just the last syllable' do
@@ -321,8 +338,7 @@ describe 'RHYMES' do
     oughta_rhyme 'action', 'attraction'
 
     oughta_rhyme 'ice', 'dice'
-    oughta_rhyme 'ice', 'deice', NOT_WORKING # deice (de-ice) is not in cmudict
-    ought_not_rhyme 'ice', 'deice', NOT_WORKING
+    ought_not_rhyme 'ice', 'deice' # deice (de-ice) is not in cmudict, so this succeeds for the wrong reason
 
     oughta_rhyme 'stand', 'strand'
     oughta_rhyme 'understand', 'strand'
@@ -337,14 +353,12 @@ describe 'RHYMES' do
     ought_not_rhyme_one_way 'goner', 'honour' # ...but not honour
   end
 
-  if(OPTIMISTIC)
   context "homophones ought not count as rhymes" do
-    ought_not_rhyme 'blue', 'blew'
-    ought_not_rhyme 'base', 'bass'
-    ought_not_rhyme 'leader', 'lieder'
-    ought_not_rhyme 'lindsay', 'lindsey'
-    ought_not_rhyme 'hanukkah', 'chanukah' # what if the initial sounds are different, though? Then how do we know to eliminate this?
-  end
+    ought_not_rhyme 'blue', 'blew', NOT_WORKING
+    ought_not_rhyme 'base', 'bass', NOT_WORKING
+    ought_not_rhyme 'leader', 'lieder', NOT_WORKING
+    ought_not_rhyme 'lindsay', 'lindsey', NOT_WORKING
+    ought_not_rhyme 'hanukkah', 'chanukah', NOT_WORKING # what if the initial sounds are different, though? Then how do we know to eliminate this?
   end
   context "'lay' ought not rhyme with 'lei'..." do
     ought_not_rhyme 'lay', 'lei', NOT_WORKING
@@ -357,6 +371,7 @@ describe 'RHYMES' do
   context 'profanity is allowed' do
     oughta_rhyme 'truck', 'fuck'
     oughta_rhyme 'bunt', 'cunt'
+    oughta_rhyme 'wanker', 'banker'
   end
   
   context 'slurs are forbidden' do
@@ -399,20 +414,28 @@ end
 
 def oughta_be_related(word1, word2, is_working=true)
   lang = 'en'
-  if(is_working or OPTIMISTIC)
+  if(is_working)
     test_name = "'#{word1}' in #{lang} oughta be related to '#{word2}'"
     it test_name do
       expect(related?(word1, word2, false, lang)).to eql(true), "Related words for '#{word1}' oughta include '#{word2}', but instead we just get #{find_related_words(word1, false, lang)}"
+    end
+  else # NOT_WORKING
+    if TEST_FOR_SURPRISING_SUCCESSES
+      ought_not_be_related(word1, word2, true)
     end
   end
 end
   
 def ought_not_be_related(word1, word2, is_working=true)
   lang = 'en'
-  if(is_working or OPTIMISTIC)
+  if(is_working)
     test_name = "'#{word1}' in #{lang} ought not be related to '#{word2}'"
     it test_name do
       expect(related?(word1, word2, false, lang)).to eql(false), "Related words in #{lang} for '#{word1}' ought not include '#{word2}'"
+    end
+  else # NOT_WORKING
+    if TEST_FOR_SURPRISING_SUCCESSES
+      oughta_be_related(word1, word2, true)
     end
   end
 end
@@ -445,10 +468,8 @@ describe 'RELATED' do
     ought_not_be_related 'food', 'the'
   end
   
-  if(OPTIMISTIC)
   context 'pirate' do
     ought_not_be_related 'pirate', 'pew', NOT_WORKING
-  end
   end
 
   context 'halloween' do
@@ -479,20 +500,28 @@ end
 
 def set_related_oughta_contain(input, output1, output2, is_working=true)
   lang = 'en'
-  if(is_working or OPTIMISTIC)
+  if(is_working)
     test_name = "set_related #{lang}: #{input} -> #{output1} / #{output2}"
     it test_name do
       expect(set_related_contains?(input, output1, output2, lang)).to eql(true), "Set-related rhymes in #{lang} for '#{input}' oughta include '#{output1}' (pronounced #{pronunciations(output1, lang)}) / '#{output2}' (pronounced #{pronunciations(output2, lang)}) / ..., but instead we just get #{find_rhyming_tuples(input, lang)}"
+    end
+  else # NOT_WORKING
+    if TEST_FOR_SURPRISING_SUCCESSES
+      set_related_ought_not_contain(input, output1, output2, true)
     end
   end
 end
 
 def set_related_ought_not_contain(input, output1, output2, is_working=true)
   lang = 'en'
-  if(is_working or OPTIMISTIC)
+  if(is_working)
     test_name = "set_related #{lang}: #{input} !-> #{output1} / #{output2}"
     it test_name do
       expect(set_related_contains?(input, output1, output2, lang)).to eql(false), "Set-related rhymes in #{lang} for '#{input}' ought not include '#{output1}' / '#{output2}' / ..."
+    end
+  else # NOT_WORKING
+    if TEST_FOR_SURPRISING_SUCCESSES
+      set_related_oughta_contain(input, output1, output2, true)
     end
   end
 end
@@ -573,17 +602,15 @@ describe 'SET_RELATED' do
     end
   end
 
-  if(OPTIMISTIC)
   context 'imperfect' do
     # relax the stress:
-    set_related_oughta_contain 'halloween', 'broom', 'costume'
-    set_related_oughta_contain 'music', 'oboe', 'piano'
-    set_related_oughta_contain 'music', 'cello', 'solo'
-    set_related_oughta_contain 'music', 'cello', 'concerto'
-    set_related_oughta_contain 'music', 'solo', 'concerto'
+    set_related_oughta_contain 'halloween', 'broom', 'costume', NOT_WORKING
+    set_related_oughta_contain 'music', 'oboe', 'piano', NOT_WORKING
+    set_related_oughta_contain 'music', 'cello', 'solo', NOT_WORKING
+    set_related_oughta_contain 'music', 'cello', 'concerto', NOT_WORKING
+    set_related_oughta_contain 'music', 'solo', 'concerto', NOT_WORKING
     # dwim a non-final consonant
-    set_related_oughta_contain 'music', 'symphony', 'timpani'
-  end
+    set_related_oughta_contain 'music', 'symphony', 'timpani', NOT_WORKING
   end
 
   context 'no spelling variants' do
@@ -605,20 +632,28 @@ end
 
 def pair_related_oughta_contain(input1, input2, output1, output2, is_working=true)
   lang = "en"
-  if(is_working or OPTIMISTIC)
+  if(is_working)
     test_name = "pair_related #{lang}: #{input1} / #{input2} -> #{output1} / #{output2}"
     it test_name do
       expect(pair_related_contains?(lang, input1, input2, output1, output2)).to eql(true), "Pair-related rhymes in #{lang} for '#{input1}' / '#{input2}' oughta include '#{output1}' (pronounced #{pronunciations(output1, lang)}) / '#{output2}' (pronounced #{pronunciations(output2, lang)}), but instead we just get #{find_rhyming_pairs(input1, input2, lang)}"
+    end
+  else # NOT_WORKING
+    if TEST_FOR_SURPRISING_SUCCESSES
+      pair_related_ought_not_contain(input1, input2, output1, output2, true)
     end
   end
 end
 
 def pair_related_ought_not_contain(input1, input2, output1, output2, is_working=true)
   lang = "en"
-  if(is_working or OPTIMISTIC)
+  if(is_working)
     test_name = "pair_related #{lang}: #{input1} / #{input2} !-> #{output1} / #{output2}"
     it test_name do
       expect(pair_related_contains?(lang, input1, input2, output1, output2)).to eql(false), "Pair-related rhymes for '#{input1}' / '#{input2}' ought not include '#{output1}' / '#{output2}'"
+    end
+  else # NOT_WORKING
+    if TEST_FOR_SURPRISING_SUCCESSES
+      pair_related_oughta_contain(input1, input2, output1, output2, true)
     end
   end
 end
@@ -669,20 +704,28 @@ end
 
 def related_rhymes_oughta_contain(input_rhyme, input_related, output, is_working=true)
   lang = 'en'
-  if(is_working or OPTIMISTIC)
+  if(is_working)
     test_name = "related_rhymes #{input_rhyme} + #{input_related} -> #{output}"
     it test_name do
       expect(related_rhymes?(input_rhyme, input_related, output, lang)).to eql(true), "'#{output}' (pronounced #{pronunciations(output, lang)}) oughta be one of the words that rhyme with '#{input_rhyme}' (pronounced #{pronunciations(input_rhyme, lang)}) and is related to '#{input_related}'"
+    end
+  else # NOT_WORKING
+    if TEST_FOR_SURPRISING_SUCCESSES
+      related_rhymes_ought_not_contain(input_rhyme, input_related, output, true)
     end
   end
 end
 
 def related_rhymes_ought_not_contain(input_rhyme, input_related, output, is_working=true)
   lang = 'en'
-  if(is_working or OPTIMISTIC)
+  if(is_working)
     test_name = "related_rhymes #{input_rhyme} + #{input_related} !-> #{output}"
     it test_name do
       expect(related_rhymes?(input_rhyme, input_related, output, lang)).to eql(true), "'#{output}' (pronounced #{pronunciations(output, lang)}) ought not one of the words that rhyme with '#{input_rhyme}' (pronounced #{pronunciations(input_rhyme, lang)}) and is related to '#{input_related}'"
+    end
+  else # NOT_WORKING
+    if TEST_FOR_SURPRISING_SUCCESSES
+      related_rhymes_oughta_contain(input_rhyme, input_related, output, true)
     end
   end
 end
