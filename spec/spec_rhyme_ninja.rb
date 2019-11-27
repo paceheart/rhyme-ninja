@@ -237,28 +237,31 @@ end
 # rhymes
 #
 
-def oughta_rhyme(lang, word1, word2, is_working=true)
+def oughta_rhyme(word1, word2, is_working=true)
   if(is_working or OPTIMISTIC)
-    oughta_rhyme_one_way(lang, word1, word2, is_working)
-    oughta_rhyme_one_way(lang, word2, word1, is_working)
+    oughta_rhyme_one_way(word1, word2, is_working)
+    oughta_rhyme_one_way(word2, word1, is_working)
   end
 end
 
-def oughta_rhyme_one_way(lang, word1, word2, is_working=true)
+def oughta_rhyme_one_way(word1, word2, is_working=true)
+  lang = 'en'
   test_name = "'#{word1}' in #{lang} oughta have '#{word2}' in its list of rhymes"
   it test_name do
     expect(find_preferred_rhyming_words(word1, lang).include?(word2)).to eql(true), "'#{word1}' (pronounced #{pronunciations(word1, lang)}) oughta include '#{word2}' ((pronounced #{pronunciations(word2, lang)}) in its list of rhymes, but instead it only rhymes with #{find_preferred_rhyming_words(word1, lang)}"
   end
 end
                 
-def ought_not_rhyme(lang, word1, word2, is_working=true)
+def ought_not_rhyme(word1, word2, is_working=true)
+  lang = 'en'
   if(is_working or OPTIMISTIC)
-    ought_not_rhyme_one_way(lang, word1, word2, is_working)
-    ought_not_rhyme_one_way(lang, word2, word1, is_working)
+    ought_not_rhyme_one_way(word1, word2, is_working)
+    ought_not_rhyme_one_way(word2, word1, is_working)
   end
 end
 
-def ought_not_rhyme_one_way(lang, word1, word2, is_working=true)
+def ought_not_rhyme_one_way(word1, word2, is_working=true)
+  lang = 'en'
   test_name = "'#{word1}' in #{lang} ought not have '#{word2}' in its list of rhymes"
   it test_name do
     expect(find_preferred_rhyming_words(word1, lang).include?(word2)).to eql(false), "'#{word1}' (pronounced #{pronunciations(word1, lang)}) ought not include '#{word2}' (pronounced #{pronunciations(word2, lang)}) as a rhyme, but it does, and it also rhymes with #{find_preferred_rhyming_words(word1, lang)}"
@@ -267,114 +270,126 @@ end
 
 describe 'RHYMES' do
 
-  context 'no self-rhymes' do
-    ought_not_rhyme 'en', 'red', 'red'
-  end
-  
   context 'basic' do
-    ought_not_rhyme 'en', 'beer', 'wine'
-    oughta_rhyme 'en', 'yum', 'plum'
-    oughta_rhyme 'en', 'space', 'place'
-    oughta_rhyme 'en', 'rhyme', 'crime'
-    oughta_rhyme 'en', 'gay', 'hooray'
+    ought_not_rhyme 'beer', 'wine'
+    oughta_rhyme 'yum', 'plum'
+    oughta_rhyme 'space', 'place'
+    oughta_rhyme 'rhyme', 'crime'
+    oughta_rhyme 'gay', 'hooray'
+    oughta_rhyme 'tongue', 'strung'
+    oughta_rhyme 'tomb', 'doom'
+    oughta_rhyme 'entomb', 'doom'
   end
   
   context 'tricky' do
-    oughta_rhyme 'en', 'ear', 'beer' # used to fail because ear is [IY1 R] and beer is [B IH1 R]
-    oughta_rhyme 'en', "we're", 'queer'
-    oughta_rhyme 'en', 'faring', 'glaring' # used to fail because faring is [F EH1 R IY0 NG] and glaring is [G L EH1 R IH0 NG]
-    ought_not_rhyme 'en', 'crime', "yum"
-    ought_not_rhyme 'en', 'crime', "'em"
-    ought_not_rhyme 'en', 'rhyme', "'em"
-    oughta_rhyme 'en', 'station', 'nation'
-    oughta_rhyme 'en', 'station', 'education'
-    ought_not_rhyme 'en', 'station', 'cation' # it's pronounced "CAT-EYE-ON"
-    ought_not_rhyme 'en', 'education', 'cation'
-    ought_not_rhyme 'en', 'anion', 'onion' # it's pronounced "ANN-EYE-ON"
+    oughta_rhyme "we're", 'queer'
+    ought_not_rhyme 'crime', "yum"
+    ought_not_rhyme 'crime', "'em"
+    ought_not_rhyme 'rhyme', "'em"
+    oughta_rhyme 'station', 'nation'
+    oughta_rhyme 'station', 'education'
+    ought_not_rhyme 'station', 'cation' # it's pronounced "CAT-EYE-ON"
+    ought_not_rhyme 'education', 'cation'
+    ought_not_rhyme 'anion', 'onion' # it's pronounced "ANN-EYE-ON"
   end
   
   context 'perfect rhymes must rhyme the last primary-stressed syllable, not just the last syllable' do
-    ought_not_rhyme 'en', 'station', 'shun'
-    ought_not_rhyme 'en', 'under', 'fur'
-    ought_not_rhyme 'en', 'tea', 'bounty'
+    ought_not_rhyme 'station', 'shun'
+    ought_not_rhyme 'under', 'fur'
+    ought_not_rhyme 'tea', 'bounty'
   end
 
+  context 'no self-rhymes' do
+    ought_not_rhyme 'red', 'red'
+  end
+  
   context "you can't just add a prefix and call it a rhyme" do
-    oughta_rhyme 'en', 'grape', 'ape' # gr- is not a prefix
-    oughta_rhyme 'en', 'pot', 'spot' # s- is not a prefix
-    oughta_rhyme 'en', 'under', 'plunder' # pl- is not a prefix
-    ought_not_rhyme 'en', 'bone', 'trombone', NOT_WORKING # trom- is not a prefix... but this one is arguable
+    oughta_rhyme 'grape', 'ape' # gr- is not a prefix
+    oughta_rhyme 'pot', 'spot' # s- is not a prefix
+    oughta_rhyme 'under', 'plunder' # pl- is not a prefix
+    oughta_rhyme 'bone', 'trombone' # trom- is not a prefix... but this one is arguable
     
-    ought_not_rhyme 'en', 'promising', 'unpromising'
-    ought_not_rhyme 'en', 'ion', 'cation'
+    ought_not_rhyme 'promising', 'unpromising', NOT_WORKING
+    ought_not_rhyme 'ion', 'cation'
     
-    oughta_rhyme 'en', 'able', 'cable'
-    oughta_rhyme 'en', 'unable', 'cable'
-    ought_not_rhyme 'en', 'able', 'unable', NOT_WORKING
+    oughta_rhyme 'able', 'cable'
+    oughta_rhyme 'unable', 'cable'
+    ought_not_rhyme 'able', 'unable', NOT_WORKING
 
-    ought_not_rhyme 'en', 'traction', 'attraction', NOT_WORKING # arguable
-    oughta_rhyme 'en', 'action', 'traction'
-    oughta_rhyme 'en', 'action', 'attraction'
+    oughta_rhyme 'traction', 'attraction' # arguable
+    oughta_rhyme 'action', 'traction'
+    oughta_rhyme 'action', 'attraction'
 
-    oughta_rhyme 'en', 'ice', 'dice'
-    oughta_rhyme 'en', 'ice', 'deice', NOT_WORKING # deice (de-ice) is not in cmudict
-    ought_not_rhyme 'en', 'ice', 'deice', NOT_WORKING
+    oughta_rhyme 'ice', 'dice'
+    oughta_rhyme 'ice', 'deice', NOT_WORKING # deice (de-ice) is not in cmudict
+    ought_not_rhyme 'ice', 'deice', NOT_WORKING
 
-    oughta_rhyme 'en', 'stand', 'strand'
-    oughta_rhyme 'en', 'understand', 'strand'
-    ought_not_rhyme 'en', 'stand', 'understand', NOT_WORKING
+    oughta_rhyme 'stand', 'strand'
+    oughta_rhyme 'understand', 'strand'
+    ought_not_rhyme 'stand', 'understand', NOT_WORKING
   end
 
   context "spelling variants ought not count as rhymes" do
-    ought_not_rhyme 'en', 'adapter', 'adaptor'
-    ought_not_rhyme 'en', 'impostor', 'imposter'
-    oughta_rhyme_one_way 'en', 'honour', 'goner' # input honour, you oughta get goner
-    oughta_rhyme 'en', 'goner', 'honor' # but input goner, and you oughta get honor...
-    ought_not_rhyme_one_way 'en', 'goner', 'honour' # ...but not honour
+    ought_not_rhyme 'adapter', 'adaptor'
+    ought_not_rhyme 'impostor', 'imposter'
+    oughta_rhyme_one_way 'honour', 'goner' # input honour, you oughta get goner
+    oughta_rhyme 'goner', 'honor' # but input goner, and you oughta get honor...
+    ought_not_rhyme_one_way 'goner', 'honour' # ...but not honour
   end
 
   if(OPTIMISTIC)
   context "homophones ought not count as rhymes" do
-    ought_not_rhyme 'en', 'blue', 'blew'
-    ought_not_rhyme 'en', 'base', 'bass'
-    ought_not_rhyme 'en', 'leader', 'lieder'
-    ought_not_rhyme 'en', 'lindsay', 'lindsey'
-    ought_not_rhyme 'en', 'hanukkah', 'chanukah' # what if the initial sounds are different, though? Then how do we know to eliminate this?
-    ought_not_rhyme 'en', 'lay', 'lei'
+    ought_not_rhyme 'blue', 'blew'
+    ought_not_rhyme 'base', 'bass'
+    ought_not_rhyme 'leader', 'lieder'
+    ought_not_rhyme 'lindsay', 'lindsey'
+    ought_not_rhyme 'hanukkah', 'chanukah' # what if the initial sounds are different, though? Then how do we know to eliminate this?
   end
   end
-
-  context "rhyming with homophones" do
-    # 'lay' ought not rhyme with 'lei', but 'bay' oughta rhyme with both of 'em
-    oughta_rhyme 'en', 'bay', 'lay'
-    oughta_rhyme 'en', 'bay', 'lei'
+  context "'lay' ought not rhyme with 'lei'..." do
+    ought_not_rhyme 'lay', 'lei', NOT_WORKING
+  end
+  context "...but 'bay' oughta rhyme with both of 'em" do
+    oughta_rhyme 'bay', 'lay'
+    oughta_rhyme 'bay', 'lei'
   end
   
   context 'profanity is allowed' do
-    oughta_rhyme 'en', 'truck', 'fuck'
-    oughta_rhyme 'en', 'bunt', 'cunt'
+    oughta_rhyme 'truck', 'fuck'
+    oughta_rhyme 'bunt', 'cunt'
   end
   
   context 'slurs are forbidden' do
-    ought_not_rhyme 'en', 'tipsy', 'gypsy'
-    ought_not_rhyme 'en', 'fop', 'wop'
-    ought_not_rhyme 'en', 'fops', 'wops'
-    ought_not_rhyme 'en', 'crannies', 'trannies'
+    ought_not_rhyme 'tipsy', 'gypsy'
+    ought_not_rhyme 'fop', 'wop'
+    ought_not_rhyme 'fops', 'wops'
+    ought_not_rhyme 'crannies', 'trannies'
   end
 
   context 'initialisms' do
-    ought_not_rhyme 'en', 'eye', 'ni'
+    ought_not_rhyme 'eye', 'ni'
   end
   
   context 'Limerick Heist' do
-    oughta_rhyme 'en', 'heist', 'sliced'
-    oughta_rhyme 'en', 'heist', 'iced'
-    oughta_rhyme 'en', 'tons', 'funds' # [T AH1 N Z] [F AH1 N D Z], N D Z gets collapsed to N Z
+    oughta_rhyme 'heist', 'sliced'
+    oughta_rhyme 'heist', 'iced'
+    oughta_rhyme 'tons', 'funds' # [T AH1 N Z] [F AH1 N D Z], N D Z gets collapsed to N Z
   end
 
+  context 'imperfect rhymes that ought to be perfect' do
+    oughta_rhyme 'ear', 'beer' # used to fail because ear is [IY1 R] and beer is [B IH1 R]
+    oughta_rhyme 'faring', 'glaring' # used to fail because faring is [F EH1 R IY0 NG] and glaring is [G L EH1 R IH0 NG]
+    oughta_rhyme 'foster', 'impostor' # foster [AA S T ER] imposter [AO S T ER]
+    oughta_rhyme 'curry', 'hurry' # curry [K AH1 R IY0] hurry [HH ER1 IY0]
+    oughta_rhyme 'errors', 'terrors' # errors [EH1 R ER0 Z] terrors [T EH1 R AH0 R Z]
+    oughta_rhyme 'array', 'hurray' # array [ER0 EY1] hurray [HH AH0 R EY1]
+    oughta_rhyme 'illicit', 'solicit' # illicit [IH2 L IH1 S AH0 T] solicit [S AH0 L IH1 S IH0 T]
+    oughta_rhyme "takin'", 'waken' # taken [T EY1 K IH0 N], waken [W EY1 K AH0 N]
+  end
+  
   context 'imperfect rhymes' do
-    oughta_rhyme 'en', 'foster', 'impostor' # foster [AA S T ER] imposter [AO S T ER]
-    oughta_rhyme 'en', 'mushroom', 'doom', NOT_WORKING # no pronunciation for 'mushroom'
+    oughta_rhyme 'mushroom', 'doom', NOT_WORKING # no pronunciation for 'mushroom', and its stress is off
+    oughta_rhyme 'dodge', 'massage', NOT_WORKING
   end
 end
 
@@ -382,7 +397,8 @@ end
 # related
 #
 
-def oughta_be_related(lang, word1, word2, is_working=true)
+def oughta_be_related(word1, word2, is_working=true)
+  lang = 'en'
   if(is_working or OPTIMISTIC)
     test_name = "'#{word1}' in #{lang} oughta be related to '#{word2}'"
     it test_name do
@@ -391,7 +407,8 @@ def oughta_be_related(lang, word1, word2, is_working=true)
   end
 end
   
-def ought_not_be_related(lang, word1, word2, is_working=true)
+def ought_not_be_related(word1, word2, is_working=true)
+  lang = 'en'
   if(is_working or OPTIMISTIC)
     test_name = "'#{word1}' in #{lang} ought not be related to '#{word2}'"
     it test_name do
@@ -403,44 +420,44 @@ end
 describe 'RELATED' do
   
   context 'basic' do
-    oughta_be_related 'en', 'meow', 'cat'
-    oughta_be_related 'en', 'grave', 'death'
+    oughta_be_related 'meow', 'cat'
+    oughta_be_related 'grave', 'death'
   end
 
   context 'reflexivity' do
-    ought_not_be_related 'en', 'death', 'death'
+    ought_not_be_related 'death', 'death'
   end
 
   context 'examples from the documentation' do
-    oughta_be_related 'en', 'death', 'bled'
-    oughta_be_related 'en', 'death', 'dead'
-    oughta_be_related 'en', 'death', 'dread'
+    oughta_be_related 'death', 'bled'
+    oughta_be_related 'death', 'dead'
+    oughta_be_related 'death', 'dread'
   end
 
   context 'slurs are forbidden' do
-    ought_not_be_related 'en', 'gypsy', 'romanian'
-    ought_not_be_related 'en', 'romanian', 'gypsy'
-    ought_not_be_related 'en', 'gypsies', 'romanian'
-    ought_not_be_related 'en', 'romanian', 'gypsies'
+    ought_not_be_related 'gypsy', 'romanian'
+    ought_not_be_related 'romanian', 'gypsy'
+    ought_not_be_related 'gypsies', 'romanian'
+    ought_not_be_related 'romanian', 'gypsies'
   end
 
   context 'trivial stop words ought not show up as related to anything' do
-    ought_not_be_related 'en', 'food', 'the'
+    ought_not_be_related 'food', 'the'
   end
   
   if(OPTIMISTIC)
   context 'pirate' do
-    ought_not_be_related 'en', 'pirate', 'pew', NOT_WORKING
+    ought_not_be_related 'pirate', 'pew', NOT_WORKING
   end
   end
 
   context 'halloween' do
-    ought_not_be_related 'en', 'halloween', 'ira', NOT_WORKING
-    ought_not_be_related 'en', 'halloween', 'lindsay', NOT_WORKING
-    ought_not_be_related 'en', 'halloween', 'lindsey', NOT_WORKING
-    ought_not_be_related 'en', 'halloween', 'nicki', NOT_WORKING
-    ought_not_be_related 'en', 'halloween', 'nikki', NOT_WORKING
-    ought_not_be_related 'en', 'halloween', 'pauline', NOT_WORKING
+    ought_not_be_related 'halloween', 'ira', NOT_WORKING
+    ought_not_be_related 'halloween', 'lindsay', NOT_WORKING
+    ought_not_be_related 'halloween', 'lindsey', NOT_WORKING
+    ought_not_be_related 'halloween', 'nicki', NOT_WORKING
+    ought_not_be_related 'halloween', 'nikki', NOT_WORKING
+    ought_not_be_related 'halloween', 'pauline', NOT_WORKING
   end
   
 end
@@ -460,7 +477,8 @@ def set_related_contains?(input, output1, output2, lang)
   return false
 end
 
-def set_related_oughta_contain(lang, input, output1, output2, is_working=true)
+def set_related_oughta_contain(input, output1, output2, is_working=true)
+  lang = 'en'
   if(is_working or OPTIMISTIC)
     test_name = "set_related #{lang}: #{input} -> #{output1} / #{output2}"
     it test_name do
@@ -469,7 +487,8 @@ def set_related_oughta_contain(lang, input, output1, output2, is_working=true)
   end
 end
 
-def set_related_ought_not_contain(lang, input, output1, output2, is_working=true)
+def set_related_ought_not_contain(input, output1, output2, is_working=true)
+  lang = 'en'
   if(is_working or OPTIMISTIC)
     test_name = "set_related #{lang}: #{input} !-> #{output1} / #{output2}"
     it test_name do
@@ -481,70 +500,70 @@ end
 describe 'SET_RELATED' do
 
   context 'examples from the documentation' do
-    set_related_oughta_contain 'en', 'death', 'bled', 'dread'
-    set_related_oughta_contain 'en', 'death', 'bled', 'dead'
-    set_related_oughta_contain 'en', 'death', 'dead', 'dread'
+    set_related_oughta_contain 'death', 'bled', 'dread'
+    set_related_oughta_contain 'death', 'bled', 'dead'
+    set_related_oughta_contain 'death', 'dead', 'dread'
   end
   
   context 'pirate' do
-    set_related_oughta_contain 'en', 'pirate', 'cove', 'trove'
-    set_related_oughta_contain 'en', 'pirate', 'handsome', 'ransom'
-    set_related_oughta_contain 'en', 'pirate', 'french', 'wench'
-    set_related_oughta_contain 'en', 'pirate', 'gang', 'hang'
-    set_related_oughta_contain 'en', 'pirate', 'bold', 'gold'
-    set_related_oughta_contain 'en', 'pirate', 'peg', 'leg'
-    set_related_oughta_contain 'en', 'pirate', 'daring', 'swearing'
-    set_related_oughta_contain 'en', 'pirate', 'hacker', 'cracker' # a different kind of pirate
-    set_related_oughta_contain 'en', 'pirate', 'crew', 'tattoo'
-    set_related_oughta_contain 'en', 'pirate', 'coast', 'ghost'
-    set_related_oughta_contain 'en', 'pirate', 'loot', 'pursuit'
-    set_related_oughta_contain 'en', 'pirate', 'buccaneer', 'commandeer'
-    set_related_ought_not_contain 'en', 'pirate', 'eyes', 'seas' # via two pronunciations of 'reprise'
+    set_related_oughta_contain 'pirate', 'cove', 'trove'
+    set_related_oughta_contain 'pirate', 'handsome', 'ransom'
+    set_related_oughta_contain 'pirate', 'french', 'wench'
+    set_related_oughta_contain 'pirate', 'gang', 'hang'
+    set_related_oughta_contain 'pirate', 'bold', 'gold'
+    set_related_oughta_contain 'pirate', 'peg', 'leg'
+    set_related_oughta_contain 'pirate', 'daring', 'swearing'
+    set_related_oughta_contain 'pirate', 'hacker', 'cracker' # a different kind of pirate
+    set_related_oughta_contain 'pirate', 'crew', 'tattoo'
+    set_related_oughta_contain 'pirate', 'coast', 'ghost'
+    set_related_oughta_contain 'pirate', 'loot', 'pursuit'
+    set_related_oughta_contain 'pirate', 'buccaneer', 'commandeer'
+    set_related_ought_not_contain 'pirate', 'eyes', 'seas' # via two pronunciations of 'reprise'
   end
 
   context 'halloween' do
-    set_related_oughta_contain 'en', 'halloween', 'celebration', 'decoration'
-    set_related_oughta_contain 'en', 'halloween', 'cider', 'spider'
-    set_related_oughta_contain 'en', 'halloween', 'sheet', 'treat'
-    set_related_oughta_contain 'en', 'halloween', 'bat', 'cat'
-    set_related_oughta_contain 'en', 'halloween', 'fairy', 'scary'
-    set_related_oughta_contain 'en', 'halloween', 'fright', 'night'
-    set_related_ought_not_contain 'en', 'halloween', 'lindsay', 'lindsey', NOT_WORKING
-    set_related_ought_not_contain 'en', 'halloween', 'cider', 'snyder', NOT_WORKING
-    set_related_ought_not_contain 'en', 'halloween', 'day', 'ira', NOT_WORKING
+    set_related_oughta_contain 'halloween', 'celebration', 'decoration'
+    set_related_oughta_contain 'halloween', 'cider', 'spider'
+    set_related_oughta_contain 'halloween', 'sheet', 'treat'
+    set_related_oughta_contain 'halloween', 'bat', 'cat'
+    set_related_oughta_contain 'halloween', 'fairy', 'scary'
+    set_related_oughta_contain 'halloween', 'fright', 'night'
+    set_related_ought_not_contain 'halloween', 'lindsay', 'lindsey', NOT_WORKING
+    set_related_ought_not_contain 'halloween', 'cider', 'snyder', NOT_WORKING
+    set_related_ought_not_contain 'halloween', 'day', 'ira', NOT_WORKING
   end
 
   context 'music' do
-    set_related_oughta_contain 'en', 'music', 'baroque', 'folk'
-    set_related_oughta_contain 'en', 'music', 'enjoys', 'noise'
-    set_related_oughta_contain 'en', 'music', 'funk', 'punk'
-    set_related_oughta_contain 'en', 'music', 'sing', 'swing'
-    set_related_oughta_contain 'en', 'music', 'composition', 'musician'
-    set_related_oughta_contain 'en', 'music', 'clarinet', 'minuet'
-    set_related_oughta_contain 'en', 'music', 'accidental', 'instrumental'
-    set_related_oughta_contain 'en', 'music', 'sings', 'strings'
-    set_related_oughta_contain 'en', 'music', 'glissando', 'ritardando', NOT_WORKING
-    set_related_oughta_contain 'en', 'music', 'viola', 'hemiola', NOT_WORKING
-    set_related_oughta_contain 'en', 'music', 'overtone', 'xylophone', NOT_WORKING
-    set_related_oughta_contain 'en', 'music', 'wave', 'rave', NOT_WORKING
-    set_related_oughta_contain 'en', 'music', 'beat', 'repeat', NOT_WORKING
-    set_related_oughta_contain 'en', 'music', 'flow', 'bow', NOT_WORKING
-    set_related_oughta_contain 'en', 'music', 'guitar', 'rock star', NOT_WORKING
-    set_related_oughta_contain 'en', 'music', 'jingle', 'single', NOT_WORKING # as in a hit single
-    set_related_oughta_contain 'en', 'music', 'bar', 'repertoire', NOT_WORKING
-    set_related_oughta_contain 'en', 'music', 'harp', 'sharp', NOT_WORKING
-    set_related_oughta_contain 'en', 'music', 'show', 'arpeggio', NOT_WORKING # if we squish the stress
-    set_related_oughta_contain 'en', 'music', 'mix', 'drumsticks', NOT_WORKING # if we squish the stress
-    set_related_oughta_contain 'en', 'music', 'violin', 'mandolin', NOT_WORKING
-    set_related_oughta_contain 'en', 'music', 'rest', 'expressed', NOT_WORKING
-    set_related_oughta_contain 'en', 'music', 'lute', 'flute', NOT_WORKING
-    set_related_oughta_contain 'en', 'music', 'fortissimo', 'pianissimo', NOT_WORKING
-    set_related_ought_not_contain 'en', 'music', 'cello', 'solo'
-    set_related_ought_not_contain 'en', 'music', 'cello', 'concerto'
-    set_related_ought_not_contain 'en', 'music', 'solo', 'concerto'
-    set_related_oughta_contain 'en', 'music', 'gong', 'song', NOT_WORKING # reverse relatedness would fix
-    set_related_oughta_contain 'en', 'music', 'duet', 'quartet', NOT_WORKING
-    set_related_oughta_contain 'en', 'music', 'duet', 'quintet', NOT_WORKING
+    set_related_oughta_contain 'music', 'baroque', 'folk'
+    set_related_oughta_contain 'music', 'enjoys', 'noise'
+    set_related_oughta_contain 'music', 'funk', 'punk'
+    set_related_oughta_contain 'music', 'sing', 'swing'
+    set_related_oughta_contain 'music', 'composition', 'musician'
+    set_related_oughta_contain 'music', 'clarinet', 'minuet'
+    set_related_oughta_contain 'music', 'accidental', 'instrumental'
+    set_related_oughta_contain 'music', 'sings', 'strings'
+    set_related_oughta_contain 'music', 'glissando', 'ritardando', NOT_WORKING
+    set_related_oughta_contain 'music', 'viola', 'hemiola', NOT_WORKING
+    set_related_oughta_contain 'music', 'overtone', 'xylophone', NOT_WORKING
+    set_related_oughta_contain 'music', 'wave', 'rave', NOT_WORKING
+    set_related_oughta_contain 'music', 'beat', 'repeat', NOT_WORKING
+    set_related_oughta_contain 'music', 'flow', 'bow', NOT_WORKING
+    set_related_oughta_contain 'music', 'guitar', 'rock star', NOT_WORKING
+    set_related_oughta_contain 'music', 'jingle', 'single', NOT_WORKING # as in a hit single
+    set_related_oughta_contain 'music', 'bar', 'repertoire', NOT_WORKING
+    set_related_oughta_contain 'music', 'harp', 'sharp', NOT_WORKING
+    set_related_oughta_contain 'music', 'show', 'arpeggio', NOT_WORKING # if we squish the stress
+    set_related_oughta_contain 'music', 'mix', 'drumsticks', NOT_WORKING # if we squish the stress
+    set_related_oughta_contain 'music', 'violin', 'mandolin', NOT_WORKING
+    set_related_oughta_contain 'music', 'rest', 'expressed', NOT_WORKING
+    set_related_oughta_contain 'music', 'lute', 'flute', NOT_WORKING
+    set_related_oughta_contain 'music', 'fortissimo', 'pianissimo', NOT_WORKING
+    set_related_ought_not_contain 'music', 'cello', 'solo'
+    set_related_ought_not_contain 'music', 'cello', 'concerto'
+    set_related_ought_not_contain 'music', 'solo', 'concerto'
+    set_related_oughta_contain 'music', 'gong', 'song', NOT_WORKING # reverse relatedness would fix
+    set_related_oughta_contain 'music', 'duet', 'quartet', NOT_WORKING
+    set_related_oughta_contain 'music', 'duet', 'quintet', NOT_WORKING
     it 'no proper subsets: we should get bone / intone / trombone, and not also get bone / intone' do
       bone_intone = ['bone', 'intone']
       bone_intone_trombone = ['bone', 'intone', 'trombone']
@@ -557,19 +576,19 @@ describe 'SET_RELATED' do
   if(OPTIMISTIC)
   context 'imperfect' do
     # relax the stress:
-    set_related_oughta_contain 'en', 'halloween', 'broom', 'costume'
-    set_related_oughta_contain 'en', 'music', 'oboe', 'piano'
-    set_related_oughta_contain 'en', 'music', 'cello', 'solo'
-    set_related_oughta_contain 'en', 'music', 'cello', 'concerto'
-    set_related_oughta_contain 'en', 'music', 'solo', 'concerto'
+    set_related_oughta_contain 'halloween', 'broom', 'costume'
+    set_related_oughta_contain 'music', 'oboe', 'piano'
+    set_related_oughta_contain 'music', 'cello', 'solo'
+    set_related_oughta_contain 'music', 'cello', 'concerto'
+    set_related_oughta_contain 'music', 'solo', 'concerto'
     # dwim a non-final consonant
-    set_related_oughta_contain 'en', 'music', 'symphony', 'timpani'
+    set_related_oughta_contain 'music', 'symphony', 'timpani'
   end
   end
 
   context 'no spelling variants' do
-    set_related_ought_not_contain 'en', 'agree', 'harmonize', 'harmonise'
-    set_related_ought_not_contain 'en', 'ace', 'honor', 'honour'
+    set_related_ought_not_contain 'agree', 'harmonize', 'harmonise'
+    set_related_ought_not_contain 'ace', 'honor', 'honour'
   end
 
 end
@@ -584,7 +603,7 @@ def pair_related_contains?(lang, input1, input2, output1, output2)
   find_rhyming_pairs(input1, input2, lang).include? target_pair
 end
 
-def pair_related_oughta_contain(lang, input1, input2, output1, output2, is_working=true)
+def pair_related_oughta_contain(input1, input2, output1, output2, is_working=true)
   lang = "en"
   if(is_working or OPTIMISTIC)
     test_name = "pair_related #{lang}: #{input1} / #{input2} -> #{output1} / #{output2}"
@@ -594,7 +613,8 @@ def pair_related_oughta_contain(lang, input1, input2, output1, output2, is_worki
   end
 end
 
-def pair_related_ought_not_contain(lang, input1, input2, output1, output2, is_working=true)
+def pair_related_ought_not_contain(input1, input2, output1, output2, is_working=true)
+  lang = "en"
   if(is_working or OPTIMISTIC)
     test_name = "pair_related #{lang}: #{input1} / #{input2} !-> #{output1} / #{output2}"
     it test_name do
@@ -606,32 +626,32 @@ end
 describe 'PAIR_RELATED' do
   
   context 'examples from the documentation' do
-    pair_related_oughta_contain 'en', 'crime', 'heaven', 'confessed', 'blessed'
+    pair_related_oughta_contain 'crime', 'heaven', 'confessed', 'blessed'
   end
   
   context 'interactive fiction' do
-    pair_related_oughta_contain 'en', 'interactive', 'fiction', 'exciting', 'writing'
+    pair_related_oughta_contain 'interactive', 'fiction', 'exciting', 'writing'
   end
 
   context 'food evil' do
-    pair_related_oughta_contain 'en', 'food', 'evil', 'chewed', 'rude'
-    pair_related_oughta_contain 'en', 'food', 'evil', 'cuisine', 'mean'
-    pair_related_oughta_contain 'en', 'food', 'evil', 'feed', 'greed'
-    pair_related_oughta_contain 'en', 'food', 'evil', 'grain', 'pain'
-    pair_related_oughta_contain 'en', 'food', 'evil', 'grain', 'bane'
-    pair_related_oughta_contain 'en', 'food', 'evil', 'rice', 'vice'
-    pair_related_oughta_contain 'en', 'food', 'evil', 'vegetarian', 'totalitarian'
-    pair_related_oughta_contain 'en', 'food', 'evil', 'dinner', 'sinner'
-    pair_related_oughta_contain 'en', 'food', 'evil', 'cake', 'rake', NOT_WORKING
-    pair_related_oughta_contain 'en', 'food', 'evil', 'mushroom', 'doom', NOT_WORKING
-    pair_related_oughta_contain 'en', 'food', 'evil', 'chips', 'apocalypse', NOT_WORKING
-    pair_related_oughta_contain 'en', 'food', 'evil', 'seder', 'darth vader', NOT_WORKING
-    pair_related_oughta_contain 'en', 'food', 'evil', 'sachertort', 'voldemort', NOT_WORKING
-    pair_related_oughta_contain 'en', 'food', 'evil', 'bread', 'undead', NOT_WORKING
+    pair_related_oughta_contain 'food', 'evil', 'chewed', 'rude'
+    pair_related_oughta_contain 'food', 'evil', 'cuisine', 'mean'
+    pair_related_oughta_contain 'food', 'evil', 'feed', 'greed'
+    pair_related_oughta_contain 'food', 'evil', 'grain', 'pain'
+    pair_related_oughta_contain 'food', 'evil', 'grain', 'bane'
+    pair_related_oughta_contain 'food', 'evil', 'rice', 'vice'
+    pair_related_oughta_contain 'food', 'evil', 'vegetarian', 'totalitarian'
+    pair_related_oughta_contain 'food', 'evil', 'dinner', 'sinner'
+    pair_related_oughta_contain 'food', 'evil', 'cake', 'rake', NOT_WORKING
+    pair_related_oughta_contain 'food', 'evil', 'mushroom', 'doom', NOT_WORKING
+    pair_related_oughta_contain 'food', 'evil', 'chips', 'apocalypse', NOT_WORKING
+    pair_related_oughta_contain 'food', 'evil', 'seder', 'darth vader', NOT_WORKING
+    pair_related_oughta_contain 'food', 'evil', 'sachertort', 'voldemort', NOT_WORKING
+    pair_related_oughta_contain 'food', 'evil', 'bread', 'undead', NOT_WORKING
   end
   
   context 'food dark' do
-    pair_related_oughta_contain 'en', 'food', 'dark', 'turkey', 'murky', NOT_WORKING
+    pair_related_oughta_contain 'food', 'dark', 'turkey', 'murky', NOT_WORKING
   end
 
 end
@@ -647,7 +667,8 @@ def related_rhymes?(input_rhyme, input_related, output, lang)
   find_related_rhymes(input_rhyme, input_related, lang).include?(output)
 end
 
-def related_rhymes_oughta_contain(lang, input_rhyme, input_related, output, is_working=true)
+def related_rhymes_oughta_contain(input_rhyme, input_related, output, is_working=true)
+  lang = 'en'
   if(is_working or OPTIMISTIC)
     test_name = "related_rhymes #{input_rhyme} + #{input_related} -> #{output}"
     it test_name do
@@ -656,7 +677,8 @@ def related_rhymes_oughta_contain(lang, input_rhyme, input_related, output, is_w
   end
 end
 
-def related_rhymes_ought_not_contain(lang, input_rhyme, input_related, output, is_working=true)
+def related_rhymes_ought_not_contain(input_rhyme, input_related, output, is_working=true)
+  lang = 'en'
   if(is_working or OPTIMISTIC)
     test_name = "related_rhymes #{input_rhyme} + #{input_related} !-> #{output}"
     it test_name do
@@ -668,7 +690,7 @@ end
 describe 'RELATED_RHYMES' do
 
   context 'examples from the documentation' do
-    related_rhymes_oughta_contain 'en', 'please', 'cats', 'siamese'
+    related_rhymes_oughta_contain 'please', 'cats', 'siamese'
   end
 
 end

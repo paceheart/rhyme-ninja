@@ -52,18 +52,57 @@ end
 def preprocess_cmudict_line(line)
   # merge some similar-enough-sounding syllables
   line = line.chomp()
-  line = line.gsub("IH1 R", "IY1 R") # ear [IY R] rhymes with beer [IH R]
-  line = line.gsub("IH2 R", "IY2 R")
+
+  # this one comes first because it splits ER into two phonemes
+  # curry [K AH1 R IY0] / hurry [HH ER1 IY0]
+  line = line.gsub("ER0", "AH0 R")
+  line = line.gsub("ER1", "AH1 R")
+  line = line.gsub("ER2", "AH2 R")
+  
+  # ear [IY R] / beer [B IH R]
   line = line.gsub("IH0 R", "IY0 R")
-  line = line.gsub("IH1 NG", "IY1 NG") # faring [F EH1 R IY0 NG] rhymes with glaring [G L EH1 R IH0 NG]
-  line = line.gsub("IH2 NG", "IY2 NG")
+  line = line.gsub("IH1 R", "IY1 R")
+  line = line.gsub("IH2 R", "IY2 R")
+  
+  # faring [F EH1 R IY0 NG] / glaring [G L EH1 R IH0 NG]
   line = line.gsub("IH0 NG", "IY0 NG")
-  # imperfect rhymes. @todo allow this to be toggleable at runtime instead of dictionary-building time
-  line = line.gsub(" AO", " AA") # caught [AA T] rhymes with fought [AO T]
-  line = line.gsub("N D Z", "N Z") # make tons [T AH1 N Z] rhyme with funds [F AH1 N D Z]
-  # replace all unstressed schwa-ish syllables with "x" indicating "schwa"
-  # line = line.gsub("AH0", "x")
-# IH0  
+  line = line.gsub("IH1 NG", "IY1 NG")
+  line = line.gsub("IH2 NG", "IY2 NG")
+
+  # caught [K AA T] / fought [F AO T]. If we had reliable data to distinguish 'cot' from 'caught', this would be in imperfect rhymes. But since caught and fought need to rhyme, we're forced to conflate them globally.
+  line = line.gsub(" AO", " AA")
+
+  # illicit [IH2 L IH1 S AH0 T] solicit [S AH0 L IH1 S IH0 T]
+  line = conflate_schwas(line)
+  
+  line = conflate_imperfect_rhymes(line)
+  return line
+end
+
+def conflate_schwas(line)
+  # replace all unstressed schwa-ish syllables with "x" indicating "schwa",
+  # unless they are followed by R or NG.
+  # Protect R and NG from the upcoming gsub.
+  line = line.gsub("IH0 R", "fubarduckR")
+  line = line.gsub("IH0 NG", "fubarduckNG")
+
+  # mumble a little mumblier, please
+  line = line.gsub("IH0", "AH0")
+  
+  # put R and NG back the way they were
+  line = line.gsub("fubarduckR", "IH0 R")
+  line = line.gsub("fubarduckNG", "IH0 NG")
+  return line
+end
+
+def conflate_imperfect_rhymes(line)
+  # @todo allow this to be toggleable at runtime instead of dictionary-building time
+  
+  # tons [T AH1 N Z] / funds [F AH1 N D Z]
+  line = line.gsub("N D Z", "N Z") 
+
+  # massage [M AH0 S AA1 ZH] / dodge [D AA1 JH]
+  # line = line.gsub(" ZH", " JH")
   return line
 end
 
