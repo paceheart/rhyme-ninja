@@ -309,6 +309,7 @@ describe 'RHYMES' do
     oughta_rhyme 'wank', 'bank'
     ought_not_rhyme 'wank', 'bonk'
     oughta_rhyme 'bong', 'song'
+    oughta_rhyme 'bounty', 'county'
   end
   
   context 'perfect rhymes must rhyme the last primary-stressed syllable, not just the last syllable' do
@@ -327,12 +328,13 @@ describe 'RHYMES' do
     oughta_rhyme 'under', 'plunder' # pl- is not a prefix
     oughta_rhyme 'bone', 'trombone' # trom- is not a prefix... but this one is arguable
     
-    ought_not_rhyme 'promising', 'unpromising', NOT_WORKING
+    ought_not_rhyme 'promising', 'unpromising', NOT_WORKING # un- is a prefix
+    ought_not_rhyme 'diversity', 'biodiversity', NOT_WORKING # bio- is a prefix
     ought_not_rhyme 'ion', 'cation'
     
     oughta_rhyme 'able', 'cable'
     oughta_rhyme 'unable', 'cable'
-    ought_not_rhyme 'able', 'unable', NOT_WORKING
+    ought_not_rhyme 'able', 'unable', NOT_WORKING # un- is a prefix
 
     oughta_rhyme 'traction', 'attraction' # arguable
     oughta_rhyme 'action', 'traction'
@@ -357,6 +359,7 @@ describe 'RHYMES' do
   context "homophones ought not count as rhymes" do
     ought_not_rhyme 'blue', 'blew', NOT_WORKING
     ought_not_rhyme 'base', 'bass', NOT_WORKING
+    ought_not_rhyme 'coral', 'choral', NOT_WORKING
     ought_not_rhyme 'leader', 'lieder', NOT_WORKING
     ought_not_rhyme 'lindsay', 'lindsey', NOT_WORKING
     ought_not_rhyme 'hanukkah', 'chanukah', NOT_WORKING # what if the initial sounds are different, though? Then how do we know to eliminate this?
@@ -581,6 +584,8 @@ describe 'SET_RELATED' do
     set_related_oughta_contain 'music', 'guitar', 'rock star', NOT_WORKING
     set_related_oughta_contain 'music', 'jingle', 'single', NOT_WORKING # as in a hit single
     set_related_oughta_contain 'music', 'bar', 'repertoire', NOT_WORKING
+    set_related_ought_not_contain 'music', 'bars', 'scores'
+    set_related_ought_not_contain 'music', 'bass', 'base', NOT_WORKING
     set_related_oughta_contain 'music', 'harp', 'sharp', NOT_WORKING
     set_related_oughta_contain 'music', 'show', 'arpeggio', NOT_WORKING # if we squish the stress
     set_related_oughta_contain 'music', 'mix', 'drumsticks', NOT_WORKING # if we squish the stress
@@ -594,6 +599,7 @@ describe 'SET_RELATED' do
     set_related_oughta_contain 'music', 'gong', 'song', NOT_WORKING # reverse relatedness would fix
     set_related_oughta_contain 'music', 'duet', 'quartet', NOT_WORKING
     set_related_oughta_contain 'music', 'duet', 'quintet', NOT_WORKING
+    set_related_oughta_contain 'music', 'coral', 'choral', NOT_WORKING
     it 'no proper subsets: we should get bone / intone / trombone, and not also get bone / intone' do
       bone_intone = ['bone', 'intone']
       bone_intone_trombone = ['bone', 'intone', 'trombone']
