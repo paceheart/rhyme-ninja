@@ -372,7 +372,7 @@ end
 def print_tuple(tuple, lang)
   # print TUPLE separated by slashes
   i = 0
-  cgi_print "<div class='tuple'>"
+  cgi_print "<div class='output_tuple'><p class='output_p'>"
   tuple.each { |elem|
     if(i > 0)
       print " / "
@@ -380,7 +380,7 @@ def print_tuple(tuple, lang)
     print_word(elem, lang)
     i += 1
   }
-  cgi_print "</div>"
+  cgi_print "</p></div>"
   puts
   STDOUT.flush
 end
@@ -401,12 +401,12 @@ def print_words(words, lang)
   if(success)
     words.sort.uniq.each { |word|
       cgi_print "<div class='output_tuple'>"
-      cgi_print "<span class='output_word'>"
+      cgi_print "<p class='output_p'>"
       print_word(word, lang)
       if($display_word_frequencies)
         print " (#{frequency(word)})"
       end
-      cgi_print "</span>"
+      cgi_print "</p>"
       cgi_print "</div>"
       puts
     }

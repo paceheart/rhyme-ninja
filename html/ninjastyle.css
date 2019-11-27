@@ -7,7 +7,7 @@ body {
     color: #eeeefa;
 }
 
-.focal_word, .output_word, .output_tuple, .results, p, td, input {
+.focal_word, .output_p, .output_tuple, .results, p, td, input {
     font-family: "Verdana", Verdana, sans-serif;
     color: #ffdce1;
 }
@@ -36,14 +36,21 @@ body {
 
 .output_tuple {
     line-height: 130%;
+    margin-bottom: 2px;
+    margin-top: 0px;
+}
+
+.output_p {
+    color: #22dce1;
+    line-height: 110%;
+    margin-left: 15px;
+    text-indent: -15px;
+    margin-bottom: 0px;
+    margin-top: 0px;
 }
 
 .focal_word {
     font-weight: bold;
-    color: #22dce1;
-}
-
-.output_word {
     color: #22dce1;
 }
 
