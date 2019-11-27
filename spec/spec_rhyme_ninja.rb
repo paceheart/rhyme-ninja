@@ -384,7 +384,7 @@ describe 'RHYMES' do
     oughta_rhyme 'errors', 'terrors' # errors [EH1 R ER0 Z] terrors [T EH1 R AH0 R Z]
     oughta_rhyme 'array', 'hurray' # array [ER0 EY1] hurray [HH AH0 R EY1]
     oughta_rhyme 'illicit', 'solicit' # illicit [IH2 L IH1 S AH0 T] solicit [S AH0 L IH1 S IH0 T]
-    oughta_rhyme "takin'", 'waken' # taken [T EY1 K IH0 N], waken [W EY1 K AH0 N]
+    oughta_rhyme "takin'", 'waken' # takin' [T EY1 K IH0 N], waken [W EY1 K AH0 N]
   end
   
   context 'imperfect rhymes' do
