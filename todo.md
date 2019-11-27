@@ -6,13 +6,13 @@
 * fix indention upon word wrap
 * urlencode word links
 * reduce dumb outputs
-** get rid of plurals, possessives, etc. if they don't add anything new
+** WordNet contains saffron and paroled. Why do we need lemma_en? We count a word as common if it has a frequency of 2 or more (@todo try upping this) according to lemma_en, or if it exists in WordNet at all. If we upped this to 2, 2/3 of the newly-rare words would be crap, but we would also lose 1/3 good words like chicanery, noncombatants, propagandize, and psilocybin. That's probably okay.
+** get rid of plurals, possessives, etc. if they don't add anything new. We could use the actual lemmas in lemma_en! and/or WordNet
 ** get rid of prefixes
-** respect rare_words.txt
 ** separate names out
+** respect rare_words.txt
 ** 'saddle' has a bunch of rare words
 * improve good outputs
-** what happens if we turn all 0's into schwas?
 ** relatedness isn't symmetric. For set_related, we don't have to go related1, related2, rhyme. We could also go related, rhyme, related to input. Blocked on semantic relatedness.
 ** look for all plurals that differ in vowels to find more phonemes to conflate, e.g. ORPHANAGE  [AO1 R F AH0 N AH0 JH] ORPHANAGES  [AO1 R F AH0 N IH0 JH IH0 Z]
 * imperfect rhymes
@@ -31,11 +31,3 @@
 * drag and drop for two-word combos
 * add another input form at the bottom
 * add definition (i.e. singleton synsets)
-
-## wishlist (feature requests from users)
-
-* find Spanish data sets, unstub rimar.rb
-
-## potential beta-testers
-
-* https://www.reddit.com/user/wordgoeshere/
