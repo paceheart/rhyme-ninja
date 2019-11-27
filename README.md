@@ -41,9 +41,9 @@ This will preprocess the cmudict data into a format that's efficient for looking
 
 We use a two-step lookup process to avoid storing lots of redundant data, e.g. all 500+ "-ation" rhymes as values for "elation", "consternation", etc.
 
-Step 1: Given a word, use the CMU Pronouncing Data to get its pronunciation. 
+#### Step 1: Given a word, use the CMU Pronouncing Data to get its pronunciation. 
 
-Step 1.1: Tweak the given pronunciation to deal with quirks of cmudict. 
+#### Step 1.1: Tweak the given pronunciation to deal with quirks of cmudict. 
 e.g. 
 curry [K AH1 R IY0] / hurry [HH ER1 IY0]  
 ear [IY R] / beer [B IH R]  
@@ -56,7 +56,7 @@ illicit [IH2 L IH1 S AH0 T] solicit [S AH0 L IH1 S IH0 T]
 conflate all unstressed schwa-ish syllables, unless they are followed by R or NG.  
 mumble a little mumblier, please  
 
-Step 1.5: Get the word's rhyme signature
+#### Step 1.5: Get the word's rhyme signature
 
 The rhyme signature is everything including and after the final most stressed vowel,
 which is indicated in cmudict by a "1".
@@ -70,9 +70,9 @@ output:        [IH  ZH AH  N] # the pronunciation of '-ision' with stress marker
 We remove the stress markers so that we can rhyme 'furs' [F ER1 Z] with 'yours(2)' [Y ER0 Z]
 They will both have the rhyme signature [ER Z].
 
-Step 2: Given the rhyme signature, look up all words that rhyme with it (including itself)
+#### Step 2: Given the rhyme signature, look up all words that rhyme with it (including itself)
 
-Step 2.5: Filter out bad rhymes, like the word itself and subwords (e.g. important rhyming with unimportant)
+#### Step 2.5: Filter out bad rhymes, like the word itself and subwords (e.g. important rhyming with unimportant)
 
 ### Filtering out rare words
 
