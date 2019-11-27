@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+# Change this to a string to display detailed output for a particular word
 TRACE_WORD = nil
 
 # Preprocess the cmudict data into a format that's efficient for looking up rhyming words.
@@ -52,6 +53,7 @@ end
 def preprocess_cmudict_line(line)
   # merge some similar-enough-sounding syllables
   line = line.chomp()
+  original_line = line.clone
 
   # this one comes first because it splits ER into two phonemes
   # curry [K AH1 R IY0] / hurry [HH ER1 IY0]
@@ -69,29 +71,51 @@ def preprocess_cmudict_line(line)
   line = line.gsub("IH1 NG", "IY1 NG")
   line = line.gsub("IH2 NG", "IY2 NG")
 
-  # caught [K AA T] / fought [F AO T]. If we had reliable data to distinguish 'cot' from 'caught', this would be in imperfect rhymes. But since caught and fought need to rhyme, we're forced to conflate them globally.
-  line = line.gsub(" AO", " AA")
+  #         caught [K AA1 T] / fought [F AO1 T]
+  #         bong [B AA1 NG] / song [S AO1 NG]
+  # but NOT bar [B AA1 R] / score [S K AO1 R], so we leave it alone if it's followed by R
+  # If we had reliable data to distinguish 'cot' from 'caught', this would be in imperfect rhymes. But since caught and fought need to rhyme, we're forced to conflate them globally.
+  line = gsub_unless_followed_by_r_or_ng(line, " AO0", " AA0")
+  line = gsub_unless_followed_by_r_or_ng(line, " AO1", " AA1")
+  line = gsub_unless_followed_by_r_or_ng(line, " AO2", " AA2")
 
   # illicit [IH2 L IH1 S AH0 T] solicit [S AH0 L IH1 S IH0 T]
-  line = conflate_schwas(line)
+  # conflate all unstressed schwa-ish syllables, unless they are followed by R or NG.
+  # mumble a little mumblier, please
+  line = gsub_unless_followed_by_r(line, 'IH0', 'AH0')
   
   line = conflate_imperfect_rhymes(line)
+  if(TRACE_WORD && line.include?(TRACE_WORD) && line != original_line)
+    puts "Dwimmed #{original_line} to #{line}"
+  end
   return line
 end
 
-def conflate_schwas(line)
-  # replace all unstressed schwa-ish syllables with "x" indicating "schwa",
-  # unless they are followed by R or NG.
-  # Protect R and NG from the upcoming gsub.
-  line = line.gsub("IH0 R", "fubarduckR")
-  line = line.gsub("IH0 NG", "fubarduckNG")
+def gsub_unless_followed_by_r(line, old, new)
+  # substitute OLD for NEW unless OLD is followed by " R"
+  
+  # Protect R from the upcoming gsub.
+  line = line.gsub(old + " R", "fubarduckR")
 
-  # mumble a little mumblier, please
-  line = line.gsub("IH0", "AH0")
+  line = line.gsub(old, new)
+  
+  # put R back the way it was
+  line = line.gsub("fubarduckR", old + " R")
+  return line
+end
+
+def gsub_unless_followed_by_r_or_ng(line, old, new)
+  # substitute OLD for NEW unless OLD is followed by " R" or " NG"
+  
+  # Protect R and NG from the upcoming gsub.
+  line = line.gsub(old + " R", "fubarduckR")
+  line = line.gsub(old + " NG", "fubarduckNG")
+
+  line = line.gsub(old, new)
   
   # put R and NG back the way they were
-  line = line.gsub("fubarduckR", "IH0 R")
-  line = line.gsub("fubarduckNG", "IH0 NG")
+  line = line.gsub("fubarduckR", old + " R")
+  line = line.gsub("fubarduckNG", old + " NG")
   return line
 end
 
