@@ -6,6 +6,9 @@
 * fix indention upon word wrap
 * urlencode word links
 * reduce dumb outputs
+** for 'music', why do we get both
+*** accidental / incidental / instrumental / oriental / sentimental
+*** accidental / instrumental / oriental / sentimental
 ** WordNet contains saffron and paroled. Why do we need lemma_en? We count a word as common if it has a frequency of 2 or more (@todo try upping this) according to lemma_en, or if it exists in WordNet at all. If we upped this to 2, 2/3 of the newly-rare words would be crap, but we would also lose 1/3 good words like chicanery, noncombatants, propagandize, and psilocybin. That's probably okay.
 ** get rid of plurals, possessives, etc. if they don't add anything new. We could use the actual lemmas in lemma_en! and/or WordNet
 ** get rid of prefixes
