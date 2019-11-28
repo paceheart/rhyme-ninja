@@ -95,6 +95,7 @@ eon aeon
 equaling equalling
 esophagus oesophagus
 estrogen oestrogen
+eulogize eulogise
 favor favour
 favored favoured
 favoring favouring
@@ -231,6 +232,10 @@ offenses offences
 omelet omelette
 omelets omelettes
 opossum possum
+organize organise
+organizes organises
+organized organised
+organizing organising
 organization organisation
 organizations organisations
 ortholog orthologue
