@@ -101,14 +101,11 @@ def preprocess_cmudict_line(line)
   #         bong [B AA1 NG] / song [S AO1 NG]
   # but NOT bar [B AA1 R] / score [S K AO1 R], so we leave it alone if it's followed by R
   # If we had reliable data to distinguish 'cot' from 'caught', this would be in imperfect rhymes. But since caught and fought need to rhyme, we're forced to conflate them globally.
-  line = gsub_unless_followed_by_r_or_ng(line, " AO0", " AA0")
-  line = gsub_unless_followed_by_r_or_ng(line, " AO1", " AA1")
-  line = gsub_unless_followed_by_r_or_ng(line, " AO2", " AA2")
+  line = gsub_unless_followed_by_r(line, " AO0", " AA0")
+  line = gsub_unless_followed_by_r(line, " AO1", " AA1")
+  line = gsub_unless_followed_by_r(line, " AO2", " AA2")
 
-  # illicit [IH2 L IH1 S AH0 T] solicit [S AH0 L IH1 S IH0 T]
-  # conflate all unstressed schwa-ish syllables, unless they are followed by R or NG.
-  # mumble a little mumblier, please
-  line = gsub_unless_followed_by_r(line, 'IH0', 'AH0')
+  line = dwim_schwas(line)
   
   line = conflate_imperfect_rhymes(line)
   if(TRACE_WORD && line.include?(TRACE_WORD) && line != original_line)
@@ -130,18 +127,39 @@ def gsub_unless_followed_by_r(line, old, new)
   return line
 end
 
-def gsub_unless_followed_by_r_or_ng(line, old, new)
-  # substitute OLD for NEW unless OLD is followed by " R" or " NG"
-  
+def dwim_schwas(line)
+  # illicit [IH2 L IH1 S AH0 T] solicit [S AH0 L IH1 S IH0 T]
+  # conflate all unstressed schwa-ish syllables, unless they are followed by R or NG.
+  # mumble a little mumblier, please
+  # don't do this if it's the only syllable. Or maybe don't do this if it's the most-stressed syllable?
+  old = 'IH0'
+  new = 'AH0'
+  original_line = line.clone
+
+  # (line =~ "1" || line =~ "2")
   # Protect R and NG from the upcoming gsub.
+  # Also get (1) and (2) out of the way so they don't give false positives for primary/secondary stress detection.
   line = line.gsub(old + " R", "fubarduckR")
   line = line.gsub(old + " NG", "fubarduckNG")
 
   line = line.gsub(old, new)
-  
-  # put R and NG back the way they were
-  line = line.gsub("fubarduckR", old + " R")
-  line = line.gsub("fubarduckNG", old + " NG")
+
+  if line != original_line
+    line = line.gsub("(1)", "{a}")
+    line = line.gsub("(2)", "{b}")
+    
+    if(!line.include?("1") && !line.include?("2")) # if there is no primary or secondary stress in this pronunciation
+      line = original_line
+      puts "Protected \"#{line}\" from having its schwas dwimmed"
+    else
+#      puts "Dwimmed schwas: #{original_line} -> #{line}"
+      # put R and NG and (1) and (2) back the way they were
+      line = line.gsub("fubarduckR", old + " R")
+      line = line.gsub("fubarduckNG", old + " NG")
+      line = line.gsub("{a}", "(1)")
+      line = line.gsub("{b}", "(2)")
+    end
+  end
   return line
 end
 

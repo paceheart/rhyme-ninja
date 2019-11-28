@@ -310,6 +310,30 @@ describe 'RHYMES' do
     ought_not_rhyme 'wank', 'bonk'
     oughta_rhyme 'bong', 'song'
     oughta_rhyme 'bounty', 'county'
+    oughta_rhyme 'does', 'fuzz'
+    oughta_rhyme 'is', 'fizz'
+    ought_not_rhyme 'fizz', 'fuzz'
+    ought_not_rhyme 'is', 'fuzz'
+    ought_not_rhyme 'does', 'fizz'
+    ought_not_rhyme 'does', 'is'
+    oughta_rhyme 'did', 'bid'
+    ought_not_rhyme 'good', 'did'
+    ought_not_rhyme 'good', 'bid'
+    ought_not_rhyme 'just', 'kissed' # not a perfect rhyme
+    oughta_rhyme 'michael', 'cycle'
+  end
+
+  context 'schwas' do
+    oughta_rhyme 'picked', 'tricked'
+    oughta_rhyme 'chicked', 'tricked'
+    oughta_rhyme 'chucked', 'trucked'
+    ought_not_rhyme 'picked', 'trucked'
+    ought_not_rhyme 'chicked', 'trucked'
+    oughta_rhyme 'neediest', 'greediest'
+    oughta_rhyme 'meatiest', 'greediest', NOT_WORKING # 'meatiest' is not in cmudict
+    oughta_rhyme 'america', 'midamerica'
+    oughta_rhyme 'america', 'microamerica'
+    oughta_rhyme 'supplemented', 'fermented'
   end
   
   context 'perfect rhymes must rhyme the last primary-stressed syllable, not just the last syllable' do
@@ -346,6 +370,9 @@ describe 'RHYMES' do
     oughta_rhyme 'stand', 'strand'
     oughta_rhyme 'understand', 'strand'
     ought_not_rhyme 'stand', 'understand', NOT_WORKING
+    ought_not_rhyme 'organizing', 'reorganizing', NOT_WORKING
+    ought_not_rhyme 'organizing', 'self-organizing'
+    ought_not_rhyme 'urbanize', 'suburbanize', NOT_WORKING # sub- is a prefix
   end
 
   context "spelling variants ought not count as rhymes" do
@@ -354,6 +381,9 @@ describe 'RHYMES' do
     oughta_rhyme_one_way 'honour', 'goner' # input honour, you oughta get goner
     oughta_rhyme 'goner', 'honor' # but input goner, and you oughta get honor...
     ought_not_rhyme_one_way 'goner', 'honour' # ...but not honour
+    oughta_rhyme_one_way 'realisable', 'advisable' # input realisable, you oughta get advisable
+    oughta_rhyme 'advisable', 'realizable' # but input advisable, and you oughta get realizable...
+    ought_not_rhyme_one_way 'advisable', 'realisable', NOT_WORKING # ...but not realisable with an s
   end
 
   context "homophones ought not count as rhymes" do
@@ -388,11 +418,17 @@ describe 'RHYMES' do
   context 'initialisms' do
     ought_not_rhyme 'eye', 'ni'
   end
+
+  context 'hyphens' do
+    oughta_rhyme 'flaws', 'in-laws' # it ought to rhyme with the preferred form...
+    ought_not_rhyme 'flaws', 'inlaws', NOT_WORKING # ...but not with the dispreferred form.
+    ought_not_rhyme 'inlaws', 'in-laws', NOT_WORKING
+    ought_not_rhyme 'nonbuilding', 'non-building', NOT_WORKING
+  end
   
   context 'Limerick Heist' do
     oughta_rhyme 'heist', 'sliced'
     oughta_rhyme 'heist', 'iced'
-    oughta_rhyme 'tons', 'funds' # [T AH1 N Z] [F AH1 N D Z], N D Z gets collapsed to N Z
   end
 
   context 'imperfect rhymes that ought to be perfect' do
@@ -404,6 +440,7 @@ describe 'RHYMES' do
     oughta_rhyme 'array', 'hurray' # array [ER0 EY1] hurray [HH AH0 R EY1]
     oughta_rhyme 'illicit', 'solicit' # illicit [IH2 L IH1 S AH0 T] solicit [S AH0 L IH1 S IH0 T]
     oughta_rhyme "takin'", 'waken' # takin' [T EY1 K IH0 N], waken [W EY1 K AH0 N]
+    oughta_rhyme 'tons', 'funds' # [T AH1 N Z] [F AH1 N D Z], N D Z gets collapsed to N Z
   end
 
   context 'rhymes too imperfect to live' do
@@ -414,6 +451,8 @@ describe 'RHYMES' do
     oughta_rhyme 'mushroom', 'doom', NOT_WORKING # no pronunciation for 'mushroom', and its stress is off
     oughta_rhyme 'dodge', 'massage', NOT_WORKING
     oughta_rhyme 'fennel', 'sentimental' # it's OK to elide the final T in 'sentimental'
+    oughta_rhyme 'just', 'kissed', NOT_WORKING # this would work in dialect
+    oughta_rhyme 'greediest', 'devious', NOT_WORKING
   end
 end
 
@@ -604,7 +643,7 @@ describe 'SET_RELATED' do
     set_related_oughta_contain 'music', 'gong', 'song', NOT_WORKING # reverse relatedness would fix
     set_related_oughta_contain 'music', 'duet', 'quartet', NOT_WORKING
     set_related_oughta_contain 'music', 'duet', 'quintet', NOT_WORKING
-    set_related_oughta_contain 'music', 'coral', 'choral', NOT_WORKING
+    set_related_ought_not_contain 'music', 'coral', 'choral', NOT_WORKING # exclude homophones
     it 'no proper subsets: we should get bone / intone / trombone, and not also get bone / intone' do
       bone_intone = ['bone', 'intone']
       bone_intone_trombone = ['bone', 'intone', 'trombone']
