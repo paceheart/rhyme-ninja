@@ -3,6 +3,8 @@
 # Rhyming utilities for Rhyme Ninja
 # Used both in preprocessing and at runtime
 
+RHYME_SIGNATURE_DICT_FILENAME = "rhyme_signature_dict.txt"
+
 #
 # stop words
 #
@@ -100,7 +102,62 @@ def load_variants
   end
   return hash
 end
-    
+
+#
+# file utilities
+#
+
+def load_string_hash(filename)
+  # each line is of the form:
+  # KEY  STRING1 STRING2 ...
+  # substitutes "_" with " " in keys after loading
+  hash = Hash.new {|h,k| h[k] = [] } # hash of strings
+  IO.readlines(filename).each{ |line|
+    if(useful_line?(line))
+      tokens = line.split
+      key = tokens.shift # now TOKENS contains only the value strings
+      key = desanitize_string(key)
+      hash[key] = tokens.map{ |str| desanitize_string(str)}
+    else
+      puts "Ignoring #{filename} line: #{line}"
+    end
+  }
+  puts "Loaded #{hash.length} entries from #{filename}"
+  return hash
+end
+
+def sanitize_string (str)
+  # sanitizes STR so it can be saved in a space-delimited text file
+  return str.gsub(" ", "_")
+end
+
+def desanitize_string (str)
+  # desanitizes STR. The result may contain spaces.
+  return str.gsub("_", " ")
+end
+
+def save_string_hash(hash, filename, header="")
+  # sanitizes spaces into underscores
+  @fh=File.open(filename, 'w')
+  unless header.empty?
+    @fh.puts(header)
+  end
+  hash.each do |key, values|
+    key = sanitize_string(key)
+    @fh.print "#{key} "
+    for value in values do
+      value = sanitize_string(value)
+      @fh.print " #{value}"
+    end
+    @fh.puts
+  end
+end
+
+def useful_line?(line)
+  # ignore entries that start with ; or #
+  return !(line =~ /\A;/ || line =~ /\A#/)
+end
+
 #
 # rhyme signature
 #

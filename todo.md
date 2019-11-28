@@ -12,6 +12,10 @@
 ** respect rare_words.txt
 ** 'saddle' has a bunch of rare words
 ** put tuples in dregs unless they contain at least two common words
+** standardize "i r a" vs. "ira" and "san-jose" oughta be "san_jose" but "so-so" oughta stay "so-so"
+** filter out spelling variants from rhyme signature dict, e.g.
+*** AH_NG_S_T_AH_R_Z  youngster's youngsters youngsters'
+*** UW_S_EH_F  yousef youssef yusef
 * improve good outputs
 ** relatedness isn't symmetric. For set_related, we don't have to go related1, related2, rhyme. We could also go related, rhyme, related to input. Blocked on semantic relatedness.
 ** look for all plurals that differ in vowels to find more phonemes to conflate, e.g. ORPHANAGE  [AO1 R F AH0 N AH0 JH] ORPHANAGES  [AO1 R F AH0 N IH0 JH IH0 Z]

@@ -73,7 +73,7 @@ def load_word_dict_as_hash()
 end
 
 def load_rhyme_signature_dict_as_hash()
-  JSON.parse(File.read("dict/rhyme_signature_dict.json")) or die "First run dict/dict.rb to generate dictionary caches"
+  load_string_hash("dict/#{RHYME_SIGNATURE_DICT_FILENAME}") or die "First run dict/dict.rb to generate dictionary caches"
 end
 
 def pronunciations(word, lang)

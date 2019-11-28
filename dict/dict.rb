@@ -31,6 +31,24 @@ require_relative 'utils_rhyme'
 WordNet::DB.path = "WordNet3.1/"
 WORDNET_TAGSENSE_COUNT_MULTIPLICATION_FACTOR = 100 # each tagsense_count from wordnet counts as this many occurrences in some corpus
 
+RHYME_SIGNATURE_DICT_HEADER = "# Rhyme Ninja's Rhyme Signature Dictionary
+# https://github.com/pacesmith/rhyme-ninja
+#
+# Each line is of the form:
+#
+# RHYME_SIGNATURE  WORD1 WORD2 WORD3 ...
+#
+# where RHYME_SIGNATURE is an underscore-concatenated ARPABET encoding
+# of the syllables including and after the final most stressed vowel.
+# See rhyme_signature_array for details.
+#
+# This data is automatically distilled from a forked version of the
+# CMU Pronouncing Dictionary, with some manual tweaks and some
+# programmatic preprocessing as described in dict.rb.
+#
+# Singleton signatures are excluded.
+#"
+
 #
 # parse cmudict
 #
@@ -94,7 +112,7 @@ def preprocess_cmudict_line(line)
   
   line = conflate_imperfect_rhymes(line)
   if(TRACE_WORD && line.include?(TRACE_WORD) && line != original_line)
-    puts "Dwimmed #{original_line} to #{line}"
+    puts "TRACE Dwimmed #{original_line} to #{line}"
   end
   return line
 end
@@ -349,9 +367,7 @@ def rebuild_rhyme_ninja_dictionaries()
   cmudict = load_cmudict
   delete_blacklisted_keys_from_hash(cmudict)
   rdict = build_rhyme_signature_dict(cmudict)
-  File.open("rhyme_signature_dict.json", "w") do |f|
-    f.write(rdict.to_json)
-  end
+  save_string_hash(rdict, RHYME_SIGNATURE_DICT_FILENAME, RHYME_SIGNATURE_DICT_HEADER)
   lemma_dict, freq_dict = load_lemma_dict
   word_dict = build_word_dict(cmudict, lemma_dict, freq_dict, rdict)
   File.open("word_dict.json", "w") do |f|
