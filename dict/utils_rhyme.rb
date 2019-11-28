@@ -119,10 +119,10 @@ def load_string_hash(filename)
       key = desanitize_string(key)
       hash[key] = tokens.map{ |str| desanitize_string(str)}
     else
-      puts "Ignoring #{filename} line: #{line}"
+      debug "Ignoring #{filename} line: #{line}"
     end
   }
-  puts "Loaded #{hash.length} entries from #{filename}"
+  debug "Loaded #{hash.length} entries from #{filename}"
   return hash
 end
 

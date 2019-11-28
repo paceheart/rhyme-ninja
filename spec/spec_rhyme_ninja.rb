@@ -40,6 +40,7 @@ describe 'RARITY' do
     oughta_be_common 'a'
     oughta_be_common 'be'
     oughta_be_common 'in'
+    oughta_be_common 'it'
     oughta_be_common 'me'
     oughta_be_common 'i'
     oughta_be_common 'you'
@@ -319,6 +320,7 @@ describe 'RHYMES' do
     oughta_rhyme 'did', 'bid'
     ought_not_rhyme 'good', 'did'
     ought_not_rhyme 'good', 'bid'
+    ought_not_rhyme 'it', 'but'
     ought_not_rhyme 'just', 'kissed' # not a perfect rhyme
     oughta_rhyme 'michael', 'cycle'
   end
