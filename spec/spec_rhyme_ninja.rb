@@ -405,10 +405,15 @@ describe 'RHYMES' do
     oughta_rhyme 'illicit', 'solicit' # illicit [IH2 L IH1 S AH0 T] solicit [S AH0 L IH1 S IH0 T]
     oughta_rhyme "takin'", 'waken' # takin' [T EY1 K IH0 N], waken [W EY1 K AH0 N]
   end
+
+  context 'rhymes too imperfect to live' do
+    ought_not_rhyme 'fennel', 'mental' # don't elide the t in 'mental'
+  end
   
   context 'imperfect rhymes' do
     oughta_rhyme 'mushroom', 'doom', NOT_WORKING # no pronunciation for 'mushroom', and its stress is off
     oughta_rhyme 'dodge', 'massage', NOT_WORKING
+    oughta_rhyme 'fennel', 'sentimental' # it's OK to elide the final T in 'sentimental'
   end
 end
 
