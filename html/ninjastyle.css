@@ -7,7 +7,7 @@ body {
     color: #eeeefa;
 }
 
-.focal_word, .output_p, .output_tuple, .results, p, td, input {
+.focal_word, .output_p, .output_tuple, .results, .optional, p, td, input {
     font-family: "Verdana", Verdana, sans-serif;
     color: #ffdce1;
 }
@@ -32,6 +32,7 @@ body {
   
 .optional {
     color: #eeeefa;
+    font-size: 75%;
 }
 
 .output_tuple {
