@@ -3,7 +3,6 @@
 * eliminate dependence on datamuse
 ** wordnet?
 ** maybe NLTK wup_similarity or https://stackoverflow.com/questions/14148986/how-do-you-write-a-program-to-find-if-certain-words-are-similar/14638272#14638272
-* fix indention upon word wrap
 * urlencode word links
 * reduce dumb outputs
 ** for 'music', why do we get both
