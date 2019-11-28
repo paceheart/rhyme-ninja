@@ -9,14 +9,15 @@
 ** get rid of plurals, possessives, etc. if they don't add anything new. We could use the actual lemmas in lemma_en! and/or WordNet
 ** get rid of prefixes
 ** separate names out
-** respect rare_words.txt
 ** 'saddle' has a bunch of rare words
 ** put tuples in dregs unless they contain at least two common words
-** standardize "i r a" vs. "ira" and "san-jose" oughta be "san_jose" but "so-so" oughta stay "so-so"
 ** filter out spelling variants from rhyme signature dict, e.g.
 *** AH_NG_S_T_AH_R_Z  youngster's youngsters youngsters'
 *** UW_S_EH_F  yousef youssef yusef
+** respect rare_words.txt
+** eliminate identical rhymes
 ** hyphens
+*** standardize "i r a" vs. "ira" and "san-jose" oughta be "san_jose" but "so-so" oughta stay "so-so"
 ** more scalable solution for British English, e.g. advisable / realisable
 * improve good outputs
 ** relatedness isn't symmetric. For set_related, we don't have to go related1, related2, rhyme. We could also go related, rhyme, related to input. Blocked on semantic relatedness.
@@ -24,6 +25,7 @@
 * imperfect rhymes
 ** TH / DH
 ** sitter / admit her
+** piton / lightin'
 ** mansion / stanchion
 ** snapshot -> trap's wrought (if that were an actual phrase)
 ** snapshot -> trap's wrought (even though that's not an actual phrase)
