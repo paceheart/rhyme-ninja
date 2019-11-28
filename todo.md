@@ -6,14 +6,14 @@
 * urlencode word links
 * reduce dumb outputs
 ** WordNet contains saffron and paroled. Why do we need lemma_en? We count a word as common if it has a frequency of 2 or more (@todo try upping this) according to lemma_en, or if it exists in WordNet at all. If we upped this to 2, 2/3 of the newly-rare words would be crap, but we would also lose 1/3 good words like chicanery, noncombatants, propagandize, and psilocybin. That's probably okay.
-** get rid of plurals, possessives, etc. if they don't add anything new. We could use the actual lemmas in lemma_en! and/or WordNet
+** get rid of plurals, possessives, etc. if they don't add anything new
+*** e.g. youngster's youngsters youngsters'
+*** We could use the actual lemmas in lemma_en! and/or WordNet
 ** get rid of prefixes
 ** separate names out
 ** 'saddle' has a bunch of rare words
 ** put tuples in dregs unless they contain at least two common words
-** filter out spelling variants from rhyme signature dict, e.g.
-*** AH_NG_S_T_AH_R_Z  youngster's youngsters youngsters'
-*** UW_S_EH_F  yousef youssef yusef
+** filter out spelling variants from rhyme signature dict, e.g. UW_S_EH_F  yousef youssef yusef
 ** respect rare_words.txt
 ** eliminate identical rhymes
 ** hyphens
@@ -38,4 +38,4 @@
 * add a clickable "x" for "this is a dumb word that should be stricken from the list forever"
 ** in the dregs, add a clickable up-arrow for "this is a good word that does not deserve to be down here"
 * guess at pronunciations of unknown words
-* don't use json for the internal dictionaries - it would be nice to be able to grep them. And git wouldn't be so slow and crashy
+* make word_dict a text file too

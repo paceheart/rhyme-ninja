@@ -173,33 +173,49 @@ def rhyme_signature_array(pron)
   #
   # We remove the stress markers so that we can rhyme 'furs' [F ER1 Z] with 'yours(2)' [Y ER0 Z]
   # They will both have the rhyme signature [ER Z].
+  return rhyme_signature_array_with_stress(pron, "1") || rhyme_signature_array_with_stress(pron, "2") || rhyme_signature_array_with_stress(pron, "0") || error(pron)
+end
+
+def rhyme_signature_array_with_stress(pron, stress)
   rsig = Array.new
   pron.reverse.each { |syl|
     # we need to remove the numbers
     rsig.unshift(syl.tr("0-2", ""))
-    if(syl.include?("1"))
-      return rsig # we found the main stressed syllable, we can stop now
-    end
-  }  
-  # huh? we made it all the way through without a 1. Fine, we'll settle for a secondarily-stressed syllable.
-  rsig = Array.new # start over
-  pron.reverse.each { |syl|
-    rsig.unshift(syl.tr("0-2", ""))
-    if(syl.include?("2"))
-      return rsig # we found the secondarily-stressed syllable, we can stop now
+    if(syl.include?(stress))
+      return rsig # we found the syllable with stress STRESS, we can stop now
     end
   }
-  rsig = Array.new # start over one last time
-  # I guess we'll have to settle for the last unstressed syllable
-  pron.reverse.each { |syl|
-    rsig.unshift(syl.tr("0-2", ""))
-    if(syl.include?("0"))
-      return rsig # we found the last-resort thing, we can stop now
-    end
-  }
-  error pron
+  return nil
 end
 
+def rhyme_syllables_array(pron)
+  # This is like rhyme_signature_array but includes the whole rhyming syllable; it doesn't chop off the preceding consonants.
+  return rhyme_syllables_array_with_stress(pron, "1") || rhyme_syllables_array_with_stress(pron, "2") || rhyme_syllables_array_with_stress(pron, "0") || error(pron)
+end
+
+def rhyme_syllables_array_with_stress(pron, stress)
+  rsig = Array.new
+  foundTheRhymingSyllable = false
+  pron.reverse.each { |syl|
+    # we need to remove the numbers
+    rsig.unshift(syl.tr("0-2", ""))
+    if(!foundTheRhymingSyllable)
+      if(syl.include?(stress))
+        foundTheRhymingSyllable = true; # we found the main stressed syllable, we can stop at the next vowel
+      end
+    else
+      if(syl.include?("1") || syl.include?("2") || syl.include?("0")) # vowel
+        rsig.shift # get that vowel outta here
+        return rsig
+      end
+    end
+  }
+  if foundTheRhymingSyllable # we got all the way to the beginning of the word without another vowel
+    return rsig
+  end
+  return nil
+end
+  
 def rhyme_signature(pron)
   # this makes for a better hash key
   return rhyme_signature_array(pron).join(" ")

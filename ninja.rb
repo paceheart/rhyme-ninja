@@ -114,7 +114,8 @@ def rdict_lookup(rsig)
 end
 
 def find_preferred_rhyming_words(word, lang)
-  result = find_rhyming_words(word, lang).map { |word| preferred_form(word) }
+  # filters out dispreferred spelling variants and identical rhymes
+  result = find_rhyming_words(word, lang, false).map { |word| preferred_form(word) }
   if result
     result.sort!.uniq!
     result = result - all_forms(word)
@@ -123,14 +124,14 @@ def find_preferred_rhyming_words(word, lang)
   return result || [ ]
 end
 
-def find_rhyming_words(word, lang)
+def find_rhyming_words(word, lang, identical_ok=true)
   # merges multiple pronunciations of WORD
-  # use our local dictionaries, we don't need the Datamuse API for simple rhyme lookup
+  # use our compiled rhyme signature dictionary; we don't need the Datamuse API for simple rhyme lookup
   rhyming_words = Array.new
-  for form in all_forms(word) # to increase the likelihood of a hit, try all spelling variants
-    unless(blacklisted?(word))
+  unless(blacklisted?(word))
+    for form in all_forms(word) # to increase the likelihood of a hit, try all spelling variants
       for pron in pronunciations(word, lang)
-        for rhyme in find_rhyming_words_for_pronunciation(pron)
+        for rhyme in find_rhyming_words_for_pronunciation(pron, identical_ok)
           rhyming_words.push(rhyme)
         end
       end
@@ -143,12 +144,31 @@ def find_rhyming_words(word, lang)
   return rhyming_words || [ ]
 end
 
-def find_rhyming_words_for_pronunciation(pron)
-  # use our local dictionaries, we don't need the Datamuse API for simple rhyme lookup
+def is_identical_rhyme(rhyme, target_rhyme_syllables_array)
+  # Used to filter out identical rhymes, where the entire final stressed syllable is identical to the one in RSIG.
+  # e.g. if you input "leave", this will return "grieve" but not "believe", because the rhyming syllable
+  # "L_IY_V" is identical.
+  lang = 'en' # @hack
+  for pron in pronunciations(rhyme, lang)
+    debug "Is #{rhyme} (#{rhyme_syllables_array(pron)}) identical to #{target_rhyme_syllables_array}?"
+    if rhyme_syllables_array(pron) != target_rhyme_syllables_array
+      return false; # we found a pronunciation with a different rhyming syllable; this rhyme is perfect
+    end
+  end
+  return true;
+end
+  
+def find_rhyming_words_for_pronunciation(pron, identical_ok=true)
+  # use our compiled rhyme signature dictionary; we don't need the Datamuse API for simple rhyme lookup
   results = Array.new
   rsig = rhyme_signature(pron)
+  rsyllables = rhyme_syllables_array(pron)
   rdict_lookup(rsig).each { |rhyme|
-    results.push(rhyme)
+    unless(!identical_ok && is_identical_rhyme(rhyme, rsyllables))
+      results.push(rhyme)
+    else
+      debug "Filtered out identical rhyme: #{pron} / #{rhyme}"
+    end
   }
   return results || [ ]
 end
@@ -279,7 +299,7 @@ def find_rhyming_tuples(input_rel1, lang)
       for rel1pron in pronunciations(rel1, lang)
         rsig = rhyme_signature(rel1pron)
         debug "Rhymes for #{rel1} [#{rsig}]:"
-        find_rhyming_words_for_pronunciation(rel1pron).each { |rhyme1|
+        find_rhyming_words_for_pronunciation(rel1pron, true).each { |rhyme1|
           if(relateds1.include? rhyme1) # we only care about relateds of input_rel1
             rhyme1 = preferred_form(rhyme1) # push 'honor' instead of 'honour'. This will ensure we don't push both.
             related_rhymes[rsig].push(rhyme1)
@@ -581,9 +601,9 @@ end
 # Utilities
 #
 
-def rhymes?(word1, word2, lang="en")
+def rhymes?(word1, word2, lang="en", identical_ok=true)
   # Does word1 rhyme with word2?
-  find_rhyming_words(word1, lang).include?(word2)
+  find_rhyming_words(word1, lang, identical_ok).include?(word2)
 end
 
 def related?(word1, word2, include_self=false, lang="en")

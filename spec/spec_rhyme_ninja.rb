@@ -259,7 +259,7 @@ def oughta_rhyme_one_way(word1, word2, is_working=true)
     end
   end
 end
-                
+
 def ought_not_rhyme(word1, word2, is_working=true)
   lang = 'en'
   ought_not_rhyme_one_way(word1, word2, is_working)
@@ -323,29 +323,56 @@ describe 'RHYMES' do
     ought_not_rhyme 'it', 'but'
     ought_not_rhyme 'just', 'kissed' # not a perfect rhyme
     oughta_rhyme 'michael', 'cycle'
+    oughta_rhyme 'heart', 'art' # take that, Alexander Bain!
   end
 
-  context 'schwas' do
-    oughta_rhyme 'picked', 'tricked'
-    oughta_rhyme 'chicked', 'tricked'
-    oughta_rhyme 'chucked', 'trucked'
-    ought_not_rhyme 'picked', 'trucked'
-    ought_not_rhyme 'chicked', 'trucked'
-    oughta_rhyme 'neediest', 'greediest'
-    oughta_rhyme 'meatiest', 'greediest', NOT_WORKING # 'meatiest' is not in cmudict
-    oughta_rhyme 'america', 'midamerica'
-    oughta_rhyme 'america', 'microamerica'
-    oughta_rhyme 'supplemented', 'fermented'
-  end
-  
   context 'perfect rhymes must rhyme the last primary-stressed syllable, not just the last syllable' do
     ought_not_rhyme 'station', 'shun'
     ought_not_rhyme 'under', 'fur'
     ought_not_rhyme 'tea', 'bounty'
+    ought_not_rhyme 'eyeball', 'mall'
+    ought_not_rhyme 'eyeball', 'ball'
+    oughta_rhyme 'eyeball', 'highball', NOT_WORKING # not in cmudict
+    ought_not_rhyme 'painting', 'ring'
   end
 
   context 'no self-rhymes' do
     ought_not_rhyme 'red', 'red'
+  end
+  
+  context "homophones ought not count as rhymes" do
+    ought_not_rhyme 'side', 'sighed'
+    ought_not_rhyme 'blue', 'blew'
+    ought_not_rhyme_one_way 'base', 'bass', NOT_WORKING # gets confused by bass the fish
+    ought_not_rhyme_one_way 'bass', 'base'
+    ought_not_rhyme 'coral', 'choral'
+    ought_not_rhyme 'leader', 'lieder'
+    ought_not_rhyme 'lindsay', 'lindsey'
+    ought_not_rhyme 'hanukkah', 'chanukah' # what if the initial sounds are different, though? Then how do we know to eliminate this?
+  end
+  context "'lay' ought not rhyme with 'lei'..." do
+    ought_not_rhyme 'lay', 'lei'
+  end
+  context "...but 'bay' oughta rhyme with both of 'em" do
+    oughta_rhyme 'bay', 'lay'
+    oughta_rhyme 'bay', 'lei'
+  end
+  
+  context 'identical rhymes' do
+    ought_not_rhyme 'leave', 'believe'
+    ought_not_rhyme 'troll', 'patrol'
+    ought_not_rhyme 'troll', 'control', NOT_WORKING # need better syllable detection
+    oughta_rhyme 'end', 'pend'
+    oughta_rhyme 'upend', 'pend', NOT_WORKING # need better syllable detection
+    ought_not_rhyme 'end', 'upend'
+    ought_not_rhyme 'lied', 'relied'
+    ought_not_rhyme 'confide', 'defied', NOT_WORKING # need better syllable detection
+    ought_not_rhyme 'side', 'beside'
+    ought_not_rhyme 'side', 'alongside', NOT_WORKING # need better syllable detection
+    ought_not_rhyme 'beside', 'alongside', NOT_WORKING # need better syllable detection
+    ought_not_rhyme 'applied', 'misapplied'
+    ought_not_rhyme 'plied', 'applied'
+    ought_not_rhyme 'complied', 'applied', NOT_WORKING # need better syllable detection
   end
   
   context "you can't just add a prefix and call it a rhyme" do
@@ -354,15 +381,15 @@ describe 'RHYMES' do
     oughta_rhyme 'under', 'plunder' # pl- is not a prefix
     oughta_rhyme 'bone', 'trombone' # trom- is not a prefix... but this one is arguable
     
-    ought_not_rhyme 'promising', 'unpromising', NOT_WORKING # un- is a prefix
-    ought_not_rhyme 'diversity', 'biodiversity', NOT_WORKING # bio- is a prefix
+    ought_not_rhyme 'promising', 'unpromising', NOT_WORKING # need better syllable detection
+    ought_not_rhyme 'diversity', 'biodiversity'
     ought_not_rhyme 'ion', 'cation'
     
     oughta_rhyme 'able', 'cable'
     oughta_rhyme 'unable', 'cable'
     ought_not_rhyme 'able', 'unable', NOT_WORKING # un- is a prefix
 
-    oughta_rhyme 'traction', 'attraction' # arguable
+    ought_not_rhyme 'traction', 'attraction' # arguable
     oughta_rhyme 'action', 'traction'
     oughta_rhyme 'action', 'attraction'
 
@@ -371,10 +398,12 @@ describe 'RHYMES' do
 
     oughta_rhyme 'stand', 'strand'
     oughta_rhyme 'understand', 'strand'
-    ought_not_rhyme 'stand', 'understand', NOT_WORKING
-    ought_not_rhyme 'organizing', 'reorganizing', NOT_WORKING
+    ought_not_rhyme 'stand', 'understand', NOT_WORKING # need better syllable detection
+    ought_not_rhyme 'organizing', 'reorganizing'
     ought_not_rhyme 'organizing', 'self-organizing'
     ought_not_rhyme 'urbanize', 'suburbanize', NOT_WORKING # sub- is a prefix
+    ought_not_rhyme 'america', 'midamerica'
+    ought_not_rhyme 'america', 'microamerica'
   end
 
   context "spelling variants ought not count as rhymes" do
@@ -388,22 +417,6 @@ describe 'RHYMES' do
     ought_not_rhyme_one_way 'advisable', 'realisable', NOT_WORKING # ...but not realisable with an s
   end
 
-  context "homophones ought not count as rhymes" do
-    ought_not_rhyme 'blue', 'blew', NOT_WORKING
-    ought_not_rhyme 'base', 'bass', NOT_WORKING
-    ought_not_rhyme 'coral', 'choral', NOT_WORKING
-    ought_not_rhyme 'leader', 'lieder', NOT_WORKING
-    ought_not_rhyme 'lindsay', 'lindsey', NOT_WORKING
-    ought_not_rhyme 'hanukkah', 'chanukah', NOT_WORKING # what if the initial sounds are different, though? Then how do we know to eliminate this?
-  end
-  context "'lay' ought not rhyme with 'lei'..." do
-    ought_not_rhyme 'lay', 'lei', NOT_WORKING
-  end
-  context "...but 'bay' oughta rhyme with both of 'em" do
-    oughta_rhyme 'bay', 'lay'
-    oughta_rhyme 'bay', 'lei'
-  end
-  
   context 'profanity is allowed' do
     oughta_rhyme 'truck', 'fuck'
     oughta_rhyme 'bunt', 'cunt'
@@ -421,11 +434,28 @@ describe 'RHYMES' do
     ought_not_rhyme 'eye', 'ni'
   end
 
+  context 'schwas' do
+    oughta_rhyme 'picked', 'tricked'
+    oughta_rhyme 'chicked', 'tricked'
+    oughta_rhyme 'chucked', 'trucked'
+    ought_not_rhyme 'picked', 'trucked'
+    ought_not_rhyme 'chicked', 'trucked'
+    oughta_rhyme 'neediest', 'greediest'
+    oughta_rhyme 'meatiest', 'greediest', NOT_WORKING # 'meatiest' is not in cmudict
+    oughta_rhyme 'supplemented', 'fermented'
+  end
+  
+  context 'apostrophes' do
+    oughta_rhyme "hits", "its"
+    oughta_rhyme "hits", "it's"
+    ought_not_rhyme "its", "it's"
+  end
+
   context 'hyphens' do
     oughta_rhyme 'flaws', 'in-laws' # it ought to rhyme with the preferred form...
     ought_not_rhyme 'flaws', 'inlaws', NOT_WORKING # ...but not with the dispreferred form.
-    ought_not_rhyme 'inlaws', 'in-laws', NOT_WORKING
-    ought_not_rhyme 'nonbuilding', 'non-building', NOT_WORKING
+    ought_not_rhyme 'inlaws', 'in-laws'
+    ought_not_rhyme 'nonbuilding', 'non-building'
   end
   
   context 'Limerick Heist' do
@@ -439,8 +469,10 @@ describe 'RHYMES' do
     oughta_rhyme 'foster', 'impostor' # foster [AA S T ER] imposter [AO S T ER]
     oughta_rhyme 'curry', 'hurry' # curry [K AH1 R IY0] hurry [HH ER1 IY0]
     oughta_rhyme 'errors', 'terrors' # errors [EH1 R ER0 Z] terrors [T EH1 R AH0 R Z]
-    oughta_rhyme 'array', 'hurray' # array [ER0 EY1] hurray [HH AH0 R EY1]
-    oughta_rhyme 'illicit', 'solicit' # illicit [IH2 L IH1 S AH0 T] solicit [S AH0 L IH1 S IH0 T]
+    oughta_rhyme 'array', 'hurray', NOT_WORKING # array [ER0 EY1] hurray [HH AH0 R EY1]
+    oughta_rhyme_one_way 'array', 'moray' # array [ER0 EY1] moray [M ER0 EY1]
+    oughta_rhyme_one_way 'moray', 'array', NOT_WORKING
+    oughta_rhyme 'illicit', 'solicit', NOT_WORKING # illicit [IH2 L IH1 S AH0 T] solicit [S AH0 L IH1 S IH0 T]
     oughta_rhyme "takin'", 'waken' # takin' [T EY1 K IH0 N], waken [W EY1 K AH0 N]
     oughta_rhyme 'tons', 'funds' # [T AH1 N Z] [F AH1 N D Z], N D Z gets collapsed to N Z
   end
