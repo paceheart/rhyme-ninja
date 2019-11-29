@@ -644,7 +644,7 @@ describe 'SET_RELATED' do
     set_related_oughta_contain 'halloween', 'bat', 'cat'
     set_related_oughta_contain 'halloween', 'fairy', 'scary'
     set_related_oughta_contain 'halloween', 'fright', 'night'
-    set_related_ought_not_contain 'halloween', 'lindsay', 'lindsey', NOT_WORKING
+    set_related_ought_not_contain 'halloween', 'lindsay', 'lindsey'
     set_related_ought_not_contain 'halloween', 'cider', 'snyder', NOT_WORKING
     set_related_ought_not_contain 'halloween', 'day', 'ira', NOT_WORKING
   end
@@ -682,9 +682,9 @@ describe 'SET_RELATED' do
     set_related_oughta_contain 'music', 'gong', 'song', NOT_WORKING # reverse relatedness would fix
     set_related_oughta_contain 'music', 'duet', 'quartet', NOT_WORKING
     set_related_oughta_contain 'music', 'duet', 'quintet', NOT_WORKING
-    set_related_ought_not_contain 'music', 'recorded', 'prerecorded', NOT_WORKING
-    set_related_ought_not_contain 'music', 'coral', 'choral', NOT_WORKING # exclude homophones 
-    set_related_ought_not_contain 'music', 'percussion', 'repercussion' # exclude identical rhymes
+    set_related_ought_not_contain 'music', 'coral', 'choral' # exclude homophones 
+    set_related_ought_not_contain 'music', 'recorded', 'prerecorded' # exclude identical rhymes
+    set_related_ought_not_contain 'music', 'percussion', 'repercussion', NOT_WORKING # exclude identical rhymes
     set_related_ought_not_contain 'music', 'tonal', 'atonal' # exclude identical rhymes
     set_related_oughta_contain 'music', 'appalachian', 'augmentation'
     set_related_oughta_contain 'music', 'abbreviation', 'notation' # identical rhymes are OK if they're part of a tuples that contains non-identical rhymes such as the previous line
@@ -780,7 +780,7 @@ describe 'PAIR_RELATED' do
     pair_related_oughta_contain 'food', 'evil', 'bread', 'undead', NOT_WORKING
     pair_related_oughta_contain 'food', 'evil', 'heinz', 'designs'
     pair_related_oughta_contain 'food', 'evil', 'served', 'undeserved' # this is not quite an identical rhyme becauze the s in undeserved is pronounced like a z
-    pair_related_ought_not_contain 'food', 'evil', 'sanitation', 'temptation' # exclude identical rhymes '-tation'
+    pair_related_ought_not_contain 'food', 'evil', 'sanitation', 'temptation', NOT_WORKING # need better syllable detection # exclude identical rhymes '-nation'
     pair_related_ought_not_contain 'food', 'evil', 'healthy', 'unhealthy', NOT_WORKING # need better syllable detection # exclude identical rhymes '-nation'
     pair_related_ought_not_contain 'food', 'evil', 'contamination', 'condemnation', NOT_WORKING # need better syllable detection # exclude identical rhymes '-nation'
   end

@@ -10,6 +10,7 @@
 *** e.g. youngster's youngsters youngsters'
 *** We could use the actual lemmas in lemma_en! and/or WordNet
 ** filter out identical rhymes from tuples and pairs
+*** percussion / repercussion
 ** improve syllable detection, so we can filter out promising / unpromising
 ** separate names out
 ** 'saddle' has a bunch of rare words
