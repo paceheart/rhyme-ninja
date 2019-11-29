@@ -31,16 +31,53 @@ require_relative 'dict/utils_rhyme'
 # utilities
 #
 
+def cgi_print(string)
+  if($output_format == 'cgi')
+    print string
+  end
+end
+
 def debug(string)
   if($debug_mode)
     puts string
   end
 end
 
-def cgi_print(string)
-  if($output_format == 'cgi')
-    print string
+def debug_info(word)
+  lang = 'en' # @hack
+  result = ""
+  i = 0
+  prons = pronunciations(word, lang)
+  for pron in prons
+    i = i + 1
+    unless i == 1
+      result << " "
+    end
+
+    # pronunciation
+    if prons.length == 1
+      result << "pron="
+    else
+      result << "pron#{i}="
+    end
+    result << pron.to_s
+
+    # rhyme syllables string
+    if prons.length == 1
+      result << " rsyll="
+    else
+      result << " rsyll#{i}="
+    end
+    result << rhyme_syllables_string(pron)
+
+    if prons.length == 1
+      result << " rsig="
+    else
+      result << " rsig#{i}="
+    end
+    result << rhyme_signature(pron)
   end
+  return result
 end
 
 #
@@ -130,7 +167,8 @@ def find_rhyming_words(word, lang, identical_ok=true)
   rhyming_words = Array.new
   unless(blacklisted?(word))
     for form in all_forms(word) # to increase the likelihood of a hit, try all spelling variants
-      for pron in pronunciations(word, lang)
+      debug "Finding rhyming words for #{form} #{debug_info(form)}:"
+      for pron in pronunciations(form, lang)
         for rhyme in find_rhyming_words_for_pronunciation(pron, identical_ok)
           rhyming_words.push(rhyme)
         end
@@ -150,7 +188,6 @@ def identical_rhyme?(rhyme, target_rhyme_syllables_array)
   # "L_IY_V" is identical.
   lang = 'en' # @hack
   for pron in pronunciations(rhyme, lang)
-    debug "Is #{rhyme} (#{rhyme_syllables_array(pron)}) identical to #{target_rhyme_syllables_array}?"
     if rhyme_syllables_array(pron) != target_rhyme_syllables_array
       return false; # we found a pronunciation with a different rhyming syllable; this rhyme is perfect
     end
@@ -188,7 +225,7 @@ def find_rhyming_words_for_pronunciation(pron, identical_ok=true)
     unless(!identical_ok && identical_rhyme?(rhyme, rsyllables))
       results.push(rhyme)
     else
-      debug "Filtered out identical rhyme: #{pron} / #{rhyme}"
+      debug "Filtered out identical rhyme: #{pron} / #{rhyme} (#{debug_info(rhyme)})"
     end
   }
   return results || [ ]
@@ -313,12 +350,12 @@ def find_rhyming_tuples(input_rel1, lang)
     relateds1.each { |rel1|
       for rel1pron in pronunciations(rel1, lang)
         rsig = rhyme_signature(rel1pron)
-        debug "Rhymes for #{rel1} [#{rsig}]:"
+        debug "Rhymes for #{rel1} [#{rsig}] #{debug_info(rel1)}:"
         find_rhyming_words_for_pronunciation(rel1pron, true).each { |rhyme1|
           if(relateds1.include? rhyme1) # we only care about relateds of input_rel1
             rhyme1 = preferred_form(rhyme1) # push 'honor' instead of 'honour'. This will ensure we don't push both.
             related_rhymes[rsig].push(rhyme1)
-            debug " #{rhyme1}"
+            debug " #{rhyme1} #{debug_info(rhyme1)}"
           end
         }
       end
@@ -349,11 +386,11 @@ def find_rhyming_pairs(input_rel1, input_rel2, lang)
     relateds2 = find_related_words(input_rel2, true, lang)
     relateds1.each { |rel1|
       # rel1 is a word related to input_rel1. We're looking for rhyming pairs [rel1 rel2].
-      debug "rhymes for #{rel1}:<br>"
+      debug "rhymes for #{rel1} (#{debug_info(rel1)}):<br>"
       find_rhyming_words(rel1, lang, false).each { |rhyme| # check all non-identical rhymes of REL1, call each one 'RHYME'
         if(relateds2.include? rhyme) # is RHYME related to INPUT_REL2? If so, we win!
           related_rhymes[rel1].push(rhyme)
-          debug rhyme;
+          debug " " + rhyme + " " + debug_info(rhyme)
         end
       }
       debug "<br><br>"
