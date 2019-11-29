@@ -2,7 +2,8 @@
 # control parameters
 #
 
-OUTPUT_FORMAT = 'cgi' # 'cgi' or 'text'
+# 'cgi' or 'text'
+OUTPUT_FORMAT = 'cgi'
 DEBUG_MODE = false
 
 #
