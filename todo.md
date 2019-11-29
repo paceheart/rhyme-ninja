@@ -27,8 +27,8 @@
 ** sitter / admit her
 ** piton / lightin'
 ** mansion / stanchion
-** snapshot -> trap's wrought (if that were an actual phrase)
-** snapshot -> trap's wrought (even though that's not an actual phrase)
+** snapshot -> trap's wrought
+** bacon -> they can (bring back "CAN(1)  K AH0 N" but only when used as part of a phrase)
 * test input phrases
 * mine Limerick Heist for more test cases
 
@@ -39,3 +39,4 @@
 ** in the dregs, add a clickable up-arrow for "this is a good word that does not deserve to be down here"
 * guess at pronunciations of unknown words
 * make word_dict a text file too
+* instead of eliminating identical rhymes entirely, just put them in the dregs along with the imperfect rhymes

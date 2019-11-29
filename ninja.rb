@@ -144,7 +144,7 @@ def find_rhyming_words(word, lang, identical_ok=true)
   return rhyming_words || [ ]
 end
 
-def is_identical_rhyme(rhyme, target_rhyme_syllables_array)
+def identical_rhyme?(rhyme, target_rhyme_syllables_array)
   # Used to filter out identical rhymes, where the entire final stressed syllable is identical to the one in RSIG.
   # e.g. if you input "leave", this will return "grieve" but not "believe", because the rhyming syllable
   # "L_IY_V" is identical.
@@ -157,14 +157,35 @@ def is_identical_rhyme(rhyme, target_rhyme_syllables_array)
   end
   return true;
 end
-  
+
+def all_identical_rhymes?(words)
+  lang = 'en' # @hack
+  syllable_signatures = Hash.new
+  for word in words do
+    for pron in pronunciations(word, lang)
+      syllable_signatures[rhyme_syllables_string(pron)] = true
+    end
+  end
+  if syllable_signatures.length == 1
+    debug "Filtered out identical rhymes #{words}"
+    return true
+  else
+    return false
+  end
+end
+
+def duplicates?(array)
+  # does ARRAY contain any duplicate items?
+  return array.length != array.uniq.length
+end
+
 def find_rhyming_words_for_pronunciation(pron, identical_ok=true)
   # use our compiled rhyme signature dictionary; we don't need the Datamuse API for simple rhyme lookup
   results = Array.new
   rsig = rhyme_signature(pron)
   rsyllables = rhyme_syllables_array(pron)
   rdict_lookup(rsig).each { |rhyme|
-    unless(!identical_ok && is_identical_rhyme(rhyme, rsyllables))
+    unless(!identical_ok && identical_rhyme?(rhyme, rsyllables))
       results.push(rhyme)
     else
       debug "Filtered out identical rhyme: #{pron} / #{rhyme}"
@@ -188,12 +209,6 @@ end
 def filter_out_rhymeless_words(words, lang)
   words.select { |word| has_rhyming_word?(word, lang) }
 end
-
-# def is_stupid_rhyme(pron, rhyme)
-  # word.include?(rhyme) or rhyme.include?(word)
-  # consider filtering out words where the rhyming syllable is identical. But for now it's better to overinclude than overexclude.
-#   word == rhyme
-# end
 
 #
 # WordNet stuff
@@ -312,7 +327,7 @@ def find_rhyming_tuples(input_rel1, lang)
   tuples = [ ]
   related_rhymes.each { |rsig, relrhymes|
     relrhymes.sort!.uniq!
-    if(relrhymes.length > 1)
+    if(relrhymes.length > 1 && !all_identical_rhymes?(relrhymes))
       tuples.push(relrhymes.sort!)
     end
   }
@@ -326,7 +341,7 @@ def find_rhyming_pairs(input_rel1, input_rel2, lang)
   # Compute the set of all words semantically related to INPUT_REL1, call it RELATEDS1.
   # Compute the set of all words semantically related to INPUT_REL2, call it RELATEDS2.
   # For each word REL1 in RELATEDS1,
-  #   Get all rhymes RHYME of REL1.
+  #   Get all non-identical rhymes RHYME of REL1.
   #   If RHYME rhymes with REL1 and is related to INPUT_REL2, we win! "REL1 / RHYME" is a pair.
   related_rhymes = Hash.new {|h,k| h[k] = [] } # hash of arrays
   unless(blacklisted?(input_rel1) || blacklisted?(input_rel2))
@@ -335,9 +350,8 @@ def find_rhyming_pairs(input_rel1, input_rel2, lang)
     relateds1.each { |rel1|
       # rel1 is a word related to input_rel1. We're looking for rhyming pairs [rel1 rel2].
       debug "rhymes for #{rel1}:<br>"
-      # If we find a word 'RHYME' that rhymes with REL1 and is related to INPUT_REL2, we win!
-      find_rhyming_words(rel1, lang).each { |rhyme| # check all rhymes of rel1, call each one 'RHYME'
-        if(relateds2.include? rhyme) # is RHYME related to input_rel2? If so, we win!
+      find_rhyming_words(rel1, lang, false).each { |rhyme| # check all non-identical rhymes of REL1, call each one 'RHYME'
+        if(relateds2.include? rhyme) # is RHYME related to INPUT_REL2? If so, we win!
           related_rhymes[rel1].push(rhyme)
           debug rhyme;
         end

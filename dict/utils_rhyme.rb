@@ -188,6 +188,11 @@ def rhyme_signature_array_with_stress(pron, stress)
   return nil
 end
 
+def rhyme_signature(pron)
+  # this makes for a better hash key
+  return rhyme_signature_array(pron).join(" ")
+end
+
 def rhyme_syllables_array(pron)
   # This is like rhyme_signature_array but includes the whole rhyming syllable; it doesn't chop off the preceding consonants.
   return rhyme_syllables_array_with_stress(pron, "1") || rhyme_syllables_array_with_stress(pron, "2") || rhyme_syllables_array_with_stress(pron, "0") || error(pron)
@@ -216,9 +221,9 @@ def rhyme_syllables_array_with_stress(pron, stress)
   return nil
 end
   
-def rhyme_signature(pron)
+def rhyme_syllables_string(pron)
   # this makes for a better hash key
-  return rhyme_signature_array(pron).join(" ")
+  return rhyme_syllables_array(pron).join(" ")
 end
 
 def lang(lang, en_string, es_string)

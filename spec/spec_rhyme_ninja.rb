@@ -324,6 +324,7 @@ describe 'RHYMES' do
     ought_not_rhyme 'just', 'kissed' # not a perfect rhyme
     oughta_rhyme 'michael', 'cycle'
     oughta_rhyme 'heart', 'art' # take that, Alexander Bain!
+    oughta_rhyme 'world', 'unfurled'
   end
 
   context 'perfect rhymes must rhyme the last primary-stressed syllable, not just the last syllable' do
@@ -445,6 +446,7 @@ describe 'RHYMES' do
     oughta_rhyme 'neediest', 'greediest'
     oughta_rhyme 'meatiest', 'greediest', NOT_WORKING # 'meatiest' is not in cmudict
     oughta_rhyme 'supplemented', 'fermented'
+    ought_not_rhyme 'can', 'done'
   end
   
   context 'apostrophes' do
@@ -489,6 +491,7 @@ describe 'RHYMES' do
     oughta_rhyme 'fennel', 'sentimental' # it's OK to elide the final T in 'sentimental'
     oughta_rhyme 'just', 'kissed', NOT_WORKING # this would work in dialect
     oughta_rhyme 'greediest', 'devious', NOT_WORKING
+    oughta_rhyme 'girl', 'world', NOT_WORKING
   end
 end
 
@@ -680,7 +683,11 @@ describe 'SET_RELATED' do
     set_related_oughta_contain 'music', 'duet', 'quartet', NOT_WORKING
     set_related_oughta_contain 'music', 'duet', 'quintet', NOT_WORKING
     set_related_ought_not_contain 'music', 'recorded', 'prerecorded', NOT_WORKING
-    set_related_ought_not_contain 'music', 'coral', 'choral', NOT_WORKING # exclude homophones
+    set_related_ought_not_contain 'music', 'coral', 'choral', NOT_WORKING # exclude homophones 
+    set_related_ought_not_contain 'music', 'percussion', 'repercussion' # exclude identical rhymes
+    set_related_ought_not_contain 'music', 'tonal', 'atonal' # exclude identical rhymes
+    set_related_oughta_contain 'music', 'appalachian', 'augmentation'
+    set_related_oughta_contain 'music', 'abbreviation', 'notation' # identical rhymes are OK if they're part of a tuples that contains non-identical rhymes such as the previous line
     it 'no proper subsets: we should get bone / intone / trombone, and not also get bone / intone' do
       bone_intone = ['bone', 'intone']
       bone_intone_trombone = ['bone', 'intone', 'trombone']
@@ -763,7 +770,7 @@ describe 'PAIR_RELATED' do
     pair_related_oughta_contain 'food', 'evil', 'grain', 'pain'
     pair_related_oughta_contain 'food', 'evil', 'grain', 'bane'
     pair_related_oughta_contain 'food', 'evil', 'rice', 'vice'
-    pair_related_oughta_contain 'food', 'evil', 'vegetarian', 'totalitarian'
+    pair_related_ought_not_contain 'food', 'evil', 'vegetarian', 'totalitarian' # it's a damn shame that this is an identical rhyme
     pair_related_oughta_contain 'food', 'evil', 'dinner', 'sinner'
     pair_related_oughta_contain 'food', 'evil', 'cake', 'rake', NOT_WORKING
     pair_related_oughta_contain 'food', 'evil', 'mushroom', 'doom', NOT_WORKING
@@ -771,6 +778,11 @@ describe 'PAIR_RELATED' do
     pair_related_oughta_contain 'food', 'evil', 'seder', 'darth vader', NOT_WORKING
     pair_related_oughta_contain 'food', 'evil', 'sachertort', 'voldemort', NOT_WORKING
     pair_related_oughta_contain 'food', 'evil', 'bread', 'undead', NOT_WORKING
+    pair_related_oughta_contain 'food', 'evil', 'heinz', 'designs'
+    pair_related_oughta_contain 'food', 'evil', 'served', 'undeserved' # this is not quite an identical rhyme becauze the s in undeserved is pronounced like a z
+    pair_related_ought_not_contain 'food', 'evil', 'sanitation', 'temptation' # exclude identical rhymes '-tation'
+    pair_related_ought_not_contain 'food', 'evil', 'healthy', 'unhealthy', NOT_WORKING # need better syllable detection # exclude identical rhymes '-nation'
+    pair_related_ought_not_contain 'food', 'evil', 'contamination', 'condemnation', NOT_WORKING # need better syllable detection # exclude identical rhymes '-nation'
   end
   
   context 'food dark' do
