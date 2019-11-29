@@ -373,6 +373,8 @@ describe 'RHYMES' do
     ought_not_rhyme 'applied', 'misapplied'
     ought_not_rhyme 'plied', 'applied'
     ought_not_rhyme 'complied', 'applied', NOT_WORKING # need better syllable detection
+    ought_not_rhyme 'recorded', 'prerecorded'
+    ought_not_rhyme 'corded', 'recorded'
   end
   
   context "you can't just add a prefix and call it a rhyme" do
@@ -677,6 +679,7 @@ describe 'SET_RELATED' do
     set_related_oughta_contain 'music', 'gong', 'song', NOT_WORKING # reverse relatedness would fix
     set_related_oughta_contain 'music', 'duet', 'quartet', NOT_WORKING
     set_related_oughta_contain 'music', 'duet', 'quintet', NOT_WORKING
+    set_related_ought_not_contain 'music', 'recorded', 'prerecorded', NOT_WORKING
     set_related_ought_not_contain 'music', 'coral', 'choral', NOT_WORKING # exclude homophones
     it 'no proper subsets: we should get bone / intone / trombone, and not also get bone / intone' do
       bone_intone = ['bone', 'intone']
