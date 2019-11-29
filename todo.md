@@ -9,13 +9,12 @@
 ** get rid of plurals, possessives, etc. if they don't add anything new
 *** e.g. youngster's youngsters youngsters'
 *** We could use the actual lemmas in lemma_en! and/or WordNet
-** get rid of prefixes
+** improve syllable detection, so we can filter out promising / unpromising
 ** separate names out
 ** 'saddle' has a bunch of rare words
 ** put tuples in dregs unless they contain at least two common words
 ** filter out spelling variants from rhyme signature dict, e.g. UW_S_EH_F  yousef youssef yusef
 ** respect rare_words.txt
-** eliminate identical rhymes
 ** hyphens
 *** standardize "i r a" vs. "ira" and "san-jose" oughta be "san_jose" but "so-so" oughta stay "so-so"
 ** more scalable solution for British English, e.g. advisable / realisable
