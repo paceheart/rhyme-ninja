@@ -128,10 +128,10 @@ def gsub_unless_followed_by_r(line, old, new)
 end
 
 def dwim_schwas(line)
-  # illicit [IH2 L IH1 S AH0 T] solicit [S AH0 L IH1 S IH0 T]
+  # illicit [IH2 L IH1 S AH0 T] / solicit [S AH0 L IH1 S IH0 T]
+  # selfish [S EH1 L F IH0 SH] / shellfish [SH EH1 L F IH2 SH]
   # conflate all unstressed schwa-ish syllables, unless they are followed by R or NG.
   # mumble a little mumblier, please
-  # don't do this if it's the only syllable. Or maybe don't do this if it's the most-stressed syllable?
   old = 'IH0'
   new = 'AH0'
   original_line = line.clone
@@ -139,14 +139,15 @@ def dwim_schwas(line)
   # (line =~ "1" || line =~ "2")
   # Protect R and NG from the upcoming gsub.
   # Also get (1) and (2) out of the way so they don't give false positives for primary/secondary stress detection.
-  line = line.gsub(old + " R", "fubarduckR")
-  line = line.gsub(old + " NG", "fubarduckNG")
+  line.gsub!(old + " R", "fubarduckR")
+  line.gsub!(old + " NG", "fubarduckNG")
+  line.gsub!(old + " SH", "fubarduckSH") # this is needed for selfish / shellfish
 
-  line = line.gsub(old, new)
+  line.gsub!(old, new)
 
   if line != original_line
-    line = line.gsub("(1)", "{a}")
-    line = line.gsub("(2)", "{b}")
+    line.gsub!("(1)", "{a}")
+    line.gsub!("(2)", "{b}")
     
     if(!line.include?("1") && !line.include?("2")) # if there is no primary or secondary stress in this pronunciation
       line = original_line
@@ -154,10 +155,11 @@ def dwim_schwas(line)
     else
 #      puts "Dwimmed schwas: #{original_line} -> #{line}"
       # put R and NG and (1) and (2) back the way they were
-      line = line.gsub("fubarduckR", old + " R")
-      line = line.gsub("fubarduckNG", old + " NG")
-      line = line.gsub("{a}", "(1)")
-      line = line.gsub("{b}", "(2)")
+      line.gsub!("fubarduckR", old + " R")
+      line.gsub!("fubarduckNG", old + " NG")
+      line.gsub!("fubarduckSH", old + " SH")
+      line.gsub!("{a}", "(1)")
+      line.gsub!("{b}", "(2)")
     end
   end
   return line
@@ -166,11 +168,13 @@ end
 def conflate_imperfect_rhymes(line)
   # @todo allow this to be toggleable at runtime instead of dictionary-building time
   
-  # tons [T AH1 N Z] / funds [F AH1 N D Z]
-  line = line.gsub("N D Z", "N Z") 
-
-  # massage [M AH0 S AA1 ZH] / dodge [D AA1 JH]
-  # line = line.gsub(" ZH", " JH")
+  line.gsub!(/ L S$/, ' L T S') # false / malts, else / melts. Sure I guess? Otherwise 'false' and 'else' won't rhyme with anything at all.
+  line.gsub!(/ M T$/, ' M P T') # dreamt / tempt
+  line.gsub!(/ N D Z$/, ' N Z') # tons [T AH1 N Z] / funds [F AH1 N D Z]
+  line.gsub!(/ N S$/, ' N T S') # dance / ants
+  line.gsub!(/ T CH$/, ' CH') # blotch / watch
+  line.gsub!(/ ZH$/, ' JH') # massage [M AH0 S AA1 ZH] / dodge [D AA1 JH]
+  
   return line
 end
 
@@ -188,12 +192,17 @@ def load_cmudict()
         word = word[0...-3]
       end
       if(!(word =~ /\d/) || word == "w00t") # ignore words containing digits, except w00t
+        final_cluster = final_consonant_cluster_array(tokens)
+        # ignore nonstandard final consonant clusters. They're mostly names and a handful of loan words, and they'll rhyme with nothing or just each other.
+        unless final_consonant_cluster_ok?(final_cluster)
+          puts "Ignoring weird final consonant cluster: #{final_cluster.join(" ")} in #{line}"
+        end
         hash[word].push(tokens)
         if(word == TRACE_WORD)
           puts "TRACE Loaded #{word} as #{tokens}"
         end
       else
-        puts "filtered out #{word}"
+        puts "Ignoring word: #{word}"
       end
     else
       puts "Ignoring cmudict line: #{line}"
@@ -201,6 +210,15 @@ def load_cmudict()
   }
   puts "Loaded #{hash.length} words from cmudict"
   return hash
+end
+
+def final_consonant_cluster_ok?(cluster)
+  if(cluster.length <= 1)
+    return true; # not a cluster
+  else
+    cluster_str = cluster.join(" ")
+    return ALL_FINAL_CONSONANT_CLUSTERS.include?(cluster_str)
+  end
 end
 
 #

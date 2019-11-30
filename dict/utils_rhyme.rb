@@ -104,6 +104,224 @@ def load_variants
 end
 
 #
+# consonant clusters and syllabification
+#
+
+                                                                                                 
+ALL_INITIAL_CONSONANT_CLUSTERS = [
+  'B L', # blue
+  'B R', # bread
+  'B W', # bueno
+  'B Y', # bugle
+  'F Y', # few
+  'D R', # draw
+  'D W', # dwell
+  'F L', # flaw
+  'F R', # free
+  'G L', # glow
+  'G R', # grow
+  'HH Y', # hue
+  'K L', # claw
+  'K R', # crow
+  'K W', # quick
+  'K Y', # cue
+  'M Y', # mute
+  'P L', # play
+  'P R', # pray
+  'P Y', # pupil
+  'S K', # sky
+  'S K R', # scrub
+  'S K W', # squall
+  'S K Y', # skew
+  'S P Y', # spume
+  'S L', # sled
+  'S M', # small
+  'S N', # snow
+  'S P', # speech
+  'S P L', # split
+  'S P R', # spray
+  'S T', # stay
+  'S T R', # straw
+  'S W', # sway
+  'SH R', # shred
+  'T R', # tree
+  'T W', # twig
+  'TH R', # throw
+  'TH W', # thwack
+  'V Y', # view
+] # ARPABET format. source: John Algeo, https://www.tandfonline.com/doi/pdf/10.1080/00437956.1978.11435661 + original work
+
+ALL_FINAL_CONSONANT_CLUSTERS = [
+  'B D', # grabbed
+  'B Z', # cubs
+  'CH T', # patched
+  'D TH', # width
+  'D TH S', # widths
+  'D S T', # midst, rare
+  'D Z', # adze
+  'DH D', # clothed
+  'DH Z', # clothes
+  'F S', # graphs
+  'F T', # soft
+  'F T S', # lifts
+  'F TH', # fifth
+  'F TH S', # fifths
+  'G D', # bogged
+  'G Z', # eggs
+  'JH D', # bulged
+  'K S', # fix
+  'K S T', # fixed
+  'K S T S', # texts
+  'K T', # act
+  'K T S', # acts
+  'L B', # bulb
+  'L B Z', # bulbs
+  'L CH', # belch
+  'L CH T', # belched
+  'L D', # build
+  'L D Z', # builds
+  'L F', # gulf
+  'L F S', # gulfs
+  'L F T', # engulfed
+  'L F TH', # twelfth, rare
+  'L F TH S', # twelfths, rare
+  'L JH', # bulge
+  'L JH D', # bulged
+  'L K', # silk
+  'L K S', # silks
+  'L K T', # milked
+  'L M', # film
+  'L M D', # filmed
+  'L M Z', # films
+  'L N', # kiln, rare
+  'L N Z', # kilns, rare
+  'L P', # help
+  'L P S', # helps
+  'L P T', # helped
+  'L P T S', # sculpts, rare
+  'L S', # else
+  'L S T', # pulsed
+  'L T', # salt
+  'L T S', # salts
+  'L TH', # wealth
+  'L TH S', # wealths
+  # 'L TH T', # wealthed? theoretically possible, but doesn't occur
+  'L V', # valve
+  'L V D', # solved
+  'L V Z', # valves
+  'L Z', # feels
+  'M D', # framed
+  'M F', # triumph
+  'M F S', # triumphs
+  'M F T', # triumphed
+  'M P', # jump
+  'M P S', # jumps
+  'M P S T', # glimpsed
+  'M P T', # jumped
+  'M P T S', # tempts
+  'M T', # dreamt
+  'M Z', # dooms
+  'N CH', # punch
+  'N CH T', # punched
+  'N D', # send
+  'N D Z', # sends
+  'N JH', # change
+  'N JH D', # changed
+  'N S', # fence
+  'N S T', # fenced
+  'N T', # cent
+  'N T S', # cents
+  'N T S T', # incensed (?)
+  'N TH', # tenth
+  'N TH S', # tenths
+  # 'N TH T', # tenthed? theoretically possible, but doesn't occur
+  'N Z', # bronze
+  'N Z D', # bronzed
+  'NG D', # wronged
+  'NG K', # ink
+  'NG K S', # inks
+  'NG K T', # inked
+  'NG K T S', # instincts
+  'NG K TH', # length
+  'NG K TH S', # lengths
+  # 'NG TH T', # lengthed? theoretically possible, but doesn't occur
+  'NG Z', # things
+  'P S', # lapse
+  'P S T', # lapsed
+  'P T', # apt
+  'P T S', # opts
+  'P TH', # depth
+  'P TH S', # depths
+  'R B', # curb
+  'R B D', # curbed
+  'R B Z', # curbs
+  'R CH T', # arched
+  'R CH', # arch
+  'R D', # beard
+  'R D Z', # beards
+  'R DH Z', # berths
+  'R F', # scarf
+  'R F S', # scarfs
+  'R F T', # scarfed
+  'R G', # morgue
+  # 'R G D', # morgued? theoretically possible, but doesn't occur
+  'R G Z', # morgues
+  'R JH', # merge
+  'R JH D', # merged
+  'R K', # mark
+  'R K T', # marked
+  'R K S', # marks
+  'R L D', # world
+  'R L D Z', # worlds
+  'R L', # curl
+  'R L Z', # curls
+  'R M', # storm
+  'R M D', # stormed
+  'R M TH', # warmth
+  # 'R M TH S', # warmths? theoretically possible, but doesn't occur
+  'R M Z', # storms
+  'R N', # earn
+  'R N D', # earned
+  'R N T', # burnt
+  'R N Z', # burns
+  'R P', # harp
+  'R P S', # harps
+  'R P T', # excerpt
+  'R P T S', # excerpts
+  'R S', # force
+  'R S T', # forced
+  'R S T S', # bursts
+  'R SH', # marsh
+  'R SH T', # borscht
+  'R T', # part
+  'R T S', # parts
+  'R TH', # north
+  'R TH S', # births
+  'R TH T', # unearthed, rare
+  'R V', # curve
+  'R V D', # curved
+  'R V Z', # curves
+  'R Z', # furs
+  'S K', # mask
+  'S K S', # masks
+  'S K T', # masked
+  'S P', # clasp
+  'S P S', # clasps
+  'S P T', # clasped
+  'S T', # chest
+  'S T S', # chests
+  'SH T', # mashed
+  'T S', # eats
+  'T S T', # blitzed
+  'TH S', # breaths
+  'TH T', # bequeathed
+  'V D', # caved
+  'V Z', # drives
+  'Z D', # dozed
+  'ZH D', # camouflaged
+] # ARPABET format. source: John Algeo, https://www.tandfonline.com/doi/pdf/10.1080/00437956.1978.11435661 + original work
+
+#
 # file utilities
 #
 
@@ -188,6 +406,18 @@ def rhyme_signature_array_with_stress(pron, stress)
   return nil
 end
 
+def final_consonant_cluster_array(pron)
+  rsig = Array.new
+  pron.reverse.each { |syl|
+    if(vowel?(syl))
+      return rsig # we found the syllable with stress STRESS, we can stop now
+    else
+      rsig.unshift(syl)
+    end
+  }
+  return [ ]
+end
+
 def rhyme_signature(pron)
   # this makes for a better hash key
   return rhyme_signature_array(pron).join(" ")
@@ -209,7 +439,7 @@ def rhyme_syllables_array_with_stress(pron, stress)
         foundTheRhymingSyllable = true; # we found the main stressed syllable, we can stop at the next vowel
       end
     else
-      if(syl.include?("1") || syl.include?("2") || syl.include?("0")) # vowel
+      if(vowel?(syl))
         rsig.shift # get that vowel outta here
         return rsig
       end
@@ -220,7 +450,11 @@ def rhyme_syllables_array_with_stress(pron, stress)
   end
   return nil
 end
-  
+
+def vowel?(syl)
+  return syl.include?("1") || syl.include?("2") || syl.include?("0")
+end
+
 def rhyme_syllables_string(pron)
   # this makes for a better hash key
   return rhyme_syllables_array(pron).join(" ")

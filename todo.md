@@ -4,14 +4,14 @@
 ** wordnet?
 ** maybe NLTK wup_similarity or https://stackoverflow.com/questions/14148986/how-do-you-write-a-program-to-find-if-certain-words-are-similar/14638272#14638272
 * urlencode word links
-* reduce dumb outputs
+* reduce dumb outputs via better rarity filtering
 ** WordNet contains saffron and paroled. Why do we need lemma_en? We count a word as common if it has a frequency of 2 or more (@todo try upping this) according to lemma_en, or if it exists in WordNet at all. If we upped this to 2, 2/3 of the newly-rare words would be crap, but we would also lose 1/3 good words like chicanery, noncombatants, propagandize, and psilocybin. That's probably okay.
+** separate names out
+** 'saddle' has a bunch of rare words
+* reduce dumb outputs otherhow
 ** get rid of plurals, possessives, etc. if they don't add anything new
 *** e.g. youngster's youngsters youngsters'
 *** We could use the actual lemmas in lemma_en! and/or WordNet
-** improve syllable detection, so we can filter out promising / unpromising
-** separate names out
-** 'saddle' has a bunch of rare words
 ** put tuples in dregs unless they contain at least two common words
 ** filter out spelling variants from rhyme signature dict, e.g. UW_S_EH_F  yousef youssef yusef
 ** respect rare_words.txt
@@ -38,4 +38,4 @@
 ** in the dregs, add a clickable up-arrow for "this is a good word that does not deserve to be down here"
 * guess at pronunciations of unknown words
 * make word_dict a text file too
-* instead of eliminating identical rhymes entirely, just put them in the dregs along with the imperfect rhymes
+* instead of eliminating identical rhymes entirely, just put them in the dregs along with the imperfect rhymes. There are a few it's sad to lose, like illicit / solicit, and vegetarian / totalitarian

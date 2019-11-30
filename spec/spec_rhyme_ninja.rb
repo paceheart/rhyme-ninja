@@ -324,6 +324,7 @@ describe 'RHYMES' do
     ought_not_rhyme 'just', 'kissed' # not a perfect rhyme
     oughta_rhyme 'michael', 'cycle'
     oughta_rhyme 'heart', 'art' # take that, Alexander Bain!
+    oughta_rhyme 'selfish', 'shellfish' # take that, J.C. Wells!
     oughta_rhyme 'world', 'unfurled'
   end
 
@@ -376,6 +377,7 @@ describe 'RHYMES' do
     ought_not_rhyme 'complied', 'applied', NOT_WORKING # need better syllable detection
     ought_not_rhyme 'recorded', 'prerecorded'
     ought_not_rhyme 'corded', 'recorded'
+    ought_not_rhyme 'illicit', 'solicit' # I'm sad that these are identical rhymes. illicit [IH2 L IH1 S AH0 T] solicit [S AH0 L IH1 S IH0 T]
   end
   
   context "you can't just add a prefix and call it a rhyme" do
@@ -453,6 +455,7 @@ describe 'RHYMES' do
     oughta_rhyme "hits", "its"
     oughta_rhyme "hits", "it's"
     ought_not_rhyme "its", "it's"
+    oughta_rhyme "f'd", "bereft"
   end
 
   context 'hyphens' do
@@ -467,6 +470,12 @@ describe 'RHYMES' do
     oughta_rhyme 'heist', 'iced'
   end
 
+  context 'consonant clusters' do
+    oughta_rhyme 'lengths', 'strengths'
+    oughta_rhyme 'famed', 'claimed'
+    oughta_rhyme 'sized', 'surmised'
+  end
+  
   context 'imperfect rhymes that ought to be perfect' do
     oughta_rhyme 'ear', 'beer' # used to fail because ear is [IY1 R] and beer is [B IH1 R]
     oughta_rhyme 'faring', 'glaring' # used to fail because faring is [F EH1 R IY0 NG] and glaring is [G L EH1 R IH0 NG]
@@ -476,22 +485,28 @@ describe 'RHYMES' do
     oughta_rhyme 'array', 'hurray', NOT_WORKING # array [ER0 EY1] hurray [HH AH0 R EY1]
     oughta_rhyme_one_way 'array', 'moray' # array [ER0 EY1] moray [M ER0 EY1]
     oughta_rhyme_one_way 'moray', 'array', NOT_WORKING
-    oughta_rhyme 'illicit', 'solicit', NOT_WORKING # illicit [IH2 L IH1 S AH0 T] solicit [S AH0 L IH1 S IH0 T]
     oughta_rhyme "takin'", 'waken' # takin' [T EY1 K IH0 N], waken [W EY1 K AH0 N]
     oughta_rhyme 'tons', 'funds' # [T AH1 N Z] [F AH1 N D Z], N D Z gets collapsed to N Z
+    oughta_rhyme 'dance', 'ants' # plosive epenthesis. Technically this ought to only be valid within syllables, e.g. 'inside' ought not rhyme with 'ants hide', because you can't manifest a [t] out of nothing with 'inside', but whatever, it's fine.
+    oughta_rhyme 'dreamt', 'tempt' # who cares about that P anyway. there's practically an invisible P in dreampt
+    oughta_rhyme 'blotch', 'watch'
+    oughta_rhyme 'blotched', 'watched'
+    oughta_rhyme 'false', 'malts' # sure I guess? otherwise 'false' won't rhyme with anything at all
+    oughta_rhyme 'else', 'melts' # sure I guess? otherwise 'else' won't rhyme with anything at all
   end
 
   context 'rhymes too imperfect to live' do
     ought_not_rhyme 'fennel', 'mental' # don't elide the t in 'mental'
+    ought_not_rhyme 'just', 'kissed' # this could work in dialect, but ought not be standard
   end
   
   context 'imperfect rhymes' do
     oughta_rhyme 'mushroom', 'doom', NOT_WORKING # no pronunciation for 'mushroom', and its stress is off
-    oughta_rhyme 'dodge', 'massage', NOT_WORKING
+    oughta_rhyme 'dodge', 'massage'
     oughta_rhyme 'fennel', 'sentimental' # it's OK to elide the final T in 'sentimental'
-    oughta_rhyme 'just', 'kissed', NOT_WORKING # this would work in dialect
     oughta_rhyme 'greediest', 'devious', NOT_WORKING
     oughta_rhyme 'girl', 'world', NOT_WORKING
+    oughta_rhyme 'fence', 'wince', NOT_WORKING
   end
 end
 

@@ -43,7 +43,7 @@ def debug(string)
   end
 end
 
-def debug_info(word)
+def debug_info(word, lang='en')
   lang = 'en' # @hack
   result = ""
   i = 0
