@@ -491,8 +491,6 @@ describe 'RHYMES' do
     oughta_rhyme 'dreamt', 'tempt' # who cares about that P anyway. there's practically an invisible P in dreampt
     oughta_rhyme 'blotch', 'watch'
     oughta_rhyme 'blotched', 'watched'
-    oughta_rhyme 'false', 'malts' # sure I guess? otherwise 'false' won't rhyme with anything at all
-    oughta_rhyme 'else', 'melts' # sure I guess? otherwise 'else' won't rhyme with anything at all
   end
 
   context 'rhymes too imperfect to live' do
@@ -502,11 +500,13 @@ describe 'RHYMES' do
   
   context 'imperfect rhymes' do
     oughta_rhyme 'mushroom', 'doom', NOT_WORKING # no pronunciation for 'mushroom', and its stress is off
-    oughta_rhyme 'dodge', 'massage'
+    oughta_rhyme 'dodge', 'massage' # only in Texas, but we don't want dodge to get lonely in its empty lodge
     oughta_rhyme 'fennel', 'sentimental' # it's OK to elide the final T in 'sentimental'
     oughta_rhyme 'greediest', 'devious', NOT_WORKING
     oughta_rhyme 'girl', 'world', NOT_WORKING
     oughta_rhyme 'fence', 'wince', NOT_WORKING
+    oughta_rhyme 'false', 'malts' # sure I guess? otherwise 'false' won't rhyme with anything at all
+    oughta_rhyme 'else', 'melts' # sure I guess? otherwise 'else' won't rhyme with anything at all
   end
 end
 
