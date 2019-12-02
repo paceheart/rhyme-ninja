@@ -474,6 +474,16 @@ describe 'RHYMES' do
     oughta_rhyme 'lengths', 'strengths'
     oughta_rhyme 'famed', 'claimed'
     oughta_rhyme 'sized', 'surmised'
+    oughta_rhyme 'wreck', 'shrek'
+    oughta_rhyme 'melt', 'svelte'
+    oughta_rhyme 'pet', 'nyet'
+    oughta_rhyme 'doom', 'vroom'
+    oughta_rhyme 'spider', 'schneider'
+    oughta_rhyme 'car', 'tsar'
+    oughta_rhyme 'car', 'czar'
+    ought_not_rhyme 'czar', 'tsar'
+    oughta_rhyme 'lad', 'vlad'
+    oughta_rhyme 'withdraw', 'voila'
   end
   
   context 'imperfect rhymes that ought to be perfect' do

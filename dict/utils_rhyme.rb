@@ -107,7 +107,6 @@ end
 # consonant clusters and syllabification
 #
 
-                                                                                                 
 ALL_INITIAL_CONSONANT_CLUSTERS = [
   'B L', # blue
   'B R', # bread
@@ -116,10 +115,12 @@ ALL_INITIAL_CONSONANT_CLUSTERS = [
   'F Y', # few
   'D R', # draw
   'D W', # dwell
+  'D Y', # due(1)
   'F L', # flaw
   'F R', # free
   'G L', # glow
   'G R', # grow
+  'G W', # guava
   'HH Y', # hue
   'K L', # claw
   'K R', # crow
@@ -128,8 +129,11 @@ ALL_INITIAL_CONSONANT_CLUSTERS = [
   'M Y', # mute
   'P L', # play
   'P R', # pray
+  'P W', # pueblo
   'P Y', # pupil
+  'S F', # sphere
   'S K', # sky
+  'S K L', # sclera
   'S K R', # scrub
   'S K W', # squall
   'S K Y', # skew
@@ -143,12 +147,17 @@ ALL_INITIAL_CONSONANT_CLUSTERS = [
   'S T', # stay
   'S T R', # straw
   'S W', # sway
+  'SH L', # schlock
+  'SH M', # schmooze
   'SH R', # shred
+  'SH T', # schtick
+  'SH W', # schwa
   'T R', # tree
   'T W', # twig
   'TH R', # throw
   'TH W', # thwack
   'V Y', # view
+  'ZH W', # joie
 ] # ARPABET format. source: John Algeo, https://www.tandfonline.com/doi/pdf/10.1080/00437956.1978.11435661 + original work
 
 ALL_FINAL_CONSONANT_CLUSTERS = [
@@ -321,6 +330,25 @@ ALL_FINAL_CONSONANT_CLUSTERS = [
   'ZH D', # camouflaged
 ] # ARPABET format. source: John Algeo, https://www.tandfonline.com/doi/pdf/10.1080/00437956.1978.11435661 + original work
 
+# Words with weird initial/final consonant clusters that should be included anyway
+WHITELIST = [
+  'dvorak',
+  'neuroscience',
+  'neuroscientist',
+  'nyet',
+  'sbarro',
+  'schneider',
+  'svelte',
+  'tsetse',
+  'tsunami',
+  'vlad',
+  'vladimir',
+  'vroom',
+  'voila',
+  'zloty',
+  'zlotys',
+]
+
 #
 # file utilities
 #
@@ -406,11 +434,25 @@ def rhyme_signature_array_with_stress(pron, stress)
   return nil
 end
 
+def initial_consonant_cluster_array(pron)
+  # everything strictly before the first vowel
+  rsig = Array.new
+  pron.each { |syl|
+    if(vowel?(syl))
+      return rsig
+    else
+      rsig.push(syl)
+    end
+  }
+  return [ ]
+end
+
 def final_consonant_cluster_array(pron)
+  # everything strictly after the last vowel
   rsig = Array.new
   pron.reverse.each { |syl|
     if(vowel?(syl))
-      return rsig # we found the syllable with stress STRESS, we can stop now
+      return rsig
     else
       rsig.unshift(syl)
     end

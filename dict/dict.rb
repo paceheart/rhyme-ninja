@@ -83,19 +83,19 @@ def preprocess_cmudict_line(line)
 
   # this one comes first because it splits ER into two phonemes
   # curry [K AH1 R IY0] / hurry [HH ER1 IY0]
-  line = line.gsub("ER0", "AH0 R")
-  line = line.gsub("ER1", "AH1 R")
-  line = line.gsub("ER2", "AH2 R")
+  line.gsub!("ER0", "AH0 R")
+  line.gsub!("ER1", "AH1 R")
+  line.gsub!("ER2", "AH2 R")
   
   # ear [IY R] / beer [B IH R]
-  line = line.gsub("IH0 R", "IY0 R")
-  line = line.gsub("IH1 R", "IY1 R")
-  line = line.gsub("IH2 R", "IY2 R")
+  line.gsub!("IH0 R", "IY0 R")
+  line.gsub!("IH1 R", "IY1 R")
+  line.gsub!("IH2 R", "IY2 R")
   
   # faring [F EH1 R IY0 NG] / glaring [G L EH1 R IH0 NG]
-  line = line.gsub("IH0 NG", "IY0 NG")
-  line = line.gsub("IH1 NG", "IY1 NG")
-  line = line.gsub("IH2 NG", "IY2 NG")
+  line.gsub!("IH0 NG", "IY0 NG")
+  line.gsub!("IH1 NG", "IY1 NG")
+  line.gsub!("IH2 NG", "IY2 NG")
 
   #         caught [K AA1 T] / fought [F AO1 T]
   #         bong [B AA1 NG] / song [S AO1 NG]
@@ -105,6 +105,9 @@ def preprocess_cmudict_line(line)
   line = gsub_unless_followed_by_r(line, " AO1", " AA1")
   line = gsub_unless_followed_by_r(line, " AO2", " AA2")
 
+  # we could conflate this but whatever, I don't think it would make anything rhyme with 'endure'
+  # line.gsub!(" D Y UW", " D UW")
+  
   line = dwim_schwas(line)
   
   line = conflate_imperfect_rhymes(line)
@@ -118,12 +121,12 @@ def gsub_unless_followed_by_r(line, old, new)
   # substitute OLD for NEW unless OLD is followed by " R"
   
   # Protect R from the upcoming gsub.
-  line = line.gsub(old + " R", "fubarduckR")
+  line.gsub!(old + " R", "fubarduckR")
 
-  line = line.gsub(old, new)
+  line.gsub!(old, new)
   
   # put R back the way it was
-  line = line.gsub("fubarduckR", old + " R")
+  line.gsub!("fubarduckR", old + " R")
   return line
 end
 
@@ -192,14 +195,25 @@ def load_cmudict()
         word = word[0...-3]
       end
       if(!(word =~ /\d/) || word == "w00t") # ignore words containing digits, except w00t
-        final_cluster = final_consonant_cluster_array(tokens)
-        # ignore nonstandard final consonant clusters. They're mostly names and a handful of loan words, and they'll rhyme with nothing or just each other.
-        unless final_consonant_cluster_ok?(final_cluster)
-          puts "Ignoring weird final consonant cluster: #{final_cluster.join(" ")} in #{line}"
+        # ignore nonstandard initial and final consonant clusters. They're mostly names and a handful of loan words, and they'll rhyme with nothing or just each other, so we lose little to nothing by excluding them.
+        word_ok = true
+        unless WHITELIST.include?(word)
+          initial_cluster = initial_consonant_cluster_array(tokens)
+          unless initial_consonant_cluster_ok?(initial_cluster)
+            word_ok = false
+            puts "Ignoring weird initial consonant cluster: #{initial_cluster.join(" ")} in #{line}"
+          end
+          final_cluster = final_consonant_cluster_array(tokens)
+          unless final_consonant_cluster_ok?(final_cluster)
+            word_ok = false
+            # puts "Ignoring weird final consonant cluster: #{final_cluster.join(" ")} in #{line}"
+          end
         end
-        hash[word].push(tokens)
-        if(word == TRACE_WORD)
-          puts "TRACE Loaded #{word} as #{tokens}"
+        if word_ok
+          hash[word].push(tokens)
+          if(word == TRACE_WORD)
+            puts "TRACE Loaded #{word} as #{tokens}"
+          end
         end
       else
         puts "Ignoring word: #{word}"
@@ -210,6 +224,15 @@ def load_cmudict()
   }
   puts "Loaded #{hash.length} words from cmudict"
   return hash
+end
+
+def initial_consonant_cluster_ok?(cluster)
+  if(cluster.length <= 1)
+    return true; # not a cluster
+  else
+    cluster_str = cluster.join(" ")
+    return ALL_INITIAL_CONSONANT_CLUSTERS.include?(cluster_str)
+  end
 end
 
 def final_consonant_cluster_ok?(cluster)

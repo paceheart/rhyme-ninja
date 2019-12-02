@@ -1,10 +1,13 @@
+## goal
+
+To help me write better limericks quicklier.
+
 ## to-do list
 
-* eliminate dependence on datamuse
-** wordnet?
-** maybe NLTK wup_similarity or https://stackoverflow.com/questions/14148986/how-do-you-write-a-program-to-find-if-certain-words-are-similar/14638272#14638272
-* urlencode word links
 * reduce dumb outputs via better rarity filtering
+** improve syllable detection for better identical rhyme filtering
+*** try UWn R -> UHn R
+** put tuples in dregs unless they contain at least two common words
 ** WordNet contains saffron and paroled. Why do we need lemma_en? We count a word as common if it has a frequency of 2 or more (@todo try upping this) according to lemma_en, or if it exists in WordNet at all. If we upped this to 2, 2/3 of the newly-rare words would be crap, but we would also lose 1/3 good words like chicanery, noncombatants, propagandize, and psilocybin. That's probably okay.
 ** separate names out
 ** 'saddle' has a bunch of rare words
@@ -12,7 +15,6 @@
 ** get rid of plurals, possessives, etc. if they don't add anything new
 *** e.g. youngster's youngsters youngsters'
 *** We could use the actual lemmas in lemma_en! and/or WordNet
-** put tuples in dregs unless they contain at least two common words
 ** filter out spelling variants from rhyme signature dict, e.g. UW_S_EH_F  yousef youssef yusef
 ** respect rare_words.txt
 ** hyphens
@@ -28,6 +30,10 @@
 ** mansion / stanchion
 ** snapshot -> trap's wrought
 ** bacon -> they can (bring back "CAN(1)  K AH0 N" but only when used as part of a phrase)
+* eliminate dependence on datamuse
+** wordnet?
+** maybe NLTK wup_similarity or https://stackoverflow.com/questions/14148986/how-do-you-write-a-program-to-find-if-certain-words-are-similar/14638272#14638272
+* urlencode word links
 * test input phrases
 * mine Limerick Heist for more test cases
 
