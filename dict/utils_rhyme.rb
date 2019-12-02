@@ -424,11 +424,11 @@ end
 
 def rhyme_signature_array_with_stress(pron, stress)
   rsig = Array.new
-  pron.reverse.each { |syl|
+  pron.reverse.each { |phoneme|
     # we need to remove the numbers
-    rsig.unshift(syl.tr("0-2", ""))
-    if(syl.include?(stress))
-      return rsig # we found the syllable with stress STRESS, we can stop now
+    rsig.unshift(phoneme.tr("0-2", ""))
+    if(phoneme.include?(stress))
+      return rsig # we found the phoneme with stress STRESS, we can stop now
     end
   }
   return nil
@@ -437,11 +437,11 @@ end
 def initial_consonant_cluster_array(pron)
   # everything strictly before the first vowel
   rsig = Array.new
-  pron.each { |syl|
-    if(vowel?(syl))
+  pron.each { |phoneme|
+    if(vowel?(phoneme))
       return rsig
     else
-      rsig.push(syl)
+      rsig.push(phoneme)
     end
   }
   return [ ]
@@ -450,11 +450,11 @@ end
 def final_consonant_cluster_array(pron)
   # everything strictly after the last vowel
   rsig = Array.new
-  pron.reverse.each { |syl|
-    if(vowel?(syl))
+  pron.reverse.each { |phoneme|
+    if(vowel?(phoneme))
       return rsig
     else
-      rsig.unshift(syl)
+      rsig.unshift(phoneme)
     end
   }
   return [ ]
@@ -473,28 +473,28 @@ end
 def rhyme_syllables_array_with_stress(pron, stress)
   rsig = Array.new
   foundTheRhymingSyllable = false
-  pron.reverse.each { |syl|
+  pron.reverse.each { |phoneme|
     # we need to remove the numbers
-    rsig.unshift(syl.tr("0-2", ""))
-    if(!foundTheRhymingSyllable)
-      if(syl.include?(stress))
-        foundTheRhymingSyllable = true; # we found the main stressed syllable, we can stop at the next vowel
+    rsig.unshift(phoneme.tr("0-2", ""))
+    if(!foundTheRhymingPhoneme)
+      if(phoneme.include?(stress))
+        foundTheRhymingPhoneme = true; # we found the main stressed phoneme, we can stop at the next vowel
       end
     else
-      if(vowel?(syl))
+      if(vowel?(phoneme))
         rsig.shift # get that vowel outta here
         return rsig
       end
     end
   }
-  if foundTheRhymingSyllable # we got all the way to the beginning of the word without another vowel
+  if foundTheRhymingPhoneme # we got all the way to the beginning of the word without another vowel
     return rsig
   end
   return nil
 end
 
-def vowel?(syl)
-  return syl.include?("1") || syl.include?("2") || syl.include?("0")
+def vowel?(phoneme)
+  return phoneme.include?("1") || phoneme.include?("2") || phoneme.include?("0")
 end
 
 def rhyme_syllables_string(pron)
