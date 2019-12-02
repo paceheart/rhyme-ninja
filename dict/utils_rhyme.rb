@@ -472,7 +472,7 @@ end
 
 def rhyme_syllables_array_with_stress(pron, stress)
   rsig = Array.new
-  foundTheRhymingSyllable = false
+  foundTheRhymingPhoneme = false
   pron.reverse.each { |phoneme|
     # we need to remove the numbers
     rsig.unshift(phoneme.tr("0-2", ""))
