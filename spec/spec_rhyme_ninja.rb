@@ -73,10 +73,72 @@ describe 'RARITY' do
     oughta_be_common 'yeah'
     oughta_be_common 'whatever'
     oughta_be_common 'anymore'
+    oughta_be_common 'pray'
+    oughta_be_common 'obey'
+    oughta_be_common 'divine'
+    oughta_be_common 'adore'
   end
 
   context 'timely' do
     oughta_be_common 'blog'
+  end
+
+  context 'initialisms' do
+    oughta_be_rare 'ni', NOT_WORKING
+    oughta_be_rare 'cctv', NOT_WORKING
+  end
+
+  context 'names' do
+    oughta_be_rare 'ciardi', NOT_WORKING
+    oughta_be_rare 'tuscaloosa', NOT_WORKING
+    oughta_be_rare 'bors', NOT_WORKING
+    oughta_be_rare 'matias', NOT_WORKING
+    oughta_be_rare 'soweto', NOT_WORKING
+    oughta_be_rare 'steinman', NOT_WORKING
+  end
+  
+  context 'uncommon but not rare' do
+    oughta_be_common 'astray'
+    oughta_be_common 'everyday'
+    oughta_be_common 'faraway'
+    oughta_be_common 'halfway'
+    oughta_be_common 'risque'
+    oughta_be_common 'underway'
+    oughta_be_common 'renowned'
+    oughta_be_common 'newfound'
+    oughta_be_common 'shat', NOT_WORKING
+    oughta_be_common 'bra'
+    oughta_be_common 'daft'
+    oughta_be_common 'evict'
+    oughta_be_common 'flighty'
+    oughta_be_common 'canned'
+    oughta_be_common 'convex'
+    oughta_be_common 'face-to-face'
+    oughta_be_common 'gasoline'
+    oughta_be_common 'holy'
+    oughta_be_common 'paroled'
+    oughta_be_common 'saffron'
+    oughta_be_common 'slacker'
+    oughta_be_common 'trillion'
+    oughta_be_common 'vanes'
+    oughta_be_common 'chicanery'
+    oughta_be_common 'combatants'
+    oughta_be_common 'noncombatants'
+    oughta_be_common 'rapt'
+    oughta_be_common 'sparkly'
+    oughta_be_common 'splashy'
+    oughta_be_common 'straightforward'
+    oughta_be_common 'suicidal'
+    oughta_be_common 'surgical'
+    oughta_be_common 'tenuous'
+    oughta_be_common 'tearful'
+    oughta_be_common 'teary'
+    oughta_be_common 'tasteless'
+    oughta_be_common 'uncut'
+    oughta_be_common 'viral'
+    oughta_be_common 'wholehearted'
+    oughta_be_common 'aground'
+    oughta_be_common 'inbound'
   end
 
   context 'rare' do
@@ -177,68 +239,6 @@ describe 'RARITY' do
     oughta_be_rare 'junco', NOT_WORKING
     oughta_be_rare 'stylites', NOT_WORKING
     oughta_be_rare 'devine'
-  end
-
-  context 'initialisms' do
-    oughta_be_rare 'ni', NOT_WORKING
-    oughta_be_rare 'cctv', NOT_WORKING
-  end
-
-  context 'names' do
-    oughta_be_rare 'ciardi', NOT_WORKING
-    oughta_be_rare 'tuscaloosa', NOT_WORKING
-    oughta_be_rare 'bors', NOT_WORKING
-    oughta_be_rare 'matias', NOT_WORKING
-    oughta_be_rare 'soweto', NOT_WORKING
-    oughta_be_rare 'steinman', NOT_WORKING
-  end
-  
-  context 'uncommon but not rare' do
-    oughta_be_common 'astray'
-    oughta_be_common 'everyday'
-    oughta_be_common 'faraway'
-    oughta_be_common 'halfway'
-    oughta_be_common 'risque'
-    oughta_be_common 'underway'
-    oughta_be_common 'renowned'
-    oughta_be_common 'newfound'
-    oughta_be_common 'shat', NOT_WORKING
-    oughta_be_common 'bra'
-    oughta_be_common 'daft'
-    oughta_be_common 'evict'
-    oughta_be_common 'flighty'
-    oughta_be_common 'canned'
-    oughta_be_common 'convex'
-    oughta_be_common 'face-to-face'
-    oughta_be_common 'gasoline'
-    oughta_be_common 'holy'
-    oughta_be_common 'paroled'
-    oughta_be_common 'saffron'
-    oughta_be_common 'slacker'
-    oughta_be_common 'trillion'
-    oughta_be_common 'vanes'
-    oughta_be_common 'chicanery'
-    oughta_be_common 'combatants'
-    oughta_be_common 'noncombatants'
-    oughta_be_common 'rapt'
-    oughta_be_common 'sparkly'
-    oughta_be_common 'splashy'
-    oughta_be_common 'straightforward'
-    oughta_be_common 'suicidal'
-    oughta_be_common 'surgical'
-    oughta_be_common 'tenuous'
-    oughta_be_common 'tearful'
-    oughta_be_common 'teary'
-    oughta_be_common 'tasteless'
-    oughta_be_common 'uncut'
-    oughta_be_common 'viral'
-    oughta_be_common 'wholehearted'
-    oughta_be_common 'aground'
-    oughta_be_common 'inbound'
-    oughta_be_common 'pray'
-    oughta_be_common 'obey'
-    oughta_be_common 'divine'
-    oughta_be_common 'adore'
   end
 end
 
