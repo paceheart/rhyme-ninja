@@ -104,6 +104,56 @@ def load_variants
 end
 
 #
+# prefixes
+#
+
+COMMON_PREFIXES = [
+  'ante',
+  'anti',
+  'auto',
+  'bi',
+  'co',
+  'com',
+  'con',
+  'contra',
+  'de',
+  'dis',
+  'en',
+  'ex',
+  'extra',
+  'hetero',
+  'homeo',
+  'homo',
+  'hyper',
+  'in',
+  'inter',
+  'intra',
+  'macro',
+  'micro',
+  'mis',
+  'mono',
+  'non',
+  'omni',
+  'out',
+  'over',
+  'post',
+  'pre',
+  'pro',
+  're',
+  'sub',
+  'super',
+  'sym',
+  'syn',
+  'tele',
+  'trans',
+  'tri',
+  'un',
+  'under',
+  'uni',
+  'up',
+]
+
+#
 # consonant clusters and syllabification
 #
 

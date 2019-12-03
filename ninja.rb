@@ -151,14 +151,55 @@ def rdict_lookup(rsig)
 end
 
 def find_preferred_rhyming_words(word, lang)
-  # filters out dispreferred spelling variants and identical rhymes
+  # filters out dispreferred spelling variants and prefix words
   result = find_rhyming_words(word, lang, false).map { |word| preferred_form(word) }
   if result
     result.sort!.uniq!
     result = result - all_forms(word)
     debug "preferred: #{result.inspect}"
   end
+  result = filter_out_prefix_words(result, word)
   return result || [ ]
+end
+
+def filter_out_prefix_words(words, focal_word)
+  return words - prefix_words(words, focal_word)
+end
+
+def prefix_words(words, focal_word)
+  # All words in WORDS that would share the same root as FOCAL_WORD if you removed its prefix.
+  # For example, if WORDS contains "able" and "disable", the prefix_words are ["disable"].
+  # But if WORDS contained "unable" and "disable", there would be no prefix_words.
+  focal_roots = Array.new
+  focal_roots << focal_word
+  for prefix in COMMON_PREFIXES
+    if focal_word.start_with?(prefix)
+      root = focal_word[prefix.length..-1]
+      if words.include?(root)
+        focal_roots << root
+      end
+    end
+  end
+  
+  result = Array.new
+  for word in words
+    if focal_roots.include?(word)
+      result << word
+    else
+      for prefix in COMMON_PREFIXES
+        if word.start_with?(prefix)
+          root = word[prefix.length..-1]
+          if focal_roots.include?(root)
+            result << word
+          end
+        end
+      end
+    end
+  end
+  if result
+    debug "Filtering out prefix words #{result} from #{words}"
+  end
+  return result
 end
 
 def find_rhyming_words(word, lang, identical_ok=true)

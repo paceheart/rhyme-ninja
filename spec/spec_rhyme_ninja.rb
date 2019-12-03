@@ -326,6 +326,7 @@ describe 'RHYMES' do
     oughta_rhyme 'heart', 'art' # take that, Alexander Bain!
     oughta_rhyme 'selfish', 'shellfish' # take that, J.C. Wells!
     oughta_rhyme 'world', 'unfurled'
+    oughta_rhyme 'cold', 'paroled'
   end
 
   context 'perfect rhymes must rhyme the last primary-stressed syllable, not just the last syllable' do
@@ -381,6 +382,7 @@ describe 'RHYMES' do
     ought_not_rhyme 'spectre', 'inspector'
     ought_not_rhyme 'supplemented', 'fermented'
     oughta_rhyme 'poor', 'pure' # P vs. PY is different enough
+    ought_not_rhyme 'jar', 'ajar'
   end
   
   context "you can't just add a prefix and call it a rhyme" do
@@ -395,11 +397,15 @@ describe 'RHYMES' do
     
     oughta_rhyme 'able', 'cable'
     oughta_rhyme 'unable', 'cable'
-    ought_not_rhyme 'able', 'unable', NOT_WORKING # un- is a prefix
+    ought_not_rhyme 'able', 'unable' # un- is a prefix
+    ought_not_rhyme 'unable', 'disable' # dis- is a prefix
+    oughta_rhyme 'able', 'sable' # s- is not a prefix
+    oughta_rhyme 'sable', 'disable', NOT_WORKING # arguable
+    ought_not_rhyme 'able', 'disable'
 
-    ought_not_rhyme 'traction', 'attraction' # arguable
     oughta_rhyme 'action', 'traction'
     oughta_rhyme 'action', 'attraction'
+    ought_not_rhyme 'traction', 'attraction' # arguable
 
     oughta_rhyme 'ice', 'dice'
     ought_not_rhyme 'ice', 'deice' # deice (de-ice) is not in cmudict, so this succeeds for the wrong reason
@@ -409,9 +415,31 @@ describe 'RHYMES' do
     ought_not_rhyme 'stand', 'understand'
     ought_not_rhyme 'organizing', 'reorganizing'
     ought_not_rhyme 'organizing', 'self-organizing'
-    ought_not_rhyme 'urbanize', 'suburbanize', NOT_WORKING # sub- is a prefix
+    ought_not_rhyme 'urban', 'suburban'
+    ought_not_rhyme 'urbanize', 'suburbanize'
     ought_not_rhyme 'america', 'midamerica'
     ought_not_rhyme 'america', 'microamerica'
+    ought_not_rhyme 'pure', 'impure'
+    ought_not_rhyme 'open', 'reopen'
+    ought_not_rhyme 'opened', 'unopened'
+    ought_not_rhyme 'mixed', 'unmixed'
+    ought_not_rhyme 'mixed', 'intermixed'
+    ought_not_rhyme 'unmixed', 'intermixed'
+    ought_not_rhyme 'operate', 'interoperate'
+    ought_not_rhyme 'operate', 'cooperate'
+    ought_not_rhyme 'indicated', 'contraindicated'
+    ought_not_rhyme 'emphasize', 'deemphasize'
+    ought_not_rhyme 'closed', 'enclosed'
+    ought_not_rhyme 'close', 'enclose' # this is trickier because 'close' can mean 'nearby' in which case it's pronounced differently
+    ought_not_rhyme 'act', 'enact'
+    ought_not_rhyme 'urb', 'exurb'
+    ought_not_rhyme 'ordinary', 'extraordinary'
+    ought_not_rhyme 'exempt', 'preempt' # arguable
+    ought_not_rhyme 'subhuman', 'superhuman'
+    ought_not_rhyme 'active', 'hyperactive'
+    ought_not_rhyme 'inactive', 'hyperactive'
+    ought_not_rhyme 'operate', 'teleoperate'
+    ought_not_rhyme 'logical', 'teleological'
   end
 
   context "spelling variants ought not count as rhymes" do
@@ -522,6 +550,7 @@ describe 'RHYMES' do
     oughta_rhyme 'fence', 'wince', NOT_WORKING
     oughta_rhyme 'false', 'malts' # sure I guess? otherwise 'false' won't rhyme with anything at all
     oughta_rhyme 'else', 'melts' # sure I guess? otherwise 'else' won't rhyme with anything at all
+    oughta_rhyme 'poor', 'core', NOT_WORKING # in some dialects, these rhyme
   end
 
   context 'loan words' do
