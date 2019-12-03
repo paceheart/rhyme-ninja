@@ -28,8 +28,7 @@ require 'json'
 require 'rwordnet'
 require_relative 'utils_rhyme'
 
-RAW_CMUDICT_FILENAME = "cmudict/cmudict-0.7c.txt"
-SYLLABIFIED_CMUDICT_FILENAME = "cmudict/cmudict-with-syllables-0.7c.txt"
+CMUDICT_FILENAME = "cmudict/cmudict-0.7c.txt"
 
 WordNet::DB.path = "WordNet3.1/"
 WORDNET_TAGSENSE_COUNT_MULTIPLICATION_FACTOR = 100 # each tagsense_count from wordnet counts as this many occurrences in some corpus
@@ -189,7 +188,7 @@ def load_cmudict()
   # word => [pronunciation1, pronunciation2 ...]
   # pronunciation = [syllable1, syllable1, ...]
   hash = Hash.new {|h,k| h[k] = [] } # hash of arrays
-  IO.readlines(RAW_CMUDICT_FILENAME).each{ |line|
+  IO.readlines(CMUDICT_FILENAME).each{ |line|
     if(useful_cmudict_line?(line))
       line = preprocess_cmudict_line(line)
       tokens = line.split
