@@ -380,6 +380,7 @@ describe 'RHYMES' do
     ought_not_rhyme 'illicit', 'solicit' # I'm sad that these are identical rhymes. illicit [IH2 L IH1 S AH0 T] solicit [S AH0 L IH1 S IH0 T]
     ought_not_rhyme 'spectre', 'inspector'
     ought_not_rhyme 'supplemented', 'fermented'
+    oughta_rhyme 'poor', 'pure' # P vs. PY is different enough
   end
   
   context "you can't just add a prefix and call it a rhyme" do
@@ -458,6 +459,7 @@ describe 'RHYMES' do
     oughta_rhyme "hits", "it's"
     ought_not_rhyme "its", "it's"
     oughta_rhyme "f'd", "bereft"
+    oughta_rhyme "you're", 'secure'
   end
 
   context 'hyphens' do
@@ -503,6 +505,7 @@ describe 'RHYMES' do
     oughta_rhyme 'dreamt', 'tempt' # who cares about that P anyway. there's practically an invisible P in dreampt
     oughta_rhyme 'blotch', 'watch'
     oughta_rhyme 'blotched', 'watched'
+    oughta_rhyme 'poor', 'tour' # P UW R / T UH R
   end
 
   context 'rhymes too imperfect to live' do
@@ -519,6 +522,10 @@ describe 'RHYMES' do
     oughta_rhyme 'fence', 'wince', NOT_WORKING
     oughta_rhyme 'false', 'malts' # sure I guess? otherwise 'false' won't rhyme with anything at all
     oughta_rhyme 'else', 'melts' # sure I guess? otherwise 'else' won't rhyme with anything at all
+  end
+
+  context 'loan words' do
+    oughta_rhyme 'amour', 'bonjour'
   end
 end
 

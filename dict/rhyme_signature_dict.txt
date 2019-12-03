@@ -860,8 +860,8 @@ OW_S_T_AH  agosta dacosta decosta kosta
 EH_L_IY  agostinelli allele altobelli angeli antonelli baldelli beli belli belly berardinelli bertelli bonelli borelli borrelli bottecelli brunelli bucciarelli buzzelli cafarelli campanelli capelli capparelli cappelli cardarelli carelli caroselli carpinelli caselli cassinelli castelli catelli ceccarelli celie celli chiarelli ciccarelli cifelli cimorelli cinelli cirelli covelli critelli crivelli delee delhi deli dimiceli dimichele dominelli donatelli dwelley ehly elie elley ellie elly fanelli fedeli ferrelli filippelli filtrenelli finelli fiorelli gabelli gabrielli gastelli gelli gencarelli giacomelli gianelli giannelli giovanelli helie iacobelli iacovelli iannelli jelley jelly kelley kelli kellie kelly leonelli locatelli lomeli lorelli lucarelli machiavelli machivelli mancinelli marcelli marelli marinelli martelli martorelli masciarelli maselli mcnelly meli melley melli mellie melly miceli micheli michelli mignanelli minelli minnelli mirabelli molinelli monacelli mondelli mongelli morelli nardelli nelli nellie nelly new_delhi nigrelli novelli o'deli o'kelley o'kelly odele okelley okelly pacelli paganelli parmele pascarelli pasquarelli pasquinelli passarelli patricelli pelley perrelli petrelli petrocelli petruccelli petrucelli petruzzelli pignatelli pinelli pirelli piscitelli polsinelli pontarelli poparelli porcelli portelli pucciarelli puccinelli puricelli racanelli raffaelli rapanelli reli ricciardelli riccitelli riopelle robustelli romanelli rondinelli roselli rosselli saltarelli santarelli santelli santorelli scarpelli scibelli selie selley shelley shelly signorelli simonelli skelley skelly smelley smelly spinelli stefanelli stelly tele telly tomaselli tonelli torelli torricelli tortorelli vannelli vecchiarelli veley velie vitelli wehle zambelli zeffirelli zelie zuccarelli
 IY_N_OW  agostino alvino ambrosino amino andantino andino angeleno angelino aquilino aquino ardolino armellino arpino artino astorino atorino audino avellino babino bacino baldino bambino barbarino barradino bellino beradino berandino berardino bernadino bernardino bertino bertolino bettino blandino bocchino bonino boscarino bottino bovino buccino calvino camino cancino canino cannavino cappuccino carino carlino carpino carrino casalino casino cassarino cassino caterino catino celestino cereghino cerino chino ciaravino cimino cimmino cino ciolino cirino cittadino cocanino coconino colino comino consentino constantino contino coppolino corradino corsentino corvino cosentino costantino cousino covino cozzolino crispino cupertino cuttino d'agostino dagostino darpino davino defino delfino delpino demarino demartino deno dentino devino dimarino dimartino dimino dinino dino disabatino encino espino farino faustino fazzino ferrandino ferrentino filipino fino fiorentino fiorino firino florentino folino fortino franchino frankino furino galeano gambino gamino garbarino gaudino geno gerbino giammarino gianino giannino giardino gino godino gravino greeno guardino guarino gudino guerino gugino gulino hino infantino iovino jusino justino karino keno ladino lagomarsino landino latino laureano laurino leino leno lino longino lorino luppino maiorino malino mancino mandarino mangino maraschino marcelino marcellino marino martino maschino masino massimino mendicino mendocino menino merendino merino merlino mieno mino molino monachino montagnino montesino moreno morino mormino musolino neutrino nienow nino occhino orsino pacino paladino palladino palmerino palomino paolino parrino passantino passino pastorino patino paulino pelino pellegrino pennino peraino perino perrino petino petrino petrosino philippino pino pitino pizzino polino pollino pomicino postino reno restaino rodino rubino ruffino sabatino sabino saladino salatino salvino sammartino sandino sanseverino santino saracino savarino savino scardino scarpino sciarrino sciortino serafino serino severino sortino sorvino sparacino spino tamburrino tarantino theano tino tognino tolentino tomaino tomasino tomatino torino trevino trombino tropeano tutino tuzzolino valentino venturino vicino victorino vizcaino wino yoshino zaccagnino zaffino zampino zunino
 OW_S_T_OW  agosto tosto
-UW_R_AH  agoura fujikura kikumura ohmura okura tanimura uemura yoshimura
-UW_R_AA_N  agouron huron tebuthiuron
+UH_R_AH  agoura alura amdura azura badura bonaventura bonura bravura bujumbura chmura chura coloratura contura datura dura durrah euro figura fujikura gura inamura jura kawamura kikumura kimura kitamura komura lura matsumura matsuura midura mitamura miura moura mura nakamura nishimura nomenklatura nomura ohmura okamura okumura okura pura segura stachura sura tamura tanimura uemura vancura ventura yoshimura
+UH_R_AA_N  agouron huron neuron tebuthiuron
 AE_G_R_AH  agra conagra niagara pellagra sinagra viagra
 EH_R_IY_AH_N_IH_Z_AH_M  agrarianism antidisestablishmentarianism authoritarianism egalitarianism parliamentarianism sectarianism totalitarianism vegetarianism
 IY_AH_B_AH_L  agreeable disagreeable foreseeable forseeable unforeseeable
@@ -1288,9 +1288,9 @@ UW_D_Z  alludes bermudes concludes crude's crudes deludes dudes eludes excludes 
 UW_D_IY_NG  alluding brooding colluding concluding deluding denuding eluding excluding extruding exuding feuding including intruding precluding protruding ruding
 AE_L_AH_M  allum alum callum hallam hallum kallam maccallum mccallum salemme salim
 AE_L_AH_M_Z  allums alums hallums
-UH_R  allure amanpour assure badour baldur beladur bijur bloor bonjour boor brochure buhr couture cure damour demure detour duerr dufour endure ensure entrepreneur fluhr foor fuhr gilmour gloor gochnour immature impure insure inure jabbour jure lacour lancour latour lesure luhr lumpur lure manure mature mercure moor moore mosur muhr muir nur obscure observateur pimplapure premature procure pure reassure rednour reinsure ruhr schuur secure segur shure spoor stamour stuhr suhr suhre suire sure tour ture uhr unsure you're your
+UH_R  allure amanpour amour assure badour baldur beladur bijur bloor bonjour boor brochure buhr coeur cour couture cure damour darfur demure detour doer duerr dufour endure ensure entrepreneur fluhr foor fuer fuhr gilmour gloor gochnour grandeur immature impure insure inure jabbour jour jure kapoor koor lacour lancour latour lesure luhr lumpur lure majeure manure mature mccluer mcclure mclure mercure moor moore mosur muhr muir nur obscure observateur pasteur pimplapure poor poore premature procure pure raconteur reassure rednour reinsure rigueur ruhr schuur secteur secure segur shure spoor stamour stuhr suhr suhre suire sure tour ture uhr unsure ure velour voyeur well-doer yoor you're your
 UH_R_D  allured assured boord cured endured ensured insured inured lured matured moored obscured procured reassured reinsured secured toured uninsured unsecured
-UH_R_IY_NG  alluring assuring curing during enduring ensuring insuring luehring luhring luring maturing mooring obscuring procuring reassuring securing touring turing
+UH_R_IY_NG  alluring assuring buehring curing during enduring ensuring insuring luehring luhring luring maturing mooring obscuring procuring reassuring securing touring turing
 UW_ZH_AH_N  allusion collusion conclusion confusion contusion delusion diffusion disillusion exclusion extrusion fusion illusion inclusion infusion intrusion occlusion preclusion profusion rediffusion reperfusion seclusion transfusion
 UW_ZH_AH_N_Z  allusions conclusions confusions contusions delusions exclusions illusions inclusions infusions intrusions transfusions
 UW_V_IY_AH_L  alluvial fluvial pluvial
@@ -1348,7 +1348,7 @@ AE_L_Z_B_R_UH_K_S  alsbrook's alsbrooks alsbrooks'
 EH_L_HH_AH  alshelhah shelhah
 AA_L_T  alt anawalt assault ault basalt brault covault dault default exalt fault galt gault halt kalt kuralt malt mault nault perrault pinault renault salt sault vault walt
 AA_L_T_AH  alta malta minolta peralta rakolta transalta yalta
-UH_R_OW  altamuro arturo buhrow bureau burow curro demuro dimuro duro euro maturo montemurro murihuro muro neuro scaturro shimabukuro tamburo tamburro testuro thurow turo turow venacuro
+UH_R_OW  altamuro arturo buhrow bureau burow curro demuro dimuro duro euro maturo montemurro murihuro muro neuro scaturro shimabukuro tamburo tamburro testuro thurow touro truro turo turow venacuro
 AA_L_T_AH_R  altar alter balter defaulter falter gibraltar halter kalter malter psalter salter saulter stalter walter
 AA_L_T_AH_R_Z  altars alters defaulters falters halter's halters psalters salter's salters walter's walters walters'
 IH_S_T_AH  altavista arista baptista basista batiste bellavista calista christa crista krista sandinista trista vista
@@ -1370,7 +1370,7 @@ IH_S_T_AH_K  altruistic anachronistic antagonistic antiballistic artistic atheis
 AE_L_CH_Y_UW_L_AH_R  altschuler altshuler
 AE_L_CH_UW_L_AH_R  altschuler altshuler
 AH_K_AH_R  altucher brucker bucher drucker ducker fucker hucker kuchar kucher lucker plucker pucker rucker schmucker schucker smucker stucker succor sucker trucker tucker zucker
-UH_R_AH_S  alturas arcturus assuras burrus burruss honduras juris puris
+UH_R_AH_S  alturas arcturus assuras burrus burruss duris duross honduras juris lathouris puris souris
 AA_L_T_S_HH_AY_M_AH_R  altzheimer alzheimer
 AA_L_UW  alu cefalu
 AH_M_B_AA  alumbaugh brumbaugh bumbaugh crumbaugh rumbaugh stumbaugh
@@ -1382,7 +1382,6 @@ UW_M_AH_N_AY_Z_D  aluminized dehumanized humanized
 IH_L_AH_K_EY_T  aluminosilicate silicate
 AH_M_N_AH_S  alumnus numbness
 EY_L_AH_N  alun bailin bailon bailyn balan baylen beilin calan caylin galan galen kalan kalen keylon malan malin neylon phenolphthalein stalon taillon veillon venezuelan walen weylin whalen
-UH_R_AH  alura amdura azura badura bonaventura bonura bravura bujumbura chmura chura coloratura contura datura dura durrah euro figura gura inamura jura kawamura kimura kitamura komura lura matsumura matsuura midura mitamura miura moura mura nakamura nishimura nomenklatura nomura okamura okumura pura segura stachura sura tamura vancura ventura
 AE_L_V_AH_N  alvan alvin calvin galvin malvin
 EY_R  alvare ayr braer buenos-aires elaire lazere mayr meir sofaer st_hilaire zayre
 EH_NG_G_AH  alvarenga bencivenga mennenga stegenga wierenga
@@ -1408,7 +1407,7 @@ AE_M_EY_K_AH_R  amaker hammaker
 AE_M_AH_L_IY  amalie family multifamily
 AE_N_D_AH  amanda aranda banda blanda branda chanda deanda faranda fernanda ganda granda handa janda kanda koranda landa manda maranda marulanda memoranda miranda nolanda noranda panda propaganda sanda standa veranda yanda
 AE_N_D_AH_Z  amanda's amandas miranda's noranda's pandas uganda's verandas
-UH_R_Z  amanpour's assures beladur's boors brochures chargeurs cures detours endures ensures insures koors luehrs luhrs lures matures moore's moores moors obscures reassures secures spoor's sures tour's tours yours
+UH_R_Z  amanpour's assures beladur's boors brochures chargeurs coors cures detours endures ensures insures koors luehrs luhrs lures matures messrs. moore's moores moors moteurs obscures poor's poors reassures secures spoor's sures tour's tours yoor's yours
 AA_N_T_IY  amante amarante aponte assante auntie avanti barsanti belafonte bellante belmonte benanty biamonte bonfanti bracamonte brigante bronte bustamante centofanti conti delmonte demonte desanti diamante durante escalante ferrante fioravanti galante gigante interrante jaunty labonte laplante mazzanti mercadante montante monte montee monti montie monty morante morgante morganti musante pallante passante ponti tonti traficante violante
 AA_R_Z  amar's ares azhar's baars babar's bar's barr's barres barrs bars barz bazaars car's carr's cars cars' cigars czar's czars dinars dzhokhar's far's gars guitars hekmatyar's jabar's jars kahr's kahrs lamar's lars marrs mars mars' marz minicars myanmar's nars npr's ours par's pars r's renoirs sars scars shahar's sitars staar's star's starr's starrs stars stars' superstars tatars tokars vars
 IH_L_OW_Z  amarillo's amarillos armadillos billows decamillo's pillows willowes willows zedillo's zedillos
@@ -1518,7 +1517,6 @@ AE_M_AH_R_T_AY_Z_D  amortized unamortized
 UW_S_OW  amoruso ayuso borruso bruso camuso caruso colarusso crusoe cuso dirusso gattuso giarrusso laruso larusso lorusso macaluso maluso mancuso musso pantuso peluso russo viscuso
 EY_M_AH_S  amos brademas famous ignoramus mandamus ramus seamus shamus
 AW_N_AH_D  amounted mounted
-UW_R  amour coeur cour darfur doer fuer grandeur jour kapoor koor majeure mccluer mcclure mclure pasteur poor poore raconteur rigueur secteur ure velour voyeur well-doer yoor you're
 AE_M_P  amp camp champ clamp cramp damp decamp encamp gamp hamp hampe kamp kampe kramp krampe lamp lampe lampp ramp revamp samp schamp shamp stamp tamp tramp trampe unclamp vamp vancamp
 AE_M_P_AH_L  ampal ample example hampel hample lampl pampel sample trample
 AE_M_P_AH_R_AH_N  amparan pamperin
@@ -2009,7 +2007,7 @@ AA_R_K_AH_T_EH_K_CH_AH_R_Z  architecture's architectures
 AY_V_AH_L  archival arrival revival rival survival
 AA_R_K_S  arcs arx barkes barks clark's clarke's clarks embarks harks larks marcks mark's marks marques marx merc's park's parkes parks parks' quarks remarks sharks sparkes sparks stark's starkes starks tjarks vonarx
 AH_R_AH_S  arcturus banderas burress burris burrous
-UH_R_IY  arcuri buri burri centuri curie duri durie dury fleury furey fury idrocarburi jury kouri laverdure lurie mercuri missouri moncure muri puri tamburri turi turri venturi widuri youri yuri yury zuri
+UH_R_IY  arcuri brewry buri burri centuri curie drewry drury duri durie dury eury fleury flury furey fury idrocarburi jewry jury kouri kury laverdure loury lurie mercuri missouri moncure muri puri tamburri turi turri ury venturi widuri youri yuri yury zuri
 AA_R_D_AH  arda carda garda leonarda lugarda narda skarda
 AA_R_D_AH_TH  ardath ardith
 EH_L_IY_AH  ardelia azelia cerelia dorelia marcelia melia nelia obelia odelia omelia orelia selia zelia
@@ -2306,7 +2304,7 @@ UW_M_Z  assumes bloom's blooms boom's booms brooms consumes coombes coombs coome
 UW_M_IY_NG  assuming blooming booming consuming dooming fuming grooming looming perfuming presuming puming resuming rooming unassuming zooming
 AH_M_P_SH_AH_N  assumption consumption gumption presumption resumption
 AH_M_P_SH_AH_N_Z  assumptions presumptions
-UH_R_AH_N_T_S  assurance durrance durrence insurance reassurance reinsurance
+UH_R_AH_N_T_S  assurance durrance durrence insurance lieurance reassurance reinsurance
 UH_R_AH_N_S_AH_Z  assurances insurance's insurances reassurances
 AE_S_T_AH_R  aster astor blaster caster castor disaster faster gaster grandmaster headmaster jaster kaster laster macmaster master mcmaster oleaster paster pastor pasztor pilaster plaster raster
 AE_S_T_AH_R_OY_D_Z  asteroid's asteroids
@@ -2523,7 +2521,7 @@ EH_M_K_OW  avemco conchemco demko emco gemco remco temco
 EH_N_JH  avenge benge enge klenge menge revenge wenge
 EH_N_JH_AH_R  avenger menger prenger saenger sprenger stenger
 AA_V_AH_N_T  avent dunavant
-UH_R_AA  aventura imamura ishikura skura takemura
+UH_R_AA  aventura imamura ishikura ishimura sakura skura takemura
 AE_V_AH_N_UW_Z  avenue's avenues
 AE_V_R_AH_JH_AH_Z  average's averages
 AE_V_AH_R_EH_T  averette navarette navarrette
@@ -4219,7 +4217,7 @@ AA_N_AH_F_AY_D  bonafide personified
 AA_N_D_AH_R_M_AH_N  bonderman sonderman
 AA_N_D_HH_OW_L_D_AH_R_Z  bondholders bondholders'
 AA_N_D_R_AH  bondra condra double-entendre entendre jayachandra letendre navin-chandra satyandra saundra sondra vondra wondra
-UH_R_AH_N_T  bondurant courant durant
+UH_R_AH_N_T  bondurant burandt courant durant
 OW_N_K_AH_T_AH_R  bonecutter stonecutter
 OW_N_T  bonet don't won't wont
 IH_G_L_IY_OW  bonfiglio coniglio giglio reviglio
@@ -4264,10 +4262,10 @@ UH_K_IY_NG_Z  bookings brookings
 UH_K_M_AH_N  bookman brookman cookman
 UH_K_AW_T  bookout cookout lookout
 UH_K_W_AH_R_M  bookworm hookworm
-UH_R_AH_Z  booras jura's juras kuras lueras nomura's
+UH_R_AH_Z  booras buras jura's juras kuras lueras nomura's
 UH_R_D_AH  boorda burda noorda roorda
 UH_R_IH_SH  boorish moorish
-UH_R_M_AH_N  boorman buhrman fuhrman fuhrmann moorman moormann
+UH_R_M_AH_N  boorman buhrman fuhrman fuhrmann moorman moormann poorman
 UW_S_T  boost deduced induced introduced joost loosed overproduced produced proust reduced reintroduced reproduced reust roost ruest seduced spruced troost
 UW_S_T_AH_D  boosted roosted
 UW_S_T_AH_R_Z  booster's boosters roosters
@@ -4596,9 +4594,9 @@ EH_V_AH_R_D  brevard endeavored evered severed
 EH_V_AH_G  brevig strevig
 EH_V_AH_T_IY  brevity levity longevity
 UW_AH_R_Z  brewer's brewers brewers' chewers dewar's doers ewers fluor's heuer's lewers luers mooers pursuers reviewer's reviewers sewers skewers viewer's viewers viewers' wrongdoers
+UH_R_IY_Z  breweries juries juries' jury's missouri's
 UW_AH_R_IY  brewery drewery
 UW_IY_NG_T_AH_N  brewington bruington
-UW_R_IY  brewry drewry drury eury flury jewry kury loury ury
 AY_AH_N  brian brien brion bryan bryen bryon cryan dian dion ghanaian guyon hawaiian himalayan hyun ion ixion lion lyon mayan mcbrien mion nvryan o'brian o'brien o'bryan obrian obrien obryan olayan orion paraguayan rion ryan ryen ryon scion tiein tryin' tryon uruguayan wian wion wyan zeien zion
 AY_AH_N_Z  brian's bryan's bryans bryans' ghanaians hawaiians lion's lions lions' lyon's lyons mayans o'brien's orion's ryan's ryans zions
 AA_N_AH_Z  briana's donna's donnas iguanas ilana's madonna's manas moniz nirvana's nirvanas saunas shobana's shobanna's
@@ -4866,7 +4864,7 @@ AH_D_V_AA_R  budvar udvar
 EH  bue eh heh hsieh ke kreh leh moshe pirouette reh sneh ye yeh zeh
 UW_G_L_AH_R  buegler coogler koogler kugler
 UW_L_AH_R  buehler buhler cooler cuellar hewler jeweler muehler mueller pooler ruler schooler schueler schueller schuler schuller shular shuler spuhler stuhler suhler uhler uhlir
-UW_R_AH_L  buehrle durall durell kouril purile
+UH_R_AH_L  buehrle durall durell durrell intramural kouril mural neural plural purile rural ural
 UW_K_AH_R  bueker buker duecker dueker duker euchre fluker frucher kuker luker sucre sueker zucker zuker
 OW_S_T_R_OW  buenrostro paternostro
 UW_SH_AH_R  buescher buscher
@@ -4973,8 +4971,8 @@ AH_N_IY_NG  bunning cunning dunning gunning outrunning rerunning running shunnin
 AH_N_Y_AH_N  bunyan grunion munyan munyon onion runnion runyan runyon
 OY_AH_N_T  buoyant clairvoyant flamboyant
 AH_P  bupp chupp closeup cup cupp grupp hupp krupp lay-up pup rupp ruppe schlup schrupp schupp shupp strupp stupp sup trupp up upp yup
-UW_R_AH_K  burack burak durick
-UW_R_AH_N  buran duron vanburen vancuren
+UH_R_AH_K  burack burak durick jurich mercuric rurik sulfuric tchuruk uhrich yurick zurich
+UH_R_AH_N  buran buren duren duron honduran murin suren turin uhrin urine vanburen vancuren vanvooren
 AH_R_B_AH  burba szczerba
 AH_R_B_AA_K  burbach urbach
 AH_R_B_AH_JH  burbage burbidge
@@ -4986,9 +4984,10 @@ AH_R_K_HH_AA_R_T  burckhardt burkhardt burkhart kirkhart
 AH_R_D_AH_N_D  burdened overburdened unburdened
 AH_R_D_AH_K  burdick murdick
 UH_R_D_OW  burdo colasurdo losurdo
-UH_R_OW_Z  bureau's bureaus murihuro's
+UH_R_OW_Z  bureau's bureaus euros murihuro's
 AA_K_R_AH_S_IY_Z  bureaucracies bureaucracy's democracies democracy's
-UH_R_AH_N  buren duren honduran murin suren turin uhrin urine vanvooren
+UH_R_AH_K_R_AE_T  bureaucrat eurocrat
+UH_R_AH_K_R_AE_T_S  bureaucrats eurocrats
 AH_R_F_AH_R_D  burford comerford herford hurford retherford
 AH_R_G_IY  burgee fergie virgie
 AH_R_JH_AH_N  burgeon durgin spurgeon spurgin sturgeon surgeon turgeon virgen virgin yeargin
@@ -5021,7 +5020,7 @@ AH_R_N_IH_SH_T  burnished furnished
 AH_R_N_L_IY  burnley sternly turnley wernli
 AH_R_N_AW_T  burnout turn-out turnout
 AH_R_N_Z_AH_Z  burns's stearns's
-UW_R_AH_K_AH_R  buroker durocher
+UH_R_AH_K_AH_R  buroker durocher
 AH_R_P  burp chirp earp hjerpe serpe slurp usurp
 AH_R_P_IY  burpee chirpy
 AH_R_P_IY_Z  burpees herpes
@@ -6552,7 +6551,6 @@ AO_R_D_AH_N_EY_T_AH_D  coordinated subordinated uncoordinated
 AO_R_D_AH_N_AH_T_S  coordinates subordinates
 AO_R_D_AH_N_EY_T_S  coordinates subordinates
 AO_R_D_AH_N_EY_T_IY_NG  coordinating subordinating
-UW_R_Z  coors messrs. moteurs poor's poors yoor's
 UW_V_AH_R  coover groover gruver hoover kluver maneuver mover outmaneuver remover steuver stuver vancouver zuver
 OW_P_AH_Z  copas kopas
 AA_P_K_OW  copco shopko
@@ -6962,10 +6960,10 @@ UH_R_AH_T_AH_R_Z  curator's curators
 AH_R_B_D  curbed disturbed perturbed reverbed undisturbed unperturbed
 AH_R_B_IY_NG  curbing disturbing perturbing
 AH_R_B_OW  curbow kerbow non-turbo nonturbo turbo
-UH_R_UW  curcuru erburu
+UH_R_UW  curcuru erburu guru kourou mitsuru
 UH_R_IY_NG_T_AH_N  curington purington
 UH_R_IY_OW  curio dimercurio durio mercurio
-UH_R_IY_AH_S  curious furious injurious murias spurious
+UH_R_IY_AH_S  curious furious injurious murias penurious spurious
 UH_R_IY_AH_S_AH_R  curiouser furiouser
 UH_R_IY_AH_S_L_IY  curiously furiously
 AH_R_L_D  curled hurled neworld swirled transworld twirled unfurled whirled world
@@ -7358,7 +7356,7 @@ EH_M_OW_Z  demos memo's memos
 OW_SH_AH_N_Z  demotions emotions lotion's lotions motions notions ocean's oceans potions promotions
 EH_M_P_S  demps kemp's temps
 EH_M_P_S_T_AH_R  dempster kempster
-UH_R_L_IY  demurely prematurely purely securely surely
+UH_R_L_IY  demurely kalgoorlie poorly prematurely purely securely surely
 IH_S_T_AH_F_AY  demystify mystify
 AA_P_AH_L_IY  denapoli duopoly metropoli monopoly oligopoly sloppily
 AE_SH_AH_N_AH_L_AY_Z  denationalize internationalize nationalize rationalize renationalize
@@ -8026,6 +8024,7 @@ AA_M_P_S  duchamp's prompts swamps
 AY_EH_V  dudayev nechayev
 UW_D_AH_K  dudek dudik hudak hudec hudek rudich
 AH_D_M_AH_N  dudman hudman krudman rudman
+UH_R_S_AH_N  duerson luerssen
 UH_R_S_T  duerst vanvoorst
 UW_S_AH_L_AH_R  duesler ruseler
 UW_S_L_AH_R  duesler schuessler
@@ -8084,11 +8083,10 @@ IH_K_AH_T_AH_V  duplicative indicative
 IH_S_AH_T_AH_S  duplicitous felicitous solicitous
 AH_P_R_EY  dupre duprey
 UH_R_AH_B_AH_L_Z  durables non-durables nondurables
-UH_R_AH_R  durer fuhrer furer insurer juror moorer procurer purer reinsurer surer
+UH_R_IY_N  durene fluorine murine
+UH_R_AH_R  durer fuhrer furer insurer juror moorer poorer procurer purer reinsurer surer
 AH_R_F_IY  durfee durfey mcmurphy murphey murphy sherfey
-UH_R_AH_M  durham durum erzurum purim
-UW_R_AH_S  duris duross lathouris souris
-UH_R_AH_L  durrell intramural mural neural plural rural ural
+UH_R_AH_M  durham durum erzurum purim uram
 UW_S_EH_K  dusek janousek kusek matousek matusek usec
 UW_S_AH_N_B_EH_R_IY  dusenberry dusenbury
 AH_S_K_AH_N  duskin etruscan gluskin luskin ruskin tuscan
@@ -8611,7 +8609,6 @@ EH_T_Z_AH_L_Z  etzel's pretzels
 AA_K_S_IY_AH  eudoxia hypoxia
 UW_L_AH_JH_IY_Z  eulogies eulogy's
 OY_R_AH_K  eurich scheurich
-UW_R_OW  euro touro truro
 IY_AH_N_Z  europeans europeans' korean's koreans koreans' mcgeean's meehans paeans peons plebeians sheehan's sofians tennesseans
 OW_P_IY_AH_M  europium opium
 IY_B_IY_OW  eusebio toribio
@@ -9052,7 +9049,6 @@ AH_R_IH_SH_IY_NG  flourishing nourishing
 UH_G_AH_L  fluegel huegel
 UW_AH_N_S_IY  fluency truancy
 EH_S_AH_N_T_L_IY  fluorescently incessantly
-UH_R_IY_N  fluorine murine
 AA_S_K_AH_P_IY  fluoroscopy laparoscopy spectroscopy
 AH_K_SH_AH_N_AH_L  fluxional instructional
 AY_K_AE_CH_AH_R  flycatcher spycatcher
@@ -9827,8 +9823,7 @@ AH_N_AH_S_AH_N  gunnison tunison
 AH_N_P_OY_N_T  gunpoint sunpoint
 AH_P_IY_Z  guppies puppies yuppies
 AH_P_T_AH_N  gupton lupton upton
-UW_R_UW  guru kourou mitsuru
-UW_R_UW_Z  guru's gurus
+UH_R_UW_Z  guru's gurus
 UW_S_M_AH_N  guseman huishman huseman moosman
 AH_TH_AH_R_IY  gutherie guthery
 AH_T_AH_N_B_AH_R_G  guttenberg ruttenberg
@@ -10437,7 +10432,6 @@ AH_P_F_AH_R  hupfer kupfer lupfer
 AH_P_AH_R_T  huppert ruppert
 AH_R_L_B_AH_R_T  hurlbert hurlburt
 AH_R_L_B_AH_T  hurlbut hurlbutt
-UH_R_AA_N  huron neuron
 AH_R_AH_K_EY_N_Z  hurricane hurricane's hurricanes
 UW_S_AH_K  husak matusik musich musick prusak
 AH_S_K_S  husks rusk's tusks
@@ -10677,7 +10671,7 @@ IH_N_T_AH_S  intis lintas
 AA_L_AH_R_AH_B_AH_L  intolerable tolerable
 AA_L_AH_R_AH_N_T_S  intolerance tolerance tolerants
 AA_L_AH_R_AH_N_T  intolerant tolerant
-UH_R_AH_S_T  intourist jurist purest purist surest tourist
+UH_R_AH_S_T  intourist jurist poorest purest purist surest tourist
 AE_K_T_AH_B_AH_L  intractable retractable tractable tractebel
 AA_R_JH_AH_N_AH_L  intramarginal marginal
 UW_T_AH_R_AH_N  intrauterine uterine
@@ -10751,7 +10745,6 @@ AY_S_EY  isay keisei
 IH_SH_AE_K  ishaq kiszczak
 IY_D_AA  ishida saksida theda
 IY_M_AA  ishikawajima seema takeshima
-UW_R_AA  ishimura sakura
 IH_SH_M_EY_L  ishmael ishmail
 AY_L_AH_N_D_AH_R  islander nylander rhode-islander wilander
 AY_L_AH_N_D_AH_R_Z  islanders rhode-islanders
@@ -10886,9 +10879,7 @@ AH_NG_K_IY_Z  junkies monkey's monkeys
 UW_N_AH_T  junot unit
 UW_P_AH_N  jupin lupin supan toupin trupin zupan
 AH_R_CH_AH_K  jurczyk pertschuk yurchak
-UH_R_EH_K  jurek kocourek yurek zurek
-UH_R_AH_K  jurich mercuric rurik sulfuric tchuruk uhrich yurick zurich
-UH_R_IY_Z  juries juries' jury's missouri's
+UH_R_EH_K  jurek kocourek kocurek kurek mazurek yurek zurek
 UH_R_AH_S_T_S  jurists purists tourists
 AH_R_K_AH_V_AH_CH  jurkiewicz jurkovich mazurkiewicz perkovic perkovich turkovich yurkovich
 AH_S_K_OW  jusco luckow popieluszko susko yusko
@@ -10904,7 +10895,6 @@ IH_N_S_K_IY_Z  kaczynski's levinsky's lewinsky's mezvinsky's stravinsky's yavlin
 EH_S_T_N_AH_R  kaestner kestner
 AA_D_UW  kakadu radu
 AA_R_UW  kakumaru kanemaru masaru toshiharu
-UW_R_L_IY  kalgoorlie poorly
 AE_L_AH_L  kalil kallal khalil
 AA_L_AH_N_B_AH_R_G_AH_R  kallenberger shallenberger shollenberger sollenberger
 AE_L_IY_OW  kallio valeo
@@ -11069,7 +11059,6 @@ AH_T_Z_AH_N  knutzen rutzen
 OW_B_AA  koba proba
 EH_M_B_AH  kociemba moczygemba otremba poremba zaremba zemba
 AA_K_S_AH_S  kocsis rox's
-UW_R_EH_K  kocurek kurek mazurek
 OW_D_IY_AE_K  kodiak zodiac
 AA_IY_N_M_AH_N  koeneman schoeneman schoenemann
 AH_R_N_AH_G  koenig virnig
@@ -11943,7 +11932,7 @@ UW_M_AA  moomaw mumaw sakuma
 UW_N_IY_Z  moonies rooney's
 UH_R_F_IY_L_D  moorefield muirfield
 UH_R_HH_EH_D  moorehead moorhead muirhead
-UH_R_HH_AW_S  moorehouse moorhouse
+UH_R_HH_AW_S  moorehouse moorhouse poorhouse
 UH_R_L_AE_N_Z  moorland's moorlands
 AO_R_AH_SH  morash orosz
 AO_R_AH_TH  morath porath
@@ -11973,6 +11962,7 @@ AA_S_K  mosk mosque
 AH_DH_AH_R_F_AH_K_AH_R_Z  motherfucker's motherfuckers
 AH_DH_AH_R_IY_NG  mothering smothering wuthering
 AH_DH_AH_R_SH_IH_P_S  mothership's motherships
+UH_R_AE_D  mourad murad
 AO_R_N_F_AH_L  mournful scornful
 AH_S_T_AE_SH  moustache mustache
 UW_V_IY_Z  movie's movies

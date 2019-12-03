@@ -99,6 +99,11 @@ def preprocess_cmudict_line(line)
   line.gsub!("IH1 NG", "IY1 NG")
   line.gsub!("IH2 NG", "IY2 NG")
 
+  # poor [P UW1 R] / tour [T UH1 R]
+  line.gsub!("UW0 R", "UH0 R")
+  line.gsub!("UW1 R", "UH1 R")
+  line.gsub!("UW2 R", "UH2 R")
+
   #         caught [K AA1 T] / fought [F AO1 T]
   #         bong [B AA1 NG] / song [S AO1 NG]
   # but NOT bar [B AA1 R] / score [S K AO1 R], so we leave it alone if it's followed by R

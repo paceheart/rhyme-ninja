@@ -5,8 +5,6 @@ To help me write better limericks quicklier.
 ## to-do list
 
 * reduce dumb outputs via better rarity filtering
-** improve syllable detection for better identical rhyme filtering
-*** try UWn R -> UHn R
 ** put tuples in dregs unless they contain at least two common words
 ** WordNet contains saffron and paroled. Why do we need lemma_en? We count a word as common if it has a frequency of 2 or more (@todo try upping this) according to lemma_en, or if it exists in WordNet at all. If we upped this to 2, 2/3 of the newly-rare words would be crap, but we would also lose 1/3 good words like chicanery, noncombatants, propagandize, and psilocybin. That's probably okay.
 ** separate names out
