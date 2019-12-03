@@ -425,10 +425,11 @@ end
 def rhyme_signature_array_with_stress(pron, stress)
   rsig = Array.new
   pron.reverse.each { |phoneme|
-    # we need to remove the numbers
-    rsig.unshift(phoneme.tr("0-2", ""))
-    if(phoneme.include?(stress))
-      return rsig # we found the phoneme with stress STRESS, we can stop now
+    unless(syllable_boundary?(phoneme))
+      rsig.unshift(phoneme.tr("0-2", "")) # we need to remove the numbers
+      if(phoneme.include?(stress))
+        return rsig # we found the phoneme with stress STRESS, we can stop now
+      end
     end
   }
   return nil
@@ -472,22 +473,22 @@ end
 
 def rhyme_syllables_array_with_stress(pron, stress)
   rsig = Array.new
-  foundTheRhymingPhoneme = false
+  foundTheRhymingSyllable = false
   pron.reverse.each { |phoneme|
-    # we need to remove the numbers
-    rsig.unshift(phoneme.tr("0-2", ""))
-    if(!foundTheRhymingPhoneme)
+    unless syllable_boundary?(phoneme)
+      rsig.unshift(phoneme.tr("0-2", "")) # we need to remove the numbers
+    end
+    if(!foundTheRhymingSyllable)
       if(phoneme.include?(stress))
-        foundTheRhymingPhoneme = true; # we found the main stressed phoneme, we can stop at the next vowel
+        foundTheRhymingSyllable = true; # we found the main stressed vowel, we can stop at the next syllable boundary
       end
     else
-      if(vowel?(phoneme))
-        rsig.shift # get that vowel outta here
+      if(syllable_boundary?(phoneme))
         return rsig
       end
     end
   }
-  if foundTheRhymingPhoneme # we got all the way to the beginning of the word without another vowel
+  if foundTheRhymingSyllable # we got all the way to the beginning of the word without a syllable break
     return rsig
   end
   return nil
@@ -495,6 +496,10 @@ end
 
 def vowel?(phoneme)
   return phoneme.include?("1") || phoneme.include?("2") || phoneme.include?("0")
+end
+
+def syllable_boundary?(phoneme)
+  return phoneme == "."
 end
 
 def rhyme_syllables_string(pron)
@@ -511,4 +516,49 @@ def lang(lang, en_string, es_string)
   else
     abort "Unexpected language #{lang}"
   end
+end
+
+def syllabify(pron)
+  syls = Array.new
+  this_syllable = Array.new
+  this_initial_consonant_cluster = Array.new
+  candidate_initial_consonant_cluster = Array.new
+  foundThisSyllablesVowel = false
+  pron.reverse.each { |phoneme|
+    if !foundThisSyllablesVowel
+      this_syllable.unshift(phoneme) # just allow any syllable-final consonant cluster
+      if(vowel?(phoneme))
+        foundThisSyllablesVowel = true
+      end
+    else
+      # gobble up as many syllable-initial consonants while still being a valid cluster
+      candidate_initial_consonant_cluster = this_initial_consonant_cluster.unshift(phoneme)
+      if single_consonant?(candidate_initial_consonant_cluster) ||
+         ALL_INITIAL_CONSONANT_CLUSTERS.include?(candidate_initial_consonant_cluster.join(" "))
+        this_syllable.unshift(phoneme) # PHONEME is legit as a syllable-initial consonant cluster
+        this_initial_consonant_cluster = candidate_initial_consonant_cluster
+        # puts "#{phoneme} is legit, now we have #{this_syllable} starting with #{this_initial_consonant_cluster}"
+      else
+        # that's all we can gobble, gotta move on to the next syllable now
+        # puts "we've got #{this_syllable}. That's all we can gobble, gotta move on to the next syllable now"
+        syls.unshift(this_syllable)
+        # add a syllable boundary token
+        syls.unshift(".")
+        # ok, stick this phoneme at the end of the next syllable (previous, because we're going backward)
+        this_syllable = Array.new
+        this_initial_consonant_cluster = Array.new
+        this_syllable.unshift(phoneme)
+        foundThisSyllablesVowel = vowel?(phoneme)
+      end
+    end
+  }
+  # tack on whatever was left over when we ran out of phonemes
+  unless this_syllable.empty?
+    syls.unshift(this_syllable)
+  end
+  return syls
+end
+
+def single_consonant?(phoneme_cluster)
+  return phoneme_cluster.length == 1 && !vowel?(phoneme_cluster[0])
 end

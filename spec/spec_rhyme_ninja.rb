@@ -363,30 +363,32 @@ describe 'RHYMES' do
   context 'identical rhymes' do
     ought_not_rhyme 'leave', 'believe'
     ought_not_rhyme 'troll', 'patrol'
-    ought_not_rhyme 'troll', 'control', NOT_WORKING # need better syllable detection
+    ought_not_rhyme 'troll', 'control'
     oughta_rhyme 'end', 'pend'
-    oughta_rhyme 'upend', 'pend', NOT_WORKING # need better syllable detection
-    ought_not_rhyme 'end', 'upend'
+    oughta_rhyme 'upend', 'pend', NOT_WORKING # 'upend' isn't in cmudict, and if it were, we'd get an incorrect syllable boundary anyway
+    ought_not_rhyme 'end', 'upend' # working for the wrong reasons: 'upend' isn't in cmudict, and if it were, we'd get an incorrect syllable boundary anyway
     ought_not_rhyme 'lied', 'relied'
-    ought_not_rhyme 'confide', 'defied', NOT_WORKING # need better syllable detection
+    ought_not_rhyme 'confide', 'defied'
     ought_not_rhyme 'side', 'beside'
-    ought_not_rhyme 'side', 'alongside', NOT_WORKING # need better syllable detection
-    ought_not_rhyme 'beside', 'alongside', NOT_WORKING # need better syllable detection
+    ought_not_rhyme 'side', 'alongside'
+    ought_not_rhyme 'beside', 'alongside'
     ought_not_rhyme 'applied', 'misapplied'
     ought_not_rhyme 'plied', 'applied'
-    ought_not_rhyme 'complied', 'applied', NOT_WORKING # need better syllable detection
+    ought_not_rhyme 'complied', 'applied'
     ought_not_rhyme 'recorded', 'prerecorded'
     ought_not_rhyme 'corded', 'recorded'
     ought_not_rhyme 'illicit', 'solicit' # I'm sad that these are identical rhymes. illicit [IH2 L IH1 S AH0 T] solicit [S AH0 L IH1 S IH0 T]
+    ought_not_rhyme 'spectre', 'inspector'
+    ought_not_rhyme 'supplemented', 'fermented'
   end
   
   context "you can't just add a prefix and call it a rhyme" do
     oughta_rhyme 'grape', 'ape' # gr- is not a prefix
     oughta_rhyme 'pot', 'spot' # s- is not a prefix
     oughta_rhyme 'under', 'plunder' # pl- is not a prefix
-    oughta_rhyme 'bone', 'trombone' # trom- is not a prefix... but this one is arguable
+    ought_not_rhyme 'bone', 'trombone' # trom- is not a prefix, but this is an identical rhyme anyway
     
-    ought_not_rhyme 'promising', 'unpromising', NOT_WORKING # need better syllable detection
+    ought_not_rhyme 'promising', 'unpromising'
     ought_not_rhyme 'diversity', 'biodiversity'
     ought_not_rhyme 'ion', 'cation'
     
@@ -403,7 +405,7 @@ describe 'RHYMES' do
 
     oughta_rhyme 'stand', 'strand'
     oughta_rhyme 'understand', 'strand'
-    ought_not_rhyme 'stand', 'understand', NOT_WORKING # need better syllable detection
+    ought_not_rhyme 'stand', 'understand'
     ought_not_rhyme 'organizing', 'reorganizing'
     ought_not_rhyme 'organizing', 'self-organizing'
     ought_not_rhyme 'urbanize', 'suburbanize', NOT_WORKING # sub- is a prefix
@@ -447,8 +449,8 @@ describe 'RHYMES' do
     ought_not_rhyme 'chicked', 'trucked'
     oughta_rhyme 'neediest', 'greediest'
     oughta_rhyme 'meatiest', 'greediest', NOT_WORKING # 'meatiest' is not in cmudict
-    oughta_rhyme 'supplemented', 'fermented'
     ought_not_rhyme 'can', 'done'
+    oughta_rhyme 'supplemented', 'invented' # IH D oughta get dwimmed to AH D
   end
   
   context 'apostrophes' do
@@ -482,7 +484,7 @@ describe 'RHYMES' do
     oughta_rhyme 'car', 'tsar'
     oughta_rhyme 'car', 'czar'
     ought_not_rhyme 'czar', 'tsar'
-    oughta_rhyme 'lad', 'vlad'
+    oughta_rhyme 'lad', 'vlad', NOT_WORKING # 'vlad' gets syllabified as V . L AE D
     oughta_rhyme 'withdraw', 'voila'
   end
   
@@ -710,7 +712,7 @@ describe 'SET_RELATED' do
     set_related_oughta_contain 'music', 'duet', 'quintet', NOT_WORKING
     set_related_ought_not_contain 'music', 'coral', 'choral' # exclude homophones 
     set_related_ought_not_contain 'music', 'recorded', 'prerecorded' # exclude identical rhymes
-    set_related_ought_not_contain 'music', 'percussion', 'repercussion', NOT_WORKING # this identical rhyme slips through because of the alternate pronunciation of repercussion pron2=["R", "IY2", "P", "R", "AH0", "K", "AH1", "SH", "AH0", "N"]
+    set_related_ought_not_contain 'music', 'percussion', 'repercussion'
     set_related_ought_not_contain 'music', 'tonal', 'atonal' # exclude identical rhymes
     set_related_oughta_contain 'music', 'appalachian', 'augmentation'
     set_related_oughta_contain 'music', 'abbreviation', 'notation' # identical rhymes are OK if they're part of a tuples that contains non-identical rhymes such as the previous line
@@ -806,9 +808,9 @@ describe 'PAIR_RELATED' do
     pair_related_oughta_contain 'food', 'evil', 'bread', 'undead', NOT_WORKING
     pair_related_oughta_contain 'food', 'evil', 'heinz', 'designs'
     pair_related_oughta_contain 'food', 'evil', 'served', 'undeserved' # this is not quite an identical rhyme becauze the s in undeserved is pronounced like a z
-    pair_related_ought_not_contain 'food', 'evil', 'sanitation', 'temptation', NOT_WORKING # need better syllable detection # exclude identical rhymes '-nation'
-    pair_related_ought_not_contain 'food', 'evil', 'healthy', 'unhealthy', NOT_WORKING # need better syllable detection # exclude identical rhymes '-nation'
-    pair_related_ought_not_contain 'food', 'evil', 'contamination', 'condemnation', NOT_WORKING # need better syllable detection # exclude identical rhymes '-nation'
+    pair_related_ought_not_contain 'food', 'evil', 'sanitation', 'temptation'
+    pair_related_ought_not_contain 'food', 'evil', 'healthy', 'unhealthy'
+    pair_related_ought_not_contain 'food', 'evil', 'contamination', 'condemnation'
   end
   
   context 'food dark' do

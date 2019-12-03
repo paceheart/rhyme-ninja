@@ -28,6 +28,9 @@ require 'json'
 require 'rwordnet'
 require_relative 'utils_rhyme'
 
+RAW_CMUDICT_FILENAME = "cmudict/cmudict-0.7c.txt"
+SYLLABIFIED_CMUDICT_FILENAME = "cmudict/cmudict-with-syllables-0.7c.txt"
+
 WordNet::DB.path = "WordNet3.1/"
 WORDNET_TAGSENSE_COUNT_MULTIPLICATION_FACTOR = 100 # each tagsense_count from wordnet counts as this many occurrences in some corpus
 
@@ -181,11 +184,12 @@ def conflate_imperfect_rhymes(line)
   return line
 end
 
+# @todo don't preprocess
 def load_cmudict()
   # word => [pronunciation1, pronunciation2 ...]
   # pronunciation = [syllable1, syllable1, ...]
   hash = Hash.new {|h,k| h[k] = [] } # hash of arrays
-  IO.readlines("cmudict/cmudict-0.7c.txt").each{ |line|
+  IO.readlines(RAW_CMUDICT_FILENAME).each{ |line|
     if(useful_cmudict_line?(line))
       line = preprocess_cmudict_line(line)
       tokens = line.split
@@ -201,7 +205,7 @@ def load_cmudict()
           initial_cluster = initial_consonant_cluster_array(tokens)
           unless initial_consonant_cluster_ok?(initial_cluster)
             word_ok = false
-            puts "Ignoring weird initial consonant cluster: #{initial_cluster.join(" ")} in #{line}"
+            # puts "Ignoring weird initial consonant cluster: #{initial_cluster.join(" ")} in #{line}"
           end
           final_cluster = final_consonant_cluster_array(tokens)
           unless final_consonant_cluster_ok?(final_cluster)
@@ -210,9 +214,11 @@ def load_cmudict()
           end
         end
         if word_ok
-          hash[word].push(tokens)
+          syls = syllabify(tokens)
+          sylpron = syls.flatten
+          hash[word].push(sylpron)
           if(word == TRACE_WORD)
-            puts "TRACE Loaded #{word} as #{tokens}"
+            puts "TRACE Loaded #{word} as #{sylpron}"
           end
         end
       else
@@ -391,6 +397,9 @@ def add_frequency_info(cmudict, lemmadict, freqdict)
     wn_freq = wn_frequency(word, lemmadict)
     if(stop_word?(word))
       freq = 999999 # very common
+# Even if we let 'Vlad' through, it would have incorrect syllable boundaries because it won't accept VL as a conconant cluster
+#    elsif(WHITELIST.include?(word))
+#      freq = 212 # common enough to be worth mentioning explicitly
     else
       freq = freqdict_freq + wn_freq
     end
