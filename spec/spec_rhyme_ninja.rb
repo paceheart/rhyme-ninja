@@ -72,6 +72,7 @@ describe 'RARITY' do
     oughta_be_common 'flight'
     oughta_be_common 'yeah'
     oughta_be_common 'whatever'
+    oughta_be_common 'anymore'
   end
 
   context 'timely' do
@@ -175,6 +176,7 @@ describe 'RARITY' do
     oughta_be_rare 'tvsat'
     oughta_be_rare 'junco', NOT_WORKING
     oughta_be_rare 'stylites', NOT_WORKING
+    oughta_be_rare 'devine'
   end
 
   context 'initialisms' do
@@ -233,6 +235,10 @@ describe 'RARITY' do
     oughta_be_common 'wholehearted'
     oughta_be_common 'aground'
     oughta_be_common 'inbound'
+    oughta_be_common 'pray'
+    oughta_be_common 'obey'
+    oughta_be_common 'divine'
+    oughta_be_common 'adore'
   end
 end
 
@@ -847,6 +853,8 @@ describe 'PAIR_RELATED' do
     pair_related_ought_not_contain 'food', 'evil', 'sanitation', 'temptation'
     pair_related_ought_not_contain 'food', 'evil', 'healthy', 'unhealthy'
     pair_related_ought_not_contain 'food', 'evil', 'contamination', 'condemnation'
+    pair_related_oughta_contain 'food', 'evil', 'slavery', 'savory'
+    pair_related_ought_not_contain 'food,' 'evil', 'slavery', 'savoury', NOT_WORKING
   end
   
   context 'food dark' do

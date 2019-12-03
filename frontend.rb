@@ -3,8 +3,8 @@
 #
 
 # 'cgi' or 'text'
-OUTPUT_FORMAT = 'text'
-DEBUG_MODE = true
+OUTPUT_FORMAT = 'cgi'
+DEBUG_MODE = false
 
 #
 # Front end for Rhyme Ninja.

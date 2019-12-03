@@ -151,14 +151,18 @@ def rdict_lookup(rsig)
 end
 
 def find_preferred_rhyming_words(word, lang)
+  return filter_out_dispreferred_words(find_rhyming_words(word, lang, false), word)
+end
+
+def filter_out_dispreferred_words(words, focal_word)
   # filters out dispreferred spelling variants and prefix words
-  result = find_rhyming_words(word, lang, false).map { |word| preferred_form(word) }
+  result = words.map { |word| preferred_form(word) }
   if result
     result.sort!.uniq!
-    result = result - all_forms(word)
+    result = result - all_forms(focal_word)
     debug "preferred: #{result.inspect}"
   end
-  result = filter_out_prefix_words(result, word)
+  result = filter_out_prefix_words(result, focal_word)
   return result || [ ]
 end
 
@@ -337,7 +341,7 @@ def find_related_words(word, include_self, lang)
 end
 
 def find_related_rhymes(rhyme, rel, lang)
-  results_to_related_words(find_datamuse_results(rhyme, rel, lang))
+  filter_out_dispreferred_words(results_to_related_words(find_datamuse_results(rhyme, rel, lang)), rhyme)
 end
 
 def find_datamuse_results(rhyme, rel, lang)
@@ -482,9 +486,27 @@ def short_gloss(synset)
 end
 
 def print_tuple(tuple, lang)
+  # this basically just pushes the rare words to the end, but we could do something snazzier if we want
+  cgi_print "<div class='output_tuple'><p class='output_p'>"
+  good_tuple = tuple.reject{ |t| rare?(t) }
+  bad_tuple  = tuple.select{ |t| rare?(t) }
+  if(good_tuple.empty?)
+    print_half_of_tuple(bad_tuple, lang)
+  elsif(bad_tuple.empty?)
+    print_half_of_tuple(good_tuple, lang)
+  else
+    print_half_of_tuple(good_tuple, lang)
+    print " / "
+    print_half_of_tuple(bad_tuple, lang)
+  end
+  cgi_print "</p></div>"
+  puts
+  STDOUT.flush
+end
+  
+def print_half_of_tuple(tuple, lang)
   # print TUPLE separated by slashes
   i = 0
-  cgi_print "<div class='output_tuple'><p class='output_p'>"
   tuple.each { |elem|
     if(i > 0)
       print " / "
@@ -492,9 +514,6 @@ def print_tuple(tuple, lang)
     print_word(elem, lang)
     i += 1
   }
-  cgi_print "</p></div>"
-  puts
-  STDOUT.flush
 end
 
 def print_tuples(tuples, lang)
@@ -571,6 +590,37 @@ def filter_out_rare_words(words)
   return good, bad
 end
 
+def rare_tuple?(tuple, threshold=2)
+  common_count = 0
+  for word in tuple
+    unless rare?(word)
+      common_count = common_count + 1
+      if(common_count >= threshold)
+        return false
+      end
+    end
+  end
+  return true
+end
+
+def filter_out_rare_tuples(tuples)
+  # A tuple gets to be common if it contains at least two common words
+  good = tuples.reject{ |t| rare_tuple?(t) }
+  bad = tuples.select { |t| rare_tuple?(t) }
+  return good, bad
+end
+
+def rare_pair?(pair)
+  rare_tuple?(pair, 2)
+end
+
+def filter_out_rare_pairs(tuples)
+  # A pair only gets to be common if both its words are common
+  good = tuples.reject{ |t| rare_pair?(t) }
+  bad = tuples.select { |t| rare_pair?(t) }
+  return good, bad
+end
+
 def print_word(word, lang)
   word = word.gsub(/\(.*\)/, '') # remove stuff in parentheses
   got_rhymes = !pronunciations(word, lang).empty?
@@ -578,11 +628,14 @@ def print_word(word, lang)
     # @todo urlencode
     cgi_print lang(lang, "<a href='rhyme.rb?word1=#{word}'>", "<a href='rimar.rb?word1=#{word}'>")
   end
-  ubiq = ubiquity(word)
-  #  cgi_print "<span style='color: rgb(#{ubiq}, #{ubiq}, #{ubiq});'>"
+  ubiq = 255
+  if(rare?(word))
+    ubiq = 0
+  end
+  # cgi_print "<span style='color: rgb(#{ubiq}, #{ubiq}, #{ubiq});'>"
   word = word.gsub('_', ' ')
   print word
-#  cgi_print "</span>"
+  # cgi_print "</span>"
   if(got_rhymes)
     cgi_print "</a>"
   end
@@ -631,11 +684,6 @@ def rhyme_ninja(word1, word2, goal, lang='en', output_format='text', debug_mode=
     result_header = lang(lang, "Rhymes for", "Rimas para") + " " + focal_word(word1) + header_eol
     result, dregs = filter_out_rare_words(find_preferred_rhyming_words(word1, lang))
     result_type = :words
-  when "synonyms"
-    result_header = lang(lang, "Synonyms of", "Sinónimos para") + " " + focal_word(word1) + header_eol
-    result = find_synsets(word1, lang)
-    dregs = [ ]
-    result_type = :synsets
   when "related"
     result_header = lang(lang, "Words related to", "Palabras relacionadas con") + " " + focal_word(word1) + header_eol
     unless DATAMUSE_ENABLED
@@ -648,7 +696,7 @@ def rhyme_ninja(word1, word2, goal, lang='en', output_format='text', debug_mode=
     unless DATAMUSE_ENABLED
       result_header = "<i>This section currently under (re)construction. Try back in a couple of days. I'm working on it! -Pace</i>"
     end
-    result = find_rhyming_tuples(word1, lang)
+    result, dregs = filter_out_rare_tuples(find_rhyming_tuples(word1, lang))
     result_type = :tuples
   when "pair_related"
     if(word1 == "" or word2 == "")
@@ -662,7 +710,7 @@ def rhyme_ninja(word1, word2, goal, lang='en', output_format='text', debug_mode=
       unless DATAMUSE_ENABLED
         result_header = "<i>This section currently under (re)construction. Try back in a couple of days. I'm working on it! -Pace</i>"
       end
-      result = find_rhyming_pairs(word1, word2, lang)
+      result, dregs = filter_out_rare_tuples(find_rhyming_pairs(word1, word2, lang))
       result_type = :tuples
     end
   when "related_rhymes"
@@ -677,7 +725,7 @@ def rhyme_ninja(word1, word2, goal, lang='en', output_format='text', debug_mode=
       unless DATAMUSE_ENABLED
         result_header = "<i>This section currently under (re)construction. Try back in a couple of days. I'm working on it! -Pace</i>"
       end
-      result = find_related_rhymes(word1, word2, lang)
+      result, dregs = filter_out_rare_words(find_related_rhymes(word1, word2, lang))
       result_type = :words
     end
   else
