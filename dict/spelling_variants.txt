@@ -329,3 +329,5 @@ foregone forgone
 szechuan sichuan
 tehran teheran
 barbecue barbeque
+restaurateur restauranteur
+restaurateurs restauranteurs

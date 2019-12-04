@@ -166,7 +166,7 @@ AA_L_IH_SH  abolish demolish fallish kalisz polish smallish sollish
 AA_L_IH_SH_T  abolished demolished polished
 AA_L_IH_SH_AH_Z  abolishes demolishes
 AA_L_IH_SH_IY_NG  abolishing demolishing polishing
-IH_SH_AH_N  abolition academician acquisition addition admission admonition ambition ammunition apparition attrition audition britian clinician coalition cognition commision commission competition composition condition contrition daffynition decommission decomposition definition demolition dentition deposition dietician dietitian dimunition disposition edition electrician emission erudition exhibition expedition exposition extradition fission fondkommission fruition geriatrician ignition imposition inhibition inquisition intermission intuition juxtaposition logician magician malnutrition mathematician mccuistion misrecognition mission mortician munition musician nisshin nutrition obstetrician omission opposition optician partition patrician pediatrician permission petition physician politician position precondition predisposition preignition premonition presupposition prohibition proposition recission recognition recondition redefinition redeposition reimposition remission rendition repetition reposition requisition retransmission rhetorician sedition statistician submission super-imposition super-position superstition supposition suspicion tactician technician theoretician titian tradition transition transmission volition wishon
+IH_SH_AH_N  abolition academician acquisition addition admission admonition ambition ammunition apparition attrition audition britian clinician coalition cognition commision commission competition composition condition contrition daffynition decommission decomposition definition demolition dentition deposition dietician dietitian dimunition disposition edition electrician emission erudition exhibition expedition exposition extradition fission fondkommission fruition geriatrician ignition imposition inhibition inquisition intermission intuition juxtaposition logician magician malnutrition mathematician mccuistion misrecognition mission mortician munition musician nisshin nutrition obstetrician omission opposition optician partition patrician pediatrician permission petition physician politician position precondition predisposition preignition premonition presupposition prohibition proposition recission recognition recondition redefinition redeposition reimposition remission rendition repetition reposition requisition retransmission rhetorician sedition statistician submission super-imposition superposition superstition supposition suspicion tactician technician theoretician titian tradition transition transmission volition wishon
 IH_SH_AH_N_AH_S_T  abolitionist exhibitionist nutritionist
 IH_SH_AH_N_AH_S_T_S  abolitionists exhibitionists nutritionists
 UW_D_IY  aboodi ahmoudi alamoudi baroody berudi boody broody chudy coody doody eudy foodie howdydoody hudy judi judy ludy moodie moody nudey rhudy rudi rudie rudy ruedy trudie trudy tschudy udy yehudi
@@ -1209,7 +1209,7 @@ IH_S_AH  alissa alyssa clarissa corissa disa garissa issa issah lissa marcissa m
 EY_L_IY_AH  alitalia centralia galea ofelia portugalia
 AE_L_IY_AH  alitalia athalia italia mahalia nathalia
 IH_TH_IY_AH  alithia forsythia pythia
-AY_V  alive arrive clive clyve connive contrive deprive derive dive dr dr. drive five hive i've jive live o'five revive shive strive survive thrive vive
+AY_V  alive arrive clive clyve connive contrive deprive derive dive dr. drive five hive i've jive live o'five revive shive strive survive thrive vive
 AE_L_K_AH  alka galka kalka palca palka rusalka
 OY_D_AH_L  alkaloidal colloidal rhizoidal sigmoidal
 AH_R_M_IY_Z  alkermes hermes
@@ -7828,7 +7828,7 @@ AA_B_S_AH_N_Z  dobson's dobsons hobson's
 AA_K_AH_T_S  dockets lockets lockett's pockets rocket's rockets sockets
 AA_K_HH_AH_M  dockham stockham
 AA_K_IY_NG_Z  dockings stockings talking's
-AA_K_T_AH_R  dockter doctor doktor dr dr. hoctor prockter procter proctor wachter
+AA_K_T_AH_R  dockter doctor doktor dr. hoctor prockter procter proctor wachter
 AA_K_Y_AA_R_D  dockyard stockyard
 AA_K_T_AH_R_Z  doctor's doctors doctors' proctor's proctors
 AA_K_T_AH_R_AH_L  doctoral postdoctoral

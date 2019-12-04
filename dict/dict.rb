@@ -29,6 +29,8 @@ require 'rwordnet'
 require_relative 'utils_rhyme'
 
 CMUDICT_FILENAME = "cmudict/cmudict-0.7c.txt"
+RARE_WORDS_FILENAME = "rare_words.txt"
+COMMON_WORDS_FILENAME = "common_words.txt"
 
 WordNet::DB.path = "WordNet3.1/"
 WORDNET_TAGSENSE_COUNT_MULTIPLICATION_FACTOR = 100 # each tagsense_count from wordnet counts as this many occurrences in some corpus
@@ -396,15 +398,21 @@ def add_frequency_info(cmudict, lemmadict, freqdict)
   # to distinguish rare words from common words.
   count = 0;
   hash = Hash.new
+  rare_words = IO.readlines(RARE_WORDS_FILENAME, chomp: true)
+  common_words = IO.readlines(COMMON_WORDS_FILENAME, chomp: true)
   for word, prons in cmudict
-    freqdict_freq = freqdict[word] || 0
-    wn_freq = wn_frequency(word, lemmadict)
     if(stop_word?(word))
       freq = 999999 # very common
 # Even if we let 'Vlad' through, it would have incorrect syllable boundaries because it won't accept VL as a conconant cluster
 #    elsif(WHITELIST.include?(word))
 #      freq = 212 # common enough to be worth mentioning explicitly
+    elsif(common_words.include?(word))
+      freq = 99
+    elsif(rare_words.include?(word))
+      freq = 0
     else
+      freqdict_freq = freqdict[word] || 0
+      wn_freq = wn_frequency(word, lemmadict)
       freq = freqdict_freq + wn_freq
     end
     # lemma_en (freqdict_freq) has better coverage than WordNet,

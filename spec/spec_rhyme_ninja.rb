@@ -77,6 +77,7 @@ describe 'RARITY' do
     oughta_be_common 'obey'
     oughta_be_common 'divine'
     oughta_be_common 'adore'
+    oughta_be_common 'wicker'
   end
 
   context 'timely' do
@@ -85,16 +86,20 @@ describe 'RARITY' do
 
   context 'initialisms' do
     oughta_be_rare 'ni', NOT_WORKING
-    oughta_be_rare 'cctv', NOT_WORKING
+    oughta_be_rare 'cctv'
   end
 
   context 'names' do
     oughta_be_rare 'ciardi', NOT_WORKING
     oughta_be_rare 'tuscaloosa', NOT_WORKING
     oughta_be_rare 'bors', NOT_WORKING
-    oughta_be_rare 'matias', NOT_WORKING
+    oughta_be_rare 'matias'
     oughta_be_rare 'soweto', NOT_WORKING
     oughta_be_rare 'steinman', NOT_WORKING
+    oughta_be_rare 'vicker'
+    oughta_be_rare 'timmins'
+    oughta_be_rare 'phileas'
+    oughta_be_rare 'schwantes'
   end
   
   context 'uncommon but not rare' do
@@ -239,6 +244,8 @@ describe 'RARITY' do
     oughta_be_rare 'junco', NOT_WORKING
     oughta_be_rare 'stylites', NOT_WORKING
     oughta_be_rare 'devine'
+    oughta_be_rare 'pote'
+    oughta_be_rare 'fifer'
   end
 end
 
@@ -333,6 +340,7 @@ describe 'RHYMES' do
     oughta_rhyme 'selfish', 'shellfish' # take that, J.C. Wells!
     oughta_rhyme 'world', 'unfurled'
     oughta_rhyme 'cold', 'paroled'
+    ought_not_rhyme 'work', 'fork'
   end
 
   context 'perfect rhymes must rhyme the last primary-stressed syllable, not just the last syllable' do
