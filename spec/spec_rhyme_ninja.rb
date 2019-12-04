@@ -775,6 +775,50 @@ describe 'SET_RELATED' do
     end
   end
 
+  context 'water' do
+    set_related_oughta_contain 'water', 'gushed', 'flushed'
+    set_related_oughta_contain 'water', 'liters', 'meters'
+    set_related_oughta_contain 'water', 'drink', 'sink'
+    set_related_oughta_contain 'water', 'pee', 'sea'
+    set_related_oughta_contain 'water', 'sky', 'supply'
+    set_related_oughta_contain 'water', 'sprayed', 'wade'
+    set_related_oughta_contain 'water', 'supplied', 'tide'
+    set_related_oughta_contain 'water', 'dam', 'swam'
+    set_related_oughta_contain 'water', 'blood', 'flood'
+    set_related_oughta_contain 'water', 'marine', 'saline'
+    set_related_oughta_contain 'water', 'dip', 'sip'
+    set_related_ought_not_contain 'water', 'flour', 'flower', NOT_WORKING
+  end
+
+  context 'clumsy' do
+    set_related_oughta_contain 'clumsy', 'bumbling', 'fumbling'
+    set_related_oughta_contain 'clumsy', 'bumbling', 'stumbling'
+    set_related_oughta_contain 'clumsy', 'excuse', 'shoes'
+    set_related_oughta_contain 'clumsy', 'drop', 'flop'
+  end
+
+  context 'invoke' do
+    set_related_oughta_contain 'invoke', 'dares', 'prayers'
+  end
+
+  context 'prayers' do
+    set_related_oughta_contain 'prayers', 'addressed', 'blessed'
+    set_related_oughta_contain 'prayers', 'blessed', 'request'
+    set_related_oughta_contain 'prayers', 'appeal', 'kneel'
+    set_related_oughta_contain 'prayers', 'recites', 'rites'
+    set_related_oughta_contain 'prayers', 'humble', 'mumble'
+    set_related_oughta_contain 'prayers', 'jew', 'pew'
+    set_related_oughta_contain 'prayers', 'knee', 'plea'
+    set_related_oughta_contain 'prayers', 'heal', 'kneel', NOT_WORKING
+    set_related_oughta_contain 'prayers', 'healing', 'kneeling'
+    set_related_oughta_contain 'prayers', 'feast', 'priest', NOT_WORKING
+    set_related_oughta_contain 'prayers', 'feasts', 'priests'
+  end
+
+  context 'grenade' do
+    set_related_oughta_contain 'grenade', 'handheld', 'propelled'
+  end
+  
   context 'imperfect' do
     # relax the stress:
     set_related_oughta_contain 'halloween', 'broom', 'costume', NOT_WORKING
@@ -861,10 +905,10 @@ describe 'PAIR_RELATED' do
     pair_related_ought_not_contain 'food', 'evil', 'sanitation', 'temptation'
     pair_related_ought_not_contain 'food', 'evil', 'healthy', 'unhealthy'
     pair_related_ought_not_contain 'food', 'evil', 'contamination', 'condemnation'
-    pair_related_oughta_contain 'food', 'evil', 'slavery', 'savory'
-    pair_related_ought_not_contain 'food,' 'evil', 'slavery', 'savoury', NOT_WORKING
+    pair_related_oughta_contain 'food', 'evil', 'savory', 'slavery'
+    pair_related_ought_not_contain 'food', 'evil', 'savoury', 'slavery'
   end
-  
+
   context 'food dark' do
     pair_related_oughta_contain 'food', 'dark', 'turkey', 'murky', NOT_WORKING
   end
