@@ -337,7 +337,7 @@ def find_related_words(word, include_self, lang)
   if(include_self)
     words.push(word)
   end
-  return words
+  return filter_out_dispreferred_words(words, word)
 end
 
 def find_related_rhymes(rhyme, rel, lang)

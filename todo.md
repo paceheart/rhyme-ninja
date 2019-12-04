@@ -4,20 +4,13 @@ To help me write better limericks quicklier.
 
 ## to-do list
 
-* reduce dumb outputs via better rarity filtering
-** WordNet contains saffron and paroled. Why do we need lemma_en? We count a word as common if it has a frequency of 2 or more (@todo try upping this) according to lemma_en, or if it exists in WordNet at all. If we upped this to 2, 2/3 of the newly-rare words would be crap, but we would also lose 1/3 good words like chicanery, noncombatants, propagandize, and psilocybin. That's probably okay.
-** separate names out
-** 'saddle' has a bunch of rare words
-
 * reduce dumb outputs otherhow
-** do a preferred_form pass to eliminate slavery / savoury
 ** fix close / enclose, bass / base
 *** rewrite to be oopier
 ** get rid of plurals, possessives, etc. if they don't add anything new
 *** e.g. youngster's youngsters youngsters'
 *** We could use the actual lemmas in lemma_en! and/or WordNet
 ** filter out spelling variants from rhyme signature dict, e.g. UW_S_EH_F  yousef youssef yusef
-** respect rare_words.txt
 ** hyphens
 *** standardize "i r a" vs. "ira" and "san-jose" oughta be "san_jose" but "so-so" oughta stay "so-so"
 ** more scalable solution for British English, e.g. advisable / realisable
@@ -42,6 +35,10 @@ To help me write better limericks quicklier.
 * test input phrases
 * mine Limerick Heist for more test cases
 
+## user requests
+
+* show identical rhymes in "for the desperate" instead of eliminating them entirely
+
 ## could-do list
 
 * make better use of vertical space, to reduce the need to scroll down
@@ -50,3 +47,6 @@ To help me write better limericks quicklier.
 * guess at pronunciations of unknown words
 * make word_dict a text file too
 * instead of eliminating identical rhymes entirely, just put them in the dregs along with the imperfect rhymes. There are a few it's sad to lose, like illicit / solicit, and vegetarian / totalitarian
+* reduce dumb outputs via better rarity filtering
+** WordNet contains saffron and paroled. Why do we need lemma_en? We count a word as common if it has a frequency of 2 or more (@todo try upping this) according to lemma_en, or if it exists in WordNet at all. If we upped this to 2, 2/3 of the newly-rare words would be crap, but we would also lose 1/3 good words like chicanery, noncombatants, propagandize, and psilocybin. That's probably okay.
+** separate names out
