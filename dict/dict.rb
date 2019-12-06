@@ -4,7 +4,7 @@
 TRACE_WORD = nil
 
 # Preprocess the cmudict data into a format that's efficient for looking up rhyming words.
-# Assumes cmudict.json is in the current directory. Writes out rhyme_signature_dict.json to the current directory.
+# Reads from CMUDICT_FILENAME, writes out RHYME_SIGNATURE_DICT_FILENAME and WORD_DICT_FILENAME.
 #
 # cmudict is the CMU Pronouncing Dictionary, a text file with lines like this:
 #  KITTEN  K IH1 T AH0 N
@@ -24,9 +24,10 @@ TRACE_WORD = nil
 # to each rhyme signature, having a list of those be the keys for Dict 1, and
 # having Step 2 be an array lookup instead of a hash lookup.
 
-require 'json'
 require 'rwordnet'
 require_relative 'utils_rhyme'
+require_relative 'phoneme.rb'
+require_relative 'pronunciation.rb'
 
 CMUDICT_FILENAME = "cmudict/cmudict-0.7c.txt"
 RARE_WORDS_FILENAME = "rare_words.txt"
@@ -52,6 +53,15 @@ RHYME_SIGNATURE_DICT_HEADER = "# Rhyme Ninja's Rhyme Signature Dictionary
 #
 # Singleton signatures are excluded.
 #"
+
+WORD_DICT_HEADER = "# Rhyme Ninja's word info dictionary
+# https://github.com/pacesmith/rhyme-ninja
+#
+# Each line is of the form:
+#
+# WORD,FREQUENCY,PRONUNCIATION1|PRONUNCIATION2...
+#
+"
 
 #
 # parse cmudict
@@ -200,6 +210,7 @@ def load_cmudict()
       line = preprocess_cmudict_line(line)
       tokens = line.split
       word = tokens.shift.downcase # now TOKENS contains only syllables
+      pron = Pronunciation.new(tokens)
       word = word.gsub("_", " ")
       if(word =~ /\([0-9]\)\Z/)
         word = word[0...-3]
@@ -208,20 +219,19 @@ def load_cmudict()
         # ignore nonstandard initial and final consonant clusters. They're mostly names and a handful of loan words, and they'll rhyme with nothing or just each other, so we lose little to nothing by excluding them.
         word_ok = true
         unless WHITELIST.include?(word)
-          initial_cluster = initial_consonant_cluster_array(tokens)
+          initial_cluster = pron.initial_consonant_cluster_array
           unless initial_consonant_cluster_ok?(initial_cluster)
             word_ok = false
             # puts "Ignoring weird initial consonant cluster: #{initial_cluster.join(" ")} in #{line}"
           end
-          final_cluster = final_consonant_cluster_array(tokens)
+          final_cluster = pron.final_consonant_cluster_array
           unless final_consonant_cluster_ok?(final_cluster)
             word_ok = false
             # puts "Ignoring weird final consonant cluster: #{final_cluster.join(" ")} in #{line}"
           end
         end
         if word_ok
-          syls = syllabify(tokens)
-          sylpron = syls.flatten
+          sylpron = pron.syllabify
           hash[word].push(sylpron)
           if(word == TRACE_WORD)
             puts "TRACE Loaded #{word} as #{sylpron}"
@@ -328,11 +338,11 @@ end
 #
 
 def build_rhyme_signature_dict(cmudict)
-  rdict = Hash.new {|h,k| h[k] = [] } # hash of arrays
+  rdict = Hash.new {|h,k| h[k] = [] } # hash of Pronunciations
   i = 0;
   for word, prons in cmudict
     for pron in prons
-      rsig = rhyme_signature(pron)
+      rsig = pron.rhyme_signature
       rdict[rsig].push(word)
     end
     i = i + 1;
@@ -364,7 +374,7 @@ def filter_cmudict(cmudict, rdict)
     end
     for pron in prons
       total += 1
-      rsig = rhyme_signature(pron)
+      rsig = pron.rhyme_signature
       if(!rdict[rsig].empty?)
         proncount += 1
         filtered_cmudict[word].push(pron)
@@ -450,9 +460,7 @@ def rebuild_rhyme_ninja_dictionaries()
   save_string_hash(rdict, RHYME_SIGNATURE_DICT_FILENAME, RHYME_SIGNATURE_DICT_HEADER)
   lemma_dict, freq_dict = load_lemma_dict
   word_dict = build_word_dict(cmudict, lemma_dict, freq_dict, rdict)
-  File.open("word_dict.json", "w") do |f|
-    f.write(word_dict.to_json)
-  end
+  save_word_dict(word_dict)
 end
 
 rebuild_rhyme_ninja_dictionaries

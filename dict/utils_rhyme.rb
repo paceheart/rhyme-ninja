@@ -4,6 +4,7 @@
 # Used both in preprocessing and at runtime
 
 RHYME_SIGNATURE_DICT_FILENAME = "rhyme_signature_dict.txt"
+WORD_DICT_FILENAME = "word_dict.txt"
 
 #
 # stop words
@@ -407,13 +408,13 @@ def load_string_hash(filename)
   # each line is of the form:
   # KEY  STRING1 STRING2 ...
   # substitutes "_" with " " in keys after loading
-  hash = Hash.new {|h,k| h[k] = [] } # hash of strings
+  hash = Hash.new # hash of strings
   IO.readlines(filename).each{ |line|
     if(useful_line?(line))
       tokens = line.split
       key = tokens.shift # now TOKENS contains only the value strings
-      key = desanitize_string(key)
-      hash[key] = tokens.map{ |str| desanitize_string(str)}
+      key = key.sanitize
+      hash[key] = tokens.map{ |str| str.desanitize }
     else
       debug "Ignoring #{filename} line: #{line}"
     end
@@ -421,17 +422,6 @@ def load_string_hash(filename)
   debug "Loaded #{hash.length} entries from #{filename}"
   return hash
 end
-
-def sanitize_string (str)
-  # sanitizes STR so it can be saved in a space-delimited text file
-  return str.gsub(" ", "_")
-end
-
-def desanitize_string (str)
-  # desanitizes STR. The result may contain spaces.
-  return str.gsub("_", " ")
-end
-
 def save_string_hash(hash, filename, header="")
   # sanitizes spaces into underscores
   @fh=File.open(filename, 'w')
@@ -439,10 +429,10 @@ def save_string_hash(hash, filename, header="")
     @fh.puts(header)
   end
   hash.each do |key, values|
-    key = sanitize_string(key)
+    key = key.sanitize
     @fh.print "#{key} "
     for value in values do
-      value = sanitize_string(value)
+      value = value.sanitize
       @fh.print " #{value}"
     end
     @fh.puts
@@ -455,107 +445,59 @@ def useful_line?(line)
 end
 
 #
-# rhyme signature
+# word info dictionary
 #
 
-def rhyme_signature_array(pron)
-  # The rhyme signature is everything including and after the final most stressed vowel,
-  # which is indicated in cmudict by a "1".
-  # Some words don't have a 1, so we settle for the final secondarily-stressed vowel,
-  # or failing that, the last vowel.
-  #
-  # input: [IH0 N S IH1 ZH AH0 N] # the pronunciation of 'incision'
-  # output:        [IH  ZH AH  N] # the pronunciation of '-ision' with stress markers removed
-  #
-  # We remove the stress markers so that we can rhyme 'furs' [F ER1 Z] with 'yours(2)' [Y ER0 Z]
-  # They will both have the rhyme signature [ER Z].
-  return rhyme_signature_array_with_stress(pron, "1") || rhyme_signature_array_with_stress(pron, "2") || rhyme_signature_array_with_stress(pron, "0") || error(pron)
-end
-
-def rhyme_signature_array_with_stress(pron, stress)
-  rsig = Array.new
-  pron.reverse.each { |phoneme|
-    unless(syllable_boundary?(phoneme))
-      rsig.unshift(phoneme.tr("0-2", "")) # we need to remove the numbers
-      if(phoneme.include?(stress))
-        return rsig # we found the phoneme with stress STRESS, we can stop now
-      end
-    end
-  }
-  return nil
-end
-
-def initial_consonant_cluster_array(pron)
-  # everything strictly before the first vowel
-  rsig = Array.new
-  pron.each { |phoneme|
-    if(vowel?(phoneme))
-      return rsig
-    else
-      rsig.push(phoneme)
-    end
-  }
-  return [ ]
-end
-
-def final_consonant_cluster_array(pron)
-  # everything strictly after the last vowel
-  rsig = Array.new
-  pron.reverse.each { |phoneme|
-    if(vowel?(phoneme))
-      return rsig
-    else
-      rsig.unshift(phoneme)
-    end
-  }
-  return [ ]
-end
-
-def rhyme_signature(pron)
-  # this makes for a better hash key
-  return rhyme_signature_array(pron).join(" ")
-end
-
-def rhyme_syllables_array(pron)
-  # This is like rhyme_signature_array but includes the whole rhyming syllable; it doesn't chop off the preceding consonants.
-  return rhyme_syllables_array_with_stress(pron, "1") || rhyme_syllables_array_with_stress(pron, "2") || rhyme_syllables_array_with_stress(pron, "0") || error(pron)
-end
-
-def rhyme_syllables_array_with_stress(pron, stress)
-  rsig = Array.new
-  foundTheRhymingSyllable = false
-  pron.reverse.each { |phoneme|
-    unless syllable_boundary?(phoneme)
-      rsig.unshift(phoneme.tr("0-2", "")) # we need to remove the numbers
-    end
-    if(!foundTheRhymingSyllable)
-      if(phoneme.include?(stress))
-        foundTheRhymingSyllable = true; # we found the main stressed vowel, we can stop at the next syllable boundary
-      end
-    else
-      if(syllable_boundary?(phoneme))
-        return rsig
-      end
-    end
-  }
-  if foundTheRhymingSyllable # we got all the way to the beginning of the word without a syllable break
-    return rsig
+def load_word_dict()
+  pathname = "dict/" + WORD_DICT_FILENAME
+  unless File.exists?(pathname)
+    die "First run dict/dict.rb to generate dictionary caches"
   end
-  return nil
+  word_dict = Hash.new
+  IO.readlines(pathname).each{ |line|
+    if(useful_line?(line))
+      word, freq, pronunciations_str = line.split(",")
+      word = word.desanitize
+      freq = freq.to_i
+      prons = Array.new
+      pronunciation_strings = pronunciations_str.split("|")
+      for pronstr in pronunciation_strings
+        phonemes = pronstr.split(" ")
+        pron = Pronunciation.new(phonemes)
+        prons << pron
+      end
+      word_info = [freq, prons]
+      word_dict[word] = word_info
+    end
+  }
+  word_dict
 end
 
-def vowel?(phoneme)
-  return phoneme.include?("1") || phoneme.include?("2") || phoneme.include?("0")
+def save_word_dict(word_dict)
+  f=File.open(WORD_DICT_FILENAME, 'w')
+  f.puts(WORD_DICT_HEADER)
+  for word, word_info in word_dict
+    word = word.sanitize
+    f.print(word)
+    f.print(',')
+    frequency, prons = word_info
+    f.print(frequency)
+    f.print(',')
+    isFirstPron = true
+    for pron in prons
+      unless isFirstPron
+        f.print('|')
+      end
+      isFirstPron = false
+      f.print(pron)
+    end
+    f.puts
+  end
 end
 
-def syllable_boundary?(phoneme)
-  return phoneme == "."
-end
-
-def rhyme_syllables_string(pron)
-  # this makes for a better hash key
-  return rhyme_syllables_array(pron).join(" ")
-end
+#
+# rhyme signature
+#
 
 def lang(lang, en_string, es_string)
   case lang
@@ -568,47 +510,6 @@ def lang(lang, en_string, es_string)
   end
 end
 
-def syllabify(pron)
-  syls = Array.new
-  this_syllable = Array.new
-  this_initial_consonant_cluster = Array.new
-  candidate_initial_consonant_cluster = Array.new
-  foundThisSyllablesVowel = false
-  pron.reverse.each { |phoneme|
-    if !foundThisSyllablesVowel
-      this_syllable.unshift(phoneme) # just allow any syllable-final consonant cluster
-      if(vowel?(phoneme))
-        foundThisSyllablesVowel = true
-      end
-    else
-      # gobble up as many syllable-initial consonants while still being a valid cluster
-      candidate_initial_consonant_cluster = this_initial_consonant_cluster.unshift(phoneme)
-      if single_consonant?(candidate_initial_consonant_cluster) ||
-         ALL_INITIAL_CONSONANT_CLUSTERS.include?(candidate_initial_consonant_cluster.join(" "))
-        this_syllable.unshift(phoneme) # PHONEME is legit as a syllable-initial consonant cluster
-        this_initial_consonant_cluster = candidate_initial_consonant_cluster
-        # puts "#{phoneme} is legit, now we have #{this_syllable} starting with #{this_initial_consonant_cluster}"
-      else
-        # that's all we can gobble, gotta move on to the next syllable now
-        # puts "we've got #{this_syllable}. That's all we can gobble, gotta move on to the next syllable now"
-        syls.unshift(this_syllable)
-        # add a syllable boundary token
-        syls.unshift(".")
-        # ok, stick this phoneme at the end of the next syllable (previous, because we're going backward)
-        this_syllable = Array.new
-        this_initial_consonant_cluster = Array.new
-        this_syllable.unshift(phoneme)
-        foundThisSyllablesVowel = vowel?(phoneme)
-      end
-    end
-  }
-  # tack on whatever was left over when we ran out of phonemes
-  unless this_syllable.empty?
-    syls.unshift(this_syllable)
-  end
-  return syls
-end
-
 def single_consonant?(phoneme_cluster)
-  return phoneme_cluster.length == 1 && !vowel?(phoneme_cluster[0])
+  return phoneme_cluster.length == 1 && !phoneme_cluster[0].vowel?
 end

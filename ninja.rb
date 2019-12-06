@@ -26,6 +26,8 @@ require 'uri'
 require 'json'
 require 'cgi'
 require_relative 'dict/utils_rhyme'
+require_relative 'dict/phoneme.rb'
+require_relative 'dict/pronunciation.rb'
 
 #
 # utilities
@@ -68,14 +70,15 @@ def debug_info(word, lang='en')
     else
       result << " rsyll#{i}="
     end
-    result << rhyme_syllables_string(pron)
+
+    result << pron.rhyme_syllables_string
 
     if prons.length == 1
       result << " rsig="
     else
       result << " rsig#{i}="
     end
-    result << rhyme_signature(pron)
+    result << pron.rhyme_signature
   end
   return result
 end
@@ -90,7 +93,7 @@ def word_dict()
   # pronunciations = [pronunciation1, pronunciation2 ...]
   # pronunciation = [syllable1, syllable1, ...]
   if $word_dict.nil?
-    $word_dict = load_word_dict_as_hash
+    $word_dict = load_word_dict
   end
   $word_dict
 end
@@ -103,10 +106,6 @@ def rdict
     $rdict = load_rhyme_signature_dict_as_hash
   end
   $rdict
-end
-
-def load_word_dict_as_hash()
-  JSON.parse(File.read("dict/word_dict.json")) or die "First run dict/dict.rb to generate dictionary caches"
 end
 
 def load_rhyme_signature_dict_as_hash()
@@ -233,7 +232,7 @@ def identical_rhyme?(rhyme, target_rhyme_syllables_array)
   # "L_IY_V" is identical.
   lang = 'en' # @hack
   for pron in pronunciations(rhyme, lang)
-    if rhyme_syllables_array(pron) != target_rhyme_syllables_array
+    if pron.rhyme_syllables_array != target_rhyme_syllables_array
       return false; # we found a pronunciation with a different rhyming syllable; this rhyme is perfect
     end
   end
@@ -245,7 +244,7 @@ def all_identical_rhymes?(words)
   syllable_signatures = Hash.new
   for word in words do
     for pron in pronunciations(word, lang)
-      syllable_signatures[rhyme_syllables_string(pron)] = true
+      syllable_signatures[pron.rhyme_syllables_string] = true
     end
   end
   if syllable_signatures.length == 1
@@ -264,8 +263,8 @@ end
 def find_rhyming_words_for_pronunciation(pron, identical_ok=true)
   # use our compiled rhyme signature dictionary; we don't need the Datamuse API for simple rhyme lookup
   results = Array.new
-  rsig = rhyme_signature(pron)
-  rsyllables = rhyme_syllables_array(pron)
+  rsig = pron.rhyme_signature
+  rsyllables = pron.rhyme_syllables_array
   rdict_lookup(rsig).each { |rhyme|
     unless(!identical_ok && identical_rhyme?(rhyme, rsyllables))
       results.push(rhyme)
@@ -279,7 +278,7 @@ end
 def has_rhyming_word?(word, lang)
   unless(blacklisted?(word))
     for pron in pronunciations(word, lang)
-      rsig = rhyme_signature(pron)
+      rsig = pron.rhyme_signature
       if(! rdict_lookup(rsig).empty?)
         return true
       end
@@ -394,7 +393,7 @@ def find_rhyming_tuples(input_rel1, lang)
     relateds1 = find_related_words(input_rel1, true, lang)
     relateds1.each { |rel1|
       for rel1pron in pronunciations(rel1, lang)
-        rsig = rhyme_signature(rel1pron)
+        rsig = rel1pron.rhyme_signature
         debug "Rhymes for #{rel1} [#{rsig}] #{debug_info(rel1)}:"
         find_rhyming_words_for_pronunciation(rel1pron, true).each { |rhyme1|
           if(relateds1.include? rhyme1) # we only care about relateds of input_rel1
@@ -759,4 +758,3 @@ def print_lemma_en_entries_with_frequency(freq)
     end
   end
 end
-

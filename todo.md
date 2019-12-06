@@ -37,7 +37,7 @@ To help me write better limericks quicklier.
 
 ## user requests
 
-* show identical rhymes in "for the desperate" instead of eliminating them entirely
+* show identical rhymes in "for the brazen" instead of eliminating them entirely
 
 ## could-do list
 
