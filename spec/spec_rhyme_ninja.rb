@@ -550,11 +550,6 @@ describe 'RHYMES' do
     oughta_rhyme 'poor', 'tour' # P UW R / T UH R
   end
 
-  context 'rhymes too imperfect to live' do
-    ought_not_rhyme 'fennel', 'mental' # don't elide the t in 'mental'
-    ought_not_rhyme 'just', 'kissed' # this could work in dialect, but ought not be standard
-  end
-  
   context 'imperfect rhymes' do
     oughta_rhyme 'mushroom', 'doom', NOT_WORKING # no pronunciation for 'mushroom', and its stress is off
     oughta_rhyme 'dodge', 'massage' # only in Texas, but we don't want dodge to get lonely in its empty lodge
@@ -567,6 +562,11 @@ describe 'RHYMES' do
     oughta_rhyme 'poor', 'core', NOT_WORKING # in some dialects, these rhyme
   end
 
+  context 'rhymes too imperfect to live' do
+    ought_not_rhyme 'fennel', 'mental' # don't elide the t in 'mental'
+    ought_not_rhyme 'just', 'kissed' # this could work in dialect, but ought not be standard
+  end
+  
   context 'loan words' do
     oughta_rhyme 'amour', 'bonjour'
   end

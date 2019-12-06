@@ -211,7 +211,7 @@ def load_cmudict()
       tokens = line.split
       word = tokens.shift.downcase # now TOKENS contains only syllables
       pron = Pronunciation.new(tokens)
-      word = word.gsub("_", " ")
+      word = word.desanitize
       if(word =~ /\([0-9]\)\Z/)
         word = word[0...-3]
       end
@@ -338,7 +338,7 @@ end
 #
 
 def build_rhyme_signature_dict(cmudict)
-  rdict = Hash.new {|h,k| h[k] = [] } # hash of Pronunciations
+  rdict = Hash.new {|h,k| h[k] = [] } # hash of arrays, each element of which is a Pronunciation
   i = 0;
   for word, prons in cmudict
     for pron in prons

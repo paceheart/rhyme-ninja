@@ -4,17 +4,6 @@ To help me write better limericks quicklier.
 
 ## to-do list
 
-* reduce dumb outputs otherhow
-** fix close / enclose, bass / base
-*** rewrite to be oopier
-** get rid of plurals, possessives, etc. if they don't add anything new
-*** e.g. youngster's youngsters youngsters'
-*** We could use the actual lemmas in lemma_en! and/or WordNet
-** filter out spelling variants from rhyme signature dict, e.g. UW_S_EH_F  yousef youssef yusef
-** hyphens
-*** standardize "i r a" vs. "ira" and "san-jose" oughta be "san_jose" but "so-so" oughta stay "so-so"
-** more scalable solution for British English, e.g. advisable / realisable
-
 * improve good outputs
 ** relatedness isn't symmetric. For set_related, we don't have to go related1, related2, rhyme. We could also go related, rhyme, related to input. Blocked on semantic relatedness.
 ** look for all plurals that differ in vowels to find more phonemes to conflate, e.g. ORPHANAGE  [AO1 R F AH0 N AH0 JH] ORPHANAGES  [AO1 R F AH0 N IH0 JH IH0 Z]
@@ -30,6 +19,16 @@ To help me write better limericks quicklier.
 * eliminate dependence on datamuse
 ** wordnet?
 ** maybe NLTK wup_similarity or https://stackoverflow.com/questions/14148986/how-do-you-write-a-program-to-find-if-certain-words-are-similar/14638272#14638272
+
+* reduce dumb outputs
+** get rid of plurals, possessives, etc. if they don't add anything new
+*** e.g. youngster's youngsters youngsters'
+*** We could use the actual lemmas in lemma_en! and/or WordNet
+** fix close / enclose, bass / base by pushing down only_preferred to find_rhyming_words so it can have access to the pronunciation
+** filter out spelling variants from rhyme signature dict, e.g. UW_S_EH_F  yousef youssef yusef. But how to know whether it's a spelling variant or a homonym?
+** hyphens
+*** standardize "i r a" vs. "ira" and "san-jose" oughta be "san_jose" but "so-so" oughta stay "so-so"
+** more scalable solution for British English, e.g. advisable / realisable
 
 * urlencode word links
 * test input phrases

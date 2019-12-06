@@ -72,7 +72,7 @@ class Pronunciation
 
   def rhyme_signature
     # this makes for a better hash key
-    rhyme_signature_array.join(" ")
+    rhyme_signature_array.join("_")
   end
 
   def rhyme_syllables_array
@@ -108,7 +108,6 @@ class Pronunciation
   end
 
   def rhyme_syllables_string
-    # this makes for a better hash key
     rhyme_syllables_array.join(" ")
   end
 
