@@ -221,7 +221,7 @@ def load_cmudict()
       if(word =~ /\([0-9]\)\Z/)
         word = word[0...-3]
       end
-      if(!(word =~ /\d/) || word == "w00t") # ignore words containing digits, except w00t
+      unless ignore_cmudict_word?(word, hash)
         # ignore nonstandard initial and final consonant clusters. They're mostly names and a handful of loan words, and they'll rhyme with nothing or just each other, so we lose little to nothing by excluding them.
         word_ok = true
         unless WHITELIST.include?(word)
@@ -251,7 +251,20 @@ def load_cmudict()
     end
   }
   puts "Loaded #{hash.length} words from cmudict"
-  return hash
+  # filter out redundant apostrophe words: if we already have "foo", ignore "foo's" and "foos'"
+  newhash = Hash.new
+  for word, prons in hash do
+    unless redundant_apostrophe_word?(word, hash)
+      newhash[word] = prons
+    end
+  end
+  puts "Filtered out #{hash.length - newhash.length} redundant apostrophe words"
+  newhash
+end
+
+def ignore_cmudict_word?(word, cmudict)
+  # ignore words containing digits, except w00t
+  (word =~ /\d/) && (word != "w00t")
 end
 
 def initial_consonant_cluster_ok?(cluster)
@@ -369,7 +382,7 @@ def build_rhyme_signature_dict(cmudict)
 end
 
 def filter_cmudict(cmudict, rdict)
-  # filter out pronunciations with no rhymes
+  # filter out words that differ only in apostrophes, and pronunciations with no rhymes
   filtered_cmudict = Hash.new
   proncount = 0
   total = 0
@@ -392,6 +405,16 @@ def filter_cmudict(cmudict, rdict)
   end
   puts "#{proncount} out of #{total} pronunciations remain in the dictionary after removing pronunciations with no rhymes"
   return filtered_cmudict
+end
+
+def redundant_apostrophe_word?(word, cmudict)
+  if word.include?("'")
+    root = word.tr("'", "")
+    if(cmudict.key?(root) && (cmudict[root].sort == cmudict[word].sort)) # if pronunciations are the same (ignoring order)
+      return true
+    end
+  end
+  false
 end
 
 def filter_word_dict(word_dict)

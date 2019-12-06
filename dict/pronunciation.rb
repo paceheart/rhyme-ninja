@@ -5,6 +5,18 @@ class Pronunciation
     @phonemes = phonemes
   end
 
+  def ==(other)
+    (other.class <= Pronunciation) && @phonemes == other.phonemes
+  end
+
+  def <(other)
+    @phonemes < other.phonemes
+  end
+
+  def <=>(other)
+    @phonemes <=> other.phonemes
+  end
+  
   def to_s
     phonemes.join(" ")
   end

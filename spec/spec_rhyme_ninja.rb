@@ -342,6 +342,7 @@ describe 'RHYMES' do
     oughta_rhyme 'cold', 'paroled'
     ought_not_rhyme 'work', 'fork'
     ought_not_rhyme 'coed', 'abode'
+    oughta_rhyme 'cajun', 'contagion'
   end
 
   context 'perfect rhymes must rhyme the last primary-stressed syllable, not just the last syllable' do
@@ -567,11 +568,13 @@ describe 'RHYMES' do
     oughta_rhyme 'false', 'malts' # sure I guess? otherwise 'false' won't rhyme with anything at all
     oughta_rhyme 'else', 'melts' # sure I guess? otherwise 'else' won't rhyme with anything at all
     oughta_rhyme 'poor', 'core', NOT_WORKING # in some dialects, these rhyme
+    oughta_rhyme 'cajun', 'occasion', NOT_WORKING
   end
-
+  
   context 'rhymes too imperfect to live' do
     ought_not_rhyme 'fennel', 'mental' # don't elide the t in 'mental'
     ought_not_rhyme 'just', 'kissed' # this could work in dialect, but ought not be standard
+
   end
   
   context 'loan words' do

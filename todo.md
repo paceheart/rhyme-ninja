@@ -21,9 +21,6 @@ To help me write better limericks quicklier.
 ** maybe NLTK wup_similarity or https://stackoverflow.com/questions/14148986/how-do-you-write-a-program-to-find-if-certain-words-are-similar/14638272#14638272
 
 * reduce dumb outputs
-** get rid of plurals, possessives, etc. if they don't add anything new
-*** e.g. youngster's youngsters youngsters'
-*** We could use the actual lemmas in lemma_en! and/or WordNet
 ** fix close / enclose, bass / base by pushing down only_preferred to find_rhyming_words so it can have access to the pronunciation
 ** filter out spelling variants from rhyme signature dict, e.g. UW_S_EH_F  yousef youssef yusef. But how to know whether it's a spelling variant or a homonym?
 ** hyphens
