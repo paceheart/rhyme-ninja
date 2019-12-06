@@ -97,6 +97,9 @@ def preprocess_cmudict_line(line)
 
   # this one comes first because it splits ER into two phonemes
   # curry [K AH1 R IY0] / hurry [HH ER1 IY0]
+  line.gsub!("ER0 R", "AH0 R") # avoid R R
+  line.gsub!("ER1 R", "AH1 R") 
+  line.gsub!("ER2 R", "AH2 R")
   line.gsub!("ER0", "AH0 R")
   line.gsub!("ER1", "AH1 R")
   line.gsub!("ER2", "AH2 R")
@@ -196,11 +199,14 @@ def conflate_imperfect_rhymes(line)
   line.gsub!(/ N S$/, ' N T S') # dance / ants
   line.gsub!(/ T CH$/, ' CH') # blotch / watch
   line.gsub!(/ ZH$/, ' JH') # massage [M AH0 S AA1 ZH] / dodge [D AA1 JH]
-  
+  line.gsub!(/ ZH AH0 Z$/, ' JH AH0 Z') # massages [M AH0 S AA1 ZH AH0 Z] / dodges [D AA1 JH IH0 Z]
+  line.gsub!(/ ZH D$/, ' JH D') # massaged / dodged
+  line.gsub!(/ ZH IY0 NG$/, ' JH IY0 NG') # massaging / dodging
+  line.gsub!(/ ZH AH0 R$/, ' JH AH0 R') # massager / dodger
+  line.gsub!(/ ZH AH0 R Z$/, ' JH AH0 R Z') # massagers / dodgers
   return line
 end
 
-# @todo don't preprocess
 def load_cmudict()
   # word => [pronunciation1, pronunciation2 ...]
   # pronunciation = [syllable1, syllable1, ...]

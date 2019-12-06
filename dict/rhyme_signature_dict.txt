@@ -160,7 +160,7 @@ AE_L_AH_T_IY  abnormality actuality banality bestiality bisexuality brutality ce
 AO_R_M_AH_L_IY  abnormally formally informally normally
 AA_B_OW  abo baydhabo bobbo bonobo clabo labo picabo sabo szabo yobbo
 AA_B_OW_Z  abo's bonobos
-OW_D  abode annaud bestowed bestrode blowed bode bowed brode busload c-code coad code coed commode corrode crowed decode encode erode explode flowed forebode gloede glowed goad goedde goede grode implode kanode knode knowed load lode m-code methode moad mode moede mowed node ode out-mode outmode overflowed overrode owed plateaued reload rhoad rhode richaud road rode roed rohde rowed sewed showed shrode slowed snowed sowed stowed strode thode toad toed towed unbowed unload
+OW_D  abode annaud bestowed bestrode blowed bode bowed brode busload c-code coad code commode corrode crowed decode encode erode explode flowed forebode gloede glowed goad goedde goede grode implode kanode knode knowed load lode m-code methode moad mode moede mowed node ode out-mode outmode overflowed overrode owed plateaued reload rhoad rhode richaud road rode roed rohde rowed sewed showed shrode slowed snowed sowed stowed strode thode toad toed towed unbowed unload
 IY_M_AH  abohalima abouhalima alima aoshima auriemma beukema bima bronkema cima cosima decima delima demma diprima edema ema emphysema eurofima fema fima fukushima grima halima harima hirosakima hiroshima jarema jemima jima joakima kajima kawashima kitajima lema lima louima nakajima nakashima noxema oshima pima prima rima ritsema rozema salema schema sema septima shima sietsema sikkema sima tajima takashima thima ulima wiersema zima
 AA_L_IH_SH  abolish demolish fallish kalisz polish smallish sollish
 AA_L_IH_SH_T  abolished demolished polished
@@ -429,13 +429,13 @@ EY_N_T_AH_D  acquainted fainted painted repainted sainted tainted unpainted unta
 EY_N_AH_D  acquainted painted
 EH_S_AH_N_T_S  acquiescence adolescence adolescents antidepressants coalescence convalescence crescents depressants essence evanescence fluorescence fluorescents luminescence obsolescence phosphorescence quintessence senescence suppressants
 EH_S_IY_NG  acquiescing addressing assessing blaesing blessing caressing coalescing compressing confessing depressing digressing distressing dressing expressing guessing hessing impressing lessing messing obsessing oppressing possessing pressing professing progressing reassessing recessing redressing repressing stressing suppressing transgressing
-AY_AH_R  acquire attire ayer beier bleier breier briar brier bryer buyer byer cease-fire ceasefire choir conspire crier cryer desire dire doubtfire dreier drier dryer dubilier dwyer dyar dyer enquire entire eyer fire flier flyer friar frier fryar fryer geier grier guier guyer heier hier higher hire hyer iyer kleier klier krier kyer leier liar mcbryar mcguyer mcgwire mctier meier meyer mier mire misfire myer neier odwyer plier prier prior pryer pryor pyre require retire rewire ryer scheier schier schreier schrier schryer schwier seier shier sire speier spier squier steier stier styer supplier swier tire transpire trier tyer tyre viar why're wire wyer yzaguirre
+AY_AH_R  acquire attire ayer beier bleier breier briar brier bryer buyer byer cease-fire ceasefire choir conspire crier cryer desire dire doubtfire dreier drier dryer dubilier dwyer dyar dyer enquire entire eyer fire flier flyer friar frier fryar fryer geier grier guier guyer heier hier higher hire hyer iyer kleier klier krier kyer leier liar mcbryar mcguyer mcgwire mctier meier meyer mier mire misfire myer neier odwyer plier prier prior pryer pryor pyre require retire rewire ryer schairer scheier scheirer schier schreier schrier schryer schwier seier shier shirer sire speier spier squier steier stier styer supplier swier tire transpire trier tyer tyre viar why're wire wyer yzaguirre
 AY_AH_R_D  acquired admired byard conspired desired fired hardwired hired inquired inspired rehired required retired rewired tired transpired unexpired uninspired wired
 AY_AH_R_AH_R  acquirer schmierer
 AY_AH_R_AH_R_Z  acquirer's acquirers
 AY_AH_R_Z  acquires aspires ayers bryars buyer's buyers buyers' byars byers byers' ceasefires desires doubtfire's doubtfires dryers expires fire's fires fliers flyers friars fryers grier's hires hyers inquires liars meier's meyer's meyers miers myers pliers priors pryor's pyres requires retires smyers spiers squiers squires stiers styers supplier's suppliers suppliers' swyers syers tires transpires tyres viars wires wyers
 AY_R_IY_NG  acquiring admiring aspiring conspiring expiring firing hiring inspiring meiring perspiring quiring rehiring requiring retiring syring tiring uninspiring wiring
-AY_AH_R_IY_NG  acquiring desiring inquiring inspiring requiring retiring rewiring spiering transpiring
+AY_AH_R_IY_NG  acquiring desiring firing inquiring inspiring requiring retiring rewiring spiering transpiring
 IH_Z_AH_T_AH_V  acquisitive inquisitive
 IH_T  acquit admit barritt befit bit boblitt brit britt burditt chit clampitt commit davitt devitt dewit dewitt dewitte douthit douthitt emit fit fitt flit get gillett grit hit hitt it it-wit kit kitt knit laffitte lafitte legit lit litt mcnitt mit mitt nit obit omit permit pit pitt plitt politte presplit pritt quit readmit recommit refit remit resubmit ritt savitt schlitt schmidt schmit schmitt shit shits sit skit slit smit spit split splitt stitt submit tit transmit tritt unfit vitt whit whitt wit witt witte writ
 IH_T_S  acquits admits befits berlitz bits bitz blitz brits britts britz chits commits critz emits fits fitts fitz frits fritts fritz gets glitz grits gritz hits hitz hritz it's its kits kitts kitz klitz knits kritz lits litts litz mitts moritz nitz obits omits ovitz permits pits pitt's pitts pitz pritts pritz quits ritt's ritts ritz schlitz schmidt's schmitz sits sitts sitz skits slits smits spits spitz splits stitz submits tits transmits tritz wit's wits witts witz writs
@@ -557,7 +557,7 @@ AE_D_AH_K_W_AH_T_L_IY  adequately inadequately
 EY_D_AH_R  ader bader blockader crader crusader evader fader grader hader haider invader kader lader mader nader nadir rader raider sader schader schmader schrader seder shader shrader snader spader srader stader strader swader trader vader wader
 EY_D_Z  ades aid's aide's aides aides' aids arcades blades blaydes blockades braids brigades brocades cascade's cascades cascades' charades conrades crusades decades degrades downgrades evades fades fayed's glades grades grenades invades jades kincaid's maid's maids maids' mcdade's palisades parades persuades pervades promenades raids shades spades suedes tirades trade's trades upgrades wade's wades
 EY_D_IY  adey ady arkady bady brady cady crady dady eydie frady genady grady haidee kady lady madey mady maidie mccrady mcgrady milady motsoaledi o'grady ogrady rady shady spady
-AE_JH_AH_R  adger badger
+AE_JH_AH_R  adger azure badger
 IY_R  adhere alvear amir appear auctioneer austere baehr bahir bandolier bashir bassir beare bebear beer belvedere bere bier bioengineer blogosphere bombardier briere brigadeer brigadier buccaneer budgeteer career casebeer cashier cavalier chachere chandelier charpentier cheer chevalier chusmir clear cleere cohere comandeer commandeer conventioneer crear creer crochetiere cyr davir dear deer deere desir disappear domineer dornier dubilier dyneer ear electioneer emir endear engineer exovir fear fier financier financiere fleer four-year frear freire frere frontier gear geer gere gier giere gondolier grear greer grier guinier hear here imagineer insincere interfere jeer kamir kear keir keneer kier kir kleer kneer lagardere laimbeer lanier lazear lear manteer marketeer mateer mclear mcnear mcneer mcteer mctier mear menear mere minear minteer mir mishear multiyear musketeer mutineer myhre near neer nir o'lear olear oneyear orear overhear pamphleteer peer peer-to-peer pelletier persevere pier pioneer plenmeer premier premiere profiteer puppeteer puryear queer racketeer rainier rayonier reappear rear reengineer rehear rensselaer revere rosevear sabir saffir safier sameer samir sampere savir schear scheer schweer sear seer sere severe shamir shear sheer shere sight-seer sightseer sincere smear sneer souvenir spear speare speer speir sphere st_cyr stear steer steere summiteer tear teare teer termeer tier unclear vanleer vanliere veer veneer vere volunteer wagoneer wazir we're weir wier yasir year zahir zaire zamfir zegeer zerr zier
 IY_R_D  adhered appeared beaird beard bioengineered cashiered cheered cleared cohered comandeered commandeered disappeared eared endeared engineered feared geared interfered jeered neared peered persevered pioneered premiered reappeared reared revered seared sheard sheared smeared sneered steered tiered veered volunteered weird
 IY_R_AH_N_T_S  adherence adherents appearance clearance coherence cryptoclearance disappearance ference incoherence interference non-interference noninterference perseverance reappearance
@@ -578,7 +578,7 @@ AA_N_IY  adjani advani afghani ahwahnee albani almadani andreani armani azerbaij
 OY_N  adjoin ardoin aucoin baudoin beaudoin boudoin bourgoin bowdoin boyne broin burgoyne chaudoin chicoine coin conjoin coyne enjoin goin goyne groin hoyne jodoin join lemoine leoine loin mccoin mcgloin micoin moines purloin raboin rejoin
 OY_N_IY_NG  adjoining coining disappointing enjoining joining rejoining
 OY_N_Z  adjoins burgoyne's coin's coins des_moines goines goins goynes groins joines joins joynes moines rejoins
-AH_R_N  adjourn ahearn ahern aherne alpern amburn bern berne burn burne byrne cern chern cherne churn concern dern discern durn earn erne fearn fern hearn hearne hern herne hirn hurn kearn kern kirn laverne learn mcgurn mckern new_bern o'beirne o'byrne o'hearn o'hern obyrne ohearn ohern return sauterne spurn stearn stearne stern sterne stirn sturn thurn turn unconcern upturn urn vern verne yearn zurn
+AH_R_N  adjourn ahearn ahern aherne alpern amburn bern berne burn burne byrne cern chern cherne churn concern dern discern durn earn erne fearn fern hearn hearne hern herne hirn hurn kearn kern kirn laverne learn mcgurn mckern new_bern o'beirne o'byrne o'hearn o'hern obeirne obyrne ohearn ohern return sauterne spurn stearn stearne stern sterne stirn sturn thurn turn unconcern upturn urn vern verne yearn zurn
 AH_R_N_D  adjourned burned churned concerned discerned earned learned returned spurned turned unburned unconcerned unearned unturned yearned
 AH_R_N_IY_NG  adjourning berning burning churning concerning discerning durning earning learning returning spurning turning werning yearning
 AH_R_N_M_AH_N_T  adjournment discernment internment
@@ -807,7 +807,7 @@ AE_S_AH_Z  agassiz amasses asses bass's basses brasses class's classes gas's gas
 AE_G_AH_T  agate baggett baggott claggett daggett faggot haggett maggot zagat
 AE_G_AH_T_S  agates maggots
 EY_JH  age assuage backstage beige bethpage cage disengage drage engage enrage gage gaige gauge grage hage kage krage lage offstage onstage osage page paige phage rage restage sage schrage stage under-age upstage wage wrage
-EY_JH_AH_Z  age's ages cage's cages engages enrages gauges klages mages osages page's pages rages sage's sages stages wages
+EY_JH_AH_Z  age's ages asia's beige's beiges cage's cages engages enrages euthanasia's gauges klages mages malaysia's osages page's pages rages sage's sages stages wages
 EY_JH_D  aged assuaged caged disengaged engaged enraged gauged paged raged rampaged restaged staged upstaged waged
 AE_T_S_UW  agematsu daihatsu zaibatsu
 AE_JH_AH_N_T_S  agence pageants
@@ -817,8 +817,8 @@ EH_N_D_AH  agenda benda blenda brenda floirenda glenda grenda gwenda hacienda ko
 EH_N_D_AH_Z  agendas brenda's resendiz
 EY_JH_AH_N_T  agent bagent reagent
 EY_JH_AH_N_T_S  agent's agents agents' reagents
-EY_JH_AH_R  ager crager gauger majer major pager stager wager yager
-EY_JH_AH_R_Z  agers agers' major's majors majors' pagers wagers
+EY_JH_AH_R  ager blasier crager fraiser fraizer frasier frazier gauger majer major pager stager wager yager
+EY_JH_AH_R_Z  agers agers' blasier's braziers frasier's major's majors majors' pagers wagers
 AE_G_IY  aggie aggy agie baggie baggy craggy daggy draggy kashiwagi maggie shaggy waggy wagy
 AE_G_IY_Z  aggies maggie's saggese
 AE_N_D_AY_Z  aggrandize propagandize
@@ -995,7 +995,7 @@ EH_K_S  aix annex atx beck's becks blech's caltex checks cheques cmx complex con
 AA_N_T_S  aix-en-provence aunt's aunts aunts' avants bons chaunce clonts clontz croissants cronce debutantes ensconce etablissements faunce flaunts fonts frontz gaunce gonce hans haunts honse hontz jaunts klontz krontz lesperance monts montz nonce nonchalance ponce pont's ponts renaissance reponse response schronce schwantes schwanz sconc sconce scronce shontz shrontz taunts vermont's wants wantz yonce yonts yontz
 AY_AH  aja araya berjaya boguslavskaya cartaya czaja daya elia eligaya gaia himalaya indiaia iphegenia jaya jeremiah josiah literaturnaya maia mariah maya messiah nehemiah obadiah papaya pariah pervomaiskaya playa plisetskaya rupiah stolichnaya via vizcaya zachariah zaslavskaya zedekiah zelaya
 AA_JH  ajaj auge barrage collage corsage demirag dhiraj dislodge dodge dressage entourage garage hauge hodge lodge massage mirage montage podge raj rodge taj travelodge
-AA_JH_AH_Z  ajaj's dodge's dodges hodge's hodges lodge's lodges maharajahs
+AA_JH_AH_Z  ajaj's barrages collages dodge's dodges entourages garages hodge's hodges lodge's lodges maharajahs massages mirages
 OW_T_OW  ajinomoto alioto catalanotto coto cotto d'escoto desoto devoto dinoto doto enomoto escoto fujimoto fukumoto galioto goto hamamoto hashimoto hoshimoto iwamoto kakimoto kawamoto kimoto komoto koto kuramoto kyoto makoto marotto matsumoto miyamoto morimoto moto muramoto nakamoto nishimoto noto okamoto okimoto peixoto perrotto photo rhoto roto sakamoto scioto scotto soto spoto subroto sugimoto takemoto tanimoto toto tsukamoto yamamoto yoshimoto
 IY_T_OW  ajito akihito alamito alito appetito ardito belsito benito bommarito bonito brito burrito capito carlito carpenito cerrito colavito comito credito dapolito desposito devito dippolito divito eppolito espirito esposito exposito fedeccredito fiorito frito ghadafito gitto granito hipolito hirohito incognito ingenito ippolito ito itoh jovito koito leto losito lotito lozito marchitto marielito melito milito mirabito miskito morabito mosquito naruhito nieto nito pellerito perito petito petitto peto polito prieto quito romito rovito saporito sausalito sayito seato sestito shellito sito spirito sposito swyto szeto territo tito veto vigorito vito zambito zito
 AA_L_IY  akali ali artale attali bakrewali bali bengali bialy braly brawley brolly caccavale cali callie campanale canale caporale cardinale cardinali casale casali cauley cawley colley collie colly comunale crawley crawly curiale dalai dali dawley denatale depascale depasquale dhali dinatale dipasquale diwali dolley dollie dolly favale fawley folley folly fragale frawley gahli gali gambale generali ghali golly hallie hawley holley hollie holly imperiale industriale industriali internationale jolley jollie jolly kahley kamali keegali kigale kigali kolli lallie lavalle lawley lolley lolli lolly macaulay macauley mali mallie massingale mattikalli mcauley mccallie mccauley mccaulley mccawley mccolley mcgauley meridionale mexicali micale molley mollie molly murali natale natali nazionale nepali nolie nolley olley ollie olly oncale ovalle papale parziale pauley pauli paulie pauly pawley polley polly poly qualley quilali raleigh rawley rolley rolli rollie sahli scali shawley sholly smalley solley sollie solly somali speziale spinale spitale stolley swalley tallie tolley tringali trolley vallie vitali vitaly volley walley wallie wally wholey zeoli zingale
@@ -1198,7 +1198,7 @@ AY_JH_AH  alija elijah
 AY_JH_AH_Z  alija's heiges obliges
 AY_K  alike bike bleich dike dislike dyck dyke eich eick eike fike fyke gleich gruneich heick hike huyck ike like lyke mcpike mike pike psych pyke reich reiche rike schleich schweich speich spike streich strike teich tike tyke unlike vandyke vanschaick vanskike vanslyke vike weich wike wyke zike
 AY_K_S  alikes bikes dikes dislikes dykes fikes hikes hykes ickes ike's likes lykes mike's mikes moueix nikes pikes reich's reicks sikes spikes strike's strikes strikes' sykes tikes vikes wykes yikes
-EH_N_T_AH_R_IY  alimentary complimentary documentary parliamentary rudimentary sedimentary supplementary testamentary
+EH_N_T_AH_R_IY  alimentary complimentary documentary elementary parliamentary rudimentary sedimentary supplementary testamentary
 AE_L_AH_M_OW_N_IY  alimony palimony
 IH_P_AH_Z  aliquippa's aliquippas skippa's
 IY_R_IY_OW  alirio barberio cheerio oliverio serio tiberio valerio
@@ -1970,8 +1970,8 @@ AA_R_B  arb barb barbe farb garb garbe harb schlarb zarb
 AA_R_B_AH  arba barba
 AA_R_B_AA  arbaugh carbaugh harbaugh
 AA_R_B_AH_L  arbel garble marbil marble varble
-AA_R_B_AH_T_R_AA_ZH_AH_R  arbitrager arbitrageur
-AA_R_B_AH_T_R_AA_ZH_AH_R_Z  arbitragers arbitragers'
+AA_R_B_AH_T_R_AA_JH_AH_R  arbitrager arbitrageur
+AA_R_B_AH_T_R_AA_JH_AH_R_Z  arbitragers arbitragers'
 AH_R_Z  arbitrageurs blurs burres chauffeur's chauffeurs concurs confers connoisseurs defers demurs deters entrepreneur's entrepreneurs firs fors furr's furs hers herz incurs infers jurs kurz liqueurs lurz mers merz messieurs monsieurs occurs perz prefers purrs refers restauranteurs restaurateurs saboteurs scherz schreurs sirs slurs spurs stirs transfers wirz wurz yours
 AA_R_B_AH_T_R_EY_T_AH_R_Z  arbitrator's arbitrators arbitrators'
 AA_R_B_OW  arbo barbo carbo garbo jarboe ybarbo
@@ -2006,7 +2006,7 @@ EH_K_CH_AH_R_AH_L  architectural prefectural
 AA_R_K_AH_T_EH_K_CH_AH_R_Z  architecture's architectures
 AY_V_AH_L  archival arrival revival rival survival
 AA_R_K_S  arcs arx barkes barks clark's clarke's clarks embarks harks larks marcks mark's marks marques marx merc's park's parkes parks parks' quarks remarks sharks sparkes sparks stark's starkes starks tjarks vonarx
-AH_R_AH_S  arcturus banderas burress burris burrous
+AH_R_AH_S  arcturus banderas burress burris burrous jerris
 UH_R_IY  arcuri brewry buri burri centuri curie drewry drury duri durie dury eury fleury flury furey fury idrocarburi jewry jury kouri kury laverdure loury lurie mercuri missouri moncure muri puri tamburri turi turri ury venturi widuri youri yuri yury zuri
 AA_R_D_AH  arda carda garda leonarda lugarda narda skarda
 AA_R_D_AH_TH  ardath ardith
@@ -2221,7 +2221,6 @@ AE_SH_M_AO_R  ashmore cashmore
 AA_W_IY  ashrawi malawi qawi
 AE_SH_W_EH_L  ashwell cashwell
 AE_SH_W_UH_D  ashwood dashwood
-EY_ZH_AH_Z  asia's beige's beiges euthanasia's malaysia's
 AE_Z_AH_K  asic mazyck
 AE_S_AH_M_AA_V  asimov gerasimov
 AE_S_AH_M_OW  asimow massimo
@@ -2444,7 +2443,7 @@ AA_D_R_AH_K  audric broadrick broderick brodrick lodwrick modrak roderick rodric
 AA_D_AH_R_IY  audrie camaraderie
 AA_D_W_AH_N  audwin godwin
 AW_AH_L  auel bowel dowel fowle grauel howell howle kowal kowall lawall macdowell mcdowall mcdowell sprowle towel vowel
-AW_AH_R  auer bauer baur bougher bower brauer brougher brower clower cower dauer devour dour empower flour flower gauer glower gower grauer hauer hour how're hower kauer klauer knauer lauer mauer mph nauer our overpower power rauer sauer schauer scour shower sour superpower tauer three-hour tower trower underpower
+AW_AH_R  auer bauer baur bougher bower brauer brougher brower clower cower dauer devour dour empower flour flower gauer glower gower grauer hauer hour how're hower kauer klauer knauer lauer mauer mph nauer our overpower power rauer sauer saurer schauer scour shower sour superpower tauer three-hour tower trower underpower
 AA_G_AH_S_T  aug august auguste
 AA_G_AH_R  auger augur blogger jogger lager logger mauger swogger
 AA_G_AH_R_Z  augers augurs bloggers joggers loggers
@@ -2881,8 +2880,7 @@ AA_V_S_K_IY  barovsky bukovsky dubrovsky ianovski janovsky kreslovsky kutuzovsky
 AE_R_AH_K_S  barracks barrick's
 AE_R_AH_K_L_AW  barraclough barricklow
 EH_R_AH_G_AH_N  barragan berrigan harrigan kerrigan merrigan
-AA_ZH_D  barraged massaged
-AA_ZH_AH_Z  barrages collages entourages garages maharaja's massages mirages
+AA_JH_D  barraged dislodged dodged lodged massaged
 AA_N_K_OW  barranco capobianco carranco defranco delbianco difranco evancho gianfranco ivanko lobianco panebianco polanco sancho
 AE_R_AH_Z  barras carras clara's garroz karras
 AE_R_AH_T  barratt barret barrett carrot garett garrett garritt garrott jarratt marett parrett sarrett sharrett
@@ -3029,7 +3027,7 @@ AW_D_AH_R  bauder browder chowder crowder lauder louder powder prouder souder st
 UW_AH_N  baudouin bruin dewan doin' euan ewan ewen frewen frewin fruin hughen leeuwen lewan lewin luane mccuan mccuin mceuen mcewen mckeown mcluhan menuhin rouyn ruin vanleeuwen wuhan
 AW_AH_R_Z  bauers bowers clowers devours empowers flours flowers flowers' fowers hour's hours jowers ours overpowers power's powers powers' sauers scours showers souers sours superpowers tower's towers towers'
 AA_AH_N  baughan draughon gaughan gawen straughan
-AA_AH_R  baugher bawer brawer daher flaugher fraher mawr plaugher schaer
+AA_AH_R  baugher bawer borror brawer daher flaugher forrer fraher mawr plaugher rorrer schaer sporrer
 AA_G_AH_S  baugus boggess boggus
 AW_M  baum fraum guillaume nusbaum pflaum straum
 AW_M_AH_N  bauman baumann boughman bouwman broughman cowman lauman laumann loughman nauman naumann plowman
@@ -3555,7 +3553,7 @@ EH_T_N_AH_R  bettner fetner gestetner ketner kettner letner stettner
 EH_T_Z_AH_R  betzer hetzer kretzer netzer pretzer retzer setzer smetzer stetzer
 EH_T_S_L_AH_R  betzler etzler hetzler metzler setzler wetzler
 EH_T_Z_OW_L_D  betzold petzold
-AH_R_IY  beury blurry burry churry currey currie curry demery demory flurry flury furry gurry herre hurri hurry kebab-n-curry kebab-n-kurry macmurray margory mccurry mcmurrey mcmurry murray murree murrey murrie murry scurry slurry surrey surry towery ulery urey uri urie ury vickery worry
+AH_R_IY  beury blurry burry churry currey currie curry demery demory flurry flury furry gurry herre hurri hurry kebab-n-curry kebab-n-kurry macmurray margory mccurry mcmurrey mcmurry murray murree murrey murrie murry perri scurry slurry surrey surry towery ulery urey uri urie ury vickery worry
 AH_R_IY_Z  beury's curries curry's currys demory's flurries hurries murray's uri's worries
 UW_IY_Z  beuys buoys dewees deweese dewey's louis' mitsui's olokuei's sansui's uys
 EH_V  bev dev ev kiev lev maeve marliave rev zev
@@ -3817,7 +3815,7 @@ AH_R_K_N_AH_R  birkner kerchner kirchner kirkner
 AH_R_M_AH_D  birmid mcdermid
 AY_R_AH_N  biron byron chiron chyron kyron myren myron siren syron
 AY_R_OW_Z  biros cairo's gyros tiros
-AH_R_AH_N  birren curran curren deguerin murren perin urine
+AH_R_AH_N  birren curran curren deguerin murren perin perren perryn urine
 AH_R_TH_IY_NG  birthing unearthing worthing
 IH_S_B_IY  bisbee frisbee frisbie frisby grisby lisby wisby
 EH_G_L_IY_AH  bisceglia neglia treglia
@@ -3895,8 +3893,6 @@ AE_NG_K_L_IY  blankley blankly frankly
 AE_S_D_AH_L  blasdel blasdell
 AA_S_IY_AH  blasia gelasia grassia horacia rasia rossiya
 EY_Z_IY_AH_R  blasier blazier brazier cazier crazier glazier grazier hazier lazier
-EY_ZH_AH_R  blasier fraiser fraizer frasier frazier
-EY_ZH_AH_R_Z  blasier's braziers frasier's
 EY_S_IY_AH_S  blasius iglesias lacksadaiscious yglesias
 EY_S_K  blaske gasque haske laske maske paske raske vaske zaske
 AE_S_IY_Z  blassie's sassy's tallahassee's uliassi's
@@ -4307,7 +4303,7 @@ AO_R_K_S  bork's corks forks new_york's orks uncorks york's yorks
 AO_R_L_AH_N_D  borland dorland moreland morland norland orland westmoreland
 AO_R_M_AH_N_Z  borman's longshoremen's mormons norman's ormand's ormond's
 AO_R_N_M_AH_N  borneman bornemann bornman cornman
-AH_R_OW  boro borough burro burrough burrow furrow genero murrow pero roseboro thorough
+AH_R_OW  boro borough burro burrough burrow furrow genero murrow pero perro perrow roseboro thorough
 AO_R_AA_F  boroff borroff
 OY_AH_N  boroian doyen doyon oyen troyan zanoyan
 AO_R_AA_N  boron moron oxymoron
@@ -5031,7 +5027,7 @@ AO_R_AH_JH  burridge forage porridge storage
 AH_R_IY_AH_R  burrier courier currier furrier spurrier worrier
 AO_R_AY_T  burright fluorite
 AH_R_IY_NG_T_AH_N  burrington currington derington purrington
-AH_R_AH_T  burritt turret
+AH_R_AH_T  burritt perret perrett perritt perrot turret
 AH_R_S_IY  bursey gramercy gramersey hersey hursey kersee kersey mercy percy remerci searcy ursie ursy
 AH_R_S_T_IY_NG  bursting kersting thirsting
 AH_R_S_T_AH_N  burston gersten hurston kersten kirsten kirstin thurstan thurston
@@ -5104,6 +5100,7 @@ AY_F_IY_L_D  byfield highfield
 IH_F_AH_R_D  byford clifford differed giffard gifferd gifford liford lyford sifford twiford
 AY_L_AH_N_D  byland eiland heiland highland hyland island long_island niland nyland nylund pyland reiland rhode-island weiland wiland wyland
 AY_L_AY_N  byline skyline
+AY_L_AY_N_Z  bylines skylines
 IH_L_AH_N_D  bylund gilland hiland piland ryland
 IH_N_OW  bynoe inno minnow minow ostankino pinnow ryno winnow zinno
 IH_N_AH_M  bynum linam lynam
@@ -5888,7 +5885,7 @@ IH_N_T_R_AH_N  cintron intron
 OW_L_EH_K  ciolek kociolek kolek kollek kwolek maciolek niziolek polek
 AY_F_AH_R  cipher cypher decipher fifer heifer kifer leifer lifer peifer peiffer pfeifer pfeiffer phifer pifer schleifer seifer slifer
 IH_P_R_IY  cipri slippery
-AH_R_AH  cira curragh missouri o'harra oharra pera ventura
+AH_R_AH  cira curragh missouri o'harra oharra pera perra ventura
 AH_R_K_AH_L_Z  circle's circles
 AH_R_K_AH_L_D  circled encircled
 AH_R_K_AH_L_IY_NG  circling encircling
@@ -6036,8 +6033,8 @@ AA_Z_AH_T_AH_D  closeted deposited posited
 AA_Z_AH_T_S  closets composite's composites deposits eurodeposits posits
 AH_P_S  closeups cupps cups krupp's pups start-ups up's ups
 OW_Z_IY_NG  closing composing decomposing disclosing disposing dozing enclosing exposing foreclosing hosing imposing juxtaposing nosing opposing overexposing posing predisposing proposing reimposing rosing supposing
-OW_ZH_AH_R  closure composure crozier disclosure enclosure exposure foreclosure inclosure losure mosher mosier overexposure
-OW_ZH_AH_R_Z  closures disclosures enclosures exposures foreclosures
+OW_JH_AH_R  closure coger composure crozier disclosure enclosure exposure foreclosure inclosure losure mosher mosier overexposure
+OW_JH_AH_R_Z  closures disclosures enclosures exposures foreclosures
 OW_DH_D  clothed loathed
 OW_DH_Z  clothes oaths
 IH_L_D_AH  clothilda clotilda enskilda gilda grishilda hilda mathilda matilda tilda
@@ -6140,7 +6137,7 @@ OW_L_B_AH_R_N  colbern colburn
 OW_L_B_AH_R_T  colbert holbert kolbert tolbert wolbert
 OW_L_B_AO_R_N  colborn colborne
 OW_L_B_IY_Z  colby's colbys
-AA_ZH_AH_R  colclasure frasure lasure massager
+AA_JH_AH_R  colclasure dodger frasure lasure massager rodger roger yauger
 OW_L_D_AH_R_AH_N  coldren holdren
 OW_L_D_W_AA_T_AH_R  coldwater goldwater
 OW_L_B_R_UH_K  colebrook holbrook holbrooke
@@ -6196,6 +6193,7 @@ AA_L_AH_N_AH_S_T  colonist stalinist
 AH_L_AH_R  color colour culler discolor duller mccullar mcculler metrocolor muller multicolor noncolor stuller tullar tuller
 AE_D_OW_Z  colorado's foreshadows overshadows shadows
 AH_L_AH_R_D  colored coloured discolored multicolored
+AH_L_AH_R_IY_NG  coloring colouring
 AH_L_AH_R_Z  colors culler's cullers discolors mccullars mccullers muller's
 OW_L_S_T_AH_N  colston gholston golston holston olsten polston rolston
 OW_L_T_IY  coltie solti
@@ -6219,7 +6217,7 @@ IY_D_IY_AH_N_Z  comedian's comedians
 IY_D_AH_K  comedic encyclopedic hasidic orthopedic promilacidic
 AA_M_AH_D_IY_Z  comedies comedy's
 AA_M_AH_D_IY  comedy mohamadi
-AH_M_AH_R_Z  comers drummers plumbers somers summer's summers summor's
+AH_M_AH_R_Z  comers drummers plumbers somers sommers summer's summers summor's
 AA_M_AH_T_S  comet's comets recommits shawmut's
 EH_T_R_AH  cometra metra petra tetra
 AH_M_F_AH_R_T  comfort discomfort
@@ -6322,7 +6320,7 @@ UW_S_AH_V_L_IY  conclusively effusively exclusively
 IH_T_AH_N_T  concomitant intermittent
 IH_T_AH_N_T_L_IY  concomitantly intermittently
 AA_N_K_AO_R_D  concord concorde
-AH_R_AH_N_T  concurrent current intercurrent recurrent weren't
+AH_R_AH_N_T  concurrent current deterrent intercurrent recurrent weren't
 AH_R_AH_N_T_L_IY  concurrently currently
 AH_SH_AH_N  concussion discussion percussion prussian repercussion rushin russian
 AH_SH_AH_N_Z  concussions discussions repercussions russian's russians russians'
@@ -6822,7 +6820,7 @@ UW_L_AH_T_IY  credulity incredulity
 EH_JH_AH_L_AH_S  credulous incredulous
 IY_L_M_AH_N  creelman keleman kielman seelman speelman spielman spielmann steelman thielemann thielman
 IY_P_IY_N_AH_S  creepiness sleepiness
-IY_JH_AH_R  creger procedure yaeger
+IY_JH_AH_R  creger leisure procedure seizure yaeger
 IY_M_EY_T  cremate teammate
 EH_N_SH_AA  crenshaw henshaw renshaw
 EH_P_S  creps eppes epps krepps kreps missteps rep's reps schweppes steppes steps streps vanepps
@@ -6893,6 +6891,7 @@ OW_TH_AH_R_Z  crowther's crowthers
 UW_S_IY_Z  cruces debussy's lucy's
 UW_S_AH_B_AH_L  crucible reducible
 UW_D_L_IY  crudely rudely shrewdly
+UW_JH_AH_R  cruger hoosier
 AH_M_B_AH_L_D  crumbled fumbled grumbled humbled jumbled mumbled rumbled stumbled tumbled
 AH_M_B_AH_L_Z  crumbles fumbles grumbles humbles mumbles rumbles stumbles tumbles
 AH_M_B_IY  crumby cumbee cumbie cumby gumbi mumby
@@ -7222,7 +7221,7 @@ EH_F_R_AH_N_T_S  deference preference reference
 EH_N_CH_AH_L  deferential hentschel inconsequential
 AH_R_M_AH_N_T  deferment determent
 AH_R_M_AH_N_T_S  deferments hermance
-AH_R_AH_L  deferral epidural o'berle referral serle squirrel sterle
+AH_R_AH_L  deferral epidural o'berle referral serle squirrel sterle worrall worrel worrell
 AH_R_AH_L_Z  deferrals referrals squirrels
 IH_SH_AH_N_S_IY_Z  deficiencies efficiencies inefficiencies
 IH_SH_AH_N_S_IY  deficiency efficiency immunodeficiency inefficiency proficiency self-sufficiency sufficiency
@@ -7725,8 +7724,7 @@ IH_N_T_AH_G_R_EY_T_IY_NG  disintegrating integrating
 IH_N_T_R_AH_S_T_AH_D  disinterested uninterested
 EH_S_T_M_AH_N_T  disinvestment divestment investment reinvestment
 IH_S_K_L_AH_S  diskless riskless
-AA_JH_D  dislodged dodged lodged
-AA_JH_IY_NG  dislodging dodging lodging
+AA_JH_IY_NG  dislodging dodging lodging massaging
 OY_AH_L  disloyal doyel joyal loyal loyall royal royall
 OY_AH_L_T_IY  disloyalty loyalty royalty
 AE_N_T_AH_L_Z  dismantles mantle's mantles
@@ -7744,7 +7742,7 @@ EH_N_S_AH_R_IY  dispensary extrasensory sensory
 AH_R_S_AH_L  dispersal persall pursel pursell rehearsal reversal tercel universal
 IY_R_AH_T_AH_D  dispirited low-spirited poor-spirited public-spirited spirited
 EY_R_AY_T  displaywrite playwright
-EH_ZH_AH_R  displeasure leasure leisure measure pleasure treasure
+EH_JH_AH_R  displeasure edger hedger leasure ledger leger leisure measure pleasure pledger treasure
 OW_Z_AH_L  disposal kozel kozol nosal ozal proposal rosel rosell
 OW_Z_AH_L_Z  disposals proposal's proposals
 AO_R_SH_AH_N_AH_T  disproportionate extortionate proportionate
@@ -7838,8 +7836,7 @@ AA_K_Y_AH_M_EH_N_T_AH_D  documented undocumented
 AA_K_Y_AH_M_EH_N_AH_D  documented undocumented
 AA_D_AH_R_IY_NG  doddering soldering
 AA_JH_AH_N  dodgen hodgen hodgin nadjen rodgin sundararajan
-AA_JH_AH_R  dodger rodger roger yauger
-AA_JH_AH_R_Z  dodger's dodgers dodgers' odgers rodgers roger's rogers rogers'
+AA_JH_AH_R_Z  dodger's dodgers dodgers' massagers odgers rodgers roger's rogers rogers'
 OW_D_OW_Z  dodo's dodos
 OW_N_JH_AH_Z  doenges toenjes
 AO_R_N_B_AH_R_G  doernberg hornburg kornberg thornberg thornburg thornburgh
@@ -8184,7 +8181,6 @@ EH_D_G_AH_R  edgar medgar
 EH_D_G_AH_R_Z  edgar's medgar's
 EH_JH_AH_L  edgell kegel megill
 EH_JH_M_AH_N  edgemon edgmon
-EH_JH_AH_R  edger hedger ledger leger pledger
 EH_JH_AH_T  edgett legit
 EH_JH_W_UH_D  edgewood wedgewood wedgwood
 EH_JH_W_AH_R_TH  edgeworth wedgeworth
@@ -10046,7 +10042,7 @@ EH_V_AH_L_IY  heavily levalley mcevilly
 EH_K_T_M_AH_N  hechtman schechtman
 EH_K_L_IY_NG  heckling mechling
 EH_K_L_AH  hecla tecla thekla
-EH_JH_AH_R_Z  hedgers ledgers
+EH_JH_AH_R_Z  hedgers ledgers measure's measures pleasures treasures
 IY_M_S_T_R_AH  heemstra hiemstra
 EH_F_AH_R_AH_N  hefferan hefferon
 EH_F_IY_NG_T_AH_N  heffington skeffington
@@ -10577,6 +10573,7 @@ IH_G_N_AH_N_T  indignant malignant
 IH_M_AH_N_AH_T  indiscriminate non-discriminate nondiscriminate
 IH_JH_AH_W_AH_L_Z  individual's individuals individuals'
 IH_N_D_OW  indo jindo lindo lindow shindou window
+IY_JH_AH_Z  indonesia's sieges
 IY_ZH_AH_N_Z  indonesians lesions melanesians
 AH_K_T_AH_N_T_S  inductance reluctance
 AH_S_T_R_IY_AH_L_Z  industrial's industrials industrials'
@@ -11274,7 +11271,6 @@ AY_D_N_AH_R  leidner seidner sidener weidner
 AY_K_AH_M  leikam nycum
 AY_N_D_AH_K_AH_R  leindecker leyendecker
 AY_N_Z_D_AO_R_F  leinsdorf reinsdorf
-IY_ZH_AH_R  leisure seizure
 AY_T_S_K_IY  leitzke neitzke
 IY_K_AH_Z  lekas luxottica's rica's
 EH_M_B_AH_R_G  lemberg lemburg stemberg
@@ -11605,7 +11601,7 @@ AA_R_K_AH_T_P_L_EY_S_AH_Z  marketplace's marketplaces
 AA_R_K_AH_V_AH_CH  markiewicz markovich markowicz starkovich
 AA_R_K_AH_L  markle matriarchal patriarchal sparkle starkel
 AA_R_L_B_AH_R_OW  marlboro marlborough
-AA_R_L_B_AH_R_R_OW_Z  marlboro's marlboros
+AA_R_L_B_AH_R_OW_Z  marlboro's marlboros
 AA_R_K_W_AA_R_T  marquardt marquart
 AA_R_S_D_AH_N  marsden marsdon
 AA_R_SH_AH_L_Z  marshal's marshall's marshals martials
@@ -11688,6 +11684,7 @@ AO_R_K_AH_L  mccorkel mccorkell mccorkle snorkel
 AH_N_AH  mcdonagh mcdonough
 AE_K_AH_L_HH_EY_N_IY  mcelhaney mcelhany mcelheney
 AE_K_AH_L_HH_IH_N_IY  mcelhiney mcelhinney mcelhinny
+AE_K_AH_L_M_AH_R_IY  mcelmurray mcelmurry
 AE_K_AH_L_R_AE_TH  mcelrath mcelreath mcilrath
 AE_K_AH_L_R_OY  mcelroy mcilroy
 AE_K_AH_L_V_EY_N  mcelvain mcelvaine
@@ -11715,7 +11712,6 @@ EY_V_IH_SH  mctavish slavish tavish
 AY_G  mctighe sweig tighe
 IY_L_T_AY_M  mealtime real-time
 EH_ZH_AH_R_AH_B_AH_L  measurable pleasurable
-EH_ZH_AH_R_Z  measure's measures pleasures treasures
 EH_ZH_AH_R_D  measured treasured
 IY_T_IY_AH_R  meatier meteor
 EH_D_AH_L_AH_S_T_S  medalist's medalists
@@ -11873,6 +11869,7 @@ EH_K_AH_G_N_AY_Z_D  misrecognized recognised recognized unrecognized
 EH_K_AH_G_N_AY_Z_AH_Z  misrecognizes recognises recognizes
 EH_K_AH_G_N_AY_Z_IY_NG  misrecognizing recognising recognizing
 IH_P_IY_AH_N  mississippian rippeon
+AH_R_AH_Z  missouri's perras
 IH_S_IY_Z  missy's ullyses ulysses
 IH_CH_AH_M  mitcham mitchem mitchum
 IH_CH_AH_L_S_AH_N  mitchelson nichelson richelson
@@ -12436,15 +12433,13 @@ EH_K_T_AH  perfecta trifecta
 EH_K_SH_AH_N_IH_Z_AH_M  perfectionism protectionism
 EH_K_SH_AH_N_AH_S_T  perfectionist protectionist rejectionist
 EH_K_SH_AH_N_AH_S_T_S  perfectionists protectionists rejectionists
-AH_R_AH_K  perich tworek uric urich yurchak
+AH_R_AH_K  perich tworek uric urich urick yurchak
 IH_N_Y_AA_N  perignon sauvignon
+AH_R_IY_M_AH_N  periman perryman
 IY_R_IY_AH_D_Z  period's periods
 EH_R_AH_S_K_OW_P  periscope polariscope
 AH_R_P_AH_T_R_EY_T_AH_R_Z  perpetrator's perpetrators
 AH_R_P_AH_K  perpich tirpak
-AH_R_R_AH_N  perren perryn
-AH_R_R_AH_T  perret perrett perritt perrot
-AH_R_R_OW  perro perrow
 AH_R_SH_IY_NG_Z  pershing's pershings
 AH_R_S_AH_S  persis ursus versus
 EY_S_AH_V_N_AH_S  persuasiveness pervasiveness
@@ -12627,6 +12622,7 @@ EY_SH_AH_N_AH_R  probationer stationer vacationer
 EY_SH_AH_N_AH_R_Z  probationers stationers vacationers vacationers'
 AA_B_L_AH_M_Z  problem's problems
 AH_R_S_AH  probursa ursa versa
+IY_JH_AH_R_Z  procedures seizures
 AA_S_EH_S  process reprocess
 AA_S_EH_S_T  processed reprocessed unprocessed
 AA_S_EH_S_IY_NG  processing reprocessing
@@ -13462,7 +13458,7 @@ UW_T_S_IY_Z  tutsi's tutsis
 AH_L_R_AH_K  ulric ulrick
 UW_N_AH_B_AA_M  unabom unabomb
 UW_N_AH_B_AA_M_AH_R_Z  unabomber's unabombers
-AH_N_D_AH_R_R_AY_T_AH_R_Z  underwriter's underwriters underwriters'
+AH_N_D_AH_R_AY_T_AH_R_Z  underwriter's underwriters underwriters'
 UW_N_AH_K_AA_M  unicom unikom
 UW_N_AH_S_IH_S  unisys unisys'
 UW_N_AH_T_S  unit's units units'
@@ -13618,7 +13614,6 @@ UH_D_AH_L  wooddell woodell woodle
 UH_D_W_IH_N_Z  woodwind's woodwinds
 AH_R_K_M_AH_N_Z  workman's workmen's
 AH_R_L_D_Z  world's worlds
-AH_R_R_AH_L  worrall worrel worrell
 AH_R_SH_AH_P_T  worshiped worshipped
 AH_R_SH_AH_P_AH_R_Z  worshipers worshippers
 AH_R_SH_AH_P_IY_NG  worshiping worshipping

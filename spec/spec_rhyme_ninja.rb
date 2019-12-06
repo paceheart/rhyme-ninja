@@ -341,6 +341,7 @@ describe 'RHYMES' do
     oughta_rhyme 'world', 'unfurled'
     oughta_rhyme 'cold', 'paroled'
     ought_not_rhyme 'work', 'fork'
+    ought_not_rhyme 'coed', 'abode'
   end
 
   context 'perfect rhymes must rhyme the last primary-stressed syllable, not just the last syllable' do
@@ -553,10 +554,16 @@ describe 'RHYMES' do
   context 'imperfect rhymes' do
     oughta_rhyme 'mushroom', 'doom', NOT_WORKING # no pronunciation for 'mushroom', and its stress is off
     oughta_rhyme 'dodge', 'massage' # only in Texas, but we don't want dodge to get lonely in its empty lodge
+    oughta_rhyme 'dodges', 'massages'
+    oughta_rhyme 'dodger', 'massager'
+    oughta_rhyme 'dodgers', 'massagers'
+    oughta_rhyme 'dodged', 'massaged'
+    oughta_rhyme 'dodging', 'massaging'
     oughta_rhyme 'fennel', 'sentimental' # it's OK to elide the final T in 'sentimental'
     oughta_rhyme 'greediest', 'devious', NOT_WORKING
-    oughta_rhyme 'girl', 'world', NOT_WORKING
     oughta_rhyme 'fence', 'wince', NOT_WORKING
+    oughta_rhyme 'vintage', 'percentage', NOT_WORKING 
+    oughta_rhyme 'girl', 'world', NOT_WORKING
     oughta_rhyme 'false', 'malts' # sure I guess? otherwise 'false' won't rhyme with anything at all
     oughta_rhyme 'else', 'melts' # sure I guess? otherwise 'else' won't rhyme with anything at all
     oughta_rhyme 'poor', 'core', NOT_WORKING # in some dialects, these rhyme

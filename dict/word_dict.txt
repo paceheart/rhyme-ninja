@@ -4051,10 +4051,10 @@ arbella,0,AA2 R . B EH1 . L AH0
 arbiter,300,
 arbiters,300,
 arbitrage,465,
-arbitrager,101,AA1 R . B AH0 . T R AA2 . ZH AH0 R
-arbitragers,101,AA1 R . B AH0 . T R AA2 . ZH AH0 R Z
-arbitragers',0,AA1 R . B AH0 . T R AA2 . ZH AH0 R Z
-arbitrageur,147,AA1 R . B AH0 . T R AA2 . ZH AH0 R
+arbitrager,101,AA1 R . B AH0 . T R AA2 . JH AH0 R
+arbitragers,101,AA1 R . B AH0 . T R AA2 . JH AH0 R Z
+arbitragers',0,AA1 R . B AH0 . T R AA2 . JH AH0 R Z
+arbitrageur,147,AA1 R . B AH0 . T R AA2 . JH AH0 R
 arbitrageurs,147,AA2 R . B AH0 . T R AA2 . ZH AH1 R Z
 arbitraging,465,
 arbitrarily,200,
@@ -4716,7 +4716,7 @@ ashwell,0,AE1 . SH W EH2 L
 ashwood,0,AE1 . SH W UH2 D
 ashy,100,AE1 . SH IY0
 asia,3211,EY1 . ZH AH0
-asia's,0,EY1 . ZH AH0 Z
+asia's,0,EY1 . JH AH0 Z
 asiamerica,0,EY2 . S IY0 . AH0 . M EH1 . R AH0 . K AH0
 asian,2413,EY1 . ZH AH0 N
 asians,2413,EY1 . ZH AH0 N Z
@@ -5725,7 +5725,7 @@ azteca,0,AE2 Z . T EH1 . K AH0
 aztecs,198,
 azuka,0,AH0 . Z UW1 . K AH0
 azura,0,AH0 . Z UH1 . R AH0
-azure,404,
+azure,404,AE1 . JH AH0 R
 azzara,0,AA0 T . S AA1 . R AH0
 azzarello,0,AA0 T . S AA0 . R EH1 . L OW0
 azzaro,0,AA0 T . S AA1 . R OW0
@@ -6818,8 +6818,8 @@ barracuda,137,B EH2 . R AH0 . K UW1 . D AH0
 barradino,0,B EH2 . R AH0 . D IY1 . N OW0
 barragan,0,B EH1 . R AH0 . G AH0 N
 barrage,860,B AH0 . R AA1 JH
-barraged,860,B AH0 . R AA1 ZH D
-barrages,860,B AH0 . R AA1 . ZH AH0 Z
+barraged,860,B AH0 . R AA1 JH D
+barrages,860,B AH0 . R AA1 . JH AH0 Z
 barranco,0,B AA0 . R AA1 N . K OW0
 barras,0,B AE1 . R AH0 Z
 barrasso,0,B AA2 . R AA1 . S OW0
@@ -7793,9 +7793,9 @@ beidleman,0,B AY1 . D AH0 L . M AH0 N
 beidler,0,B AY1 . D AH0 . L AH0 R|B AY1 D . L AH0 R
 beier,0,B AY1 . AH0 R
 beige,434,B EY1 JH
-beige's,0,B EY1 . ZH AH0 Z
+beige's,0,B EY1 . JH AH0 Z
 beigel,101,B AY1 . G AH0 L
-beiges,434,B EY1 . ZH AH0 Z
+beiges,434,B EY1 . JH AH0 Z
 beighley,0,B EY1 . G L IY0
 beightol,0,B EY1 . T AH0 L
 beijer,0,B AY1 R
@@ -9528,8 +9528,8 @@ blase,100,B L EY1 Z
 blaser,0,B L EY1 . Z AH0 R
 blasi,0,B L EY1 . Z IY0
 blasia,0,B L AA1 . S IY0 . AH0
-blasier,0,B L EY1 . Z IY0 . AH0 R|B L EY1 . ZH AH0 R
-blasier's,0,B L EY1 . ZH AH0 R Z
+blasier,0,B L EY1 . Z IY0 . AH0 R|B L EY1 . JH AH0 R
+blasier's,0,B L EY1 . JH AH0 R Z
 blasing,0,B L EY1 . Z IY0 NG
 blasingame,0,B L AA0 . S IY0 NG . G AA1 . M IY0
 blasini,0,B L AH0 . S IY1 . N IY0
@@ -10777,6 +10777,7 @@ borrello,0,B AO2 . R EH1 . L OW0
 borrero,0,B AO0 . R EH1 . R OW0
 borris,0,B AO1 . R AH0 S
 borroff,0,B AO1 . R AA0 F
+borror,0,B AA1 . AH0 R
 borrow,3294,B AA1 . R OW2
 borrowed,3294,
 borrower,989,
@@ -11572,7 +11573,7 @@ brazenly,200,
 brazenness,207,
 braziel,0,B R AH0 . Z IY1 L
 brazier,214,B R EY1 . Z IY0 . AH0 R
-braziers,214,B R EY1 . ZH AH0 R Z
+braziers,214,B R EY1 . JH AH0 R Z
 brazil,1882,B R AH0 . Z IH1 L
 brazil's,0,B R AH0 . Z IH1 L Z
 brazile,0,B R AA1 . Z AY0 L
@@ -13495,7 +13496,7 @@ bylaws,120,
 byler,0,B AY1 . L AH0 R
 byles,2,B AY1 L Z
 byline,36,B AY1 . L AY2 N
-bylines,36,
+bylines,36,B AY1 . L AY2 N Z
 bylund,0,B IH1 . L AH0 N D
 byner,0,B AY1 . N AH0 R
 bynes,0,B AY1 N Z
@@ -15546,7 +15547,7 @@ ceco,0,S IY1 . K OW0
 cecola,0,S EH0 . K OW1 . L AH0
 cecos,0,S IY1 . K OW0 S
 cedar,328,S IY1 . D AH0 R
-cedar-rapids,0,S IY1 . D AH0 R . R AE1 . P AH0 D Z|S IY1 . D AH0 . R AE1 . P AH0 D Z
+cedar-rapids,0,S IY1 . D AH0 . R AE1 . P AH0 D Z|S IY1 . D AH0 . R AE1 . P AH0 D Z
 cedars,328,S IY1 . D AH0 R Z
 cede,259,S IY1 D
 ceded,259,S IY1 . D AH0 D|S IY1 . D AH0 D
@@ -17294,7 +17295,7 @@ cirone,0,S IY0 . R OW1 N
 ciros,0,S IY1 . R OW2 Z
 cirque,104,S AH1 R K
 cirrhosis,261,S AH0 . R OW1 . S AH0 S
-cirrincione,0,S AH0 R . R IY0 N . CH OW1 . N IY2
+cirrincione,0,S AH0 . R IY0 N . CH OW1 . N IY2
 cirrus,133,S IY1 . R AH0 S
 cisar,0,S AH0 . S AA1 R
 cisco,147,S IH1 . S K OW2
@@ -17889,8 +17890,8 @@ closings,1672,
 closs,0,K L AA1 S
 closser,0,K L AA1 . S AH0 R
 closson,0,K L AA1 . S AH0 N
-closure,2810,K L OW1 . ZH AH0 R
-closures,2810,K L OW1 . ZH AH0 R Z
+closure,2810,K L OW1 . JH AH0 R
+closures,2810,K L OW1 . JH AH0 R Z
 clot,608,K L AA1 T
 cloth,2290,K L AA1 TH
 clothe,667,K L OW1 DH
@@ -18215,7 +18216,6 @@ codrescu's,0,K AH0 . D R EH1 . S K Y UW2 Z
 cody,144,K OW1 . D IY0
 coe,139,K OW1
 coeburn,0,K OW1 . B AH0 R N
-coed,0,K OW1 D
 coeducational,100,K OW1 . EH1 . JH AH0 . K EY1 . SH AH0 . N AH0 L
 coefficient,922,K OW2 . AH0 . F IH1 . SH AH0 N T
 coefficients,922,K OW2 . AH0 . F IH1 . SH AH0 N T S
@@ -18273,6 +18273,7 @@ cogeneration,0,K OW1 . JH EH1 . N AH0 . R EY1 . SH AH0 N
 cogenerator,0,K OW0 . JH EH1 . N AH0 . R EY2 . T AH0 R
 cogenerators,0,K OW0 . JH EH1 . N AH0 . R EY2 . T AH0 R Z
 cogent,100,
+coger,0,K OW1 . JH AH0 R
 coggin,0,K AA1 . G AH0 N
 coggins,0,K AA1 . G AH0 N Z
 coghlan,0,K AA1 . G L AH0 N
@@ -18385,7 +18386,7 @@ colby,16,K OW1 L . B IY0
 colby's,0,K OW1 L . B IY0 Z
 colbys,16,K OW1 L . B IY0 Z
 colchicine,100,
-colclasure,0,K OW0 L . K L AA1 . ZH AH0 R
+colclasure,0,K OW0 L . K L AA1 . JH AH0 R
 colclough,23,
 cold,12848,K OW1 L D
 cold-blood,0,K OW1 L D . B L AH1 D
@@ -18448,7 +18449,7 @@ collaborators,481,
 collado,0,K OW0 . L AA1 . D OW0
 collage,414,K AH0 . L AA1 JH
 collagen,287,
-collages,414,K AH0 . L AA1 . ZH AH0 Z
+collages,414,K AH0 . L AA1 . JH AH0 Z
 collamore,0,K OW0 . L AA1 . M AO0 R
 collapse,5204,K AH0 . L AE1 P S
 collapsed,5204,K AH0 . L AE1 P S T
@@ -18616,7 +18617,7 @@ colored,341,K AH1 . L AH0 R D
 coloreds,301,
 colorfast,100,
 colorful,300,
-coloring,142,
+coloring,142,K AH1 . L AH0 . R IY0 NG
 coloristic,0,K AH2 . L AH0 . R IH1 . S T AH0 K
 colorization,0,K AH2 . L AH0 . R AH0 . Z EY1 . SH AH0 N
 colorize,100,
@@ -18631,7 +18632,7 @@ colosseum,161,K AA2 . L AH0 . S IY1 . AH0 M
 colossus,101,K AH0 . L AA1 . S AH0 S
 colour,16808,K AH1 . L AH0 R
 coloured,18374,K AH1 . L AH0 R D
-colouring,17076,
+colouring,17076,K AH1 . L AH0 . R IY2 NG
 colson,0,K OW1 L . S AH0 N
 colston,0,K OW1 L . S T AH0 N
 colt,673,K OW1 L T
@@ -19085,7 +19086,7 @@ compositional,100,K AA2 M . P AH0 . Z IH1 . SH AH0 . N AH0 L
 compositions,3415,K AA2 M . P AH0 . Z IH1 . SH AH0 N Z
 compost,920,
 composting,920,
-composure,474,K AH0 M . P OW1 . ZH AH0 R
+composure,474,K AH0 M . P OW1 . JH AH0 R
 compote,115,
 compound,3624,K AH0 M . P AW1 N D
 compounded,2924,K AH0 M . P AW1 N . D AH0 D|K AH0 M . P AW1 N . D AH0 D
@@ -20459,7 +20460,7 @@ corny,157,K AO1 R . N IY0
 corolla,118,K AH0 . R AA1 . L AH0
 corollaries,395,
 corollary,395,
-corologis,0,K AH0 R . R AA1 . L AH0 . JH AH0 S
+corologis,0,K AH0 . R AA1 . L AH0 . JH AH0 S
 corona,272,K AH0 . R OW1 . N AH0
 corona's,0,K AH0 . R OW1 . N AH0 Z
 coronado,0,K AH0 . R OW0 . N AA1 . D OW0
@@ -20871,8 +20872,8 @@ counterproductive,100,
 counterproposal,205,
 counterproposals,205,
 counterpunch,101,
-counterrevolution,105,K AW2 N . T AH0 R . R EH0 . V AH0 . L UW1 . SH AH0 N
-counterrevolutionary,204,K AW2 N . T AH0 R . R EH0 . V AH0 . L UW1 . SH AH0 . N EH2 . R IY0
+counterrevolution,105,K AW2 N . T AH0 . R EH0 . V AH0 . L UW1 . SH AH0 N
+counterrevolutionary,204,K AW2 N . T AH0 . R EH0 . V AH0 . L UW1 . SH AH0 . N EH2 . R IY0
 counters,4336,K AW1 N . T AH0 R Z
 countersuit,105,
 countertenor,212,
@@ -21822,7 +21823,7 @@ crowthers,0,K R OW1 . TH AH0 R Z
 croxton,0,K R AA1 K . S T AH0 N
 croy,0,K R OY1
 croyle,0,K R OY1 L
-crozier,158,K R OW1 . ZH AH0 R
+crozier,158,K R OW1 . JH AH0 R
 cruce,2,K R UW1 S
 cruces,2,K R UW1 . S IY0 Z
 crucial,300,
@@ -21845,6 +21846,7 @@ cruelest,1569,K R UW1 . L AH0 S T
 cruelly,200,K R UW1 . L IY0
 cruelties,1186,
 cruelty,1186,
+cruger,0,K R UW1 . JH AH0 R
 cruickshank,0,K R UH1 K . SH AE2 NG K
 cruise,1971,K R UW1 Z
 cruised,1971,K R UW1 Z D
@@ -25164,7 +25166,7 @@ determinist,148,
 deterministic,100,D AH0 . T AH2 R . M AH0 . N IH1 . S T AH0 K
 deterred,1082,D AH0 . T AH1 R D
 deterrence,351,D AH0 . T AH1 . R AH0 N T S
-deterrent,943,
+deterrent,943,D AH0 . T AH1 . R AH0 N T
 deterrents,943,D AH0 . T AH1 . R AH0 N T S
 deterring,1082,D AH0 . T AH1 . R IY0 NG
 deters,1082,D AH0 . T AH1 R Z
@@ -26248,8 +26250,8 @@ disclose,2088,D AH0 . S K L OW1 Z
 disclosed,1888,D AH0 . S K L OW1 Z D
 discloses,2088,D AH0 . S K L OW1 . Z AH0 Z
 disclosing,2088,D AH0 . S K L OW1 . Z IY0 NG
-disclosure,1416,D AH0 . S K L OW1 . ZH AH0 R
-disclosures,1416,D AH0 . S K L OW1 . ZH AH0 R Z
+disclosure,1416,D AH0 . S K L OW1 . JH AH0 R
+disclosures,1416,D AH0 . S K L OW1 . JH AH0 R Z
 disco,1170,D IH1 . S K OW0
 discography,100,D AH0 . S K AA1 . G R AH0 . F IY0
 discolor,100,D AH0 . S K AH1 . L AH0 R
@@ -26561,7 +26563,7 @@ displays,11470,D AH0 . S P L EY1 Z
 displaywrite,0,D AH0 . S P L EY1 . R AY2 T
 displease,185,D AH0 . S P L IY1 Z
 displeased,285,D AH0 . S P L IY1 Z D
-displeasure,388,D AH0 . S P L EH1 . ZH AH0 R
+displeasure,388,D AH0 . S P L EH1 . JH AH0 R
 disposable,627,
 disposables,627,
 disposal,2686,D AH0 . S P OW1 . Z AH0 L
@@ -29658,7 +29660,7 @@ elektrisk,0,AH0 . L EH2 K . T R IH1 S K
 elektron,0,AH0 . L EH1 K . T R AA0 N
 element,12336,
 elemental,453,EH2 . L AH0 . M EH1 N . T AH0 L|EH2 . L AH0 . M EH1 . N AH0 L
-elementary,200,EH2 . L AH0 . M EH1 N . T R IY0
+elementary,200,EH2 . L AH0 . M EH1 N . T R IY0|EH2 . L AH0 . M EH1 N . T AH0 . R IY0
 elements,11937,
 elene,0,EH1 . L IY0 N
 elenore,0,EH1 . L AH0 . N AH0 R
@@ -30279,8 +30281,8 @@ enclaves,536,
 enclose,1902,AH0 N . K L OW1 Z
 enclosed,1602,EH0 N . K L OW1 Z D|AH0 N . K L OW1 Z D
 enclosing,1689,EH0 N . K L OW1 . Z IY0 NG
-enclosure,1108,EH0 N . K L OW1 . ZH AH0 R|AH0 N . K L OW1 . ZH AH0 R
-enclosures,1108,AH0 N . K L OW1 . ZH AH0 R Z
+enclosure,1108,EH0 N . K L OW1 . JH AH0 R|AH0 N . K L OW1 . JH AH0 R
+enclosures,1108,AH0 N . K L OW1 . JH AH0 R Z
 encode,684,EH0 N . K OW1 D
 encoded,684,EH0 N . K OW1 . D AH0 D
 encoding,762,EH0 N . K OW1 . D IY0 NG
@@ -30725,7 +30727,7 @@ entomologist,132,EH2 N . T AH0 . M AA1 . L AH0 . JH AH0 S T
 entomologists,132,EH2 N . T AH0 . M AA1 . L AH0 . JH AH0 S T S
 entomology,123,EH2 N . T AH0 . M AA1 . L AH0 . JH IY0
 entourage,314,AA2 N . T UH0 . R AA1 JH|AA2 N . T AH0 . R AA1 JH
-entourages,314,AA2 N . T UH0 . R AA1 . ZH AH0 Z|AA2 N . T AH0 . R AA1 . ZH AH0 Z
+entourages,314,AA2 N . T UH0 . R AA1 . JH AH0 Z|AA2 N . T AH0 . R AA1 . JH AH0 Z
 entrail,99,EH1 N . T R AH0 L
 entrails,173,EH1 N . T R AH0 L Z
 entrance,3846,EH1 N . T R AH0 N T S
@@ -31512,7 +31514,7 @@ eustacia,0,Y UW0 . S T AA1 . CH AH0
 eustice,0,Y UW1 . S T AH0 S
 eustis,0,Y UW1 . S T AH0 S
 euthanasia,241,Y UW2 . TH AH0 . N EY1 . ZH AH0|Y UW2 . TH AH0 . N EY1 ZH . Y AH0
-euthanasia's,0,Y UW2 . TH AH0 . N EY1 . ZH AH0 Z
+euthanasia's,0,Y UW2 . TH AH0 . N EY1 . JH AH0 Z
 eutsey,0,Y UW1 T . S IY0
 ev,220,EH1 V
 eva,0,EY1 . V AH0|IY1 . V AH0
@@ -32124,8 +32126,8 @@ exposing,3904,AH0 K . S P OW1 . Z IY0 NG
 exposition,552,EH2 K . S P AH0 . Z IH1 . SH AH0 N
 expositions,552,EH2 K . S P AH0 . Z IH1 . SH AH0 N Z
 exposito,0,EH0 K . S P AH0 . S AY1 . T OW0|EH0 K . S P AH0 . Z IY1 . T OW0
-exposure,2912,AH0 K . S P OW1 . ZH AH0 R
-exposures,2912,AH0 K . S P OW1 . ZH AH0 R Z
+exposure,2912,AH0 K . S P OW1 . JH AH0 R
+exposures,2912,AH0 K . S P OW1 . JH AH0 R Z
 expound,425,AH0 K . S P AW1 N D
 expounded,425,AH0 K . S P AW1 N . D AH0 D
 expounding,326,AH0 K . S P AW1 N . D IY0 NG
@@ -34150,7 +34152,7 @@ firewood,394,
 firework,710,
 fireworks,710,
 firfer,0,F AH1 R . F AH0 R
-firing,17939,F AY1 . R IY0 NG
+firing,17939,F AY1 . R IY0 NG|F AY1 . AH0 . R IY0 NG
 firings,700,F AY1 . R IY0 NG Z
 firino,0,F IY0 . R IY1 . N OW0
 firkins,118,F AH1 R . K AH0 N Z
@@ -34559,7 +34561,7 @@ fletcher,717,F L EH1 . CH AH0 R
 flett,0,F L EH1 T
 fleur,44,F L AH1 R
 fleurette,0,F L AH2 . R EH1 T
-fleuri,0,F L AH1 R . R IY1|F L UH1 . R IY1
+fleuri,0,F L AH1 . R IY1|F L UH1 . R IY1
 fleury,0,F L UH1 . R IY0
 flew,11850,F L UW1
 flewellen,0,F L UW2 . EH1 . L AH0 N
@@ -35125,7 +35127,7 @@ forbes's,0,F AO1 R B . Z AH0 Z
 forbeses,0,F AO1 R B . Z AH0 Z
 forbess,0,F AO0 R . B EH1 S
 forbid,1596,F AH0 R . B IH1 D|F AA0 . B IH1 D
-forbidden,1496,F AH0 R R . B IH1 . D AH0 N
+forbidden,1496,F AH0 R . B IH1 . D AH0 N
 forbidding,1758,F AH0 R . B IH1 . D IY0 NG|F AA0 . B IH1 . D IY0 NG
 forbids,1596,F AH0 R . B IH1 D Z|F AA0 . B IH1 D Z
 forbis,0,F AO1 R . B AH0 S
@@ -35169,8 +35171,8 @@ foreclose,349,F AO0 R . K L OW1 Z
 foreclosed,349,F AO0 R . K L OW1 Z D
 forecloses,349,F AO0 R . K L OW1 . Z AH0 Z
 foreclosing,349,F AO0 R . K L OW1 . Z IY0 NG
-foreclosure,138,F AO0 R . K L OW1 . ZH AH0 R
-foreclosures,138,F AO0 R . K L OW1 . ZH AH0 R Z
+foreclosure,138,F AO0 R . K L OW1 . JH AH0 R
+foreclosures,138,F AO0 R . K L OW1 . JH AH0 R Z
 foree,0,F AO1 . R IY1
 forefather,282,
 forefathers,282,
@@ -35356,6 +35358,7 @@ forni,0,F AO1 R . N IY0
 fornoff,0,F AO1 R . N AA0 F
 forquer,0,F AO1 R . K AH0 R
 forr,0,F AO1 R
+forrer,0,F AA1 . AH0 R
 forrest,0,F AO1 . R AH0 S T
 forrester,104,F AO1 . R AH0 . S T AH0 R
 forrey,0,F AO1 . R IY0
@@ -35614,8 +35617,8 @@ frain,0,F R EY1 N
 fraine,0,F R EY1 N
 fraioli,0,F R AY0 . OW1 . L IY0
 fraire,0,F R EH1 R
-fraiser,0,F R EY1 . ZH AH0 R
-fraizer,0,F R EY1 . ZH AH0 R
+fraiser,0,F R EY1 . JH AH0 R
+fraizer,0,F R EY1 . JH AH0 R
 fraker,0,F R EY1 . K AH0 R
 frakes,0,F R EY1 K S
 fraleigh,0,F R EY1 . L IY0
@@ -35769,9 +35772,9 @@ frase,0,F R EY1 Z
 fraser,0,F R EY1 . Z AH0 R
 fraser's,0,F R EY1 . Z AH0 R Z
 frasher,0,F R AE1 . SH AH0 R
-frasier,0,F R EY1 . ZH AH0 R
-frasier's,0,F R EY1 . ZH AH0 R Z
-frasure,0,F R AA1 . ZH AH0 R
+frasier,0,F R EY1 . JH AH0 R
+frasier's,0,F R EY1 . JH AH0 R Z
+frasure,0,F R AA1 . JH AH0 R
 fratangelo,0,F R AA0 . T AA0 NG . G EH1 . L OW0
 frate,3,F R EY1 T
 frater,3,F R EY1 . T AH0 R
@@ -35807,7 +35810,7 @@ frayne,0,F R EY1 N
 fraze,0,F R EY1 Z
 frazee,0,F R AH0 . Z IY1
 frazer,308,F R EY1 . Z AH0 R
-frazier,4,F R EY1 . ZH AH0 R
+frazier,4,F R EY1 . JH AH0 R
 frazzano,0,F R AH0 . Z AA1 . N OW0
 frazzini,0,F R AA0 T . S IY1 . N IY0
 frazzle,220,F R AE1 . Z AH0 L
@@ -37124,7 +37127,7 @@ garabedian,0,G AE2 . R AH0 . B IY1 . D IY0 . AH0 N
 garafalo,0,G AA0 . R AA0 . F AA1 . L OW0
 garafola,0,G AA0 . R AA0 . F OW1 . L AH0
 garage,2701,G AH0 . R AA1 JH
-garages,2701,G AH0 . R AA1 . ZH AH0 Z
+garages,2701,G AH0 . R AA1 . JH AH0 Z
 garagiola,0,G AH0 . R AE2 . JH IY0 . OW1 . L AH0|G EH2 . R AH0 . JH IY0 . OW1 . L AH0
 garajda,0,G AH0 . R AA1 ZH . D AH0|G AO0 . R AA1 ZH . D AH0
 garajda's,0,G AH0 . R AA1 ZH . D AH0 Z|G AO0 . R AA1 ZH . D AH0 Z
@@ -43530,8 +43533,8 @@ herbivore,252,
 herbivorous,100,
 herbs,1523,AH1 R B Z
 herceg,0,HH AH1 R . S AH0 G
-hercegovina,0,HH EH2 R T . S AH0 . G OW0 . V IY1 . N AH0|HH AH2 R R T . S AH0 . G OW0 . V IY1 . N AH0
-hercegovina's,0,HH EH2 R T . S AH0 . G OW0 . V IY1 . N AH0 Z|HH AH2 R R T . S AH0 . G OW0 . V IY1 . N AH0 Z
+hercegovina,0,HH EH2 R T . S AH0 . G OW0 . V IY1 . N AH0|HH AH2 R T . S AH0 . G OW0 . V IY1 . N AH0
+hercegovina's,0,HH EH2 R T . S AH0 . G OW0 . V IY1 . N AH0 Z|HH AH2 R T . S AH0 . G OW0 . V IY1 . N AH0 Z
 herculean,300,HH AH0 R . K Y UW1 . L IY0 . AH0 N
 hercules,501,
 herd,1763,HH AH1 R D
@@ -44987,7 +44990,7 @@ hooray,257,HH UH0 . R EY1
 hoos,0,HH UW1 Z
 hoose,14,HH UW1 S
 hooser,0,HH UW1 . Z AH0 R
-hoosier,101,
+hoosier,101,HH UW1 . JH AH0 R
 hoosiers,101,
 hoot,650,HH UW1 T
 hooted,650,HH UW1 . T AH0 D
@@ -47003,7 +47006,7 @@ inclinations,1052,IH2 N . K L AH0 . N EY1 . SH AH0 N Z
 incline,914,IH2 N . K L AY1 N|IH1 N . K L AY0 N
 inclined,614,IH2 N . K L AY1 N D
 inclines,914,IH2 N . K L AY1 N Z
-inclosure,116,IH2 N . K L OW1 . ZH AH0 R
+inclosure,116,IH2 N . K L OW1 . JH AH0 R
 include,35504,IH2 N . K L UW1 D
 included,35104,IH2 N . K L UW1 . D AH0 D|IH2 N . K L UW1 . D AH0 D
 includes,35504,IH2 N . K L UW1 D Z
@@ -47238,6 +47241,7 @@ indoctrination,187,IH2 N . D AA2 K . T R AH0 . N EY1 . SH AH0 N
 indolent,200,
 indomitable,100,
 indonesia,1058,IH2 N . D OW0 . N IY1 . ZH AH0
+indonesia's,0,IH2 N . D OW0 . N IY1 . JH AH0 Z
 indonesian,622,IH2 N . D OW0 . N IY1 . ZH AH0 N
 indonesians,622,IH2 N . D OW0 . N IY1 . ZH AH0 N Z
 indoor,201,
@@ -48187,12 +48191,12 @@ interprets,4904,IH2 N . T AH1 R . P R AH0 T S
 interprovincial,0,IH2 N . T AH0 R . P R OW0 . V IH1 N . SH AH0 L
 interpublic,0,IH2 N . T AH0 R . P AH1 . B L AH0 K
 interpublic's,0,IH2 N . T AH0 R . P AH1 . B L AH0 K S
-interracial,100,IH2 N . T AH0 R . R EY1 . SH AH0 L
-interrante,0,IH2 N . T AH0 R . R AA1 N . T IY0
+interracial,100,IH2 N . T AH0 . R EY1 . SH AH0 L
+interrante,0,IH2 N . T AH0 . R AA1 N . T IY0
 interred,396,IH2 N . T AH1 R D
 interregnum,148,
-interrelate,166,IH2 N . T AH0 R . R AH0 . L EY1 T
-interrelated,266,IH2 N . T AH0 R . R AH0 . L EY1 . T AH0 D
+interrelate,166,IH2 N . T AH0 . R AH0 . L EY1 T
+interrelated,266,IH2 N . T AH0 . R AH0 . L EY1 . T AH0 D
 interrelationship,373,
 interrogate,374,IH2 N . T EH1 . R AH0 . G EY2 T
 interrogated,374,IH2 N . T EH1 . R AH0 . G EY2 . T AH0 D
@@ -48205,7 +48209,7 @@ interrogators,167,
 interrogatory,239,IH2 N . T EH0 . R AA1 . G AH0 . T AO2 . R IY0
 interrupt,2508,IH2 N . T AH0 . R AH1 P T
 interrupted,2108,IH2 N . T AH0 . R AH1 P . T AH0 D
-interruptible,0,IH2 N . T AH0 R . R AH1 P . T AH0 . B AH0 L
+interruptible,0,IH2 N . T AH0 . R AH1 P . T AH0 . B AH0 L
 interrupting,2508,IH2 N . T AH0 . R AH1 P . T IY0 NG
 interruption,1122,IH2 N . T AH0 . R AH1 P . SH AH0 N
 interruptions,1122,IH2 N . T AH0 . R AH1 P . SH AH0 N Z
@@ -49509,6 +49513,7 @@ jerrell,0,Y EH0 . R EY1 L|JH EH1 . R AH0 L
 jerri,0,JH EH1 . R IY0
 jerrico,0,JH EH1 . R AH0 . K OW2
 jerrie,0,JH EH1 . R IY0
+jerris,0,JH AH1 . R AH0 S
 jerritts,0,JH EH1 . R AH0 T S
 jerrold,0,JH EH1 . R AH0 L D
 jerrome,0,Y EH0 . R OW1 . M EY0|JH AH0 . R OW1 M
@@ -54461,7 +54466,7 @@ lastly,200,L AE1 S T . L IY0
 lastra,0,L AE1 . S T R AH0
 lasts,78685,L AE1 S T S
 lasumma,0,L AH0 . S UW1 . M AH0
-lasure,0,L AA1 . ZH AH0 R
+lasure,0,L AA1 . JH AH0 R
 laswell,0,L AE1 . S W EH2 L
 las_vegas,0,L AA1 S . V EY1 . G AH0 S
 lat,234,L AA1 T|L AE1 T
@@ -54959,7 +54964,7 @@ leasing,3825,L IY1 . S IY0 NG
 leask,0,L IY1 S K
 leason,0,L IY1 . S AH0 N
 least,30743,L IY1 S T
-leasure,0,L EH1 . ZH AH0 R
+leasure,0,L EH1 . JH AH0 R
 leath,0,L IY1 TH
 leath's,0,L IY1 TH S
 leatham,0,L IY1 . TH AH0 M
@@ -55320,7 +55325,7 @@ leiss,0,L AY1 S
 leist,0,L IY1 . AH0 S T
 leister,101,L IY1 . S T AH0 R
 leistikow,0,L AY0 . S T IH1 . K OW0
-leisure,3151,L EH1 . ZH AH0 R|L IY1 . ZH AH0 R
+leisure,3151,L EH1 . JH AH0 R|L IY1 . JH AH0 R
 leisurely,300,
 leisy,0,L IY1 . S IY0
 leitch,0,L IY1 CH
@@ -57221,7 +57226,7 @@ losses,15465,L AA1 . S AH0 Z|L AA1 . S AH0 Z
 lossing,0,L AA1 . S IY0 NG
 lost,30020,L AA1 S T
 losurdo,0,L OW0 . S UH1 R . D OW0
-losure,0,L OW1 . ZH AH0 R
+losure,0,L OW1 . JH AH0 R
 los_angeles,0,L AA2 . S AE1 N . JH AH0 . L AH0 S
 lot,801,L AA1 T|L AA1 T
 lot's,0,L AA1 T S
@@ -58474,7 +58479,6 @@ mahaney,0,M AH0 . HH EY1 . N IY0
 mahannah,0,M AH0 . HH AE1 . N AH0
 mahany,0,M AE1 . HH AH0 . N IY0
 maharaja,116,
-maharaja's,0,M AA0 . HH AH0 . R AA1 . ZH AH2 Z
 maharajahs,163,M AA0 . HH AH0 . R AA1 . JH AH0 Z
 maharashtra,145,
 maharive,0,M AA2 . HH AH0 . R IY1 V
@@ -58711,7 +58715,7 @@ malay,338,M EY1 . L EY0
 malayan,245,M AH0 . L EY1 . AH0 N
 malays,338,M AH0 . L EY1 Z
 malaysia,781,M AH0 . L EY1 . ZH AH0
-malaysia's,0,M AH0 . L EY1 . ZH AH0 Z
+malaysia's,0,M AH0 . L EY1 . JH AH0 Z
 malaysian,450,M AH0 . L EY1 . ZH AH0 N
 malaysians,450,M AH0 . L EY1 . ZH AH0 N Z
 malbon,0,M AE1 L . B AH0 N
@@ -59600,8 +59604,8 @@ marland,0,M AA1 R . L AH0 N D
 marlar,0,M AA1 R . L AH0 R
 marlatt,0,M AA1 R . L AH0 T
 marlboro,0,M AA1 R L . B AH0 . R OW0
-marlboro's,0,M AA1 R L . B AH0 R . R OW0 Z
-marlboros,0,M AA1 R L . B AH0 R . R OW0 Z
+marlboro's,0,M AA1 R L . B AH0 . R OW0 Z
+marlboros,0,M AA1 R L . B AH0 . R OW0 Z
 marlborough,0,M AA1 R L . B AH0 . R OW0
 marleen,0,M AA0 R . L IY1 N
 marleene,0,M AA0 R . L IY1 N
@@ -59976,11 +59980,11 @@ massacres,1011,
 massacring,828,
 massad,0,M AE1 . S AH0 D
 massage,1321,M AH0 . S AA1 JH
-massaged,1321,M AH0 . S AA1 ZH D
-massager,125,M AH0 . S AA1 . ZH AH0 R
-massagers,125,
-massages,1321,M AH0 . S AA1 . ZH AH0 Z
-massaging,1321,
+massaged,1321,M AH0 . S AA1 JH D
+massager,125,M AH0 . S AA1 . JH AH0 R
+massagers,125,M AH0 . S AA1 . JH AH0 R Z
+massages,1321,M AH0 . S AA1 . JH AH0 Z
+massaging,1321,M AH0 . S AA1 . JH IY0 NG
 massar,0,M AE1 . S AH0 R
 massari,0,M AA0 . S AA1 . R IY0
 massaro,0,M AH0 . S AA1 . R OW0
@@ -60928,6 +60932,8 @@ mcelhiney,0,M AE1 . K AH0 L . HH IH2 . N IY0
 mcelhinney,0,M AE1 . K AH0 L . HH IH2 . N IY0
 mcelhinny,0,M AE1 . K AH0 L . HH IH2 . N IY0
 mcelligott,0,M AH0 . K EH1 . L AH0 . G AH0 T
+mcelmurray,0,M AE1 . K AH0 L . M AH2 . R IY0
+mcelmurry,0,M AE1 . K AH0 L . M AH2 . R IY0
 mcelrath,0,M AE1 . K AH0 L . R AE2 TH
 mcelreath,0,M AE1 . K AH0 L . R AE2 TH
 mcelroy,0,M AE1 . K AH0 L . R OY2
@@ -61536,12 +61542,12 @@ measles,102,M IY1 . Z AH0 L Z
 measly,101,M IY1 Z . L IY0
 measurable,300,M EH1 . ZH AH0 . R AH0 . B AH0 L
 measurably,100,
-measure,18703,M EH1 . ZH AH0 R
-measure's,0,M EH1 . ZH AH0 R Z
+measure,18703,M EH1 . JH AH0 R
+measure's,0,M EH1 . JH AH0 R Z
 measured,17603,M EH1 . ZH AH0 R D
 measurement,3244,
 measurements,3244,
-measures,18703,M EH1 . ZH AH0 R Z
+measures,18703,M EH1 . JH AH0 R Z
 measuring,17839,
 meat,3888,M IY1 T
 meat-eating,100,
@@ -63429,7 +63435,7 @@ miraculously,200,
 mirad,0,M AH0 . R AE1 D
 mirada,0,M IY0 . R AA1 . D AH0
 mirage,259,M AH0 . R AA1 JH
-mirages,259,M AH0 . R AA1 . ZH AH0 Z
+mirages,259,M AH0 . R AA1 . JH AH0 Z
 miraglia,0,M IY0 . R AE1 . G L IY0 . AH0
 mirak,0,M IY1 . R AE0 K
 miramontes,0,M IY0 . R AA0 . M OW1 N . T EH0 S
@@ -63721,7 +63727,7 @@ missive,258,M IH1 . S AH0 V
 missler,0,M IH1 . S L AH0 R
 missoula,103,M AH0 . Z UW1 . L AH0
 missouri,423,M AH0 . Z UH1 . R IY0|M AH0 . Z AH1 . R AH0
-missouri's,0,M AH0 . Z UH1 . R IY0 Z
+missouri's,0,M AH0 . Z UH1 . R IY0 Z|M AH0 . Z AH1 . R AH0 Z
 missourian,101,M AH0 . Z UH1 . R IY0 . AH0 N
 missourians,101,
 misspeak,100,M AH0 S . S P IY1 K|M AH0 . S P IY1 K
@@ -64915,11 +64921,11 @@ mosey,121,M OW1 . Z IY0
 mosh,107,M AA1 SH
 moshe,0,M OW0 . SH EH1|M OW1 . SH AH0
 moshe's,0,M OW0 . SH EH1 Z|M OW1 . SH AH0 Z
-mosher,17,M OW1 . ZH AH0 R
+mosher,17,M OW1 . JH AH0 R
 moshier,0,M AA1 . SH IY0 . AH0 R
 moshus,0,M OW1 . SH AH0 S|M UW1 . SH AH0 S
 mosie,0,M AA1 . S IY0
-mosier,0,M OW1 . ZH AH0 R|M OW1 . Z IY0 . AH0 R
+mosier,0,M OW1 . JH AH0 R|M OW1 . Z IY0 . AH0 R
 mosinee,0,M AH0 . S IY1 . N IY0
 mosk,0,M AA1 S K
 moskatel's,0,M AA2 . S K AH0 . T EH1 L Z
@@ -65528,7 +65534,7 @@ murali,0,M AH0 . R AA1 . L IY0
 murals,446,M Y UH1 . R AH0 L Z
 muramatsu,0,M UH2 . R AA0 . M AA1 T . S UW2
 muramoto,0,M UH0 . R AA0 . M OW1 . T OW0
-muranaga,0,M AH0 R . R AH0 . N AA1 . G AH0
+muranaga,0,M AH0 . R AH0 . N AA1 . G AH0
 murano,0,M UH0 . R AA1 . N OW0
 muraoka,0,M UH0 . R AA0 . OW1 . K AH0
 muraski,0,M AH0 . R AA1 . S K IY0
@@ -65587,7 +65593,7 @@ murphy,1054,M AH1 R . F IY0
 murphy's,0,M AH1 R . F IY0 Z
 murphys,0,M AH1 R . F IY0 Z
 murr,0,M AH1 R
-murrah,0,M AH0 R . R AA1
+murrah,0,M AH0 . R AA1
 murray,1321,M AH1 . R IY0|M AH1 . R IY0
 murray's,0,M AH1 . R IY0 Z
 murree,0,M AH1 . R IY0
@@ -68637,6 +68643,7 @@ obedience,836,OW0 . B IY1 . D IY0 . AH0 N T S
 obedient,200,OW0 . B IY1 . D IY0 . AH0 N T
 obediently,200,
 obeid,0,OW0 . B AY1 D
+obeirne,0,OW0 . B AH1 R N
 obeisance,134,OW0 . B EY1 . S AH0 N T S
 obelia,0,OW0 . B EH1 . L IY0 . AH0
 ober,0,OW1 . B AH0 R
@@ -70539,7 +70546,7 @@ overexpose,201,OW2 . V AH0 . R AH0 K . S P OW1 Z
 overexposed,201,OW2 . V AH0 . R AH0 K . S P OW1 Z D
 overexposes,201,OW2 . V AH0 . R AH0 K . S P OW1 . Z AH0 Z
 overexposing,201,OW2 . V AH0 . R AH0 K . S P OW1 . Z IY0 NG
-overexposure,108,OW2 . V AH0 . R AH0 K . S P OW1 . ZH AH0 R
+overexposure,108,OW2 . V AH0 . R AH0 K . S P OW1 . JH AH0 R
 overextend,109,OW2 . V AH0 . R AH0 K . S T EH1 N D
 overextended,109,OW2 . V AH0 . R AH0 K . S T EH1 N . D AH0 D
 overextending,0,OW2 . V AH0 . R AH0 K . S T EH1 N . D IY0 NG
@@ -70652,34 +70659,34 @@ overprotection,204,OW2 . V AH0 R . P R AH0 . T EH1 K . SH AH0 N
 overprotective,200,OW2 . V AH0 R . P R AH0 . T EH1 K . T AH0 V
 overqualified,4,
 overqualify,4,
-overran,542,OW1 . V AH0 R . R AE1 N
-overrate,115,OW2 . V AH0 R . R EY1 T
-overrated,115,OW2 . V AH0 R . R EY1 . T AH0 D
-overrates,115,OW2 . V AH0 R . R EY1 T S
-overrating,116,OW2 . V AH0 R . R EY1 . T IY0 NG
+overran,542,OW1 . V AH0 . R AE1 N
+overrate,115,OW2 . V AH0 . R EY1 T
+overrated,115,OW2 . V AH0 . R EY1 . T AH0 D
+overrates,115,OW2 . V AH0 . R EY1 T S
+overrating,116,OW2 . V AH0 . R EY1 . T IY0 NG
 overreach,332,
 overreached,332,
 overreaches,332,
 overreaching,132,
-overreact,148,OW1 . V AH0 R . R IY0 . AE1 K T
+overreact,148,OW1 . V AH0 . R IY0 . AE1 K T
 overreacted,148,
 overreacting,148,
 overreaction,113,
-overreacts,148,OW1 . V AH0 R . R IY0 . AE1 K T S
-overregulate,0,OW1 . V AH0 R . R EH1 G . Y AH0 . L EY2 T
-overregulated,0,OW2 . V AH0 R . R EH1 G . Y AH0 . L EY2 . T AH0 D
-overregulates,0,OW1 . V AH0 R . R EH1 G . Y AH0 . L EY2 T S
-overregulation,0,OW2 . V AH0 R . R EH2 G . Y AH0 . L EY1 . SH AH0 N
-overrepresent,11,OW1 . V AH0 R . R EH2 . P R AH0 . Z EH1 N T
-overrepresented,11,OW1 . V AH0 R . R EH2 . P R AH0 . Z EH1 N . T AH0 D
-overridden,734,OW1 . V AH0 R . R IH1 . D AH0 N
+overreacts,148,OW1 . V AH0 . R IY0 . AE1 K T S
+overregulate,0,OW1 . V AH0 . R EH1 G . Y AH0 . L EY2 T
+overregulated,0,OW2 . V AH0 . R EH1 G . Y AH0 . L EY2 . T AH0 D
+overregulates,0,OW1 . V AH0 . R EH1 G . Y AH0 . L EY2 T S
+overregulation,0,OW2 . V AH0 . R EH2 G . Y AH0 . L EY1 . SH AH0 N
+overrepresent,11,OW1 . V AH0 . R EH2 . P R AH0 . Z EH1 N T
+overrepresented,11,OW1 . V AH0 . R EH2 . P R AH0 . Z EH1 N . T AH0 D
+overridden,734,OW1 . V AH0 . R IH1 . D AH0 N
 override,734,
 overrides,734,
 overriding,1032,
-overripe,100,OW1 . V AH0 R . R AY1 P
-overrode,734,OW1 . V AH0 R . R OW1 D
+overripe,100,OW1 . V AH0 . R AY1 P
+overrode,734,OW1 . V AH0 . R OW1 D
 overrule,356,
-overruled,356,OW2 . V AH0 R . R UW1 L D
+overruled,356,OW2 . V AH0 . R UW1 L D
 overrules,356,
 overruling,356,
 overrun,784,
@@ -70789,12 +70796,12 @@ overwork,386,OW2 . V AH0 R . W AH1 R K
 overworked,386,OW2 . V AH0 R . W AH1 R K T
 overworking,188,OW2 . V AH0 R . W AH1 R . K IY0 NG
 overworks,386,OW2 . V AH0 R . W AH1 R K S
-overwrite,128,OW2 . V AH0 R . R AY1 T
-overwrites,128,OW2 . V AH0 R . R AY1 T S
-overwriting,35,OW2 . V AH0 R . R AY1 . T IY0 NG
-overwritten,128,OW2 . V AH0 R . R IH1 . T AH0 N
-overwrote,128,OW2 . V AH0 R . R OW1 T
-overwrought,100,OW2 . V AH0 R . R AA1 T
+overwrite,128,OW2 . V AH0 . R AY1 T
+overwrites,128,OW2 . V AH0 . R AY1 T S
+overwriting,35,OW2 . V AH0 . R AY1 . T IY0 NG
+overwritten,128,OW2 . V AH0 . R IH1 . T AH0 N
+overwrote,128,OW2 . V AH0 . R OW1 T
+overwrought,100,OW2 . V AH0 . R AA1 T
 overy,0,OW1 . V AH0 . R IY0
 overzealous,100,OW2 . V AH0 R . Z EH1 . L AH0 S
 overzealously,0,OW2 . V AH0 R . Z EH1 . L AH0 . S L IY0
@@ -72956,6 +72963,7 @@ perillo,0,P AH0 . R IH1 . L OW0
 perilous,200,P EH1 . R AH0 . L AH0 S
 perilously,200,
 perils,737,P EH1 . R AH0 L Z
+periman,0,P AH1 . R IY0 . M AH0 N
 perimeter,555,P AH0 . R IH1 . M AH0 . T AH0 R
 perimeters,555,P AH0 . R IH1 . M AH0 . T AH0 R Z
 perin,0,P AH1 . R AH0 N
@@ -73088,38 +73096,42 @@ perplexing,322,P AH0 R . P L EH1 K . S IY0 NG
 perplexity,189,P AH0 R . P L EH1 K . S AH0 . T IY0
 perquisite,155,
 perquisites,155,
+perra,0,P AH1 . R AH0
+perras,0,P AH1 . R AH0 Z
 perrault,0,P AH0 . R AA1 L T
-perreault,0,P AH0 R . R OW1
-perreira,0,P AH0 R . R EH1 . R AH0
-perrell,0,P AH0 R . R EY1 L
-perrella,0,P AH0 R . R EH1 . L AH0
-perrelli,0,P AH0 R . R EH1 . L IY0
-perren,0,P AH1 R . R AH0 N
-perret,0,P AH1 R . R AH0 T
-perrett,0,P AH1 R . R AH0 T
-perretta,0,P AH0 R . R EH1 . T AH0
-perretti,0,P AH0 R . R EH1 . T IY0
-perricone,0,P AH0 R . R IY0 . K OW1 . N IY0
-perriello,0,P AH0 R . R IY0 . EH1 . L OW0
+perreault,0,P AH0 . R OW1
+perreira,0,P AH0 . R EH1 . R AH0
+perrell,0,P AH0 . R EY1 L
+perrella,0,P AH0 . R EH1 . L AH0
+perrelli,0,P AH0 . R EH1 . L IY0
+perren,0,P AH1 . R AH0 N
+perret,0,P AH1 . R AH0 T
+perrett,0,P AH1 . R AH0 T
+perretta,0,P AH0 . R EH1 . T AH0
+perretti,0,P AH0 . R EH1 . T IY0
+perri,0,P AH1 . R IY0
+perricone,0,P AH0 . R IY0 . K OW1 . N IY0
+perriello,0,P AH0 . R IY0 . EH1 . L OW0
 perrier,0,P EH1 . R IY0 . AH0 R|P EH2 . R IY0 . EY1
-perrigo,0,P AH0 R . R IY1 . G OW0
+perrigo,0,P AH0 . R IY1 . G OW0
 perrin,0,P EH1 . R AH0 N
-perrine,0,P AH0 R . R IY1 . N IY0
-perrino,0,P AH0 R . R IY1 . N OW0
+perrine,0,P AH0 . R IY1 . N IY0
+perrino,0,P AH0 . R IY1 . N OW0
 perrins,0,P EH1 . R AH0 N Z
-perritt,0,P AH1 R . R AH0 T
-perro,0,P AH1 R . R OW0
+perritt,0,P AH1 . R AH0 T
+perro,0,P AH1 . R OW0
 perron,0,P EH1 . R AH0 N
-perrone,0,P AH0 R . R OW1 . N IY0
-perrot,0,P AH1 R . R AH0 T
-perrott,0,P AH0 R . R AA1 T
-perrotta,0,P AH0 R . R OW1 . T AH0
-perrotti,0,P AH0 R . R OW1 . T IY0
-perrotto,0,P AH0 R . R OW1 . T OW0
-perrow,0,P AH1 R . R OW0
+perrone,0,P AH0 . R OW1 . N IY0
+perrot,0,P AH1 . R AH0 T
+perrott,0,P AH0 . R AA1 T
+perrotta,0,P AH0 . R OW1 . T AH0
+perrotti,0,P AH0 . R OW1 . T IY0
+perrotto,0,P AH0 . R OW1 . T OW0
+perrow,0,P AH1 . R OW0
 perry,659,P EH1 . R IY0
 perry's,0,P EH1 . R IY0 Z
-perryn,0,P AH1 R . R AH0 N
+perryman,0,P AH1 . R IY0 . M AH0 N
+perryn,0,P AH1 . R AH0 N
 pers,13664,P AH1 R S
 persall,0,P AH1 R . S AH0 L
 persaud,9,
@@ -74706,8 +74718,8 @@ pleasing,15218,P L IY1 . Z IY0 NG
 pleasingly,100,
 pleasurable,100,P L EH1 . ZH AH0 . R AH0 . B AH0 L
 pleasurama,0,P L EH2 . ZH UH0 . R AE1 . M AH0
-pleasure,5877,P L EH1 . ZH AH0 R
-pleasures,5877,P L EH1 . ZH AH0 R Z
+pleasure,5877,P L EH1 . JH AH0 R
+pleasures,5877,P L EH1 . JH AH0 R Z
 pleat,571,P L IY1 T
 pleats,571,P L IY1 T S
 plebeian,265,P L AH0 . B IY1 . AH0 N
@@ -76718,7 +76730,7 @@ procardia,101,P R OW0 . K AA1 R . D IY0 . AH0
 procassini,0,P R AA2 . K AH0 . S IY1 . N IY0
 procedural,928,
 procedure,11321,P R AH0 . S IY1 . JH AH0 R|P R OW0 . S IY1 . JH AH0 R
-procedures,11321,
+procedures,11321,P R AH0 . S IY1 . JH AH0 R Z|P R OW0 . S IY1 . JH AH0 R Z
 proceed,5875,P R AH0 . S IY1 D|P R OW0 . S IY1 D|P AH0 R . S IY1 D
 proceeded,5875,P R AH0 . S IY1 . D AH0 D|P R OW0 . S IY1 . D AH0 D
 proceeding,9728,P R AH0 . S IY1 . D IY0 NG|P R OW0 . S IY1 . D IY0 NG
@@ -77487,7 +77499,7 @@ puente,0,P UW1 N T
 puentes,0,P W EH1 N . T EH0 S
 puerile,100,P Y UH0 . R IY1 L
 puerto,0,P W EH1 R . T OW2|P AO1 R . T AH0|P AO1 R . T AH0 R
-puerto-rico,0,P W EH1 R . T OW2 . R IY1 . K OW0|P AO1 R . T AH0 . R IY1 . K OW0|P AO1 R . T AH0 R . R IY1 . K OW0
+puerto-rico,0,P W EH1 R . T OW2 . R IY1 . K OW0|P AO1 R . T AH0 . R IY1 . K OW0|P AO1 R . T AH0 . R IY1 . K OW0
 puerto_rican,0,P W EH1 R . T OW2 . R IY1 . K AH0 N|P AO1 R . T AH0 . R IY1 . K AH0 N
 puerto_ricans,0,P W EH1 R . T OW2 . R IY1 . K AH0 N Z|P AO1 R . T AH0 . R IY1 . K AH0 N Z
 puerto_rico,0,P W EH1 R . T OW2 . R IY1 . K OW0|P AO1 R . T AH0 . R IY1 . K OW0
@@ -83226,6 +83238,7 @@ rorick,0,R AO1 . R AH0 K
 rorie,0,R AO1 . R IY0
 rork,0,R AO1 R K
 rorke,0,R AO1 R K
+rorrer,0,R AA1 . AH0 R
 rorschach,118,R AO1 R . SH AA2
 rory,0,R AO1 . R IY0
 ros,393,R AA1 S
@@ -85212,6 +85225,7 @@ saundra,0,S AA1 N . D R AH0
 saunier,0,S AA1 . N IY0 . AH0 R
 saunter,395,S AA1 N . T AH0 R
 saur,0,S AO1 R
+saurer,0,S AW1 . AH0 R
 sauro,6,S AO1 . R OW0
 saus,8,S AA1 Z
 sausage,1166,S AA1 . S AH0 JH|S AA1 . S AH0 JH
@@ -85590,6 +85604,7 @@ schaffer,58,SH EY1 . F AH0 R
 schaffler,0,SH AE1 . F L AH0 R
 schaffner,0,SH AE1 F . N AH0 R
 schaible,0,S K EY1 . B AH0 L
+schairer,0,SH AY1 . AH0 R
 schaja,0,SH AA1 . JH AH0
 schake,0,SH EY1 K
 schalk,0,SH AA1 K
@@ -85679,6 +85694,7 @@ scheiman,0,SH AY1 . M AH0 N
 schein,0,SH AY1 N
 scheinberg,0,SH AY1 N . B AH0 R G
 scheiner,0,SH AY1 . N AH0 R
+scheirer,0,SH AY1 . AH0 R
 scheler,0,SH IY1 . L AH0 R
 schelin,0,SH EH1 . L AH0 N
 schell,0,S K EH1 L
@@ -87098,8 +87114,8 @@ seize,2985,S IY1 Z
 seized,2985,S IY1 Z D
 seizes,2985,S IY1 . Z AH0 Z
 seizing,2643,S IY1 . Z IY0 NG
-seizure,820,S IY1 . ZH AH0 R
-seizures,820,
+seizure,820,S IY1 . JH AH0 R
+seizures,820,S IY1 . JH AH0 R Z
 sejm,0,S EY1 M
 sekerak,0,S EH1 . K AH0 . R AH0 K
 seki,0,S EY1 . K IY0
@@ -88556,6 +88572,7 @@ shire,487,SH AY1 R
 shirell,0,SH IY0 . R EH1 L
 shirelle,0,SH IY0 . R EH1 L
 shireman,0,SH IY0 . R EY1 . M AH0 N
+shirer,110,SH AY1 . AH0 R
 shires,487,SH AY1 R Z
 shirey,0,SH AY1 . R IY0
 shirin,0,SH IY1 . R AH0 N
@@ -89161,7 +89178,7 @@ siegell,0,S IY1 . G AH0 L
 siegelman,0,S IY1 . G AH0 L . M AH0 N
 sieger,0,S IY1 . G AH0 R
 siegert,0,S IY1 . G AH0 R T
-sieges,1087,
+sieges,1087,S IY1 . JH AH0 Z
 siegfried,204,
 siegle,0,S IY1 . G AH0 L
 siegler,0,S IY1 . G L AH0 R
@@ -89949,7 +89966,7 @@ skyles,0,S K AY1 L Z
 skylight,315,S K AY1 . L AY2 T
 skylights,315,S K AY1 . L AY2 T S
 skyline,386,S K AY1 . L AY2 N
-skylines,386,
+skylines,386,S K AY1 . L AY2 N Z
 skylite,0,S K AY1 . L AY2 T
 skylites,0,S K AY1 . L AY2 T S
 skype,0,S K AY1 P
@@ -91145,6 +91162,7 @@ somewheres,301,
 somma,0,S AA1 . M AH0
 sommer,0,S AH1 . M AH0 R
 sommerfield,0,S AH0 . M AH1 R . F IY0 L D
+sommers,0,S AH1 . M AH0 R Z
 somnolence,110,
 somnolent,200,
 somoza,0,S AH0 . M OW1 . Z AH0
@@ -92086,6 +92104,7 @@ sporkin's,0,S P AO1 R . K AH0 N Z
 sporn,2,S P AO1 R N
 sporophyte,101,S P AO1 R . F AY2 T
 sporophytes,101,
+sporrer,0,S P AA1 . AH0 R
 sport,9686,S P AO1 R T
 sport's,0,S P AO1 R T S
 sported,9686,S P AO1 R . T AH0 D
@@ -95082,9 +95101,9 @@ superposition,170,S UW2 . P AH0 R . P AH0 . Z IH1 . SH AH0 N
 superpower,416,S UW2 . P AH0 R . P AW1 . AH0 R
 superpowers,416,S UW2 . P AH0 R . P AW1 . AH0 R Z
 superpremium,0,S UW2 . P AH0 R . P R IY1 . M IY0 . AH0 M
-superregional,0,S UW2 . P AH0 R . R IY1 . JH AH0 . N AH0 L
-superregionals,0,S UW2 . P AH0 R . R IY1 . JH AH0 . N AH0 L Z
-superregionals',0,S UW0 . P AH0 R . R IY1 . JH AH0 . N AH0 L Z
+superregional,0,S UW2 . P AH0 . R IY1 . JH AH0 . N AH0 L
+superregionals,0,S UW2 . P AH0 . R IY1 . JH AH0 . N AH0 L Z
+superregionals',0,S UW0 . P AH0 . R IY1 . JH AH0 . N AH0 L Z
 supers,2247,S UW1 . P AH0 R Z
 supersaver,9,
 supersede,668,S UW2 . P AH0 R . S IY1 D
@@ -99600,12 +99619,12 @@ treason,548,T R IY1 . Z AH0 N
 treasonous,100,
 treasons,548,T R IY1 . Z AH0 N T S
 treaster,0,T R IY1 . S T AH0 R
-treasure,2281,T R EH1 . ZH AH0 R
+treasure,2281,T R EH1 . JH AH0 R
 treasured,1781,T R EH1 . ZH AH0 R D
 treasurer,1177,
 treasurer's,0,T R EH1 . ZH AH0 . R AH0 R Z
 treasurers,1177,T R EH1 . ZH AH0 . R AH0 R Z
-treasures,2281,T R EH1 . ZH AH0 R Z
+treasures,2281,T R EH1 . JH AH0 R Z
 treasuries,2948,T R EH1 . ZH AH0 . R IY0 Z
 treasury,2947,
 treasury's,0,T R EH1 . ZH AH0 . R IY0 Z
@@ -101207,13 +101226,13 @@ underpowered,0,AH2 N . D AH0 R . P AW1 . AH0 R D
 underprice,119,
 underpriced,119,
 underpricing,141,
-underrate,261,AH2 N . D AH0 R . R EY1 T
-underrated,261,AH2 N . D AH0 R . R EY1 . T AH0 D
-underreport,0,AH2 N . D AH0 R . R AH0 . P AO1 R T
-underreported,0,AH2 N . D AH0 R . R AH0 . P AO1 R . T AH0 D
-underreporting,0,AH1 N . D AH0 R . R AH0 . P AO1 R . T IY0 NG
-underrepresent,0,AH2 N . D AH0 R . R EH2 . P R AH0 . Z EH1 N T
-underrepresented,0,AH0 N . D AH0 R . R EH2 . P R AH0 . Z EH1 N . T AH0 D
+underrate,261,AH2 N . D AH0 . R EY1 T
+underrated,261,AH2 N . D AH0 . R EY1 . T AH0 D
+underreport,0,AH2 N . D AH0 . R AH0 . P AO1 R T
+underreported,0,AH2 N . D AH0 . R AH0 . P AO1 R . T AH0 D
+underreporting,0,AH1 N . D AH0 . R AH0 . P AO1 R . T IY0 NG
+underrepresent,0,AH2 N . D AH0 . R EH2 . P R AH0 . Z EH1 N T
+underrepresented,0,AH0 N . D AH0 . R EH2 . P R AH0 . Z EH1 N . T AH0 D
 underscore,389,AH2 N . D AH0 R . S K AO1 R
 underscored,389,AH2 N . D AH0 R . S K AO1 R D
 underscores,389,AH2 N . D AH0 R . S K AO1 R Z
@@ -101278,13 +101297,13 @@ underwoods,363,
 underworld,416,
 underwrite,423,
 underwriter,351,
-underwriter's,0,AH1 N . D AH0 R . R AY2 . T AH0 R Z
-underwriters,351,AH1 N . D AH0 R . R AY2 . T AH0 R Z
-underwriters',0,AH1 N . D AH0 R . R AY2 . T AH0 R Z
+underwriter's,0,AH1 N . D AH0 . R AY2 . T AH0 R Z
+underwriters,351,AH1 N . D AH0 . R AY2 . T AH0 R Z
+underwriters',0,AH1 N . D AH0 . R AY2 . T AH0 R Z
 underwrites,423,
-underwriting,154,AH1 N . D AH0 R . R AY1 . T IY0 NG
+underwriting,154,AH1 N . D AH0 . R AY1 . T IY0 NG
 underwritten,423,
-underwrote,423,AH2 N . D AH0 R . R OW1 T
+underwrote,423,AH2 N . D AH0 . R OW1 T
 undeserved,100,AH2 N . D AH0 . Z AH1 R V D
 undeserving,124,AH2 N . D AH0 . Z AH1 R . V IY0 NG
 undesirable,941,AH2 N . D AH0 . Z AY1 . R AH0 . B AH0 L
@@ -102103,6 +102122,7 @@ urias,104,Y AH0 . R IY1 . AH0 Z
 uribe,0,Y AH0 . R IY1 . B IY0
 uric,100,Y AH1 . R AH0 K
 urich,0,Y AH1 . R AH0 K
+urick,0,Y AH1 . R AH0 K
 urie,0,Y AH1 . R IY0
 uriegas,0,Y AH0 . R IY1 . G AH0 Z
 urinalysis,109,Y AH2 . R AH0 . N AE1 . L AH0 . S AH0 S
@@ -104738,7 +104758,7 @@ watchword,176,
 watchwords,176,
 water,37718,W AA1 . T AH0 R
 water's,0,W AA1 . T AH0 R Z
-water-repellent,100,W AA1 . T AH0 R . R AH0 . P EH1 . L AH0 N T
+water-repellent,100,W AA1 . T AH0 . R AH0 . P EH1 . L AH0 N T
 waterbed,99,
 waterbeds,99,
 waterborne,100,
@@ -106924,9 +106944,9 @@ worms,1697,W AH1 R M Z
 wormwood,234,
 worn,15158,W AO1 R N
 worner,0,W AO1 R . N AH0 R
-worrall,0,W AH1 R . R AH0 L
-worrel,0,W AH1 R . R AH0 L
-worrell,0,W AH1 R . R AH0 L
+worrall,0,W AH1 . R AH0 L
+worrel,0,W AH1 . R AH0 L
+worrell,0,W AH1 . R AH0 L
 worried,7865,W AH1 . R IY0 D
 worrier,123,W AH1 . R IY0 . AH0 R
 worriers,123,W AH1 . R IY0 . AH0 R Z
