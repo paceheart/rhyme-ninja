@@ -3055,7 +3055,7 @@ ands,0,AE1 N Z
 andujar,0,AA0 N . D UW0 . Y AA1 R
 andy,0,AE1 N . D IY0
 andy's,0,AE1 N . D IY0 Z
-ane,100,EY1 N|AE1 N
+ane,0,EY1 N|AE1 N
 anecdotal,100,AE2 . N AH0 K . D OW1 . T AH0 L
 anecdotally,0,AE2 . N AH0 K . D OW1 . T AH0 . L IY0
 anecdote,628,
@@ -4724,7 +4724,6 @@ associates,10235,AH0 . S OW1 . S IY0 . AH0 T S|AH0 . S OW1 . SH IY0 . AH0 T S|AH
 associates',0,AH0 . S OW1 . SH IY0 . AH0 T S|AH0 . S OW1 . S IY0 . AH0 T S
 associating,10235,
 association,14453,AH0 . S OW2 . S IY0 . EY1 . SH AH0 N|AH0 . S OW2 . SH IY0 . EY1 . SH AH0 N
-association's,0,AH0 . S OW2 . SH IY0 . EY1 . SH AH0 N Z
 associations,14453,AH0 . S OW2 . S IY0 . EY1 . SH AH0 N Z|AH0 . S OW2 . SH IY0 . EY1 . SH AH0 N Z
 assort,104,AH0 . S AO1 R T
 assorted,204,AH0 . S AO1 R . T AH0 D
@@ -10523,7 +10522,6 @@ bosom,876,
 bosqi,0,B AA1 . S K IY0
 bosquez,0,B OW0 . S K W EH1 Z
 boss,4651,B AA1 S|B AA1 S
-boss',0,B AA1 S
 boss's,0,B AA1 . S AH0 Z
 bossard,0,B AH0 . S AA1 R D
 bossart,0,B AH0 . S AA1 R T
@@ -47536,6 +47534,7 @@ isuzu,0,IH2 . S UW1 . Z UW2
 it,999999,IH1 T|IH0 T
 it'd,999999,IH1 . T AH0 D
 it'll,999999,IH1 . T AH0 L
+it's,999999,IH1 T S|IH0 T S
 it-wit,0,IH1 . T W IH1 T
 ita,0,AY1 . T AH0|AY1 . T IY1 . EY1
 italia,103,IY0 . T AE1 . L IY0 . AH0|IH2 . T AE1 L . Y AH0

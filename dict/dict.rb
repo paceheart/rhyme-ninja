@@ -408,7 +408,7 @@ def filter_cmudict(cmudict, rdict)
 end
 
 def redundant_apostrophe_word?(word, cmudict)
-  if word.include?("'")
+  if word.include?("'") && !stop_word?(word)
     root = word.tr("'", "")
     if(cmudict.key?(root) && (cmudict[root].sort == cmudict[word].sort)) # if pronunciations are the same (ignoring order)
       return true

@@ -828,6 +828,21 @@ describe 'SET_RELATED' do
   context 'grenade' do
     set_related_oughta_contain 'grenade', 'handheld', 'propelled'
   end
+
+  context 'carbon' do
+    set_related_oughta_contain 'carbon', 'sink', 'zinc'
+  end
+
+  context 'prefix' do
+    set_related_ought_not_contain 'carbon', 'cycling', 'recycling', NOT_WORKING
+    set_related_oughta_contain 'carbon', 'ethane', 'methane'
+    set_related_oughta_contain 'carbon', 'ester', 'sequester'
+  end
+
+  context 'root lemmas' do
+    set_related_oughta_contain 'carbon', 'extract', 'react', NOT_WORKING
+    set_related_ought_not_contain 'carbon', 'extracted', 'reacted', NOT_WORKING
+  end
   
   context 'imperfect' do
     # relax the stress:

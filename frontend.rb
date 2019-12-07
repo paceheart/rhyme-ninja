@@ -3,7 +3,7 @@
 #
 
 # 'cgi' or 'text'
-OUTPUT_FORMAT = 'text'
+OUTPUT_FORMAT = 'cgi'
 DEBUG_MODE = false
 
 #
