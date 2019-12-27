@@ -1,9 +1,32 @@
 # rhyme-ninja
 Find semantically related rhymes
 
-## Deployment
+## Project Status
 
-The latest stable version is live at http://rhyme.ninja
+No longer under active development by its original creator, Pace Smith. Feel free to branch, fork, whatever you wish!
+
+Also, you can just use the dictionaries without the Ruby code. cmudict 0.7c (my forked version) has several improvements over 0.7b. And there's a rhyming dictionary text file that you're free to use under the GPL.
+
+## Installation
+
+* First install the required packages, such as wordnet and rwordnet. Sorry I didn't package this into a nice gem, feel free to do so.
+
+## Command Line Usage
+
+echo "word1=food" | rhyme.rb
+
+You can change OUTPUT_TYPE from 'cgi' to 'text' if you want to use it at the command line.
+
+## Webserver Installation
+
+* put everything into your cgi-bin directory
+* configure your webserver to allow Ruby scripts
+* cd /<whatever>/cgi-bin/
+* chmod +x *.rb
+* cd dict
+* ./dict.rb
+
+That will build the internal dictionaries. Then you ought to be able to go to cgi-bin/rhyme.rb and it will bring up the web interface.
 
 ## Examples:
 
