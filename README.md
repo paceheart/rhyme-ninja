@@ -10,6 +10,7 @@ Also, you can just use the dictionaries without the Ruby code. cmudict 0.7c (my 
 ## Installation
 
 * First install the required packages, such as wordnet and rwordnet. Sorry I didn't package this into a nice gem, feel free to do so.
+* Run rspec from the install directory to verify installation. All tests should pass.
 
 ## Command Line Usage
 
